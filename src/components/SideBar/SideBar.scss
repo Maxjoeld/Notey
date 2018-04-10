@@ -1,0 +1,28 @@
+.SideBar {
+  background-color: #153335;
+  white-space: nowrap;
+
+  &__title {
+    color:rgb(255, 255, 255); 
+    margin-left: 10px; 
+    margin-bottom: 50px;
+  }
+
+  &__button {
+    font-family: 'Roboto', sans-serif;
+    font-size: 5px;
+    display: flex;
+    width: 101%;
+    margin: 10px 0;
+    font-size: 20px;
+    line-height:3px;
+    cursor: pointer;
+    color: rgb(255, 170, 170);
+    background-color: #e0fffe;
+    height: 30px;
+    padding: 20px;
+    box-shadow: none;
+    outline:none;
+    border: none;
+  }
+}

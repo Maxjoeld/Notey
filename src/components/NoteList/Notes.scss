@@ -1,0 +1,51 @@
+.Notes--comp {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.NotesView {
+  display: flex;
+  flex-flow: column;
+  
+  &__empty {
+    margin-left: 35px;
+  }
+}
+
+.Note {
+  border: 1px solid rgb(218, 218, 218);
+  list-style: none;
+  margin-right: 10px;
+  width: 210px;
+  height: 230px;
+  background-color: #fff;
+  margin-bottom: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+
+  &:hover{
+    background-color: rgb(255, 214, 214);
+  }
+  
+  &--NoteTitle {
+    font-weight: 700;
+    color: black;
+    height: 40px;
+    width: 85%;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(177, 177, 177, 0.5); /* This creates the border. Replace black with whatever color you want. */
+    margin: 0 auto;
+  }
+
+  &--NoteBody {
+    padding: 17px;
+    color: rgb(99, 99, 99);
+  }
+}
+
+.CSV-Link {
+  margin-left: 35px;
+  padding-bottom: 20px;
+  color: black;
+}
