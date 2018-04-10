@@ -6,7 +6,13 @@
   display: flex;
   flex-flow: column; }
   .NotesView__empty {
+    display: flex;
+    justify-content: space-between;
+    width: 67%;
     margin-left: 35px; }
+  .NotesView--search {
+    width: 400px;
+    height: 25px; }
 
 .Note {
   border: 1px solid #dadada;

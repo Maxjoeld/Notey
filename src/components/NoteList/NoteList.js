@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { SortableContainer, arrayMove } from "react-sortable-hoc";
-import { CSVLink } from 'react-csv';
+import { CSVLink } from "react-csv";
 import Note from "./Note";
 
 import "./Notes.css";
-
 
 const SortableList = SortableContainer(props => {
   return (
@@ -54,7 +53,10 @@ export default class NoteList extends React.Component {
   render() {
     return (
       <div className="NotesView">
-        <h2 className="NotesView__empty">Your Notes:</h2>
+        <h2 className="NotesView__empty">
+          Your Notes:{" "}
+          <input placeholder="SearchEngine" className="NotesView--search" />
+        </h2>
         {this.boolEmptyNotes ? (
           <h3>
             It looks like you don't have any notes yet, click "Create New Note"

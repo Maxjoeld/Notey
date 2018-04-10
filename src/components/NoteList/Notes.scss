@@ -8,7 +8,14 @@
   flex-flow: column;
   
   &__empty {
+    display: flex;
+    justify-content: space-between;
+    width: 67%;
     margin-left: 35px;
+  }
+  &--search {
+    width: 400px;
+    height: 25px;
   }
 }
 
