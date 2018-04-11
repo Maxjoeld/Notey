@@ -11,13 +11,20 @@ class SideBar extends Component {
           Notey<br />DataBase
         </h1>
         <Link to={"/"}>
+          <div className="SetIc">
             <FontAwesome name="fas fa-sticky-note" />
-          <button className="SideBar__button">View Your Notes</button>
+            <button className="SideBar__button">
+              View Your Notes
+            </button>
+          </div>
         </Link>
         <Link to={"/create"}>
-          <button className="SideBar__button">
-            <FontAwesome name="fas fa-plus" />Create New Note
-          </button>
+          <div className="SetIc">
+          <FontAwesome name="fas fa-plus" />
+            <button className="SideBar__button">
+              Create New Note
+            </button>
+          </div>
         </Link>
       </div>
     );
