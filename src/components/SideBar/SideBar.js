@@ -8,7 +8,7 @@ class SideBar extends Component {
     return (
       <div className="SideBar">
         <h1 className="SideBar__title">
-          Notey<br />DataBase
+          Notey <FontAwesome name="fas fa-book" /><br />DataBase
         </h1>
         <Link to={"/"}>
           <div className="SetIc">
