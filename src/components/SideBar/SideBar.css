@@ -24,6 +24,9 @@
     box-shadow: none;
     outline: none;
     border: none; }
+    .SideBar__button:hover {
+      color: #e0fffe;
+      font-size: 22px; }
 
 .SetIc {
   position: relative; }

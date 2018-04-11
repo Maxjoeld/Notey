@@ -28,7 +28,14 @@
     box-shadow: none;
     outline:none;
     border: none;
+
+    &:hover {
+      color: #e0fffe;
+      font-size: 22px;
+    }
   }
+
+  
 }
 
 .SetIc {
