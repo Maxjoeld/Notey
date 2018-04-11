@@ -36,7 +36,7 @@
     /* This creates the border. Replace black with whatever color you want. */
     margin: 0 auto; }
   .Note--NoteBody {
-    padding: 17px;
+    padding: 5px 10px 5px 10px;
     color: #636363; }
 
 .CSV-Link {

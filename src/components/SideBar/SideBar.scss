@@ -9,16 +9,18 @@
   }
 
   &__button {
+    font-weight: 400px;
     font-family: 'Roboto', sans-serif;
     font-size: 5px;
     display: flex;
-    width: 101%;
+    width: 100%;
     margin: 10px 0;
     font-size: 20px;
     line-height:3px;
     cursor: pointer;
     color: rgb(255, 170, 170);
-    background-color: #e0fffe;
+    // background-color: #e0fffe;
+    background-color: #153335;
     height: 30px;
     padding: 20px;
     box-shadow: none;
