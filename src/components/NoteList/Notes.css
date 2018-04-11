@@ -22,8 +22,7 @@
   height: 230px;
   background-color: #fff;
   margin-bottom: 10px;
-  overflow: hidden;
-  text-overflow: ellipsis; }
+  overflow: hidden; }
   .Note:hover {
     background-color: #ffd6d6; }
   .Note--NoteTitle {
@@ -31,13 +30,14 @@
     color: black;
     height: 40px;
     width: 85%;
-    padding-bottom: 20px;
+    padding-bottom: 15px;
     border-bottom: 1px solid rgba(177, 177, 177, 0.5);
     /* This creates the border. Replace black with whatever color you want. */
     margin: 0 auto; }
   .Note--NoteBody {
-    padding: 5px 10px 5px 10px;
-    color: #636363; }
+    padding: 0px 10px 5px 10px;
+    color: #636363;
+    line-height: 28px; }
 
 .CSV-Link {
   margin-left: 35px;
