@@ -5,30 +5,12 @@ import Note from "./Note";
 
 import "./Notes.css";
 
-const SortableList = SortableContainer(props => {
-  return (
-    <ul className="Notes--comp">
-      {props.notes.map((note, index) => {
-        return (
-          <Note
-            key={note.id}
-            note={note}
-            index={index}
-            title={note.title}
-            body={note.body}
-            handleNoteIndex={props.handleNoteIndex}
-          />
-        );
-      })}
-    </ul>
-  );
-});
-
 export default class NoteList extends React.Component {
   boolEmptyNotes = true;
 
   state = {
-    notes: this.props.notes
+    notes: this.props.notes,
+    search: ""
   };
 
   componentWillMount() {
@@ -50,12 +32,46 @@ export default class NoteList extends React.Component {
     this.props.updateSortedNotes(this.state.notes);
   };
 
+  updateSearch = e => {
+    this.setState({
+      search: e.target.value.substr(0, 10)
+    });
+  };
+
   render() {
+    const SortableList = SortableContainer(props => {
+      return (
+        <ul className="Notes--comp">
+          {filteredNotes.map((note, index) => {
+            return (
+              <Note
+                key={note.id}
+                note={note}
+                index={index}
+                title={note.title}
+                body={note.body}
+                handleNoteIndex={props.handleNoteIndex}
+              />
+            );
+          })}
+        </ul>
+      );
+    });
+    
+    let filteredNotes = this.state.notes.filter(note => {
+      return note.title.toLowerCase().includes(this.state.search.toLowerCase());
+    });
     return (
       <div className="NotesView">
         <h2 className="NotesView__empty">
           Your Notes:{" "}
-          <input placeholder="SearchEngine" className="NotesView--search" />
+          <input
+            type='text'
+            placeholder="SearchEngine"
+            className="NotesView--search"
+            value={this.state.search}
+            onChange={this.updateSearch.bind(this)}
+          />
         </h2>
         {this.boolEmptyNotes ? (
           <h3>
