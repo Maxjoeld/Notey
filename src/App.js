@@ -9,7 +9,7 @@ import ViewNote from "./components/ViewNote/ViewNote";
 import EditNote from './components/EditNote/EditNote';
 import Notes from './data';
 
-export default class App extends React.Component {
+export default class App extends Component {
   nextId = 0;
   noteIndex = 5;
 

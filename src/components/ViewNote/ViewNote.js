@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import DeleteNote from '../DeleteNote/DeleteNote';
 import './ViewNote.css';
 
-export default class NoteView extends React.Component {
+export default class NoteView extends Component {
   boolModal = false;
 
   state = {

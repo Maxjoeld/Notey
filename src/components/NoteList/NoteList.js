@@ -5,7 +5,7 @@ import Note from "./Note";
 
 import "./Notes.css";
 
-export default class NoteList extends React.Component {
+export default class NoteList extends Component {
   boolEmptyNotes = true;
 
   state = {

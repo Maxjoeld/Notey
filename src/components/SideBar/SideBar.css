@@ -1,15 +1,19 @@
 .SideBar {
   background-color: #153335;
-  white-space: nowrap; }
+  white-space: nowrap;
+  position: relative; }
   .SideBar__title {
     color: white;
     margin-left: 10px;
-    margin-bottom: 50px; }
+    margin-bottom: 50px;
+    font-size: 50px;
+    padding-right: 20px; }
   .SideBar__button {
-    font-weight: 400px;
-    font-family: 'Roboto', sans-serif;
-    font-size: 5px;
     display: flex;
+    font-weight: 300;
+    font-size: px;
+    font: normal 10px;
+    font-family: 'Times New Roman', Times, serif, sans-serif 50px;
     width: 100%;
     margin: 10px 0;
     font-size: 20px;
@@ -18,7 +22,18 @@
     color: #ffaaaa;
     background-color: #153335;
     height: 30px;
-    padding: 20px;
+    padding: 20px 10px 20px 40px;
     box-shadow: none;
     outline: none;
     border: none; }
+
+.fa-plus {
+  position: absolute;
+  top: 30.1%;
+  left: 7%; }
+
+.fa-sticky-note {
+  position: absolute;
+  top: 25%;
+  left: 7%;
+  color: #ffaaaa; }

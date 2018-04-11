@@ -1,7 +1,6 @@
-* {
+/* * {
   outline: none;
-  font-family: 'Roboto';
-}
+} */
 
 body {
   margin: 0;
@@ -30,6 +29,6 @@ a {
 }
 
 button:hover {
-  background-color: #c2feff;
+  background-color: #e0fffe;
 }
 
