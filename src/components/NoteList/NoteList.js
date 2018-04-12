@@ -7,7 +7,7 @@ import "./Notes.css";
 
 export default class NoteList extends Component {
   boolEmptyNotes = true;
-
+  sortedNotes = true;
   state = {
     notes: this.props.notes,
     search: ""
@@ -33,9 +33,21 @@ export default class NoteList extends Component {
   };
 
   updateSearch = e => {
-    this.setState({
-      search: e.target.value.substr(0, 10)
-    });
+    this.setState({ search: e.target.value });
+  };
+
+  sortData = (state) => {
+    const notes = [...state];
+    if (this.sortedNotes) {
+      notes.sort((a, b) => {
+        return a.title > b.title;
+      });
+      this.sortedNotes = false;
+      this.setState({ notes: notes });
+    } else {
+      this.sortedNotes = true;
+      this.setState({ notes: notes });
+    }
   };
 
   render() {
@@ -57,22 +69,31 @@ export default class NoteList extends Component {
         </ul>
       );
     });
-    
+
     let filteredNotes = this.state.notes.filter(note => {
       return note.title.toLowerCase().includes(this.state.search.toLowerCase());
     });
     return (
       <div className="NotesView">
-        <h2 className="NotesView__empty">
-          Your Notes:{" "}
+        <div className="NotesView--header">
+          <h2 className="NotesView__empty">Your Notes: </h2>
           <input
-            type='text'
+            type="text"
             placeholder="SearchEngine"
-            className="NotesView--search"
+            className="NotesView__search"
             value={this.state.search}
             onChange={this.updateSearch.bind(this)}
           />
-        </h2>
+          {this.sortedNotes ? (
+            <h1 className="NotesView__sort" onClick={() =>this.sortData(this.state.notes)}>
+              Sort: Regular 
+            </h1>
+          ) : (
+            <h1 className="NotesView__sort" onClick={() => this.sortData(this.props.notes)}>
+              Sort: Sorted Alphabetically 
+            </h1>
+          )}
+        </div>
         {this.boolEmptyNotes ? (
           <h3>
             It looks like you don't have any notes yet, click "Create New Note"

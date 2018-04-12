@@ -6,16 +6,38 @@
 .NotesView {
   display: flex;
   flex-flow: column;
-
-  &__empty {
+  &--header {
     display: flex;
     justify-content: space-between;
-    width: 65%;
-    margin-left: 35px;
+    align-items: flex-start;
   }
-  &--search {
-    width: 400px;
-    height: 25px;
+  
+  &__empty {
+    margin-left: 30px;
+    white-space: nowrap;
+  }
+  &__search {
+    margin-top: 15px;
+    margin-left: 20px;
+    padding: 4px;
+    width: 300px;
+    height: 40px;
+    border-radius: 5%;
+    border:none;
+    &:focus {
+      width: 400px;
+      -webkit-transition: width 0.4s ease-in-out;
+      transition: width 0.4s ease-in-out;
+    }
+  }
+  &__sort {
+    margin: 20px 50px 10px 30px;
+    font-size: 14px;
+    cursor: pointer;
+      &:hover {
+        font-size: 20px;
+        margin-left: 20px;
+      }
   }
 }
 
