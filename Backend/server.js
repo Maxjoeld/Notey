@@ -23,8 +23,6 @@ server.use(
   })
 );
 
-
-
 module.exports = {
   server,
 };
