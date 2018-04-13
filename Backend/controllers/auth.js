@@ -44,7 +44,7 @@ const userLogin = (req, res) => {
 const userLogout = (req, res) => {
   if (!req.session.username) res.json('User is not logged in.');
   res.session.destroy();
-  res.send(req.session);
+  res.json(req.session);
 }
 
 
