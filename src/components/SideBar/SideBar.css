@@ -1,0 +1,51 @@
+.SideBar {
+  background-color: #153335;
+  white-space: nowrap;
+  position: relative; }
+  .SideBar__title {
+    color: white;
+    margin-left: 10px;
+    margin-bottom: 50px;
+    font-size: 50px;
+    padding-right: 20px; }
+  .SideBar__button {
+    font-weight: 300;
+    font: normal 10px;
+    font-family: 'Times New Roman', Times, serif, sans-serif 50px;
+    width: 100%;
+    margin: 10px 0;
+    font-size: 20px;
+    line-height: 3px;
+    cursor: pointer;
+    color: #ffaaaa;
+    background-color: #153335;
+    height: 30px;
+    padding: 20px 10px 20px 40px;
+    box-shadow: none;
+    outline: none;
+    border: none; }
+    .SideBar__button:hover {
+      color: #e0fffe;
+      font-size: 22px; }
+
+.SetIc {
+  position: relative; }
+
+.fa-plus {
+  position: absolute;
+  top: 38%;
+  left: 12%;
+  color: #ffaaaa; }
+
+.fa-sticky-note {
+  position: absolute;
+  top: 38%;
+  left: 12%;
+  color: #ffaaaa; }
+
+.fa-bookmark {
+  position: absolute;
+  top: 4%;
+  left: 65%;
+  font-size: 50px;
+  color: #ffaaaa; }
