@@ -1,17 +1,17 @@
+/* eslint no-underscore-dangle: 0 */
 const User = require('../models/users');
 const Note = require('../models/notes');
 
 const addNote = (req, res) => {
-  const {title, content, userId } = req.body;
+  const { title, content, userId } = req.body;
   const date = new Date();
-  const note = { title, content, date };
-  const newNote = new Note(note);
+  const newNote = new Note({ title, content, date });
 
   newNote
     .save()
-    .then(note => {
+    .then((note) => {
       const id = note._id;
-      User.findOneAndUpdate({ _id: userId}, { $push: { notes: id } })
+      User.findOneAndUpdate({ _id: userId }, { $push: { notes: id } })
         .then(() => {
           res.status(201).json(note);
         })
@@ -23,7 +23,7 @@ const addNote = (req, res) => {
 const deleteNote = (req, res) => {
   const { id } = req.params;
   Note.findByIdAndRemove(id)
-    .then(deletedNote => {
+    .then((deletedNote) => {
       res.json(deletedNote);
     })
     .catch(err => res.json(err));
@@ -32,7 +32,7 @@ const deleteNote = (req, res) => {
 const editNote = (req, res) => {
   const { editedNote, id } = req.body;
   Note.findByIdAndUpdate(id, editedNote, { new: true })
-    .then(newNote => {
+    .then((newNote) => {
       res.json(newNote);
     })
     .catch(err => res.json(err));
@@ -43,14 +43,12 @@ const getNotes = (req, res) => {
   User.findById(id, (err, user) => {
     if (err) {
       res.status(422);
-      res.json({'Error Fetching single User from DB: ': err.message});
+      res.json({ 'Error Fetching single User from DB: ': err.message });
       return;
     }
     res.json(user);
   });
-}
-
-
+};
 
 // const getNotes = (req, res) => {
 //   const { id } = req.params;
