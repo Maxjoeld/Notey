@@ -1,5 +1,16 @@
-const { addNote, deleteNote, editNote, getNotes } = require('./notes');
-const { userLogin, userLogout, userCreate } = require('./auth');
+// Note Routes //
+const {
+  addNote,
+  deleteNote,
+  editNote,
+  getNotes,
+} = require('./notes');
+// Auth Routes //
+const {
+  userLogin,
+  userLogout,
+  userCreate,
+} = require('./auth');
 
 module.exports = {
   addNote,

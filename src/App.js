@@ -1,21 +1,21 @@
-import React, { Component } from "react";
-import "./App.css";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import SideBar from "./components/SideBar/SideBar";
-import NoteList from "./components/NoteList/NoteList";
-import CreateNote from "./components/CreateNote/CreateNote";
-import ViewNote from "./components/ViewNote/ViewNote";
+import SideBar from './components/SideBar/SideBar';
+import NoteList from './components/NoteList/NoteList';
+import CreateNote from './components/CreateNote/CreateNote';
+import ViewNote from './components/ViewNote/ViewNote';
 import EditNote from './components/EditNote/EditNote';
 import Notes from './data';
+import SignUp from './components/SignUp/SignUp';
+import './App.css';
 
 export default class App extends Component {
-  nextId = 0;
-  noteIndex = 5;
-
   state = {
     notes: Notes,
   };
+  nextId = 0;
+  noteIndex= 5;
 
   handleNoteViewIndex = inputId => {
     for (let i = 0; i < this.state.notes.length; i++) {
@@ -24,13 +24,21 @@ export default class App extends Component {
   };
 
   handleCreateNote = inputNote => {
-    const newNote = { id: this.nextId++, title: inputNote.title, body: inputNote.body };
+    const newNote = {
+      id: this.nextId++,
+      title: inputNote.title,
+      body: inputNote.body,
+    };
     const newNotes = [...this.state.notes, newNote];
     this.setState({ notes: newNotes });
   };
 
   handleEditNote = inputNote => {
-    const editedNote = { id: inputNote.id, title: inputNote.title, body: inputNote.body };
+    const editedNote = {
+      id: inputNote.id,
+      title: inputNote.title,
+      body: inputNote.body,
+    };
     const editedNotes = [...this.state.notes];
     editedNotes.splice(this.noteIndex, 1, editedNote);
     this.setState({ notes: editedNotes });
@@ -43,7 +51,7 @@ export default class App extends Component {
 
   updateSortedNotes = sortedNotes => {
     this.setState({
-      notes: sortedNotes
+      notes: sortedNotes,
     });
   };
 
@@ -52,9 +60,10 @@ export default class App extends Component {
       <Router>
         <div className="App">
           <SideBar />
+          <Route exact path='/signin' component={SignUp} />
           <Route
             exact
-            path={"/"}
+            path='/'
             render={() => (
               <NoteList
                 notes={this.state.notes}
@@ -65,12 +74,12 @@ export default class App extends Component {
           />
           <Route
             exact
-            path={"/create"}
+            path='/create'
             render={() => <CreateNote createNote={this.handleCreateNote} />}
           />
           <Route
             exact
-            path={"/view"}
+            path='/view'
             render={() => (
               <ViewNote
                 note={this.state.notes[this.noteIndex]}
@@ -81,7 +90,7 @@ export default class App extends Component {
           />
           <Route
             exact
-            path={"/edit"}
+            path='/edit'
             render={() => (
               <EditNote
                 note={this.state.notes[this.noteIndex]}
@@ -94,3 +103,4 @@ export default class App extends Component {
     );
   }
 }
+

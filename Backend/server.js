@@ -2,7 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const cors = require('cors');
 
-const { secret } = require('./config');
+// const { secret } = require('./config');
 const routes = require('./routes/index');
 
 const server = express();
