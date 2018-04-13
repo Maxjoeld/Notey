@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 mongooseTypes.loadTypes(mongoose, 'email');
 
-const schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 const Email = mongoose.SchemaTypes.Email;
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
@@ -37,7 +37,7 @@ UserSchema.pre('save', function(next) {
 });
 
 UserSchema.methods.checkPassword = function(plainTextPW) {
-  return bcyrpt.compare(plainTextPW, this.password);
+  return bcrypt.compare(plainTextPW, this.password);
 };
 
 module.exports = mongoose.model('User', UserSchema);

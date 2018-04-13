@@ -1,5 +1,5 @@
 const User = require('../models/users');
-const Note = require('../models/noteModel');
+const Note = require('../models/notes');
 
 const addNote = (req, res) => {
   const {title, content, userId } = req.body;
@@ -20,7 +20,7 @@ const addNote = (req, res) => {
     .catch(err => res.json(err));
 };
 
-const deleteNote = (res, res) => {
+const deleteNote = (req, res) => {
   const { id } = req.params;
   Note.findByIdAndRemove(id)
     .then(deletedNote => {
@@ -40,18 +40,32 @@ const editNote = (req, res) => {
 
 const getNotes = (req, res) => {
   const { id } = req.params;
-  User.findById(id)
-    .populate('notes')
-    .then(finalData => {
-      res.json(finalData);
-    })
-    .catch(err => res.json(err));
+  User.findById(id, (err, user) => {
+    if (err) {
+      res.status(422);
+      res.json({'Error Fetching single User from DB: ': err.message});
+      return;
+    }
+    res.json(user);
+  });
 }
+
+
+
+// const getNotes = (req, res) => {
+//   const { id } = req.params;
+//   User.findById(id)
+//     .populate('notes')
+//     .then(finalData => {
+//       res.json(finalData);
+//     })
+//     .catch(err => res.json(err));
+// }
 
 
 module.exports = {
   addNote,
   deleteNote,
   editNote,
-  getNotes
+  getNotes,
 };

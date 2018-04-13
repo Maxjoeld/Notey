@@ -3,7 +3,7 @@ const session = require('express-session');
 const cors = require('cors');
 
 const { secret } = require('./config');
-// const routes = require('./api/routes/routes');
+const routes = require('./routes/index');
 
 const server = express();
 const corsOptions = {
@@ -17,11 +17,13 @@ server.use(cors(corsOptions));
 
 server.use(
   session({
-    secret: secret,
+    secret: 'e5SPiqsEtjexkTj3Xqovsjzq8ovjfgVDFMfUzSmJO21dtXs4re',
     resave: true,
     saveUninitialized: false,
   })
 );
+
+routes(server);
 
 module.exports = {
   server,
