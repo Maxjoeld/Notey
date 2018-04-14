@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './SignUp.css';
 import logo from './google.png';
 
@@ -8,7 +9,7 @@ class SignUp extends Component {
     return (
       <div className="signin">
         <div className="signin--box">
-          <h1 className="signin--header">Sign in With</h1>
+          <h1 className="signin--header">Sign Up With</h1>
           <div className="signin--buttons">
             <button className="signin--buttons__facebook">
               <i className="fab fa-facebook-square" />facebook
@@ -31,7 +32,7 @@ class SignUp extends Component {
             <br />
             <input className="signin--signin__button" type="submit" value="Sign In" />
           </form>
-          <p className="signin--notmember"> Not a member? Sign up now</p>
+          <p className="signin--notmember"> Already a member? <Link to='/signin>'> Sign in</Link></p>
         </div>
       </div>
     );

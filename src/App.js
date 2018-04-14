@@ -7,7 +7,8 @@ import CreateNote from './components/CreateNote/CreateNote';
 import ViewNote from './components/ViewNote/ViewNote';
 import EditNote from './components/EditNote/EditNote';
 import Notes from './data';
-import SignUp from './components/SignUp/SignUp';
+import SignUp from './components/Auth/SignUp';
+import Login from './components/Auth/SignIn';
 import './App.css';
 
 class App extends Component {
@@ -77,7 +78,8 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Route exact path="/login" component={SignUp} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={SignUp} />
           <PrivateRoute exact component={SideBar} />
           <PrivateRoute
             exact
