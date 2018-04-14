@@ -21,7 +21,7 @@
     border: 0.5px solid rgb(209, 209, 209);
   }
   &--header {
-    margin-bottom: 35px;
+    // margin-bottom: 35px;
   }
 
   &--buttons {
@@ -55,11 +55,17 @@
       }
     }
   }
-
-  /////// Signin form ///////////
+//////////////////
+/////////////////////////////////
+////////// Signin form
+  &--orsign {
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
 
   &--signin {
     font-size: 12px;
+    margin-bottom: 20px;
     // background-color: yellow;
     &__username {
       padding: 5px;

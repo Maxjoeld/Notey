@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import logo from './google.png';
-import './SignUp.css';
+import './SignIn.css';
 
 
 class SignIn extends Component {
@@ -33,7 +33,7 @@ class SignIn extends Component {
             <br />
             <input className="signin--signin__button" type="submit" value="Sign In" />
           </form>
-          <p className="signin--notmember">Not a member? <Link to='/signup>'> Sign up </Link></p>
+          <p className="signin--notmember">Not a member? <Link to='/signup'> Sign up </Link></p>
         </div>
       </div>
     );

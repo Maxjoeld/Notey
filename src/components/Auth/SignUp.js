@@ -10,6 +10,17 @@ class SignUp extends Component {
       <div className="signin">
         <div className="signin--box">
           <h1 className="signin--header">Sign Up With</h1>
+          <form className="signin--signin">
+            Username:<br />
+            <input className="signin--signin__username" placeholder="Username" />
+            <br />
+            Password
+            <br />
+            <input className="signin--signin__password" placeholder="Password" />
+            <br />
+            <input className="signin--signin__button" type="submit" value="Sign Up" />
+          </form>
+          <p className="signin--orsign"> Or sign up with </p>
           <div className="signin--buttons">
             <button className="signin--buttons__facebook">
               <i className="fab fa-facebook-square" />facebook
@@ -22,17 +33,8 @@ class SignUp extends Component {
               />Google
             </button>
           </div>
-          <form className="signin--signin">
-            Username:<br />
-            <input className="signin--signin__username" placeholder="Username" />
-            <br />
-            Password
-            <br />
-            <input className="signin--signin__password" placeholder="Password" />
-            <br />
-            <input className="signin--signin__button" type="submit" value="Sign In" />
-          </form>
-          <p className="signin--notmember"> Already a member? <Link to='/signin>'> Sign in</Link></p>
+          <p className="signin--notmember"> Already a member? <Link to='/signin'> Sign in</Link></p>
+
         </div>
       </div>
     );
