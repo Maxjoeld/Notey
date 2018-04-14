@@ -18,9 +18,9 @@ class NoteList extends Component {
 
   componentWillMount() {
     if (this.state.notes.length > 0) {
-      this.state.emptyNotes = false;
+      this.setState({ emptyNotes: !true });
     } else {
-      this.state.emptyNotes = true;
+      this.setState({ emptyNotes: true });
     }
   }
 
@@ -42,11 +42,9 @@ class NoteList extends Component {
     const notes = [...state];
     if (this.state.sortedNotes) {
       notes.sort((a, b) => a.title > b.title);
-      this.state.sortedNotes = false;
-      this.setState({ notes });
+      this.setState({ notes, sortedNotes: false });
     } else {
-      this.state.sortedNotes = true;
-      this.setState({ notes });
+      this.setState({ notes, sortedNotes: true });
     }
   };
 

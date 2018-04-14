@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 import SideBar from './components/SideBar/SideBar';
 import NoteList from './components/NoteList/NoteList';
@@ -10,9 +10,10 @@ import Notes from './data';
 import SignUp from './components/SignUp/SignUp';
 import './App.css';
 
-export default class App extends Component {
+class App extends Component {
   state = {
     notes: Notes,
+    isAuthenticated: true,
   };
   nextId = 0;
   noteIndex = 5;
@@ -54,14 +55,36 @@ export default class App extends Component {
       notes: sortedNotes,
     });
   };
+  handleLogin = () => {
+
+  }
 
   render() {
+    const fakeAuth = {
+      isAuthenticated: true,
+    };
+    const PrivateRoute = ({ component: Component, ...rest }) => (
+      <Route
+        {...rest}
+        render={props =>
+          fakeAuth.isAuthenticated ? (
+            <Component {...props} />
+          ) : (
+            <Redirect
+              to={{
+                path: '/login',
+              }}
+            />
+          )
+        }
+      />
+    );
     return (
       <Router>
         <div className="App">
-          <Route exact path="/signin" component={SignUp} />
-          <SideBar />
-          <Route
+          <Route exact path="/login" component={SignUp} />
+          <PrivateRoute exact component={SideBar} />
+          <PrivateRoute
             exact
             path="/"
             render={() => (
@@ -72,12 +95,12 @@ export default class App extends Component {
               />
             )}
           />
-          <Route
+          <PrivateRoute
             exact
             path="/create"
             render={() => <CreateNote createNote={this.handleCreateNote} />}
           />
-          <Route
+          <PrivateRoute
             exact
             path="/view"
             render={() => (
@@ -88,7 +111,7 @@ export default class App extends Component {
               />
             )}
           />
-          <Route
+          <PrivateRoute
             exact
             path="/edit"
             render={() => (
@@ -103,3 +126,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default App;

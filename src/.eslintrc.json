@@ -10,6 +10,7 @@
     "import/extensions": "off",
     "react/prop-types": "off",
     "arrow-body-style": "off",
-    "jsx-all/no-noninteractive-element-interactions": "off"
+    "no-noninteractive-element-interactions": "off",
+    "no-confusing-arrow": "off"
   }
 }
