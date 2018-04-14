@@ -15,7 +15,7 @@ export default class App extends Component {
     notes: Notes,
   };
   nextId = 0;
-  noteIndex= 5;
+  noteIndex = 5;
 
   handleNoteViewIndex = inputId => {
     for (let i = 0; i < this.state.notes.length; i++) {
@@ -59,11 +59,11 @@ export default class App extends Component {
     return (
       <Router>
         <div className="App">
+          <Route exact path="/signin" component={SignUp} />
           <SideBar />
-          <Route exact path='/signin' component={SignUp} />
           <Route
             exact
-            path='/'
+            path="/"
             render={() => (
               <NoteList
                 notes={this.state.notes}
@@ -74,12 +74,12 @@ export default class App extends Component {
           />
           <Route
             exact
-            path='/create'
+            path="/create"
             render={() => <CreateNote createNote={this.handleCreateNote} />}
           />
           <Route
             exact
-            path='/view'
+            path="/view"
             render={() => (
               <ViewNote
                 note={this.state.notes[this.noteIndex]}
@@ -90,7 +90,7 @@ export default class App extends Component {
           />
           <Route
             exact
-            path='/edit'
+            path="/edit"
             render={() => (
               <EditNote
                 note={this.state.notes[this.noteIndex]}
@@ -103,4 +103,3 @@ export default class App extends Component {
     );
   }
 }
-

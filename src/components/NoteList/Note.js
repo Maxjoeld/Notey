@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Link } from 'react-router-dom';
@@ -5,9 +6,8 @@ import { SortableElement } from 'react-sortable-hoc';
 import './Notes.css';
 
 const Note = SortableElement(props => {
-  console.log(props.note.id);
   return (
-    <Link to={"/view"} onClick={() => {props.handleNoteIndex(props.note.id)}}>
+    <Link to="/view" onClick={() => {props.handleNoteIndex(props.note.id); }}>
       <li className="Note">
         <div className="Note--NoteTitle">
           <h2>{props.note.title}</h2> <br />
@@ -19,6 +19,7 @@ const Note = SortableElement(props => {
     </Link>
   );
 });
- 
+
 export default Note;
- 
+
+/* eslint-enable */

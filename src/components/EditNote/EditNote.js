@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -22,10 +23,10 @@ class EditNote extends Component {
     this.setState({ [name]: value });
   };
 
-  handleSubmit = _ => {
+  handleSubmit = () => {
     const { id, title, body } = this.state;
     this.props.handleEditNote({ id, title, body });
-    this.setState({ id: 0, title: "", body: "" });
+    this.setState({ id: 0, title: '', body: '' });
   };
 
   render() {
@@ -57,7 +58,7 @@ class EditNote extends Component {
             required
           />
           <br />
-          <Link to={"/view"}>
+          <Link to='/view'>
             <button
               onClick={() => this.handleSubmit()}
               className="CreateNote__Submit"
@@ -71,5 +72,5 @@ class EditNote extends Component {
     );
   }
 }
- 
+/* eslint-enable */
 export default EditNote;

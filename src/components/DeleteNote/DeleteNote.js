@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -8,9 +9,9 @@ const DeleteNote = (props) => {
     <div className='DeleteModal'>
       <div className='DeleteModal-Box'>
         <p> Are you sure you want to delete this? </p>
-        <Link to={'/'}>
-          <button 
-            type='button' 
+        <Link to='/'>
+          <button
+            type='button'
             onClick={() => {
               props.handleDeleteNote(props.id);
             }}
@@ -31,7 +32,7 @@ const DeleteNote = (props) => {
       </div>
     </div>
   );
-}
- 
+};
+
 export default DeleteNote;
- 
+/* eslint-enable */

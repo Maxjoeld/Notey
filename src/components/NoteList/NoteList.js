@@ -1,56 +1,60 @@
-import React, { Component } from "react";
-import { SortableContainer, arrayMove } from "react-sortable-hoc";
-import { CSVLink } from "react-csv";
-import Note from "./Note";
+/* eslint react/prop-types: 0 */
 
-import "./Notes.css";
+import React, { Component } from 'react';
+import { SortableContainer, arrayMove } from 'react-sortable-hoc';
+import { CSVLink } from 'react-csv';
+// import PropTypes from 'prop-types';
+import Note from './Note';
 
-export default class NoteList extends Component {
-  boolEmptyNotes = true;
-  sortedNotes = true;
+import './Notes.css';
+
+class NoteList extends Component {
   state = {
     notes: this.props.notes,
-    search: ""
+    search: '',
+    emptyNotes: true,
+    sortedNotes: true,
   };
 
   componentWillMount() {
     if (this.state.notes.length > 0) {
-      this.boolEmptyNotes = false;
+      this.state.emptyNotes = false;
     } else {
-      this.boolEmptyNotes = true;
+      this.state.emptyNotes = true;
     }
   }
 
-  handleNoteIndex = index => {
-    this.props.handleNoteViewIndex(index);
-  };
-
   onSortEnd = ({ oldIndex, newIndex }) => {
     this.setState({
-      notes: arrayMove(this.state.notes, oldIndex, newIndex)
+      notes: arrayMove(this.state.notes, oldIndex, newIndex),
     });
     this.props.updateSortedNotes(this.state.notes);
+  };
+  handleNoteIndex = index => {
+    this.props.handleNoteViewIndex(index);
   };
 
   updateSearch = e => {
     this.setState({ search: e.target.value });
   };
 
-  sortData = (state) => {
+  sortData = state => {
     const notes = [...state];
-    if (this.sortedNotes) {
-      notes.sort((a, b) => {
-        return a.title > b.title;
-      });
-      this.sortedNotes = false;
-      this.setState({ notes: notes });
+    if (this.state.sortedNotes) {
+      notes.sort((a, b) => a.title > b.title);
+      this.state.sortedNotes = false;
+      this.setState({ notes });
     } else {
-      this.sortedNotes = true;
-      this.setState({ notes: notes });
+      this.state.sortedNotes = true;
+      this.setState({ notes });
     }
   };
 
   render() {
+    const filteredNotes = this.state.notes.filter(note => {
+      return note.title.toLowerCase().includes(this.state.search.toLowerCase());
+    });
+
     const SortableList = SortableContainer(props => {
       return (
         <ul className="Notes--comp">
@@ -70,9 +74,6 @@ export default class NoteList extends Component {
       );
     });
 
-    let filteredNotes = this.state.notes.filter(note => {
-      return note.title.toLowerCase().includes(this.state.search.toLowerCase());
-    });
     return (
       <div className="NotesView">
         <div className="NotesView--header">
@@ -82,37 +83,49 @@ export default class NoteList extends Component {
             placeholder="SearchEngine"
             className="NotesView__search"
             value={this.state.search}
-            onChange={this.updateSearch.bind(this)}
+            onChange={this.updateSearch}
           />
-          {this.sortedNotes ? (
-            <h1 className="NotesView__sort" onClick={() =>this.sortData(this.state.notes)}>
-              Sort: Regular 
+          {/* eslint-disable */}
+          {this.state.sortedNotes ? (
+            <h1
+              className="NotesView__sort"
+              onClick={() => this.sortData(this.state.notes)}
+              onKeyDown={this.handleKeyDown}
+            >
+              Sort: Regular
             </h1>
           ) : (
-            <h1 className="NotesView__sort" onClick={() => this.sortData(this.props.notes)}>
-              Sort: Sorted Alphabetically 
+            <h1
+              className="NotesView__sort"
+              onClick={() => this.sortData(this.props.notes)}
+              onKeyDown={this.handleKeyDown}
+              // "on keyDown is important for ppl with physical disabilities who cannot use a mouse, 
+              // "Did not create the event listener tho"
+            >
+              Sort: Sorted Alphabetically
             </h1>
           )}
+          {/* eslint-enable */}
         </div>
-        {this.boolEmptyNotes ? (
+        {this.state.emptyNotes ? (
           <h3>
-            It looks like you don't have any notes yet, click "Create New Note"
+            It looks like you don’t have any notes yet, click ’Create New Note’
             to get started!
           </h3>
         ) : null}
         <SortableList
           pressDelay={90}
-          lockToContainerEdges={true}
-          axis={"xy"}
+          lockToContainerEdges
+          axis='xy'
           notes={this.state.notes}
           onSortEnd={this.onSortEnd}
           handleNoteIndex={this.handleNoteIndex}
         />
-        {!this.boolEmptyNotes ? (
+        {!this.state.emptyNotes ? (
           <CSVLink
             className="CSV-Link"
             data={this.state.notes}
-            filename={"lambda-notes.csv"}
+            filename='lambda-notes.csv'
           >
             Download CSV
           </CSVLink>
@@ -121,3 +134,5 @@ export default class NoteList extends Component {
     );
   }
 }
+
+export default NoteList;

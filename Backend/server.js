@@ -15,13 +15,12 @@ server.use(express.json());
 server.use(cors(corsOptions));
 // server.options('*', cors());
 
-server.use(
-  session({
+server
+  .use(session({
     secret: 'e5SPiqsEtjexkTj3Xqovsjzq8ovjfgVDFMfUzSmJO21dtXs4re',
     resave: true,
     saveUninitialized: false,
-  })
-);
+  }));
 
 routes(server);
 

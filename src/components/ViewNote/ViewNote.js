@@ -1,37 +1,38 @@
-import React, { Component } from "react";
-import ReactMarkdown from "react-markdown";
-import { Link } from "react-router-dom";
+/* eslint-disable */
 
-import DeleteNote from "../DeleteNote/DeleteNote";
-import "./ViewNote.css";
+import React, { Component } from 'react';
+import ReactMarkdown from 'react-markdown';
+import { Link } from 'react-router-dom';
 
-export default class NoteView extends Component {
-  boolModal = false;
+import DeleteNote from '../DeleteNote/DeleteNote';
+import './ViewNote.css';
 
+class NoteView extends Component {
   state = {
     id: 0,
-    title: "",
-    body: ""
+    title: '',
+    body: '',
+    boolModal: false,
   };
 
-  toggleModal = _ => {
-    this.boolModal = !this.boolModal;
-    this.forceUpdate();
-  };
 
   componentDidMount() {
     this.setState({
       id: this.props.note.id,
       title: this.props.note.title,
-      body: this.props.note.body
+      body: this.props.note.body,
     });
   }
+  toggleModal = () => {
+    this.state.boolModal = !this.state.boolModal;
+    this.forceUpdate();
+  };
 
   render() {
     const { id, title, body } = this.state;
     return (
       <div className="NoteView">
-        {this.boolModal ? (
+        {this.state.boolModal ? (
           <div>
             <DeleteNote
               id={id}
@@ -42,7 +43,7 @@ export default class NoteView extends Component {
         ) : null}
         <div className="NoteView--Links">
           <div>
-            <Link className="NoteView--Links__Link" to={"/edit"}>
+            <Link className="NoteView--Links__Link" to='/edit'>
               edit
             </Link>
           </div>
@@ -63,3 +64,6 @@ export default class NoteView extends Component {
     );
   }
 }
+
+/* eslint-enable */
+export default NoteView;
