@@ -16,13 +16,13 @@ class NoteList extends Component {
     sortedNotes: true,
   };
 
-  componentWillMount() {
-    if (this.state.notes.length > 0) {
-      this.setState({ emptyNotes: !true });
-    } else {
-      this.setState({ emptyNotes: true });
-    }
-  }
+  // componentWillMount() {
+  // if (this.state.notes.length > 0) {
+  //   this.setState({ emptyNotes: false });
+  // } else {
+  //   this.setState({ emptyNotes: true });
+  // }
+  // }
 
   onSortEnd = ({ oldIndex, newIndex }) => {
     this.setState({
@@ -97,7 +97,7 @@ class NoteList extends Component {
               className="NotesView__sort"
               onClick={() => this.sortData(this.props.notes)}
               onKeyDown={this.handleKeyDown}
-              // "on keyDown is important for ppl with physical disabilities who cannot use a mouse, 
+              // "on keyDown is important for ppl with physical disabilities who cannot use a mouse,
               // "Did not create the event listener tho"
             >
               Sort: Sorted Alphabetically
@@ -114,7 +114,7 @@ class NoteList extends Component {
         <SortableList
           pressDelay={90}
           lockToContainerEdges
-          axis='xy'
+          axis="xy"
           notes={this.state.notes}
           onSortEnd={this.onSortEnd}
           handleNoteIndex={this.handleNoteIndex}
@@ -123,7 +123,7 @@ class NoteList extends Component {
           <CSVLink
             className="CSV-Link"
             data={this.state.notes}
-            filename='lambda-notes.csv'
+            filename="lambda-notes.csv"
           >
             Download CSV
           </CSVLink>

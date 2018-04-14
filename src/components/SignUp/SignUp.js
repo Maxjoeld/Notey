@@ -4,8 +4,8 @@ class SignUp extends Component {
   state = {}
   render() {
     return (
-      <div>
-        <h1>Hello</h1>
+      <div className=''>
+        <h1 className='header'>Hello worllllddd</h1>
       </div>
     );
   }

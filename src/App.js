@@ -13,7 +13,7 @@ import './App.css';
 class App extends Component {
   state = {
     notes: Notes,
-    isAuthenticated: true,
+    isAuthenticated: false,
   };
   nextId = 0;
   noteIndex = 5;
@@ -55,24 +55,19 @@ class App extends Component {
       notes: sortedNotes,
     });
   };
-  handleLogin = () => {
-
-  }
+  handleLogin = () => {};
 
   render() {
-    const fakeAuth = {
-      isAuthenticated: true,
-    };
-    const PrivateRoute = ({ component: Component, ...rest }) => (
+    const PrivateRoute = ({ component: Comp, ...rest }) => (
       <Route
         {...rest}
         render={props =>
-          fakeAuth.isAuthenticated ? (
-            <Component {...props} />
+          this.state.isAuthenticated ? (
+            <Comp {...props} {...rest} />
           ) : (
             <Redirect
               to={{
-                path: '/login',
+                pathname: '/login',
               }}
             />
           )
@@ -87,39 +82,31 @@ class App extends Component {
           <PrivateRoute
             exact
             path="/"
-            render={() => (
-              <NoteList
-                notes={this.state.notes}
-                handleNoteViewIndex={this.handleNoteViewIndex}
-                updateSortedNotes={this.updateSortedNotes}
-              />
-            )}
+            component={NoteList}
+            notes={this.state.notes}
+            handleNoteViewIndex={this.handleNoteViewIndex}
+            updateSortedNotes={this.updateSortedNotes}
           />
           <PrivateRoute
             exact
             path="/create"
-            render={() => <CreateNote createNote={this.handleCreateNote} />}
+            component={CreateNote}
+            createNote={this.handleCreateNote}
           />
           <PrivateRoute
             exact
             path="/view"
-            render={() => (
-              <ViewNote
-                note={this.state.notes[this.noteIndex]}
-                toggleModal={this.toggleModal}
-                handleDeleteNote={this.handleDeleteNote}
-              />
-            )}
+            component={ViewNote}
+            note={this.state.notes[this.noteIndex]}
+            toggleModal={this.toggleModal}
+            handleDeleteNote={this.handleDeleteNote}
           />
           <PrivateRoute
             exact
             path="/edit"
-            render={() => (
-              <EditNote
-                note={this.state.notes[this.noteIndex]}
-                handleEditNote={this.handleEditNote}
-              />
-            )}
+            component={EditNote}
+            note={this.state.notes[this.noteIndex]}
+            handleEditNote={this.handleEditNote}
           />
         </div>
       </Router>
