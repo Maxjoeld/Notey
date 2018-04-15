@@ -1,10 +1,38 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './SignUp.css';
 import logo from './google.png';
 
 class SignUp extends Component {
-  state = {};
+  state = {
+    username: '',
+    password: '',
+    requestError: false,
+  };
+
+
+  saveUser = e => {
+    e.preventDefault();
+    const { username, password } = this.state;
+    axios
+      .post('http://localhost:5000/notes/register', { username, password })
+      .then(re => {
+        console.log(re);
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({ requestError: true });
+        setTimeout(() => {
+          this.setState({ requestError: false });
+        }, 3000);
+      });
+  };
+
+  handleInputChange = e => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  };
   render() {
     return (
       <div className="signin">
@@ -12,13 +40,28 @@ class SignUp extends Component {
           <h1 className="signin--header">Sign Up With</h1>
           <form className="signin--signin">
             Username:<br />
-            <input className="signin--signin__username" placeholder="Username" />
+            <input
+              name="username"
+              onChange={this.handleInputChange}
+              className="signin--signin__username"
+              placeholder="Username"
+            />
             <br />
             Password
             <br />
-            <input className="signin--signin__password" placeholder="Password" />
+            <input
+              name="password"
+              onChange={this.handleInputChange}
+              className="signin--signin__password"
+              placeholder="Password"
+            />
             <br />
-            <input className="signin--signin__button" type="submit" value="Sign Up" />
+            <input
+              className="signin--signin__button"
+              type="submit"
+              value="Sign Up"
+              onClick={this.saveUser}
+            />
           </form>
           <p className="signin--orsign"> Or sign up with </p>
           <div className="signin--buttons">
@@ -33,8 +76,10 @@ class SignUp extends Component {
               />Google
             </button>
           </div>
-          <p className="signin--notmember"> Already a member? <Link to='/signin'> Sign in</Link></p>
-
+          <p className="signin--notmember">
+            {' '}
+            Already a member? <Link to="/signin"> Sign in</Link>
+          </p>
         </div>
       </div>
     );

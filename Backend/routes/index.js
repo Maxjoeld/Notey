@@ -15,7 +15,7 @@ module.exports = (server) => {
   server.route('/notes').post(addNote);
   server.route('/notes').put(editNote);
   //  User Routes //
-  server.route('/notes/users').post(userCreate);
+  server.route('/notes/register').post(userCreate);
   server.route('/notes/login').post(userLogin);
   server.route('/notes/logout').post(userLogout);
 };

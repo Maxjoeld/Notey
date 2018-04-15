@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, Link } from 'react-router-dom';
 
 import SideBar from './components/SideBar/SideBar';
 import NoteList from './components/NoteList/NoteList';
@@ -56,7 +56,11 @@ class App extends Component {
       notes: sortedNotes,
     });
   };
-  handleLogin = () => {};
+
+  isAuth = () => {
+    this.setState({ isAuthenticated: !false });
+      <Link to="/" />
+  }
 
   render() {
     const PrivateRoute = ({ component: Comp, ...rest }) => (
@@ -78,7 +82,15 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Route exact path="/login" component={Login} />
+          <Route
+            exact
+            path="/login"
+            render={() => (
+              <Login
+                isAuthenticated={this.isAuth}
+              />
+            )}
+          />
           <Route exact path="/signup" component={SignUp} />
           <PrivateRoute exact component={SideBar} />
           <PrivateRoute
