@@ -11,7 +11,7 @@ body {
 .App {
   display: flex;
   flex-flow: row nowrap;
-  background-color: #e0fffe;
+  background-color: #ffffff;
   width: 1200px;
   margin: 50px auto;
   border: 1px solid rgba(0,0,0,0.5);

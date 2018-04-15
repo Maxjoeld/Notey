@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Redirect, Link } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  Switch,
+} from 'react-router-dom';
 
 import SideBar from './components/SideBar/SideBar';
 import NoteList from './components/NoteList/NoteList';
@@ -9,12 +14,13 @@ import EditNote from './components/EditNote/EditNote';
 import Notes from './data';
 import SignUp from './components/Auth/SignUp';
 import Login from './components/Auth/SignIn';
+import Aux from './components/hoc/Aux';
 import './App.css';
 
 class App extends Component {
   state = {
     notes: Notes,
-    isAuthenticated: false,
+    isAuthenticated: true,
   };
   nextId = 0;
   noteIndex = 5;
@@ -58,17 +64,24 @@ class App extends Component {
   };
 
   isAuth = () => {
-    this.setState({ isAuthenticated: !false });
-      <Link to="/" />
+    this.setState({ isAuthenticated: true });
+  };
+
+  currentPath = () => {
+    // if we're on the current path don't redirect to home page 
   }
 
   render() {
+    console.log(this.props)
     const PrivateRoute = ({ component: Comp, ...rest }) => (
       <Route
         {...rest}
         render={props =>
           this.state.isAuthenticated ? (
-            <Comp {...props} {...rest} />
+            <Aux>
+              <Comp {...props} {...rest} />
+              {/* <Redirect to="/" /> */}
+            </Aux>
           ) : (
             <Redirect
               to={{
@@ -82,14 +95,11 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
+          {/* <Switch> */}
           <Route
             exact
             path="/login"
-            render={() => (
-              <Login
-                isAuthenticated={this.isAuth}
-              />
-            )}
+            render={() => <Login isAuth={this.isAuth} />}
           />
           <Route exact path="/signup" component={SignUp} />
           <PrivateRoute exact component={SideBar} />
@@ -122,6 +132,7 @@ class App extends Component {
             note={this.state.notes[this.noteIndex]}
             handleEditNote={this.handleEditNote}
           />
+          {/* </Switch> */}
         </div>
       </Router>
     );

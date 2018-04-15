@@ -9,7 +9,16 @@ class SignIn extends Component {
     username: '',
     password: '',
     requestError: false,
+    redirectToReferrer: false,
   };
+
+  login = () => {
+    this.props.isAuth(() => {
+      this.setState(() => ({
+        redirectToReferrer: true,
+      }));
+    });
+  }
 
   loginUser = e => {
     e.preventDefault();
@@ -17,7 +26,7 @@ class SignIn extends Component {
     axios
       .post('http://localhost:5000/notes/login', { username, password })
       .then(re => {
-        this.props.isAuthenticated();
+        this.props.isAuth();
         console.log(re);
       })
       .catch(err => {
@@ -34,6 +43,15 @@ class SignIn extends Component {
     this.setState({ [name]: value });
   };
   render() {
+    console.log(this.props)
+    // const { redirectToReferrer } = this.state;
+
+    // if (redirectToReferrer === true) {
+    //   return (
+    //     <Redirect to='/' />
+    //   );
+    // }
+
     return (
       <div className="signin">
         <div className="signin--box">
@@ -68,12 +86,14 @@ class SignIn extends Component {
               onChange={this.handleInputChange}
             />
             <br />
-            <input
-              className="signin--signin__button"
-              type="submit"
-              value="Sign In"
-              onClick={this.loginUser}
-            />
+            <Link to="/">
+              <input
+                className="signin--signin__button"
+                type="submit"
+                value="Sign In"
+                onClick={this.loginUser}
+              />
+            </Link>
           </form>
           <p className="signin--notmember">
             Not a member? <Link to="/signup"> Sign up </Link>
