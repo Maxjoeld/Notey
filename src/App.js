@@ -72,7 +72,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props)
     const PrivateRoute = ({ component: Comp, ...rest }) => (
       <Route
         {...rest}
