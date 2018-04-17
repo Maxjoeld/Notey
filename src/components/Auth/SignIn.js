@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import logo from './google.png';
 import './SignIn.css';
@@ -12,13 +12,19 @@ class SignIn extends Component {
     redirectToReferrer: false,
   };
 
+  componentDidMount() {
+    // if (this.state.redirectToReferrer) {
+    //   return this.props.history.push('/');
+    // }
+  }
+
   login = () => {
     this.props.isAuth(() => {
       this.setState(() => ({
-        redirectToReferrer: true,
+        redirectToReferrer: true
       }));
     });
-  }
+  };
 
   loginUser = e => {
     e.preventDefault();
@@ -26,7 +32,7 @@ class SignIn extends Component {
     axios
       .post('http://localhost:5000/notes/login', { username, password })
       .then(re => {
-        this.props.isAuth();
+        this.login();
         console.log(re);
       })
       .catch(err => {
@@ -43,14 +49,12 @@ class SignIn extends Component {
     this.setState({ [name]: value });
   };
   render() {
-    console.log(this.props)
-    // const { redirectToReferrer } = this.state;
+    // console.log(this.props)
+    const { redirectToReferrer } = this.state;
 
-    // if (redirectToReferrer === true) {
-    //   return (
-    //     <Redirect to='/' />
-    //   );
-    // }
+    if (redirectToReferrer === true) {
+      return <Redirect to="/" />;
+    }
 
     return (
       <div className="signin">

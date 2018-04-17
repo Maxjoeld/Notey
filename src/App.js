@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Redirect,
-  Switch
-} from 'react-router-dom';
-import axios from 'axios';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 import SideBar from './components/SideBar/SideBar';
 import NoteList from './components/NoteList/NoteList';
@@ -16,7 +10,7 @@ import SignUp from './components/Auth/SignUp';
 import Login from './components/Auth/SignIn';
 
 import Notes from './data';
-import Aux from './components/hoc/Aux';
+// import Aux from './components/hoc/Aux';
 import './App.css';
 
 class App extends Component {
@@ -27,14 +21,17 @@ class App extends Component {
   nextId = 0;
   noteIndex = 5;
 
-  // my files disappeared- git check
-  componentDidMount() {
-    axios.get('http://localhost:5000/notes/')
-      .then(res => {
-        const notes = res.data;
-        this.setState({ notes });
-      });
-  }
+  // componentDidMount() {
+  //   console.log(this.props);
+  //   if (this.state.isAuthenticated) {
+  //     return this.props.history.push('./');
+  //   }
+  // axios.get('http://localhost:5000/notes/')
+  //   .then(res => {
+  //     const notes = res.data;
+  //     this.setState({ notes });
+  //   });
+  // }
 
   handleNoteViewIndex = inputId => {
     for (let i = 0; i < this.state.notes.length; i++) {
@@ -42,12 +39,11 @@ class App extends Component {
     }
   };
 
-
   handleCreateNote = inputNote => {
     const newNote = {
       id: this.nextId++,
       title: inputNote.title,
-      body: inputNote.body,
+      body: inputNote.body
     };
     const newNotes = [...this.state.notes, newNote];
     this.setState({ notes: newNotes });
@@ -79,24 +75,17 @@ class App extends Component {
     this.setState({ isAuthenticated: true });
   };
 
-  currentPath = () => {
-    // if we're on the current path don't redirect to home page
-  };
-
   render() {
     const PrivateRoute = ({ component: Comp, ...rest }) => (
       <Route
         {...rest}
         render={props =>
           this.state.isAuthenticated ? (
-            <Aux>
-              <Comp {...props} {...rest} />
-              {/* <Redirect to="/" /> */}
-            </Aux>
+            <Comp {...props} {...rest} />
           ) : (
             <Redirect
               to={{
-                pathname: '/login'
+                pathname: '/login',
               }}
             />
           )
@@ -106,7 +95,6 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          {/* <Switch> */}
           <Route
             exact
             path="/login"
