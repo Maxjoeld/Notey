@@ -16,7 +16,7 @@ import './App.css';
 class App extends Component {
   state = {
     notes: Notes,
-    isAuthenticated: false,
+    isAuthenticated: true,
   };
   nextId = 0;
   noteIndex = 5;

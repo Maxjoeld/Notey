@@ -17,7 +17,7 @@
     font-size: 20px;
     line-height: 3px;
     cursor: pointer;
-    color: #ffaaaa;
+    color: #daffe0;
     background-color: #153335;
     height: 30px;
     padding: 20px 10px 20px 40px;
@@ -29,23 +29,34 @@
       font-size: 22px; }
 
 .SetIc {
-  position: relative; }
-
-.fa-plus {
-  position: absolute;
-  top: 38%;
-  left: 12%;
-  color: #ffaaaa; }
+  position: relative;
+  color: #daffe0; }
+  .SetIc:hover {
+    color: #e0fffe;
+    font-size: 20px; }
 
 .fa-sticky-note {
   position: absolute;
   top: 38%;
-  left: 12%;
-  color: #ffaaaa; }
+  left: 9%;
+  color: inherit; }
+
+.fa-plus {
+  position: absolute;
+  top: 38%;
+  left: 9%;
+  color: inherit; }
 
 .fa-bookmark {
   position: absolute;
   top: 4%;
   left: 65%;
   font-size: 50px;
-  color: #ffaaaa; }
+  color: inherit; }
+
+.fa-sign-out-alt {
+  position: absolute;
+  top: 25%;
+  left: 10%;
+  font-size: 25px;
+  color: inherit; }

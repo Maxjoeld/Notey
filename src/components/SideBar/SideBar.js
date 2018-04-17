@@ -8,7 +8,7 @@ const SideBar = () => {
     <div className="SideBar">
       <h1 className="SideBar__title">
         Notey <FontAwesome name="fas fa-book" />
-        <br />DataBase
+        <br />
       </h1>
       <Link to="/">
         <div className="SetIc">
@@ -20,6 +20,12 @@ const SideBar = () => {
         <div className="SetIc">
           <FontAwesome name="fas fa-plus" />
           <button className="SideBar__button">Create New Note</button>
+        </div>
+      </Link>
+      <Link to="/logout">
+        <div className="SetIc">
+          <FontAwesome name="fas fa-sign-out-alt" />
+          <button className="SideBar__button">Sign out</button>
         </div>
       </Link>
     </div>
