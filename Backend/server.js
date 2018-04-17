@@ -1,31 +1,36 @@
 const express = require('express');
 const session = require('express-session');
 const cors = require('cors');
-
+const passport = require('passport');
 const keys = require('./config');
 const routes = require('./routes/index');
+const cookieSession = require('cookie-session');
 require('./services/passport');
 
-const server = express();
+const app = express();
 const corsOptions = {
   origin: 'http://localhost:3000',
   credentials: true,
 };
 
-server.use(express.json());
-server.use(cors(corsOptions));
-server.use(session({
+app.use(express.json());
+app.use(cors(corsOptions));
+app.use(session({
+  cookie: { maxAge: 2628000000 },
   secret: keys.seshSecret,
-  resave:cd true,
+  resave: true,
   saveUninitialized: false,
 }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Two ways of running the routes through the server 
 // below you can just pass the required route and append the server to it
 // which will call it immediately--line 26 and 28 are the same 
-require('./routes/authRoutes')(server); // This is for the Oauth sign ins
+require('./routes/authRoutes')(app); // This is for the Oauth sign ins
 
-routes(server); // this is for the basic auth && notes routes
+routes(app); // this is for the basic auth && notes routes
 
 module.exports = {
-  server,
+  app,
 };

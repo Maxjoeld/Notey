@@ -1,4 +1,4 @@
-const { server } = require('./server');
+const { app } = require('./server');
 const mongoose = require('mongoose');
 
 const PORT = process.env.PORT || 5000;
@@ -13,6 +13,6 @@ mongoose
     console.log('Error connecting to database: ', err);
   });
 
-server.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });

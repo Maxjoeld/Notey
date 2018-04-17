@@ -1,11 +1,11 @@
 .SideBar {
-  background-color: #153335;
+  background-color: #242424;
   // background-color: #40474E;
   white-space: nowrap;
   position: relative;
 
   &__title {
-    color:rgb(255, 255, 255); 
+    color: rgb(197, 255, 207);  
     margin-left: 10px; 
     margin-bottom: 50px;
     font-size: 50px;
@@ -22,7 +22,7 @@
     line-height:3px;
     cursor: pointer;
     color: rgb(218, 255, 224);  
-    background-color: #153335;
+    background-color: #242424;
     height: 30px;
     padding: 20px 10px 20px 40px;
     box-shadow: none;

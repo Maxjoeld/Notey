@@ -1,9 +1,9 @@
 .SideBar {
-  background-color: #153335;
+  background-color: #242424;
   white-space: nowrap;
   position: relative; }
   .SideBar__title {
-    color: white;
+    color: #c5ffcf;
     margin-left: 10px;
     margin-bottom: 50px;
     font-size: 50px;
@@ -18,7 +18,7 @@
     line-height: 3px;
     cursor: pointer;
     color: #daffe0;
-    background-color: #153335;
+    background-color: #242424;
     height: 30px;
     padding: 20px 10px 20px 40px;
     box-shadow: none;

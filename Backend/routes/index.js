@@ -8,14 +8,14 @@ const {
   userCreate,
 } = require('../controllers/index');
 
-module.exports = (server) => {
+module.exports = (app) => {
   // Note Routes //
-  server.route('/notes/:id').get(getNotes);
-  server.route('/notes/:id').delete(deleteNote);
-  server.route('/notes').post(addNote);
-  server.route('/notes').put(editNote);
+  app.route('/notes/:id').get(getNotes);
+  app.route('/notes/:id').delete(deleteNote);
+  app.route('/notes').post(addNote);
+  app.route('/notes').put(editNote);
   //  User Routes //
-  server.route('/notes/register').post(userCreate);
-  server.route('/notes/login').post(userLogin);
-  server.route('/notes/logout').post(userLogout);
+  app.route('/notes/register').post(userCreate);
+  app.route('/notes/login').post(userLogin);
+  app.route('/notes/logout').post(userLogout);
 };
