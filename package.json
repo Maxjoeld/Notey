@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "concurrently": "^3.5.1",
     "eslint": "^4.19.1",
     "font-awesome": "^4.7.0",
     "node-sass-chokidar": "^1.2.2",
@@ -26,6 +27,8 @@
     "test": "react-scripts test --env=jsdom",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
+    "server": "nodemon Backend/app.js",
+    "dev": "concurrently \"npm run server\" \"npm-run-all -p watch-css start-js\"",
     "build-js": "react-scripts build",
     "build": "npm-run-all build-css build-js",
     "eject": "react-scripts eject"
