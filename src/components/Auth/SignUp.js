@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import './SignUp.css';
 import logo from './google.png';
@@ -11,15 +11,19 @@ class SignUp extends Component {
     requestError: false,
   };
 
-
   saveUser = e => {
     e.preventDefault();
     const { username, password } = this.state;
     axios
       .post('http://localhost:5000/notes/register', { username, password })
+      .then(() => {
+        return axios.post('http://localhost:5000/notes/login', { username, password });
+      })
       .then(re => {
         console.log(re);
+        this.props.isAuth();
       })
+      .then(() => this.props.history.push('/'))
       .catch(err => {
         console.log(err);
         this.setState({ requestError: true });
@@ -60,7 +64,7 @@ class SignUp extends Component {
               className="signin--signin__button"
               type="submit"
               value="Sign Up"
-              onClick={this.saveUser}
+              onClick={() => this.saveUser()}
             />
           </form>
           <p className="signin--orsign"> Or sign up with </p>
@@ -78,7 +82,7 @@ class SignUp extends Component {
           </div>
           <p className="signin--notmember">
             {' '}
-            Already a member? <Link to="/signin"> Sign in</Link>
+            Already a member? <Link to="/signin"> Sign in </Link>
           </p>
         </div>
       </div>
@@ -86,4 +90,4 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+export default withRouter(SignUp);

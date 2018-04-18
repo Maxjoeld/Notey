@@ -4,7 +4,7 @@ const cors = require('cors');
 const passport = require('passport');
 const keys = require('./config');
 const routes = require('./routes/index');
-const cookieSession = require('cookie-session');
+// const cookieSession = require('cookie-session');
 require('./services/passport');
 
 const app = express();
@@ -23,6 +23,11 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.get('/me', (req, res) => {
+  // Do NOT modify this route handler in any way
+  res.send({ user: req.user, session: req.session });
+});
 
 // Two ways of running the routes through the server 
 // below you can just pass the required route and append the server to it

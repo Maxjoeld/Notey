@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+// import Aux from 'react-aux';
 
 import SideBar from './components/SideBar/SideBar';
 import NoteList from './components/NoteList/NoteList';
@@ -10,28 +11,23 @@ import SignUp from './components/Auth/SignUp';
 import Login from './components/Auth/SignIn';
 
 import Notes from './data';
-// import Aux from './components/hoc/Aux';
 import './App.css';
 
 class App extends Component {
   state = {
     notes: Notes,
-    isAuthenticated: true,
+    isAuthenticated: false,
   };
   nextId = 0;
   noteIndex = 5;
 
-  // componentDidMount() {
-  //   console.log(this.props);
-  //   if (this.state.isAuthenticated) {
-  //     return this.props.history.push('./');
-  //   }
-  // axios.get('http://localhost:5000/notes/')
-  //   .then(res => {
-  //     const notes = res.data;
-  //     this.setState({ notes });
-  //   });
-  // }
+  componentDidMount() {
+    // axios.get('http://localhost:5000/notes/')
+    //   .then(res => {
+    //     const notes = res.data;
+    //     this.setState({ notes });
+    //   });
+  }
 
   handleNoteViewIndex = inputId => {
     for (let i = 0; i < this.state.notes.length; i++) {
@@ -43,7 +39,7 @@ class App extends Component {
     const newNote = {
       id: this.nextId++,
       title: inputNote.title,
-      body: inputNote.body
+      body: inputNote.body,
     };
     const newNotes = [...this.state.notes, newNote];
     this.setState({ notes: newNotes });
@@ -53,7 +49,7 @@ class App extends Component {
     const editedNote = {
       id: inputNote.id,
       title: inputNote.title,
-      body: inputNote.body
+      body: inputNote.body,
     };
     const editedNotes = [...this.state.notes];
     editedNotes.splice(this.noteIndex, 1, editedNote);
@@ -67,12 +63,12 @@ class App extends Component {
 
   updateSortedNotes = sortedNotes => {
     this.setState({
-      notes: sortedNotes
+      notes: sortedNotes,
     });
   };
 
   isAuth = () => {
-    this.setState({ isAuthenticated: true });
+    this.setState({ isAuthenticated: !false });
   };
 
   render() {
@@ -92,16 +88,13 @@ class App extends Component {
         }
       />
     );
+    console.log(this.props);
     return (
       <Router>
         <div className="App">
-          <Route
-            exact
-            path="/login"
-            render={() => <Login isAuth={this.isAuth} />}
-          />
-          <Route exact path="/signup" component={SignUp} />
-          <PrivateRoute exact component={SideBar} />
+          <Route exact path="/login" render={() => <Login isAuth={this.isAuth} />} />
+          <Route exact path="/signup" render={() => <SignUp isAuth={this.isAuth} />} />
+          <PrivateRoute exact component={SideBar} isAuth={this.isAuth} />
           <PrivateRoute
             exact
             path="/"

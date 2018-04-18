@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import logo from './google.png';
 import './SignIn.css';
@@ -12,29 +12,15 @@ class SignIn extends Component {
     redirectToReferrer: false,
   };
 
-  componentDidMount() {
-    // if (this.state.redirectToReferrer) {
-    //   return this.props.history.push('/');
-    // }
-  }
-
-  login = () => {
-    this.props.isAuth(() => {
-      this.setState(() => ({
-        redirectToReferrer: true
-      }));
-    });
-  };
-
   loginUser = e => {
     e.preventDefault();
     const { username, password } = this.state;
     axios
       .post('http://localhost:5000/notes/login', { username, password })
-      .then(re => {
-        this.login();
-        console.log(re);
+      .then(() => {
+        this.props.isAuth();
       })
+      .then(() => this.props.history.push('/'))
       .catch(err => {
         console.log(err);
         this.setState({ requestError: true });
@@ -50,11 +36,12 @@ class SignIn extends Component {
   };
   render() {
     // console.log(this.props)
-    const { redirectToReferrer } = this.state;
+    // const { from } = this.props.location || { from: { pathname: "/" } };
+    // const { redirectToReferrer } = this.state;
 
-    if (redirectToReferrer === true) {
-      return <Redirect to="/" />;
-    }
+    // if (redirectToReferrer === true) {
+    //   return <Redirect to={from} />;
+    // }
 
     return (
       <div className="signin">
@@ -72,6 +59,7 @@ class SignIn extends Component {
               />Google
             </button>
           </div>
+          {this.state.requestError ? <h5>Wrong Email or Password</h5> : null}
           <form className="signin--signin">
             Username:<br />
             <input
@@ -95,7 +83,7 @@ class SignIn extends Component {
                 className="signin--signin__button"
                 type="submit"
                 value="Sign In"
-                onClick={this.loginUser}
+                onClick={(e) => this.loginUser(e)}
               />
             </Link>
           </form>
@@ -108,4 +96,4 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn;
+export default withRouter(SignIn);
