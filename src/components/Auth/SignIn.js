@@ -20,6 +20,7 @@ class SignIn extends Component {
       .then(() => {
         this.props.isAuth();
       })
+      .then((re) => console.log(re))
       .then(() => this.props.history.push('/'))
       .catch(err => {
         console.log(err);
