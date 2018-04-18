@@ -1,5 +1,6 @@
+const jwt = require('jsonwebtoken');
+const keys = require('../config');
 const User = require('../models/users');
-
 const STATUS_USER_ERROR = 422;
 
 const sendUserError = (err, res) => {
@@ -53,35 +54,42 @@ const userLogin = (req, res) => {
 };
 
 // const userLogin = (req, res) => {
-//   const { username, password } = req.body;
-//   const lowercaseUsername = username.toLowerCase();
-//   User.findOne({ username: lowercaseUsername })
-//     .then(user => {
-//       if (user) {
-//         user
-//           .checkPassword(password)
-//           .then(verified => {
-//             if (verified) {
-//               req.session.username = user.username;
-//               // res.send(user._id);
-//               res.json({ user: req.user, session: req.session });
-//             } else res.status(401).json({ error: "passwords don't match" });
-//           })
-//           .catch(err => {
-//             res.json({ errorCheckingPassword: err });
-//           });
-//       } else
-//         res.status(401).json({ error: 'No user with that username in our DB' });
-//     })
-//     .catch(err => {
-//       res.status(403).json({ error: 'Invalid Username/Password', ...err });
+//   let { username, password } = req.body;
+//   username = username.toLowerCase();
+//   if (!username || !password) {
+//     res
+//       .status(422)
+//       .json({ error: 'You need to provide a username and password' });
+//   }
+//   // Find the user object matching the username
+//   User.findOne({ username }, (err, user) => {
+//     if (err) {
+//       return res.status(403).json({ error: 'Invalid Username/Password' });
+//     }
+//     if (user === null) {
+//       res.status(422).json({ error: 'User does not exist' });
+//       return;
+//     }
+//     // Use the method on the User model to hash and check PW
+//     user.checkPassword(password, (nonMatch, hashMatch) => {
+//       if (nonMatch !== null) {
+//         res.status(422).json({ error: 'Incorrect password' });
+//         return;
+//       }
+//       if (hashMatch) {
+//         const payload = {
+//           username: user.username,
+//         };
+//         const token = jwt.sign(payload, keys.seshSecret);
+//         res.json({ token });
+//       }
 //     });
+//   });
 // };
 
 const userLogout = (req, res) => {
   // res.json(req.session);
-  console.log('req.user');
-  // if (!req.session.username) res.json({ notlogged: req.session });
+  // console.log({req.session.username});
   delete req.session.username;
   res.status(200).json({ msg: 'Logged out.' });
 };

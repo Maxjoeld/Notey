@@ -12,6 +12,9 @@ class SideBar extends Component {
       .then(() => {
         this.props.isAuth();
       })
+      .then(() => {
+        sessionStorage.removeItem('id');
+      })
       .then(() => this.props.history.push('/login'))
       .catch(err => {
         console.log(err);

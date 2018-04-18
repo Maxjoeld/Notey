@@ -17,6 +17,9 @@ class SignIn extends Component {
     const { username, password } = this.state;
     axios
       .post('http://localhost:5000/notes/login', { username, password })
+      .then(res => {
+        sessionStorage.setItem('id', res.data);
+      })
       .then(() => {
         this.props.isAuth();
       })

@@ -13,7 +13,7 @@
 //   app.get('/auth/google/callback', passport.authenticate('google'));
 //   // req represents the incoming response - res represent the outgoing response
 //   app.get('/api/logout', (req, res) => {
-//     // logout is built in and klls the id and logs out the user 
+//     // logout is built in and klls the id and logs out the user
 //     req.logout();
 //     res.json(req.user);
 //   });

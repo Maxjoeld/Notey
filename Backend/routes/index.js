@@ -7,6 +7,7 @@ const {
   userLogout,
   userCreate,
 } = require('../controllers/index');
+// const { authenticate } = require('./authenticate');
 
 module.exports = (app) => {
   // Note Routes //

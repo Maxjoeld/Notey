@@ -16,13 +16,9 @@ class NoteList extends Component {
     sortedNotes: true,
   };
 
-  // componentWillMount() {
-  // if (this.state.notes.length > 0) {
-  //   this.setState({ emptyNotes: false });
-  // } else {
-  //   this.setState({ emptyNotes: true });
-  // }
-  // }
+  componentWillMount() {
+    // if (!sessionStorage.getItem('id')) this.props.history.push('/login');
+  }
 
   onSortEnd = ({ oldIndex, newIndex }) => {
     this.setState({

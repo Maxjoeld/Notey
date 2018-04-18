@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const passport = require('passport');
+// const passport = require('passport');
 const keys = require('./config');
 const routes = require('./routes/index');
 // const cookieSession = require('cookie-session');
@@ -29,9 +29,9 @@ app.get('/me', (req, res) => {
   res.send({ user: req.user, session: req.session });
 });
 
-// Two ways of running the routes through the server 
+// Two ways of running the routes through the server
 // below you can just pass the required route and append the server to it
-// which will call it immediately--line 26 and 28 are the same 
+// which will call it immediately--line 26 and 28 are the same
 // require('./routes/authRoutes')(app); // This is for the Oauth sign ins
 
 routes(app); // this is for the basic auth && notes routes

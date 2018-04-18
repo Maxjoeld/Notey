@@ -68,7 +68,7 @@ class App extends Component {
   };
 
   isAuth = () => {
-    this.setState({ isAuthenticated: !false });
+    this.setState({ isAuthenticated: !this.state.isAuthenticated });
   };
 
   render() {
