@@ -1,5 +1,4 @@
 /* eslint react/prop-types: 0 */
-
 import React, { Component } from 'react';
 import { SortableContainer, arrayMove } from 'react-sortable-hoc';
 import { CSVLink } from 'react-csv';
@@ -7,6 +6,7 @@ import { CSVLink } from 'react-csv';
 import Note from './Note';
 
 import './Notes.css';
+
 
 class NoteList extends Component {
   state = {
@@ -17,7 +17,11 @@ class NoteList extends Component {
   };
 
   componentWillMount() {
-    // if (!sessionStorage.getItem('id')) this.props.history.push('/login');
+    // axios.get('http://localhost:5000/notes/')
+    //   .then(res => {
+    //     const notes = res.data;
+    //     this.setState({ notes });
+    //   });
   }
 
   onSortEnd = ({ oldIndex, newIndex }) => {

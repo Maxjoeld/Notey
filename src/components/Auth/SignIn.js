@@ -3,6 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import logo from './google.png';
 import './SignIn.css';
+axios.defaults.withCredentials = true;
 
 class SignIn extends Component {
   state = {

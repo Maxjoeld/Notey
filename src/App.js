@@ -15,19 +15,11 @@ import './App.css';
 
 class App extends Component {
   state = {
-    notes: Notes,
+    notes: [],
     isAuthenticated: false,
   };
   nextId = 0;
   noteIndex = 5;
-
-  componentDidMount() {
-    // axios.get('http://localhost:5000/notes/')
-    //   .then(res => {
-    //     const notes = res.data;
-    //     this.setState({ notes });
-    //   });
-  }
 
   handleNoteViewIndex = inputId => {
     for (let i = 0; i < this.state.notes.length; i++) {
