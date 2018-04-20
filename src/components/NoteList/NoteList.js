@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { SortableContainer, arrayMove } from 'react-sortable-hoc';
 import { CSVLink } from 'react-csv';
+import axios from 'axios';
 // import PropTypes from 'prop-types';
 import Note from './Note';
 
@@ -16,13 +17,19 @@ class NoteList extends Component {
     sortedNotes: true,
   };
 
-  componentWillMount() {
-    // axios.get('http://localhost:5000/notes/')
-    //   .then(res => {
-    //     const notes = res.data;
-    //     this.setState({ notes });
-    //   });
+  componentDidMount() {
+    const id = sessionStorage.getItem('id');
+    axios
+      .get(`http://localhost:5000/notes/${id}`)
+      .then(res => this.setState({ notes: res.data.notes }))
+      .catch(error => {
+        console.log({ err: 'There was an error loading your notes', error });
+      });
   }
+
+  // async componentDidMount() {
+  //   await this.props.getNotes();
+  // }
 
   onSortEnd = ({ oldIndex, newIndex }) => {
     this.setState({
@@ -49,6 +56,7 @@ class NoteList extends Component {
   };
 
   render() {
+    // console.log({"notes":this.state.notes});
     const filteredNotes = this.state.notes.filter(note => {
       return note.title.toLowerCase().includes(this.state.search.toLowerCase());
     });
@@ -59,11 +67,11 @@ class NoteList extends Component {
           {filteredNotes.map((note, index) => {
             return (
               <Note
-                key={note.id}
+                key={note._id}
                 note={note}
                 index={index}
                 title={note.title}
-                body={note.body}
+                content={note.content}
                 handleNoteIndex={props.handleNoteIndex}
               />
             );

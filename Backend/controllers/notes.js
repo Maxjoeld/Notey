@@ -38,18 +38,6 @@ const editNote = (req, res) => {
     .catch(err => res.json(err));
 };
 
-// const getNotes = (req, res) => {
-//   const { id } = req.params;
-//   User.findById(id, (err, user) => {
-//     if (err) {
-//       res.status(422);
-//       res.json({ 'Error Fetching single User from DB: ': err.message });
-//       return;
-//     }
-//     res.json(user);
-//   });
-// };
-
 const getNotes = (req, res) => {
   const { id } = req.params;
   User.findById(id)

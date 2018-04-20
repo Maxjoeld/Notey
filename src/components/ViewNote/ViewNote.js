@@ -10,32 +10,35 @@ import './ViewNote.css';
 class NoteView extends Component {
   state = {
     id: 0,
+    _id: '',
     title: '',
-    body: '',
+    content: '',
     boolModal: false,
   };
 
 
   componentDidMount() {
+    // console.log(this.props.note.title);
     this.setState({
       id: this.props.note.id,
+      _id: this.props.note._id,
       title: this.props.note.title,
-      body: this.props.note.body,
+      content: this.props.note.content,
     });
   }
-  toggleModal = () => {
+  toggleModal = _ => {
     this.state.boolModal = !this.state.boolModal;
     this.forceUpdate();
   };
 
   render() {
-    const { id, title, body } = this.state;
+    const { _id, title, content } = this.state;
     return (
       <div className="NoteView">
         {this.state.boolModal ? (
           <div>
             <DeleteNote
-              id={id}
+              _id={_id}
               toggleModal={this.toggleModal}
               handleDeleteNote={this.props.handleDeleteNote}
             />
@@ -58,7 +61,7 @@ class NoteView extends Component {
         </div>
         <div>
           <h2 className="SectionTitle">{title}</h2>
-          <ReactMarkdown className="SectionBody" source={body} />
+          <ReactMarkdown className="SectionBody" source={content} />
         </div>
       </div>
     );

@@ -20,6 +20,7 @@ class SignIn extends Component {
       .post('http://localhost:5000/notes/login', { username, password })
       .then(res => {
         sessionStorage.setItem('id', res.data);
+        console.log(res.data);
       })
       .then(() => {
         this.props.isAuth();

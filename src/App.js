@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-// import Aux from 'react-aux';
+import axios from 'axios';
 
 import SideBar from './components/SideBar/SideBar';
 import NoteList from './components/NoteList/NoteList';
@@ -10,7 +10,7 @@ import EditNote from './components/EditNote/EditNote';
 import SignUp from './components/Auth/SignUp';
 import Login from './components/Auth/SignIn';
 
-import Notes from './data';
+// import Notes from './data';
 import './App.css';
 
 class App extends Component {
@@ -18,23 +18,39 @@ class App extends Component {
     notes: [],
     isAuthenticated: false,
   };
+  noteIndex = 0;
   nextId = 0;
-  noteIndex = 5;
+
+
+  // async componentDidMount() {
+  //   if (this.state.isAuthenticated) {
+  //     await this.getNotes();
+  //   }
+  // }
 
   handleNoteViewIndex = inputId => {
     for (let i = 0; i < this.state.notes.length; i++) {
-      if (this.state.notes[i].id === inputId) this.noteIndex = i;
+      if (this.state.notes[i]._id === inputId) this.noteIndex = i;
     }
   };
 
+  getNotes = () => {
+    const id = sessionStorage.getItem('id');
+    axios
+      .get(`http://localhost:5000/notes/${id}`)
+      .then(res => this.setState({ notes: res.data.notes }))
+      .catch(error => {
+        console.log({ err: 'There was an error loading your notes', error });
+      });
+  }
+
   handleCreateNote = inputNote => {
-    const newNote = {
-      id: this.nextId++,
-      title: inputNote.title,
-      body: inputNote.body,
-    };
-    const newNotes = [...this.state.notes, newNote];
-    this.setState({ notes: newNotes });
+    axios
+      .post('http://localhost:5000/notes/', inputNote)
+      .then(() => this.getNotes())
+      .catch(error => {
+        console.log({ err: 'There was an error loading your notes', error });
+      });
   };
 
   handleEditNote = inputNote => {
@@ -80,7 +96,7 @@ class App extends Component {
         }
       />
     );
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <Router>
         <div className="App">
@@ -92,6 +108,7 @@ class App extends Component {
             path="/"
             component={NoteList}
             notes={this.state.notes}
+            getNotes={this.getNotes}
             handleNoteViewIndex={this.handleNoteViewIndex}
             updateSortedNotes={this.updateSortedNotes}
           />
@@ -116,7 +133,6 @@ class App extends Component {
             note={this.state.notes[this.noteIndex]}
             handleEditNote={this.handleEditNote}
           />
-          {/* </Switch> */}
         </div>
       </Router>
     );

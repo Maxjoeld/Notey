@@ -7,7 +7,7 @@ import './CreateNote.css';
 class CreateNote extends Component {
   state = {
     title: '',
-    body: '',
+    content: '',
   };
 
   handleInputChange = e => {
@@ -16,13 +16,14 @@ class CreateNote extends Component {
   };
 
   handleSubmit = () => {
-    const { title, body } = this.state;
-    this.props.createNote({ title, body });
-    this.setState({ title: '', body: '' });
+    const userId = sessionStorage.getItem('id');
+    const { title, content } = this.state;
+    this.props.createNote({ title, content, userId });
+    this.setState({ title: '', content: '' });
   };
 
   render() {
-    const { title, body } = this.state;
+    const { title, content } = this.state;
     return (
       <div className="CreateNote">
         <form className="CreateNote__Form">
@@ -41,9 +42,9 @@ class CreateNote extends Component {
           <textarea
             className="CreateNote--BodyInput"
             placeholder="Note Content"
-            name="body"
+            name="content"
             type="text"
-            value={body}
+            value={content}
             onChange={this.handleInputChange}
             required
           />
