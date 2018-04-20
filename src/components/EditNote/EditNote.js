@@ -6,16 +6,16 @@ import '../CreateNote/CreateNote';
 
 class EditNote extends Component {
   state = {
-    id: 0,
+    _id: '',
     title: '',
-    body: '',
+    content: '',
   };
 
   componentDidMount() {
     this.setState({
-      id: this.props.note.id,
+      _id: this.props.note._id,
       title: this.props.note.title,
-      body: this.props.note.body,
+      content: this.props.note.content,
     });
   }
   handleInputChange = e => {
@@ -24,13 +24,13 @@ class EditNote extends Component {
   };
 
   handleSubmit = () => {
-    const { id, title, body } = this.state;
-    this.props.handleEditNote({ id, title, body });
-    this.setState({ id: 0, title: '', body: '' });
+    const { _id, title, content } = this.state;
+    this.props.handleEditNote({ _id, title, content });
+    this.setState({ _id: '', title: '', content: '' });
   };
 
   render() {
-    const { title, body } = this.state;
+    const { title, content } = this.state;
     return (
       <div className='CreateNote'>
         <form className='CreateNote__Form'>
@@ -49,9 +49,9 @@ class EditNote extends Component {
           <textarea
             className='CreateNote--BodyInput'
             placeholder="Note Content"
-            name="body"
+            name="content"
             type='text'
-            value={body}
+            value={content}
             cols="100"
             rows="40"
             onChange={this.handleInputChange}

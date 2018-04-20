@@ -13,7 +13,7 @@ const DeleteNote = (props) => {
           <button
             type='button'
             onClick={() => {
-              props.handleDeleteNote(props.id);
+              props.handleDeleteNote(props._id);
             }}
             className='DeleteModal-Box-Delete'
           >

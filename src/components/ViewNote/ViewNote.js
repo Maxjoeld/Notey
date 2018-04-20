@@ -18,7 +18,6 @@ class NoteView extends Component {
 
 
   componentDidMount() {
-    // console.log(this.props.note.title);
     this.setState({
       id: this.props.note.id,
       _id: this.props.note._id,

@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const keys = require('../config');
 const User = require('../models/users');
+
 const STATUS_USER_ERROR = 422;
 
 const sendUserError = (err, res) => {
@@ -13,7 +14,6 @@ const sendUserError = (err, res) => {
 };
 
 const userCreate = (req, res) => {
-  console.log(req);
   const { username, password } = req.body;
   const user = new User({ username, password });
   user

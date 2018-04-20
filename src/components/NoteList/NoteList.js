@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { SortableContainer, arrayMove } from 'react-sortable-hoc';
 import { CSVLink } from 'react-csv';
-import axios from 'axios';
 // import PropTypes from 'prop-types';
 import Note from './Note';
 
@@ -16,16 +15,6 @@ class NoteList extends Component {
     emptyNotes: false,
     sortedNotes: true,
   };
-
-  componentDidMount() {
-    const id = sessionStorage.getItem('id');
-    axios
-      .get(`http://localhost:5000/notes/${id}`)
-      .then(res => this.setState({ notes: res.data.notes }))
-      .catch(error => {
-        console.log({ err: 'There was an error loading your notes', error });
-      });
-  }
 
   // async componentDidMount() {
   //   await this.props.getNotes();

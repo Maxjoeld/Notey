@@ -25,7 +25,7 @@ class SignIn extends Component {
       .then(() => {
         this.props.isAuth();
       })
-      .then((re) => console.log(re))
+      .then(() => this.props.getNotes())
       .then(() => this.props.history.push('/'))
       .catch(err => {
         console.log(err);
@@ -41,14 +41,6 @@ class SignIn extends Component {
     this.setState({ [name]: value });
   };
   render() {
-    // console.log(this.props)
-    // const { from } = this.props.location || { from: { pathname: "/" } };
-    // const { redirectToReferrer } = this.state;
-
-    // if (redirectToReferrer === true) {
-    //   return <Redirect to={from} />;
-    // }
-
     return (
       <div className="signin">
         <div className="signin--box">

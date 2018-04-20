@@ -17,12 +17,11 @@ class SignUp extends Component {
     axios
       .post('http://localhost:5000/notes/register', { username, password })
       .then(() => {
-        return axios.post('http://localhost:5000/notes/login', { username, password });
-      })
-      .then(re => {
-        console.log(re);
         this.props.isAuth();
       })
+      // .then(() => {
+      //   return axios.post('http://localhost:5000/notes/login', { username, password });
+      // })
       .then(() => this.props.history.push('/'))
       .catch(err => {
         console.log(err);
