@@ -3,6 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../google.png';
 import './SignIn.css';
+
 axios.defaults.withCredentials = true;
 
 class SignIn extends Component {
@@ -16,10 +17,10 @@ class SignIn extends Component {
     e.preventDefault();
     const { username, password } = this.state;
     axios
-      .post('http://localhost:5000/notes/login', { username, password })
+      .post('/notes/login', { username, password })
       .then(res => {
         sessionStorage.setItem('id', res.data);
-        console.log(res.data);
+        console.log({ res: res.data });
       })
       .then(() => {
         this.props.isAuth();
@@ -48,13 +49,11 @@ class SignIn extends Component {
             <button className="signin--buttons__facebook">
               <i className="fab fa-facebook-square" />facebook
             </button>
-            <button className="signin--buttons__google">
-              <img
-                src={logo}
-                alt="google logo"
-                className="signin--buttons__google--logo"
-              />Google
-            </button>
+            <a href="http://localhost:5000/auth/google">
+              <button className="signin--buttons__google">
+                <img src={logo} alt="google logo" className="signin--buttons__google--logo" />Google
+              </button>
+            </a>
           </div>
           {this.state.requestError ? <h5>Wrong Email or Password</h5> : null}
           <form className="signin--signin">
@@ -80,7 +79,7 @@ class SignIn extends Component {
                 className="signin--signin__button"
                 type="submit"
                 value="Sign In"
-                onClick={(e) => this.loginUser(e)}
+                onClick={e => this.loginUser(e)}
               />
             </Link>
           </form>

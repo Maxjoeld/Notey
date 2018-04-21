@@ -15,9 +15,9 @@ class SignUp extends Component {
     e.preventDefault();
     const { username, password } = this.state;
     axios
-      .post('http://localhost:5000/notes/register', this.state)
+      .post('/notes/register', this.state)
       .then(() => {
-        return axios.post('http://localhost:5000/notes/login', { username, password });
+        return axios.post('/notes/login', { username, password });
       })
       .then(() => {
         this.props.isAuth();

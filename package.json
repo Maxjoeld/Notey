@@ -2,6 +2,11 @@
   "name": "experiment",
   "version": "0.1.0",
   "private": true,
+  "proxy": {
+    "/notes": {
+      "target": "http://localhost:5000"
+    }
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "concurrently": "^3.5.1",

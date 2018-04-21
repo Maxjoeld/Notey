@@ -1,3 +1,4 @@
+// When you want to authenticate with jws use this 
 // const jwt = require('jsonwebtoken');
 // const { mySecret } = require('./config');
 

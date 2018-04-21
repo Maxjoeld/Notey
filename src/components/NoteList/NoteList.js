@@ -25,7 +25,7 @@ class NoteList extends Component {
   sortData = state => {
     const notes = [...state];
     if (this.state.sortedNotes) {
-      notes.toLowerCase().sort((a, b) => a.title > b.title);
+      notes.sort((a, b) => a.title.toLowerCase() > b.title.toLowerCase());
       this.setState({ notes, sortedNotes: false });
     } else {
       this.setState({ notes, sortedNotes: true });

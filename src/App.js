@@ -23,7 +23,7 @@ class App extends Component {
   getNotes = () => {
     const id = sessionStorage.getItem('id');
     axios
-      .get(`http://localhost:5000/notes/${id}`)
+      .get(`/notes/${id}`)
       .then(res => this.setState({ notes: res.data.notes }))
       .catch(error => {
         console.log({ err: 'There was an error loading your notes', error });
@@ -39,7 +39,15 @@ class App extends Component {
 
   handleCreateNote = inputNote => {
     axios
-      .post('http://localhost:5000/notes/', inputNote)
+      .post('/notes', inputNote)
+      .then(() => this.getNotes())
+      .catch(error => {
+        console.log({ err: 'There was an error loading your notes', error });
+      });
+  };
+  handleCreateNote = inputNote => {
+    axios
+      .post('/notes', inputNote)
       .then(() => this.getNotes())
       .catch(error => {
         console.log({ err: 'There was an error loading your notes', error });
@@ -49,7 +57,7 @@ class App extends Component {
   handleEditNote = (editedNote, id) => {
     const notePackage = { editedNote, id };
     axios
-      .put('http://localhost:5000/notes/', notePackage)
+      .put('/notes', notePackage)
       .then(() => this.getNotes())
       .catch(error => {
         console.log({ err: 'There was an error loading your notes', error });
@@ -58,7 +66,7 @@ class App extends Component {
 
   handleDeleteNote = inputId => {
     axios
-      .delete(`http://localhost:5000/notes/${inputId}`)
+      .delete(`/notes/${inputId}`)
       .then(() => this.getNotes())
       .catch(error => {
         console.log({ err: 'There was an error loading your notes', error });
