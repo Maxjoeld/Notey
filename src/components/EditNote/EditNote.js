@@ -25,7 +25,7 @@ class EditNote extends Component {
 
   handleSubmit = () => {
     const { _id, title, content } = this.state;
-    this.props.handleEditNote({ _id, title, content });
+    this.props.handleEditNote({ _id ,title, content }, _id);
     this.setState({ _id: '', title: '', content: '' });
   };
 

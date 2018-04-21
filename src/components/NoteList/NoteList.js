@@ -7,7 +7,6 @@ import Note from './Note';
 
 import './Notes.css';
 
-
 class NoteList extends Component {
   state = {
     notes: this.props.notes,
@@ -16,9 +15,6 @@ class NoteList extends Component {
     sortedNotes: true,
   };
 
-  // async componentDidMount() {
-  //   await this.props.getNotes();
-  // }
 
   onSortEnd = ({ oldIndex, newIndex }) => {
     this.setState({
@@ -26,22 +22,20 @@ class NoteList extends Component {
     });
     this.props.updateSortedNotes(this.state.notes);
   };
-  handleNoteIndex = index => {
-    this.props.handleNoteViewIndex(index);
-  };
-
-  updateSearch = e => {
-    this.setState({ search: e.target.value });
-  };
-
   sortData = state => {
     const notes = [...state];
     if (this.state.sortedNotes) {
-      notes.sort((a, b) => a.title > b.title);
+      notes.toLowerCase().sort((a, b) => a.title > b.title);
       this.setState({ notes, sortedNotes: false });
     } else {
       this.setState({ notes, sortedNotes: true });
     }
+  };
+  updateSearch = e => {
+    this.setState({ search: e.target.value });
+  };
+  handleNoteIndex = index => {
+    this.props.handleNoteViewIndex(index);
   };
 
   render() {
@@ -90,13 +84,7 @@ class NoteList extends Component {
               Sort: Regular
             </h1>
           ) : (
-            <h1
-              className="NotesView__sort"
-              onClick={() => this.sortData(this.props.notes)}
-              onKeyDown={this.handleKeyDown}
-              // "on keyDown is important for ppl with physical disabilities who cannot use a mouse,
-              // "Did not create the event listener tho"
-            >
+            <h1 className="NotesView__sort" onClick={() => this.sortData(this.props.notes)}>
               Sort: Sorted Alphabetically
             </h1>
           )}
@@ -104,24 +92,19 @@ class NoteList extends Component {
         </div>
         {this.state.emptyNotes ? (
           <h3>
-            It looks like you don’t have any notes yet, click ’Create New Note’
-            to get started!
+            It looks like you don’t have any notes yet, click ’Create New Note’ to get started!
           </h3>
         ) : null}
         <SortableList
-          pressDelay={90}
+          pressDelay={150}
           lockToContainerEdges
           axis="xy"
           notes={this.state.notes}
           onSortEnd={this.onSortEnd}
           handleNoteIndex={this.handleNoteIndex}
         />
-        {!this.state.emptyNotes ? (
-          <CSVLink
-            className="CSV-Link"
-            data={this.state.notes}
-            filename="lambda-notes.csv"
-          >
+        {!this.boolEmptyNotes ? (
+          <CSVLink className="CSV-Link" data={this.state.notes} filename="lambda-notes.csv">
             Download CSV
           </CSVLink>
         ) : null}

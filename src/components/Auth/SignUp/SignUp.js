@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import './SignUp.css';
-import logo from './google.png';
+import logo from '../google.png';
 
 class SignUp extends Component {
   state = {
@@ -15,13 +15,13 @@ class SignUp extends Component {
     e.preventDefault();
     const { username, password } = this.state;
     axios
-      .post('http://localhost:5000/notes/register', { username, password })
+      .post('http://localhost:5000/notes/register', this.state)
+      .then(() => {
+        return axios.post('http://localhost:5000/notes/login', { username, password });
+      })
       .then(() => {
         this.props.isAuth();
       })
-      // .then(() => {
-      //   return axios.post('http://localhost:5000/notes/login', { username, password });
-      // })
       .then(() => this.props.history.push('/'))
       .catch(err => {
         console.log(err);
@@ -63,7 +63,7 @@ class SignUp extends Component {
               className="signin--signin__button"
               type="submit"
               value="Sign Up"
-              onClick={() => this.saveUser()}
+              onClick={(e) => this.saveUser(e)}
             />
           </form>
           <p className="signin--orsign"> Or sign up with </p>

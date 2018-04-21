@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
-import logo from './google.png';
+import logo from '../google.png';
 import './SignIn.css';
 axios.defaults.withCredentials = true;
 
@@ -10,7 +10,6 @@ class SignIn extends Component {
     username: '',
     password: '',
     requestError: false,
-    redirectToReferrer: false,
   };
 
   loginUser = e => {

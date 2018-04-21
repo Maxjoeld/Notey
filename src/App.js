@@ -7,25 +7,17 @@ import NoteList from './components/NoteList/NoteList';
 import CreateNote from './components/CreateNote/CreateNote';
 import ViewNote from './components/ViewNote/ViewNote';
 import EditNote from './components/EditNote/EditNote';
-import SignUp from './components/Auth/SignUp';
-import Login from './components/Auth/SignIn';
+import SignUp from './components/Auth/SignUp/SignUp';
+import Login from './components/Auth/SignIn/SignIn';
 import './App.css';
 
-axios.defaults.withCredentials = true
-// import Notes from './data';
+axios.defaults.withCredentials = true;
 
 class App extends Component {
   state = {
     notes: [],
     isAuthenticated: false,
-  };
-  noteIndex = 0;
-  nextId = 0;
-
-  handleNoteViewIndex = inputId => {
-    for (let i = 0; i < this.state.notes.length; i++) {
-      if (this.state.notes[i]._id === inputId) this.noteIndex = i;
-    }
+    noteIndex: 0,
   };
 
   getNotes = () => {
@@ -38,6 +30,13 @@ class App extends Component {
       });
   };
 
+  handleNoteViewIndex = inputID => {
+    const state = this.state.notes;
+    state.forEach((note, i) => {
+      if (note._id === inputID) this.setState({ noteIndex: i });
+    });
+  };
+
   handleCreateNote = inputNote => {
     axios
       .post('http://localhost:5000/notes/', inputNote)
@@ -47,15 +46,10 @@ class App extends Component {
       });
   };
 
-  handleEditNote = inputNote => {
-    const id = inputNote._id;
-    const editedNote = {
-      id: inputNote._id,
-      title: inputNote.title,
-      content: inputNote.content,
-    };
+  handleEditNote = (editedNote, id) => {
+    const notePackage = { editedNote, id };
     axios
-      .put('http://localhost:5000/notes/', editedNote, id)
+      .put('http://localhost:5000/notes/', notePackage)
       .then(() => this.getNotes())
       .catch(error => {
         console.log({ err: 'There was an error loading your notes', error });
@@ -89,6 +83,7 @@ class App extends Component {
           this.state.isAuthenticated ? (
             <Comp {...props} {...rest} />
           ) : (
+            // null
             <Redirect
               to={{
                 pathname: '/login',
@@ -98,7 +93,6 @@ class App extends Component {
         }
       />
     );
-    // console.log(this.props);
     return (
       <Router>
         <div className="App">
@@ -128,7 +122,7 @@ class App extends Component {
             exact
             path="/view"
             component={ViewNote}
-            note={this.state.notes[this.noteIndex]}
+            note={this.state.notes[this.state.noteIndex]}
             toggleModal={this.toggleModal}
             handleDeleteNote={this.handleDeleteNote}
           />
@@ -136,7 +130,7 @@ class App extends Component {
             exact
             path="/edit"
             component={EditNote}
-            note={this.state.notes[this.noteIndex]}
+            note={this.state.notes[this.state.noteIndex]}
             handleEditNote={this.handleEditNote}
           />
         </div>
