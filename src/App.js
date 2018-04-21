@@ -20,14 +20,14 @@ class App extends Component {
     noteIndex: 0,
   };
 
-  getNotes = () => {
+  getNotes = async () => {
     const id = sessionStorage.getItem('id');
-    axios
-      .get(`/notes/${id}`)
-      .then(res => this.setState({ notes: res.data.notes }))
-      .catch(error => {
-        console.log({ err: 'There was an error loading your notes', error });
-      });
+    try {
+      const res = await axios.get(`/notes/${id}`);
+      await this.setState({ notes: res.data.notes });
+    } catch (error) {
+      console.log({ err: 'There was an error loading your notes', error });
+    }
   };
 
   handleNoteViewIndex = inputID => {
@@ -37,40 +37,32 @@ class App extends Component {
     });
   };
 
-  handleCreateNote = inputNote => {
-    axios
-      .post('/notes', inputNote)
-      .then(() => this.getNotes())
-      .catch(error => {
-        console.log({ err: 'There was an error loading your notes', error });
-      });
-  };
-  handleCreateNote = inputNote => {
-    axios
-      .post('/notes', inputNote)
-      .then(() => this.getNotes())
-      .catch(error => {
-        console.log({ err: 'There was an error loading your notes', error });
-      });
+  handleCreateNote = async inputNote => {
+    try {
+      await axios.post('/notes', inputNote);
+      await this.getNotes();
+    } catch (error) {
+      console.log({ err: 'There was an error loading your notes', error });
+    }
   };
 
-  handleEditNote = (editedNote, id) => {
+  handleEditNote = async (editedNote, id) => {
     const notePackage = { editedNote, id };
-    axios
-      .put('/notes', notePackage)
-      .then(() => this.getNotes())
-      .catch(error => {
-        console.log({ err: 'There was an error loading your notes', error });
-      });
+    try {
+      await axios.put('/notes', notePackage);
+      await this.getNotes();
+    } catch (error) {
+      console.log({ err: 'There was an error loading your notes', error });
+    }
   };
 
-  handleDeleteNote = inputId => {
-    axios
-      .delete(`/notes/${inputId}`)
-      .then(() => this.getNotes())
-      .catch(error => {
-        console.log({ err: 'There was an error loading your notes', error });
-      });
+  handleDeleteNote = async inputId => {
+    try {
+      await axios.delete(`/notes/${inputId}`);
+      await this.getNotes();
+    } catch (error) {
+      console.log({ err: 'There was an error loading your notes', error });
+    }
   };
 
   updateSortedNotes = sortedNotes => {
@@ -83,7 +75,17 @@ class App extends Component {
     this.setState({ isAuthenticated: !this.state.isAuthenticated });
   };
 
+  deAuth = () => {
+    this.setState({
+      notes: [],
+      isAuthenticated: false,
+    });
+  }
+
   render() {
+    let counter = 0;
+    const render = { render: counter++ };
+    console.log(render);
     const PrivateRoute = ({ component: Comp, ...rest }) => (
       <Route
         {...rest}
@@ -110,7 +112,7 @@ class App extends Component {
             render={() => <Login isAuth={this.isAuth} getNotes={this.getNotes} />}
           />
           <Route exact path="/signup" render={() => <SignUp isAuth={this.isAuth} />} />
-          <PrivateRoute exact component={SideBar} isAuth={this.isAuth} />
+          <PrivateRoute exact component={SideBar} deAuth={this.deAuth} isAuth={this.isAuth} />
           <PrivateRoute
             exact
             path="/"

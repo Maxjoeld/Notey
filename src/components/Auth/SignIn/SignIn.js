@@ -13,27 +13,22 @@ class SignIn extends Component {
     requestError: false,
   };
 
-  loginUser = e => {
+  loginUser = async e => {
     e.preventDefault();
     const { username, password } = this.state;
-    axios
-      .post('/notes/login', { username, password })
-      .then(res => {
-        sessionStorage.setItem('id', res.data);
-        console.log({ res: res.data });
-      })
-      .then(() => {
-        this.props.isAuth();
-      })
-      .then(() => this.props.getNotes())
-      .then(() => this.props.history.push('/'))
-      .catch(err => {
-        console.log(err);
-        this.setState({ requestError: true });
-        setTimeout(() => {
-          this.setState({ requestError: false });
-        }, 3000);
-      });
+    try {
+      const res = await axios.post('/notes/login', { username, password });
+      await sessionStorage.setItem('id', res.data);
+      await this.props.isAuth();
+      await this.props.history.push('/');
+      await this.props.getNotes();
+    } catch (err) {
+      console.log(err);
+      this.setState({ requestError: true });
+      setTimeout(() => {
+        this.setState({ requestError: false });
+      }, 5000);
+    }
   };
 
   handleInputChange = e => {
@@ -51,11 +46,15 @@ class SignIn extends Component {
             </button>
             <a href="http://localhost:5000/auth/google">
               <button className="signin--buttons__google">
-                <img src={logo} alt="google logo" className="signin--buttons__google--logo" />Google
+                <img
+                  src={logo}
+                  alt="google logo"
+                  className="signin--buttons__google--logo"
+                />Google
               </button>
             </a>
           </div>
-          {this.state.requestError ? <h5>Wrong Email or Password</h5> : null}
+          {this.state.requestError ? <h5>Invalid Email or Password</h5> : null}
           <form className="signin--signin">
             Username:<br />
             <input

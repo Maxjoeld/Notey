@@ -11,26 +11,43 @@ class SignUp extends Component {
     requestError: false,
   };
 
-  saveUser = e => {
+  saveUser = async e => {
     e.preventDefault();
     const { username, password } = this.state;
-    axios
-      .post('/notes/register', this.state)
-      .then(() => {
-        return axios.post('/notes/login', { username, password });
-      })
-      .then(() => {
-        this.props.isAuth();
-      })
-      .then(() => this.props.history.push('/'))
-      .catch(err => {
-        console.log(err);
-        this.setState({ requestError: true });
-        setTimeout(() => {
-          this.setState({ requestError: false });
-        }, 3000);
-      });
+    try {
+      await axios.post('/notes/register', this.state);
+      const res = await axios.post('/notes/login', { username, password });
+      await sessionStorage.setItem('id', res.data);
+      await this.props.isAuth();
+      await this.props.history.push('/');
+    } catch (err) {
+      console.log(err);
+      this.setState({ requestError: true });
+      setTimeout(() => {
+        this.setState({ requestError: false });
+      }, 3000);
+    }
   };
+  // saveUser = e => {
+  //   e.preventDefault();
+  //   const { username, password } = this.state;
+  //   axios
+  //     .post('/notes/register', this.state)
+  //     .then(() => {
+  //       return axios.post('/notes/login', { username, password });
+  //     })
+  //     .then(() => {
+  //       this.props.isAuth();
+  //     })
+  //     .then(() => this.props.history.push('/'))
+  //     .catch(err => {
+  //       console.log(err);
+  //       this.setState({ requestError: true });
+  //       setTimeout(() => {
+  //         this.setState({ requestError: false });
+  //       }, 3000);
+  //     });
+  // };
 
   handleInputChange = e => {
     const { name, value } = e.target;
@@ -63,7 +80,7 @@ class SignUp extends Component {
               className="signin--signin__button"
               type="submit"
               value="Sign Up"
-              onClick={(e) => this.saveUser(e)}
+              onClick={e => this.saveUser(e)}
             />
           </form>
           <p className="signin--orsign"> Or sign up with </p>

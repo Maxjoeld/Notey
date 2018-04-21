@@ -10,9 +10,7 @@ class SideBar extends Component {
     axios
       .post('http://localhost:5000/notes/logout')
       .then(() => {
-        this.props.isAuth();
-      })
-      .then(() => {
+        this.props.deAuth();
         sessionStorage.removeItem('id');
       })
       .then(() => this.props.history.push('/login'))
@@ -40,12 +38,10 @@ class SideBar extends Component {
             <button className="SideBar__button">Create New Note</button>
           </div>
         </Link>
-        {/* <Link to="/login" onClick={(e) => this.logoutUser(e)}> */}
         <div className="SetIc" onClick={e => this.logoutUser(e)}>
           <FontAwesome name="fas fa-sign-out-alt" />
           <button className="SideBar__button">Sign out</button>
         </div>
-        {/* </Link> */}
       </div>
     );
   }
