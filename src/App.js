@@ -11,12 +11,12 @@ import SignUp from './components/Auth/SignUp/SignUp';
 import Login from './components/Auth/SignIn/SignIn';
 import './App.css';
 
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 
 class App extends Component {
   state = {
     notes: [],
-    isAuthenticated: false,
+    isAuthenticated: true,
     noteIndex: 0,
   };
 

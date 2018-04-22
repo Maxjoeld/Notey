@@ -45,8 +45,7 @@ const userLogin = (req, res) => {
         req.user = user;
       })
       .then(() => {
-        // res.json({ success: true, user });
-        res.json(user._id);
+        res.json({ success: true, user, userId: user._id });
       })
       .catch((error) => {
         return sendUserError('User does not exist at that id ', res);

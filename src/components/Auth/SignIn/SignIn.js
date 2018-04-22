@@ -18,7 +18,8 @@ class SignIn extends Component {
     const { username, password } = this.state;
     try {
       const res = await axios.post('/notes/login', { username, password });
-      await sessionStorage.setItem('id', res.data);
+      await sessionStorage.setItem('id', res.data.userId);
+      console.log(res.data.user);
       await this.props.isAuth();
       await this.props.history.push('/');
       await this.props.getNotes();
@@ -29,6 +30,29 @@ class SignIn extends Component {
         this.setState({ requestError: false });
       }, 5000);
     }
+  };
+
+  loginGoogle = async e => {
+    console.log('hey');
+    e.preventDefault();
+    axios
+      .get('http://localhost:5000/auth/google')
+      .then(res => {
+        sessionStorage.setItem('id', res.data.userId);
+        console.log(res.data);
+      })
+      .then(() => {
+        this.props.isAuth();
+      })
+      .then(() => this.props.history.push('/'))
+      .then(() => this.props.getNotes())
+      .catch(err => {
+        console.log(err);
+        this.setState({ requestError: true });
+        setTimeout(() => {
+          this.setState({ requestError: false });
+        }, 3000);
+      });
   };
 
   handleInputChange = e => {
@@ -44,15 +68,16 @@ class SignIn extends Component {
             <button className="signin--buttons__facebook">
               <i className="fab fa-facebook-square" />facebook
             </button>
-            <a href="http://localhost:5000/auth/google">
-              <button className="signin--buttons__google">
-                <img
-                  src={logo}
-                  alt="google logo"
-                  className="signin--buttons__google--logo"
-                />Google
-              </button>
-            </a>
+            <button
+              className="signin--buttons__google"
+              onClick={e => this.loginGoogle(e)}
+            >
+              <img
+                src={logo}
+                alt="google logo"
+                className="signin--buttons__google--logo"
+              />Google
+            </button>
           </div>
           {this.state.requestError ? <h5>Invalid Email or Password</h5> : null}
           <form className="signin--signin">
