@@ -4,10 +4,11 @@
   position: relative; }
   .SideBar__title {
     color: #11754f;
+    color: white;
     margin-left: 10px;
     margin-bottom: 50px;
     font-size: 50px;
-    padding-right: 20px; }
+    padding-right: 30px; }
   .SideBar__button {
     font-weight: 300;
     font: normal 10px;

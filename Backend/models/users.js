@@ -23,6 +23,7 @@ const UserSchema = new Schema({
   },
   googleId: {
     type: String,
+    ref: 'gooUser'
   },
   notes: [
     {

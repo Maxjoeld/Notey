@@ -5,18 +5,17 @@ import FontAwesome from 'react-fontawesome';
 import './SideBar.css';
 
 class SideBar extends Component {
-  logoutUser = e => {
+
+  logoutUser = async e => {
     e.preventDefault();
-    axios
-      .post('http://localhost:5000/notes/logout')
-      .then(() => {
-        this.props.deAuth();
-        sessionStorage.removeItem('id');
-      })
-      .then(() => this.props.history.push('/login'))
-      .catch(err => {
-        console.log(err);
-      });
+    try {
+      await axios.post('notes/logout');
+      await this.props.deAuth();
+      await sessionStorage.removeItem('id');
+      await this.props.history.push('/login');
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   render() {

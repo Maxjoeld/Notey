@@ -26,7 +26,7 @@ class App extends Component {
       const res = await axios.get(`/notes/${id}`);
       await this.setState({ notes: res.data.notes });
     } catch (error) {
-      console.log({ err: 'There was an error loading your notes', error });
+      console.log({ err: 'There was an error loading your notes :(', error });
     }
   };
 
@@ -42,7 +42,7 @@ class App extends Component {
       await axios.post('/notes', inputNote);
       await this.getNotes();
     } catch (error) {
-      console.log({ err: 'There was an error loading your notes', error });
+      console.log({ err: 'There was an error loading your notes :(', error });
     }
   };
 
@@ -52,7 +52,7 @@ class App extends Component {
       await axios.put('/notes', notePackage);
       await this.getNotes();
     } catch (error) {
-      console.log({ err: 'There was an error loading your notes', error });
+      console.log({ err: 'There was an error loading your notes :(', error });
     }
   };
 
@@ -61,7 +61,7 @@ class App extends Component {
       await axios.delete(`/notes/${inputId}`);
       await this.getNotes();
     } catch (error) {
-      console.log({ err: 'There was an error loading your notes', error });
+      console.log({ err: 'There was an error loading your notes :(', error });
     }
   };
 
@@ -83,9 +83,10 @@ class App extends Component {
   }
 
   render() {
-    let counter = 0;
-    const render = { render: counter++ };
-    console.log(render);
+    // render check
+    // let counter = 0;
+    // const render = { render: counter++ };
+    // console.log(render);
     const PrivateRoute = ({ component: Comp, ...rest }) => (
       <Route
         {...rest}

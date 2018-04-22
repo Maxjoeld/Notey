@@ -28,26 +28,6 @@ class SignUp extends Component {
       }, 3000);
     }
   };
-  // saveUser = e => {
-  //   e.preventDefault();
-  //   const { username, password } = this.state;
-  //   axios
-  //     .post('/notes/register', this.state)
-  //     .then(() => {
-  //       return axios.post('/notes/login', { username, password });
-  //     })
-  //     .then(() => {
-  //       this.props.isAuth();
-  //     })
-  //     .then(() => this.props.history.push('/'))
-  //     .catch(err => {
-  //       console.log(err);
-  //       this.setState({ requestError: true });
-  //       setTimeout(() => {
-  //         this.setState({ requestError: false });
-  //       }, 3000);
-  //     });
-  // };
 
   handleInputChange = e => {
     const { name, value } = e.target;

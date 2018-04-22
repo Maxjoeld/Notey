@@ -13,6 +13,7 @@ class NoteList extends Component {
     search: '',
     emptyNotes: false,
     sortedNotes: true,
+    // sortByDate: true,
   };
 
 
@@ -37,6 +38,16 @@ class NoteList extends Component {
   handleNoteIndex = index => {
     this.props.handleNoteViewIndex(index);
   };
+
+  // sortByDate = state => {
+  //   const notes = [...state];
+  //   if (this.state.sortByDate) {
+  //     notes.sort((a, b) => a.date > b.date);
+  //     this.setState({ notes, sortedByDate: true });
+  //   } else {
+  //     this.setState({ notes, sortedByDate: false });
+  //   }
+  // };
 
   render() {
     // console.log({"notes":this.state.notes});
@@ -79,15 +90,14 @@ class NoteList extends Component {
             <h1
               className="NotesView__sort"
               onClick={() => this.sortData(this.state.notes)}
-              onKeyDown={this.handleKeyDown}
             >
               Sort: Regular
             </h1>
-          ) : (
+          ) :
             <h1 className="NotesView__sort" onClick={() => this.sortData(this.props.notes)}>
               Sort: Sorted Alphabetically
-            </h1>
-          )}
+            </h1> 
+          }
           {/* eslint-enable */}
         </div>
         {this.state.emptyNotes ? (

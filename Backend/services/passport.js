@@ -25,15 +25,20 @@ passport.use(new GoogleStrategy(
     callbackURL: '/auth/google/callback',
   },
   async (accessToken, refreshtoken, profile, done) => {
+    // console.log({ accessToken });
+    // console.log({ refreshtoken });
+    // console.log({ profile: profile.photos[0].value });
     const existingUser = await GooUser.findOne({ googleId: profile.id });
     if (existingUser) {
       return done(null, existingUser);
     }
-    const user = await new GooUser({ googleId: profile.id }).save();
+    const newUser = new GooUser({
+      googleId: profile.id,
+      email: profile.emails[0].value,
+      img: profile.photos[0].value,
+    });
+    const user = await newUser.save();
     done(null, user);
-    // console.log({ accessToken });
-    // console.log({ refreshtoken });
-    // console.log({ profile });
   },
 ));
 
