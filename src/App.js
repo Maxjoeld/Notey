@@ -16,7 +16,7 @@ import './App.css';
 class App extends Component {
   state = {
     notes: [],
-    isAuthenticated: true,
+    isAuthenticated: false,
     noteIndex: 0,
   };
 

@@ -35,8 +35,9 @@ class SignIn extends Component {
   loginGoogle = async e => {
     console.log('hey');
     e.preventDefault();
+    // const proxyurl = 'https://cors-anywhere.herokuapp.com/';
     axios
-      .get('http://localhost:5000/auth/google')
+      .get('/auth/google/')
       .then(res => {
         sessionStorage.setItem('id', res.data.userId);
         console.log(res.data);

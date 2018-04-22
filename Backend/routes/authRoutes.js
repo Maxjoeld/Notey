@@ -30,7 +30,7 @@ module.exports = (app) => {
         .then(user => {
           req.session.username = oauthUser;
           req.session.user = user;
-          // res.redirect('/notes/create')
+          // res.redirect('http://localhost:3000/notes/create/')
           res.status(201).json({success: "User saved successfully", user, userId: user._id })
         })
         .catch(error => res.status(500).json({ msg: 'Could not save user', error }))
