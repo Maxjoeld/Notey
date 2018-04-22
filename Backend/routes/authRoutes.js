@@ -1,9 +1,11 @@
 const passport = require('passport');
 const User = require('../models/users');
+const oAuth = require('../models/oAuth');
 // authenticate is a reserved word
 module.exports = (app) => {
-  app.get(
-'/auth/google',
+  
+  
+  app.get('/auth/google',
     passport.authenticate('google', {
       scope: ['profile', 'email'],
     }),
@@ -14,17 +16,26 @@ module.exports = (app) => {
   // handle the case a little different
   app.get('/auth/google/callback', passport.authenticate('google'), (req, res) => {
     // this is checking is already an existing user that wanted to use 0auth
-    // if (
+    const { googleId, email , img } = req.user;
     const oauthUser = req.user.email;
-    const googleId  = req.user.id;
-    User.findOne({ username: oauthUser }, (err, user) => {
+    const mongoId  = req.user.id;
+    // if user is already a user in the database and decided to use google to login
+    User.findOneAndUpdate({ username: oauthUser }, { $set: { googleId: mongoId }}, (err, user) => {
       if (err) return console.log({ 'Could not find user': err });
-      user.set({ googleId });
-      res.json(user);
-      user.save((err, updateduser) => {
-        if (err) return console.log({'Could not save user to database':err});
-        res.json(updateduser);
-      });
+      // if its a brand new user in the database and have 
+      // not used our original auth(user, password) method
+      if (user === null) {
+        const newUser = new oAuth({ googleId, email, img })
+        oAuth.create(newUser)
+        .then(user => {
+          req.session.username = oauthUser;
+          res.status(201).json({success: "User saved successfully", user: user._id })
+        })
+        .catch(error => res.status(500).json({ msg: 'Could not save user', error }))
+        return;
+      }
+      // if theyre a current user and decided to use google to login
+      res.json({ connected: "Found existing data in the database", user});
     });
   });
 
@@ -45,6 +56,7 @@ module.exports = (app) => {
     delete req.session.passport;
     res.json(req.user);
   });
+
   app.get('/auth/user', (req, res) => {
     res.json(req.user);
   });
