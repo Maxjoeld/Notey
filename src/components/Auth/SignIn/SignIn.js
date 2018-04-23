@@ -19,7 +19,6 @@ class SignIn extends Component {
     try {
       const res = await axios.post('/notes/login', { username, password });
       await sessionStorage.setItem('id', res.data.userId);
-      console.log(res.data.user);
       await this.props.isAuth();
       await this.props.history.push('/');
       await this.props.getNotes();
