@@ -31,12 +31,13 @@ export const loginUser = (username, password, history) => {
   return async dispatch => {
     try {
       const res = await axios.post('/notes/login', { username, password });
-      await sessionStorage.setItem('id', res.data.userId);
+      console.log('success');
+      sessionStorage.setItem('id', res.data.userId);
       dispatch({ type: LOGIN });
       history.push('/');
       dispatch(getNotes);
     } catch (error) {
-      console.log({ err: 'There was an error loading your notes :(', error });
+      console.log({ err: 'There was an error signing in ', error });
     }
   };
 };

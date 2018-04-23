@@ -39,29 +39,29 @@ class SignIn extends Component {
   //   }
   // };
 
-  // loginGoogle = async e => {
-  //   console.log('hey');
-  //   e.preventDefault();
-  //   // const proxyurl = 'https://cors-anywhere.herokuapp.com/';
-  //   axios
-  //     .get('/auth/google/')
-  //     .then(res => {
-  //       sessionStorage.setItem('id', res.data.userId);
-  //       console.log(res.data);
-  //     })
-  //     .then(() => {
-  //       this.props.isAuth();
-  //     })
-  //     .then(() => this.props.history.push('/'))
-  //     .then(() => this.props.getNotes())
-  //     .catch(err => {
-  //       console.log(err);
-  //       this.setState({ requestError: true });
-  //       setTimeout(() => {
-  //         this.setState({ requestError: false });
-  //       }, 3000);
-  //     });
-  // };
+  loginGoogle = async e => {
+    console.log('hey');
+    e.preventDefault();
+    // const proxyurl = 'https://cors-anywhere.herokuapp.com/';
+    axios
+      .get('/auth/google/')
+      .then(res => {
+        sessionStorage.setItem('id', res.data.userId);
+        console.log(res.data);
+      })
+      .then(() => {
+        this.props.isAuth();
+      })
+      .then(() => this.props.history.push('/'))
+      .then(() => this.props.getNotes())
+      .catch(err => {
+        console.log(err);
+        this.setState({ requestError: true });
+        setTimeout(() => {
+          this.setState({ requestError: false });
+        }, 3000);
+      });
+  };
 
   handleInputChange = e => {
     const { name, value } = e.target;

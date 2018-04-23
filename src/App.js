@@ -84,10 +84,6 @@ class App extends Component {
   }
 
   render() {
-    // render check
-    // let counter = 0;
-    // const render = { render: counter++ };
-    // console.log(render);
     const PrivateRoute = ({ component: Comp, ...rest }) => (
       <Route
         {...rest}
@@ -95,7 +91,6 @@ class App extends Component {
           this.props.isAuthenticated ? (
             <Comp {...props} {...rest} />
           ) : (
-            // null
             <Redirect
               to={{
                 pathname: '/login',
@@ -114,7 +109,7 @@ class App extends Component {
             render={() => <Login isAuth={this.isAuth} getNotes={this.getNotes} />}
           />
           <Route exact path="/signup" render={() => <SignUp isAuth={this.isAuth} />} />
-          <PrivateRoute exact component={SideBar} deAuth={this.deAuth} isAuth={this.isAuth} />
+          <PrivateRoute exact component={SideBar} deAuth={this.deAuth} />
           <PrivateRoute
             exact
             path="/"
