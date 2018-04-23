@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import axios from 'axios';
 
 import SideBar from './components/SideBar/SideBar';
@@ -91,7 +92,7 @@ class App extends Component {
       <Route
         {...rest}
         render={props =>
-          this.state.isAuthenticated ? (
+          this.props.isAuthenticated ? (
             <Comp {...props} {...rest} />
           ) : (
             // null
@@ -150,4 +151,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.isAuthenticated,
+  };
+};
+
+export default connect(mapStateToProps)(App);

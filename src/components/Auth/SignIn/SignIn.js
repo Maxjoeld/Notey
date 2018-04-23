@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
+
 import logo from '../google.png';
 import './SignIn.css';
+import { loginUser } from '../../../store/actions';
 
 axios.defaults.withCredentials = true;
 
@@ -13,47 +16,52 @@ class SignIn extends Component {
     requestError: false,
   };
 
-  loginUser = async e => {
-    e.preventDefault();
+  loginUser = e => {
     const { username, password } = this.state;
-    try {
-      const res = await axios.post('/notes/login', { username, password });
-      await sessionStorage.setItem('id', res.data.userId);
-      await this.props.isAuth();
-      await this.props.history.push('/');
-      await this.props.getNotes();
-    } catch (err) {
-      console.log(err);
-      this.setState({ requestError: true });
-      setTimeout(() => {
-        this.setState({ requestError: false });
-      }, 5000);
-    }
+    e.preventDefault();
+    this.props.loginUser(username, password, this.props.history);
   };
 
-  loginGoogle = async e => {
-    console.log('hey');
-    e.preventDefault();
-    // const proxyurl = 'https://cors-anywhere.herokuapp.com/';
-    axios
-      .get('/auth/google/')
-      .then(res => {
-        sessionStorage.setItem('id', res.data.userId);
-        console.log(res.data);
-      })
-      .then(() => {
-        this.props.isAuth();
-      })
-      .then(() => this.props.history.push('/'))
-      .then(() => this.props.getNotes())
-      .catch(err => {
-        console.log(err);
-        this.setState({ requestError: true });
-        setTimeout(() => {
-          this.setState({ requestError: false });
-        }, 3000);
-      });
-  };
+  // loginUser = async e => {
+  //   const { username, password } = this.state;
+  //   try {
+  //     const res = await axios.post('/notes/login', { username, password });
+  //     await sessionStorage.setItem('id', res.data.userId);
+  //     await this.props.isAuth();
+  //     await this.props.history.push('/');
+  //     await this.props.getNotes();
+  //   } catch (err) {
+  //     console.log(err);
+  //     this.setState({ requestError: true });
+  //     setTimeout(() => {
+  //       this.setState({ requestError: false });
+  //     }, 5000);
+  //   }
+  // };
+
+  // loginGoogle = async e => {
+  //   console.log('hey');
+  //   e.preventDefault();
+  //   // const proxyurl = 'https://cors-anywhere.herokuapp.com/';
+  //   axios
+  //     .get('/auth/google/')
+  //     .then(res => {
+  //       sessionStorage.setItem('id', res.data.userId);
+  //       console.log(res.data);
+  //     })
+  //     .then(() => {
+  //       this.props.isAuth();
+  //     })
+  //     .then(() => this.props.history.push('/'))
+  //     .then(() => this.props.getNotes())
+  //     .catch(err => {
+  //       console.log(err);
+  //       this.setState({ requestError: true });
+  //       setTimeout(() => {
+  //         this.setState({ requestError: false });
+  //       }, 3000);
+  //     });
+  // };
 
   handleInputChange = e => {
     const { name, value } = e.target;
@@ -116,4 +124,10 @@ class SignIn extends Component {
   }
 }
 
-export default withRouter(SignIn);
+// const mapStateToProps = state => {
+//   return {
+//     login: state.login,
+//   };
+// };
+
+export default withRouter(connect(null, { loginUser })(SignIn));
