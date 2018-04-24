@@ -57,7 +57,7 @@ export const saveUser = (username, password, history) => {
     try {
       await axios.post('/notes/register', { username, password });
       const res = await axios.post('/notes/login', { username, password });
-      await sessionStorage.setItem('id', res.data);
+      await sessionStorage.setItem('id', res.data.userId);
       await dispatch({ type: LOGIN });
       await history.push('/');
     } catch (error) {

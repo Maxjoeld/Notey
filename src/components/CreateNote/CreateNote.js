@@ -17,11 +17,13 @@ class CreateNote extends Component {
     this.setState({ [name]: value });
   };
 
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    e.preventDefault();
     const userId = sessionStorage.getItem('id');
     const { title, content } = this.state;
     this.props.createNote({ title, content, userId });
     this.setState({ title: '', content: '' });
+    this.props.history.push('/');
   };
 
   render() {
@@ -51,15 +53,13 @@ class CreateNote extends Component {
             required
           />
           <br />
-          <Link to='/'>
             <button
-              onClick={() => this.handleSubmit()}
+              onClick={(e) => this.handleSubmit(e)}
               className="CreateNote__Submit"
               type="submit"
             >
               Save
             </button>
-          </Link>
         </form>
       </div>
     );
