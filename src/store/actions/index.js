@@ -6,6 +6,7 @@ export const GET_NOTES = 'GET_NOTES';
 export const DEAUTH = 'DEAUTH';
 export const SORT_NOTES = 'SORT_NOTES';
 export const SORT_DATA = 'SORT_DATA';
+export const NOTE_IDX = 'NOTE_IDX';
 
 axios.defaults.withCredentials = true;
 
@@ -17,9 +18,9 @@ axios.defaults.withCredentials = true;
 //     };
 // };
 
-///////////////////////////////////////////
+/////////////////////////////////////////////////////////
 // AJAX Actions
-///////////////////////////////////////////
+/////////////////////////////////////////////////////////
 
 export const getNotes = () => {
   return async dispatch => {
@@ -95,9 +96,9 @@ export const deleteNote = inputId => {
   };
 };
 
-/////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
 // REG ACTIONS
-/////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
 
 export const deAuth = () => {
   return {
@@ -109,6 +110,18 @@ export const updateSortedNotes = sortedNotes => {
   return {
     type: SORT_NOTES,
     payload: sortedNotes,
+  };
+};
+
+
+export const handleIdx = inputID => {
+  return (dispatch, getState) => {
+    const state = getState().notes;
+    state.forEach((note, i) => {
+      if (note._id === inputID) {
+        dispatch({ type: 'NOTE_IDX', payload: i });
+      }
+    });
   };
 };
 

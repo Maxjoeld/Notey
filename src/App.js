@@ -11,79 +11,46 @@ import SignUp from './components/Auth/SignUp/SignUp';
 import Login from './components/Auth/SignIn/SignIn';
 import './App.css';
 
+import { handleIdx } from './store/actions/';
 
-class App extends Component {
-  state = {
-    noteIndex: 0,
-  };
-
-  handleNoteViewIndex = inputID => {
-    const state = this.props.notes;
-    state.forEach((note, i) => {
-      if (note._id === inputID) this.setState({ noteIndex: i });
-    });
-  };
-
-  render() {
-    const PrivateRoute = ({ component: Comp, ...rest }) => (
-      <Route
-        {...rest}
-        render={props =>
-          this.props.isAuthenticated ? (
-            <Comp {...props} {...rest} />
-          ) : (
-            <Redirect
-              to={{
-                pathname: '/login',
-              }}
-            />
-          )
-        }
-      />
-    );
-    return (
-      <Router>
-        <div className="App">
-          <Route
-            exact
-            path="/login"
-            render={() => <Login />}
+const App = props => {
+  const PrivateRoute = ({ component: Comp, ...rest }) => (
+    <Route
+      {...rest}
+      render={compProps =>
+        props.isAuthenticated ? (
+          <Comp {...compProps} {...rest} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: '/login',
+            }}
           />
-          <Route exact path="/signup" render={() => <SignUp />} />
-          <PrivateRoute exact component={SideBar} />
-          <PrivateRoute
-            exact
-            path="/"
-            component={NoteList}
-            handleNoteViewIndex={this.handleNoteViewIndex}
-          />
-          <PrivateRoute
-            exact
-            path="/create"
-            component={CreateNote}
-          />
-          <PrivateRoute
-            exact
-            path="/view"
-            component={ViewNote}
-            note={this.props.notes[this.state.noteIndex]}
-          />
-          <PrivateRoute
-            exact
-            path="/edit"
-            component={EditNote}
-            note={this.props.notes[this.state.noteIndex]}
-          />
-        </div>
-      </Router>
-    );
-  }
-}
+        )
+      }
+    />
+  );
+  return (
+    <Router>
+      <div className="App">
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={SignUp} />
+        <PrivateRoute exact component={SideBar} />
+        <PrivateRoute exact path="/" component={NoteList} handleNoteViewIndex={props.handleIdx} />
+        <PrivateRoute exact path="/create" component={CreateNote} />
+        <PrivateRoute exact path="/view" component={ViewNote} note={props.notes[props.noteIndex]} />
+        <PrivateRoute exact path="/edit" component={EditNote} note={props.notes[props.noteIndex]} />
+      </div>
+    </Router>
+  );
+};
 
 const mapStateToProps = state => {
   return {
     notes: state.notes,
+    isAuthenticated: state.isAuthenticated,
+    noteIndex: state.noteIndex,
   };
 };
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, { handleIdx })(App);

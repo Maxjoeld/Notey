@@ -6,11 +6,13 @@ import {
   DEAUTH,
   SORT_NOTES,
   SORT_DATA,
+  NOTE_IDX,
 } from '../actions';
 
 const initialState = {
   notes: [],
   isAuthenticated: false,
+  noteIndex: 0,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -23,8 +25,8 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, notes: [], isAuthenticated: false };
     case SORT_NOTES:
       return { ...state, notes: action.payload };
-    case SORT_DATA:
-      return { ...state, notes: action.payload };
+    case NOTE_IDX:
+      return { ...state, noteIndex: action.payload };
     default:
       return state;
   }
