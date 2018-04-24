@@ -47,9 +47,9 @@ class App extends Component {
           <Route
             exact
             path="/login"
-            render={() => <Login isAuth={this.isAuth} />}
+            render={() => <Login />}
           />
-          <Route exact path="/signup" render={() => <SignUp isAuth={this.isAuth} />} />
+          <Route exact path="/signup" render={() => <SignUp />} />
           <PrivateRoute exact component={SideBar} />
           <PrivateRoute
             exact
@@ -82,7 +82,6 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.isAuthenticated,
     notes: state.notes,
   };
 };

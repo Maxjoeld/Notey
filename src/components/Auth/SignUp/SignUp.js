@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { saveUser } from '../../../store/actions';
 import axios from 'axios';
+
 import './SignUp.css';
 import logo from '../google.png';
 
@@ -8,26 +11,31 @@ class SignUp extends Component {
   state = {
     username: '',
     password: '',
-    requestError: false,
   };
 
-  saveUser = async e => {
+  saveUser = e => {
     e.preventDefault();
     const { username, password } = this.state;
-    try {
-      await axios.post('/notes/register', this.state);
-      const res = await axios.post('/notes/login', { username, password });
-      await sessionStorage.setItem('id', res.data);
-      await this.props.isAuth();
-      await this.props.history.push('/');
-    } catch (err) {
-      console.log(err);
-      this.setState({ requestError: true });
-      setTimeout(() => {
-        this.setState({ requestError: false });
-      }, 3000);
-    }
+    this.props.saveUser(username, password, this.props.history);
   };
+
+  // saveUser = async e => {
+  //   e.preventDefault();
+  //   const { username, password } = this.state;
+  //   try {
+  //     await axios.post('/notes/register', this.state);
+  //     const res = await axios.post('/notes/login', { username, password });
+  //     await sessionStorage.setItem('id', res.data);
+  //     await this.props.isAuth();
+  //     await this.props.history.push('/');
+  //   } catch (err) {
+  //     console.log(err);
+  //     this.setState({ requestError: true });
+  //     setTimeout(() => {
+  //       this.setState({ requestError: false });
+  //     }, 3000);
+  //   }
+  // };
 
   handleInputChange = e => {
     const { name, value } = e.target;
@@ -86,4 +94,4 @@ class SignUp extends Component {
   }
 }
 
-export default withRouter(SignUp);
+export default withRouter(connect(null, { saveUser })(SignUp));

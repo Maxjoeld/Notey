@@ -27,7 +27,6 @@ export const getNotes = () => {
     try {
       const res = await axios.get(`/notes/${id}`);
       dispatch({ type: GET_NOTES, payload: res.data.notes });
-      // await this.setState({ notes: res.data.notes });
     } catch (error) {
       console.log({ err: 'There was an error loading your notes :(', error });
     }
@@ -48,11 +47,25 @@ export const loginUser = (username, password, history) => {
   };
 };
 
+export const saveUser = (username, password, history) => {
+  return async dispatch => {
+    try {
+      await axios.post('/notes/register', { username, password });
+      const res = await axios.post('/notes/login', { username, password });
+      sessionStorage.setItem('id', res.data);
+      await dispatch({ type: LOGIN });
+      await history.push('/');
+    } catch (error) {
+      console.log({ err: 'There was an error signing up ', error });
+    }
+  };
+};
+
 export const createNote = inputNote => {
   return async dispatch => {
     try {
       await axios.post('/notes', inputNote);
-      dispatch(getNotes());
+      await dispatch(getNotes());
     } catch (error) {
       console.log({ err: 'There was an error loading your notes :(', error });
     }
@@ -71,7 +84,7 @@ export const editNote = (editedNote, id) => {
   };
 };
 
-export const deleteNote = async inputId => {
+export const deleteNote = inputId => {
   return async dispatch => {
     try {
       await axios.delete(`/notes/${inputId}`);
