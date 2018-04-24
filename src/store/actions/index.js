@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { arrayMove } from 'react-sortable-hoc';
 
 export const LOGIN = 'LOGIN';
 export const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
@@ -7,6 +8,9 @@ export const DEAUTH = 'DEAUTH';
 export const SORT_NOTES = 'SORT_NOTES';
 export const SORT_DATA = 'SORT_DATA';
 export const NOTE_IDX = 'NOTE_IDX';
+export const SORT_FALSE = 'SORT_FALSE';
+export const SORT_TRUE = 'SORT_TRUE';
+export const ARRAY_MOVE = 'ARRAY_MOVE';
 
 axios.defaults.withCredentials = true;
 
@@ -27,7 +31,7 @@ export const getNotes = () => {
     const id = sessionStorage.getItem('id');
     try {
       const res = await axios.get(`/notes/${id}`);
-      dispatch({ type: GET_NOTES, payload: res.data.notes });
+      await dispatch({ type: GET_NOTES, payload: res.data.notes });
     } catch (error) {
       console.log({ err: 'There was an error loading your notes :(', error });
     }
@@ -39,9 +43,9 @@ export const loginUser = (username, password, history) => {
     try {
       const res = await axios.post('/notes/login', { username, password });
       sessionStorage.setItem('id', res.data.userId);
-      dispatch({ type: LOGIN });
-      history.push('/');
-      dispatch(getNotes());
+      await dispatch({ type: LOGIN });
+      await history.push('/');
+      await dispatch(getNotes());
     } catch (error) {
       console.log({ err: 'There was an error signing in ', error });
     }
@@ -53,7 +57,7 @@ export const saveUser = (username, password, history) => {
     try {
       await axios.post('/notes/register', { username, password });
       const res = await axios.post('/notes/login', { username, password });
-      sessionStorage.setItem('id', res.data);
+      await sessionStorage.setItem('id', res.data);
       await dispatch({ type: LOGIN });
       await history.push('/');
     } catch (error) {
@@ -78,7 +82,7 @@ export const editNote = (editedNote, id) => {
     const notePackage = { editedNote, id };
     try {
       await axios.put('/notes', notePackage);
-      dispatch(getNotes());
+      await dispatch(getNotes());
     } catch (error) {
       console.log({ err: 'There was an error loading your notes :(', error });
     }
@@ -125,14 +129,24 @@ export const handleIdx = inputID => {
   };
 };
 
-// export const sortData = state => {
-//   return dispatch => {
-//     const notes = [...state];
-//     if (this.state.sortedNotes) {
-//       notes.sort((a, b) => a.title.toLowerCase() > b.title.toLowerCase());
-//       this.setState({ notes, sortedNotes: false });
-//     } else {
-//       this.setState({ notes, sortedNotes: true });
-//     }
-//   };
-// };
+export const sortData = state => {
+  return (dispatch, getState) => {
+    const notes = [...state];
+    const { sortedNotes } = getState();
+    if (sortedNotes) {
+      notes.sort((a, b) => a.title.toLowerCase() > b.title.toLowerCase());
+      dispatch({ type: 'SORT_FALSE', payload: notes });
+    } else {
+      notes.sort((a, b) => a.date > b.date);
+      dispatch({ type: 'SORT_TRUE', payload: notes });
+    }
+  };
+};
+
+export const onSortEnd = (orderList) => {
+  return {
+    type: 'ARRAY_MOVE',
+    payload: orderList,
+  };
+};
+

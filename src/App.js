@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -10,8 +10,6 @@ import EditNote from './components/EditNote/EditNote';
 import SignUp from './components/Auth/SignUp/SignUp';
 import Login from './components/Auth/SignIn/SignIn';
 import './App.css';
-
-import { handleIdx } from './store/actions/';
 
 const App = props => {
   const PrivateRoute = ({ component: Comp, ...rest }) => (
@@ -36,10 +34,10 @@ const App = props => {
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={SignUp} />
         <PrivateRoute exact component={SideBar} />
-        <PrivateRoute exact path="/" component={NoteList} handleNoteViewIndex={props.handleIdx} />
+        <PrivateRoute exact path="/" component={NoteList} />
         <PrivateRoute exact path="/create" component={CreateNote} />
-        <PrivateRoute exact path="/view" component={ViewNote} note={props.notes[props.noteIndex]} />
-        <PrivateRoute exact path="/edit" component={EditNote} note={props.notes[props.noteIndex]} />
+        <PrivateRoute exact path="/view" component={ViewNote} />
+        <PrivateRoute exact path="/edit" component={EditNote} />
       </div>
     </Router>
   );
@@ -47,10 +45,8 @@ const App = props => {
 
 const mapStateToProps = state => {
   return {
-    notes: state.notes,
     isAuthenticated: state.isAuthenticated,
-    noteIndex: state.noteIndex,
   };
 };
 
-export default connect(mapStateToProps, { handleIdx })(App);
+export default connect(mapStateToProps)(App);

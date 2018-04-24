@@ -1,4 +1,5 @@
 // import { combineReducers } from 'redux';
+import { arrayMove } from 'react-sortable-hoc';
 import {
   LOGIN,
   GET_NOTES,
@@ -7,12 +8,16 @@ import {
   SORT_NOTES,
   SORT_DATA,
   NOTE_IDX,
+  SORT_TRUE,
+  SORT_FALSE,
+  ARRAY_MOVE,
 } from '../actions';
 
 const initialState = {
   notes: [],
   isAuthenticated: false,
   noteIndex: 0,
+  sortedNotes: true,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -22,11 +27,19 @@ const rootReducer = (state = initialState, action) => {
     case GET_NOTES:
       return { ...state, notes: action.payload };
     case DEAUTH:
-      return { ...state, notes: [], isAuthenticated: false };
+      return {
+        ...state, notes: [], isAuthenticated: false, noteIndex: 0,
+      };
     case SORT_NOTES:
       return { ...state, notes: action.payload };
     case NOTE_IDX:
       return { ...state, noteIndex: action.payload };
+    case SORT_FALSE:
+      return { ...state, notes: action.payload, sortedNotes: false };
+    case SORT_TRUE:
+      return { ...state, notes: action.payload, sortedNotes: true };
+    case ARRAY_MOVE:
+      return { ...state, notes: action.payload };
     default:
       return state;
   }

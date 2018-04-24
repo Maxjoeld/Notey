@@ -1,6 +1,6 @@
 /* eslint-disable */
-
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import ReactMarkdown from 'react-markdown';
 import { Link } from 'react-router-dom';
 
@@ -68,4 +68,10 @@ class NoteView extends Component {
 }
 
 /* eslint-enable */
-export default NoteView;
+const mapStateToProps = state => {
+  return {
+    note: state.notes[state.noteIndex],
+  };
+};
+
+export default connect(mapStateToProps)(NoteView);

@@ -25,10 +25,16 @@ class EditNote extends Component {
     this.setState({ [name]: value });
   };
 
-  handleSubmit = () => {
-    const { _id, title, content } = this.state;
-    this.props.editNote({ _id ,title, content }, _id);
-    this.setState({ _id: '', title: '', content: '' });
+  handleSubmit = async (e) => {
+      e.preventDefault();
+      const { _id, title, content } = this.state;
+    try {
+      await this.props.editNote({ _id ,title, content }, _id);
+      await this.setState({ _id: '', title: '', content: '' });
+      await this.props.history.push('/view');
+    } catch(err) {
+      console.log('error');
+    }
   };
 
   render() {
@@ -60,19 +66,23 @@ class EditNote extends Component {
             required
           />
           <br />
-          <Link to='/view'>
             <button
-              onClick={() => this.handleSubmit()}
+              onClick={(e) => this.handleSubmit(e)}
               className="CreateNote__Submit"
               type="submit"
             >
               Update
             </button>
-          </Link>
         </form>
       </div>
     );
   }
 }
 /* eslint-enable */
-export default connect(null, { editNote })(EditNote);
+const mapStateToProps = state => {
+  return {
+    note: state.notes[state.noteIndex],
+  };
+};
+
+export default connect(mapStateToProps, { editNote })(EditNote);

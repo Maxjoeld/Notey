@@ -19,24 +19,6 @@ class SignUp extends Component {
     this.props.saveUser(username, password, this.props.history);
   };
 
-  // saveUser = async e => {
-  //   e.preventDefault();
-  //   const { username, password } = this.state;
-  //   try {
-  //     await axios.post('/notes/register', this.state);
-  //     const res = await axios.post('/notes/login', { username, password });
-  //     await sessionStorage.setItem('id', res.data);
-  //     await this.props.isAuth();
-  //     await this.props.history.push('/');
-  //   } catch (err) {
-  //     console.log(err);
-  //     this.setState({ requestError: true });
-  //     setTimeout(() => {
-  //       this.setState({ requestError: false });
-  //     }, 3000);
-  //   }
-  // };
-
   handleInputChange = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });

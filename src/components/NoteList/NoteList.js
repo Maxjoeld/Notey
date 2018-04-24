@@ -3,51 +3,25 @@ import React, { Component } from 'react';
 import { SortableContainer, arrayMove } from 'react-sortable-hoc';
 import { CSVLink } from 'react-csv';
 import { connect } from 'react-redux';
-import { updateSortedNotes } from '../../store/actions';
+import { updateSortedNotes, handleIdx, onSortEnd, sortData } from '../../store/actions';
 import Note from './Note';
 
 import './Notes.css';
 
 class NoteList extends Component {
   state = {
-    notes: this.props.notes,
     search: '',
     emptyNotes: false,
-    sortedNotes: true,
   };
-
 
   onSortEnd = ({ oldIndex, newIndex }) => {
-    this.setState({
-      notes: arrayMove(this.state.notes, oldIndex, newIndex),
-    });
-    this.props.updateSortedNotes(this.state.notes);
+    const newOrderList = arrayMove(this.props.notes, oldIndex, newIndex);
+    this.props.onSortEnd(newOrderList, this.props.notes);
   };
-  sortData = state => {
-    const notes = [...state];
-    if (this.state.sortedNotes) {
-      notes.sort((a, b) => a.title.toLowerCase() > b.title.toLowerCase());
-      this.setState({ notes, sortedNotes: false });
-    } else {
-      this.setState({ notes, sortedNotes: true });
-    }
-  };
+
   updateSearch = e => {
     this.setState({ search: e.target.value });
   };
-  handleNoteIndex = index => {
-    this.props.handleNoteViewIndex(index);
-  };
-
-  // sortByDate = state => {
-  //   const notes = [...state];
-  //   if (this.state.sortByDate) {
-  //     notes.sort((a, b) => a.date > b.date);
-  //     this.setState({ notes, sortedByDate: true });
-  //   } else {
-  //     this.setState({ notes, sortedByDate: false });
-  //   }
-  // };
 
   render() {
     // console.log({"notes":this.state.notes});
@@ -66,7 +40,7 @@ class NoteList extends Component {
                 index={index}
                 title={note.title}
                 content={note.content}
-                handleNoteIndex={props.handleNoteIndex}
+                handleNoteIndex={this.props.handleIdx}
               />
             );
           })}
@@ -86,18 +60,15 @@ class NoteList extends Component {
             onChange={this.updateSearch}
           />
           {/* eslint-disable */}
-          {this.state.sortedNotes ? (
-            <h1
-              className="NotesView__sort"
-              onClick={() => this.sortData(this.props.notes)}
-            >
+          {this.props.sortedNotes ? (
+            <h1 className="NotesView__sort" onClick={() => this.props.sortData(this.props.notes)}>
               Sort: Regular
             </h1>
-          ) :
-            <h1 className="NotesView__sort" onClick={() => this.sortData(this.props.notes)}>
+          ) : (
+            <h1 className="NotesView__sort" onClick={() => this.props.sortData(this.props.notes)}>
               Sort: Sorted Alphabetically
-            </h1> 
-          }
+            </h1>
+          )}
           {/* eslint-enable */}
         </div>
         {this.state.emptyNotes ? (
@@ -109,12 +80,12 @@ class NoteList extends Component {
           pressDelay={150}
           lockToContainerEdges
           axis="xy"
-          notes={this.state.notes}
+          notes={this.props.notes}
           onSortEnd={this.onSortEnd}
-          handleNoteIndex={this.handleNoteIndex}
+          handleNoteIndex={this.props.handleIdx}
         />
         {!this.boolEmptyNotes ? (
-          <CSVLink className="CSV-Link" data={this.state.notes} filename="lambda-notes.csv">
+          <CSVLink className="CSV-Link" data={this.props.notes} filename="lambda-notes.csv">
             Download CSV
           </CSVLink>
         ) : null}
@@ -126,7 +97,10 @@ class NoteList extends Component {
 const mapStateToProps = state => {
   return {
     notes: state.notes,
+    sortedNotes: state.sortedNotes,
   };
 };
 
-export default connect(mapStateToProps, { updateSortedNotes })(NoteList);
+export default connect(mapStateToProps, {
+  updateSortedNotes, handleIdx, sortData, onSortEnd,
+})(NoteList);
