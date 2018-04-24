@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { deAuth } from '../../store/actions';
 import FontAwesome from 'react-fontawesome';
 import './SideBar.css';
 
@@ -46,4 +48,11 @@ class SideBar extends Component {
   }
 }
 
-export default withRouter(SideBar);
+// const mapStateToProps = state => {
+//   return {
+//     isAuthenticated: state.isAuthenticated,
+//     notes: state.notes,
+//   };
+// };
+
+export default withRouter(connect(null, { deAuth })(SideBar));

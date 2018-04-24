@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import { SortableContainer, arrayMove } from 'react-sortable-hoc';
 import { CSVLink } from 'react-csv';
-// import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { updateSortedNotes } from '../../store/actions';
 import Note from './Note';
 
 import './Notes.css';
@@ -13,7 +14,6 @@ class NoteList extends Component {
     search: '',
     emptyNotes: false,
     sortedNotes: true,
-    // sortByDate: true,
   };
 
 
@@ -51,7 +51,7 @@ class NoteList extends Component {
 
   render() {
     // console.log({"notes":this.state.notes});
-    const filteredNotes = this.state.notes.filter(note => {
+    const filteredNotes = this.props.notes.filter(note => {
       return note.title.toLowerCase().includes(this.state.search.toLowerCase());
     });
 
@@ -89,7 +89,7 @@ class NoteList extends Component {
           {this.state.sortedNotes ? (
             <h1
               className="NotesView__sort"
-              onClick={() => this.sortData(this.state.notes)}
+              onClick={() => this.sortData(this.props.notes)}
             >
               Sort: Regular
             </h1>
@@ -123,4 +123,10 @@ class NoteList extends Component {
   }
 }
 
-export default NoteList;
+const mapStateToProps = state => {
+  return {
+    notes: state.notes,
+  };
+};
+
+export default connect(mapStateToProps, { updateSortedNotes })(NoteList);

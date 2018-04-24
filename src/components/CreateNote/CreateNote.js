@@ -1,5 +1,7 @@
 /* eslint-disable */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { createNote } from '../../store/actions';
 import { Link } from 'react-router-dom';
 
 import './CreateNote.css';
@@ -64,5 +66,5 @@ class CreateNote extends Component {
   }
 }
 
-export default CreateNote;
+export default connect(null, { createNote })(CreateNote);
 /* eslint-enable */

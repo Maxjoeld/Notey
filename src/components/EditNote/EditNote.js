@@ -1,6 +1,8 @@
 /* eslint-disable */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { editNote } from '../../store/actions';
 
 import '../CreateNote/CreateNote';
 
@@ -25,7 +27,7 @@ class EditNote extends Component {
 
   handleSubmit = () => {
     const { _id, title, content } = this.state;
-    this.props.handleEditNote({ _id ,title, content }, _id);
+    this.props.editNote({ _id ,title, content }, _id);
     this.setState({ _id: '', title: '', content: '' });
   };
 
@@ -73,4 +75,4 @@ class EditNote extends Component {
   }
 }
 /* eslint-enable */
-export default EditNote;
+export default connect(null, { editNote })(EditNote);

@@ -1,6 +1,8 @@
 /* eslint-disable */
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { deleteNote } from '../../store/actions';
 
 import './DeleteNote.css';
 
@@ -34,5 +36,5 @@ const DeleteNote = (props) => {
   );
 };
 
-export default DeleteNote;
+export default connect(null, { deleteNote })(DeleteNote);
 /* eslint-enable */

@@ -22,23 +22,6 @@ class SignIn extends Component {
     this.props.loginUser(username, password, this.props.history);
   };
 
-  // loginUser = async e => {
-  //   const { username, password } = this.state;
-  //   try {
-  //     const res = await axios.post('/notes/login', { username, password });
-  //     await sessionStorage.setItem('id', res.data.userId);
-  //     await this.props.isAuth();
-  //     await this.props.history.push('/');
-  //     await this.props.getNotes();
-  //   } catch (err) {
-  //     console.log(err);
-  //     this.setState({ requestError: true });
-  //     setTimeout(() => {
-  //       this.setState({ requestError: false });
-  //     }, 5000);
-  //   }
-  // };
-
   loginGoogle = async e => {
     console.log('hey');
     e.preventDefault();
