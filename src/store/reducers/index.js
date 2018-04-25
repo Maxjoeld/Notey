@@ -1,11 +1,9 @@
 // import { combineReducers } from 'redux';
-import { arrayMove } from 'react-sortable-hoc';
 import {
   GET_NOTES,
   AUTHENTICATION_ERROR,
   DEAUTH,
   SORT_NOTES,
-  SORT_DATA,
   NOTE_IDX,
   SORT_TRUE,
   SORT_FALSE,

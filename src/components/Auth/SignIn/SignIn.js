@@ -5,7 +5,7 @@ import axios from 'axios';
 
 import logo from '../google.png';
 import './SignIn.css';
-import { loginUser } from '../../../store/actions';
+import { loginUser, loginGoogle } from '../../../store/actions';
 
 axios.defaults.withCredentials = true;
 
@@ -21,29 +21,10 @@ class SignIn extends Component {
     this.props.loginUser(username, password, this.props.history);
   };
 
-  // loginGoogle = async e => {
-  //   console.log('hey');
-  //   e.preventDefault();
-  //   // const proxyurl = 'https://cors-anywhere.herokuapp.com/';
-  //   axios
-  //     .get('/auth/google/')
-  //     .then(res => {
-  //       sessionStorage.setItem('id', res.data.userId);
-  //       console.log(res.data);
-  //     })
-  //     .then(() => {
-  //       this.props.isAuth();
-  //     })
-  //     .then(() => this.props.history.push('/'))
-  //     .then(() => this.props.getNotes())
-  //     .catch(err => {
-  //       console.log(err);
-  //       this.setState({ requestError: true });
-  //       setTimeout(() => {
-  //         this.setState({ requestError: false });
-  //       }, 3000);
-  //     });
-  // };
+  loginGoogle = e => {
+    e.preventDefault();
+    this.props.loginGoogle();
+  };
 
   handleInputChange = e => {
     const { name, value } = e.target;
@@ -58,16 +39,18 @@ class SignIn extends Component {
             <button className="signin--buttons__facebook">
               <i className="fab fa-facebook-square" />facebook
             </button>
-            <button
-              className="signin--buttons__google"
-              onClick={e => this.loginGoogle(e)}
-            >
-              <img
+            <a href="http://localhost:5000/auth/google">
+              <button
+                className="signin--buttons__google"
+                // onClick={e => this.loginGoogle(e)}
+              >
+                <img
                 src={logo}
                 alt="google logo"
                 className="signin--buttons__google--logo"
               />Google
-            </button>
+              </button>
+            </a>
           </div>
           {this.state.requestError ? <h5>Invalid Email or Password</h5> : null}
           <form className="signin--signin">
@@ -112,4 +95,4 @@ class SignIn extends Component {
 //   };
 // };
 
-export default withRouter(connect(null, { loginUser })(SignIn));
+export default withRouter(connect(null, { loginUser, loginGoogle })(SignIn));

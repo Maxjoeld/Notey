@@ -1,7 +1,5 @@
 import axios from 'axios';
-import { arrayMove } from 'react-sortable-hoc';
 
-// export const LOGIN = 'LOGIN';
 export const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
 export const GET_NOTES = 'GET_NOTES';
 export const DEAUTH = 'DEAUTH';
@@ -23,10 +21,6 @@ axios.defaults.withCredentials = true;
 //     };
 // };
 
-/////////////////////////////////////////////////////////
-// AJAX Actions
-/////////////////////////////////////////////////////////
-
 export const setId = id => {
   return {
     type: SET_ID,
@@ -34,14 +28,19 @@ export const setId = id => {
   };
 };
 
-export const getNotes = () => {
+/////////////////////////////////////////////////////////
+// AUTH
+/////////////////////////////////////////////////////////
+
+export const loginGoogle = (username, password, history) => {
   return async dispatch => {
-    const id = sessionStorage.getItem('id');
     try {
-      const res = await axios.get(`/notes/${id}`);
-      await dispatch({ type: GET_NOTES, payload: res.data.notes });
+      const res = await axios.get('/auth/google');
+      sessionStorage.setItem('id', res.data.userId);
+      await history.push('/');
+      await dispatch(getNotes());
     } catch (error) {
-      console.log({ err: 'There was an error loading your notes :(', error });
+      console.log({ err: 'There was an error signing in ', error });
     }
   };
 };
@@ -51,7 +50,6 @@ export const loginUser = (username, password, history) => {
     try {
       const res = await axios.post('/notes/login', { username, password });
       sessionStorage.setItem('id', res.data.userId);
-      // await dispatch({ type: LOGIN });
       await history.push('/');
       await dispatch(getNotes());
     } catch (error) {
@@ -70,6 +68,23 @@ export const saveUser = (username, password, history) => {
       await history.push('/');
     } catch (error) {
       console.log({ err: 'There was an error signing up ', error });
+    }
+  };
+};
+
+
+/////////////////////////////////////////////////////////
+// NOTES
+/////////////////////////////////////////////////////////
+
+export const getNotes = () => {
+  return async dispatch => {
+    const id = sessionStorage.getItem('id');
+    try {
+      const res = await axios.get(`/notes/${id}`);
+      await dispatch({ type: GET_NOTES, payload: res.data.notes });
+    } catch (error) {
+      console.log({ err: 'There was an error loading your notes :(', error });
     }
   };
 };

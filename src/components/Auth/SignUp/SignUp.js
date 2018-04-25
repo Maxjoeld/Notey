@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { saveUser } from '../../../store/actions';
-import axios from 'axios';
 
 import './SignUp.css';
 import logo from '../google.png';
@@ -68,7 +67,7 @@ class SignUp extends Component {
           </div>
           <p className="signin--notmember">
             {' '}
-            Already a member? <Link to="/signin"> Sign in </Link>
+            Already a member? <Link to="/"> Sign in </Link>
           </p>
         </div>
       </div>

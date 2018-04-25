@@ -26,13 +26,18 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', "http://localhost:3000");
-  res.header('Access-Control-Allow-Methods','GET');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-})
+// app.use(function(req, res, next) {
+//   res.header('Access-Control-Allow-Origin', "http://localhost:3000");
+//   res.header('Access-Control-Allow-Methods','GET');
+//   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//   next();
+// })
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.get('/me', (req, res) => {
   // Do NOT modify this route handler in any way

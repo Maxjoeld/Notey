@@ -11,7 +11,6 @@ const oAuth = new Schema({
   },
   email: {
     type: String,
-    required: true,
   },
   img: {
     type: String,
