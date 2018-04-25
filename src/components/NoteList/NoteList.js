@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { SortableContainer, arrayMove } from 'react-sortable-hoc';
 import { CSVLink } from 'react-csv';
 import { connect } from 'react-redux';
-import { updateSortedNotes, handleIdx, onSortEnd, sortData } from '../../store/actions';
+import { updateSortedNotes, handleIdx, onSortEnd, sortData, getNotes } from '../../store/actions';
 import Note from './Note';
 
 import './Notes.css';
@@ -13,6 +13,10 @@ class NoteList extends Component {
     search: '',
     emptyNotes: false,
   };
+
+  componentDidMount() {
+    this.props.getNotes();
+  }
 
   onSortEnd = ({ oldIndex, newIndex }) => {
     const newOrderList = arrayMove(this.props.notes, oldIndex, newIndex);
@@ -102,5 +106,5 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
-  updateSortedNotes, handleIdx, sortData, onSortEnd,
+  updateSortedNotes, handleIdx, sortData, onSortEnd, getNotes
 })(NoteList);

@@ -11,6 +11,7 @@ export const NOTE_IDX = 'NOTE_IDX';
 export const SORT_FALSE = 'SORT_FALSE';
 export const SORT_TRUE = 'SORT_TRUE';
 export const ARRAY_MOVE = 'ARRAY_MOVE';
+export const SET_ID = 'SET_ID';
 
 axios.defaults.withCredentials = true;
 
@@ -25,6 +26,13 @@ axios.defaults.withCredentials = true;
 /////////////////////////////////////////////////////////
 // AJAX Actions
 /////////////////////////////////////////////////////////
+
+export const setId = id => {
+  return {
+    type: SET_ID,
+    payload: id,
+  };
+};
 
 export const getNotes = () => {
   return async dispatch => {

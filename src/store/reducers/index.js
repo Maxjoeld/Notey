@@ -11,6 +11,7 @@ import {
   SORT_TRUE,
   SORT_FALSE,
   ARRAY_MOVE,
+  SET_ID,
 } from '../actions';
 
 const initialState = {
@@ -40,6 +41,8 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, notes: action.payload, sortedNotes: true };
     case ARRAY_MOVE:
       return { ...state, notes: action.payload };
+    case SET_ID:
+      return { ...state, authenticated: true, user: action.payload };
     default:
       return state;
   }

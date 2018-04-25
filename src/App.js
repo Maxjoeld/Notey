@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import RequireAuth from './components/HOC/RequireAuth';
 
 import SideBar from './components/SideBar/SideBar';
 import NoteList from './components/NoteList/NoteList';
@@ -16,7 +17,7 @@ const App = props => {
     <Route
       {...rest}
       render={compProps =>
-        props.isAuthenticated ? (
+        sessionStorage.getItem('id') ? (
           <Comp {...compProps} {...rest} />
         ) : (
           <Redirect
@@ -31,13 +32,13 @@ const App = props => {
   return (
     <Router>
       <div className="App">
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/login" component={(Login)} />
+        <Route exact path="/signup" component={(SignUp)} />
         <PrivateRoute exact component={SideBar} />
-        <PrivateRoute exact path="/" component={NoteList} />
-        <PrivateRoute exact path="/create" component={CreateNote} />
-        <PrivateRoute exact path="/view" component={ViewNote} />
-        <PrivateRoute exact path="/edit" component={EditNote} />
+        <PrivateRoute exact path="/" component={(NoteList)} />
+        <PrivateRoute exact path="/create" component={(CreateNote)} />
+        <PrivateRoute exact path="/view" component={(ViewNote)} />
+        <PrivateRoute exact path="/edit" component={(EditNote)} />
       </div>
     </Router>
   );

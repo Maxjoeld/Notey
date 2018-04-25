@@ -1,12 +1,12 @@
 // import React, { Component } from 'react';
+// import { connect } from 'react-redux';
+// import { setId } from '../../store/actions';
 
-// // OPTIONAL HOC Auth using sessions
-// // //////////////////////////////////
 // export default ComposedComponent => {
 //   class RequireAuthentication extends Component {
 //     componentWillMount() {
 //       if (!sessionStorage.getItem('id')) this.props.history.push('/login');
-//       // else this.props.setId(sessionStorage.getItem('id')); || this.setState({ id })
+//       else this.props.setId(sessionStorage.getItem('id'));
 //     }
 
 //     render() {
@@ -20,5 +20,5 @@
 //     }
 //   }
 
-//   return (null, { setId })(RequireAuthentication);
+//   return connect(null, { setId })(RequireAuthentication);
 // };
