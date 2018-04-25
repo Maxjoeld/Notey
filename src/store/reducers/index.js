@@ -1,7 +1,6 @@
 // import { combineReducers } from 'redux';
 import { arrayMove } from 'react-sortable-hoc';
 import {
-  LOGIN,
   GET_NOTES,
   AUTHENTICATION_ERROR,
   DEAUTH,
@@ -23,13 +22,11 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN:
-      return { ...state, isAuthenticated: true };
     case GET_NOTES:
       return { ...state, notes: action.payload };
     case DEAUTH:
       return {
-        ...state, notes: [], isAuthenticated: false, noteIndex: 0,
+        ...state, notes: [], noteIndex: 0,
       };
     case SORT_NOTES:
       return { ...state, notes: action.payload };

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { arrayMove } from 'react-sortable-hoc';
 
-export const LOGIN = 'LOGIN';
+// export const LOGIN = 'LOGIN';
 export const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
 export const GET_NOTES = 'GET_NOTES';
 export const DEAUTH = 'DEAUTH';
@@ -51,7 +51,7 @@ export const loginUser = (username, password, history) => {
     try {
       const res = await axios.post('/notes/login', { username, password });
       sessionStorage.setItem('id', res.data.userId);
-      await dispatch({ type: LOGIN });
+      // await dispatch({ type: LOGIN });
       await history.push('/');
       await dispatch(getNotes());
     } catch (error) {
@@ -66,7 +66,7 @@ export const saveUser = (username, password, history) => {
       await axios.post('/notes/register', { username, password });
       const res = await axios.post('/notes/login', { username, password });
       await sessionStorage.setItem('id', res.data.userId);
-      await dispatch({ type: LOGIN });
+      // await dispatch({ type: LOGIN });
       await history.push('/');
     } catch (error) {
       console.log({ err: 'There was an error signing up ', error });
