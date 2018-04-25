@@ -1,5 +1,5 @@
 .signin {
-  font-family: 'Lato',sans-serif;
+  background-size: cover;
   width: 120rem;
   display: flex;
   justify-content: center;
@@ -9,16 +9,17 @@
   background-color: #ffffff;
   border: 1px solid white;
   color: black;
-
   &--box {
-    background-color: #ffffff;
+    background-color: rgb(255, 255, 255);
     display: flex;
     flex-flow: column;
     justify-content: center;
     align-items: center;
     width: 40rem;
     height: 50rem;
-    border: .2rem solid rgb(255, 126, 126);
+    box-shadow: 16px 17px 10px -10px rgba(0, 0, 0, 0.157);
+    position: relative;
+
   }
   &--header {
     margin-bottom: 3.5rem;

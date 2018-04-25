@@ -14,16 +14,14 @@
     padding-right: 3rem;
   }
 
-  &__button {
-    font-weight: 300;
-    font: normal 1rem;
-    font-family: 'Times New Roman', Times, serif, sans-serif 50px;
+  &__link {
+    font-family: 'Montserrat';
     width: 100%;
     margin: 1rem 0;
     font-size: 2rem;
     line-height:.3rem;
     cursor: pointer;
-    color: rgb(218, 255, 224);  
+    color: rgba(218, 255, 224, 0.541);  
     background-color: #242424;
     height: 3rem;
     padding: 2rem 1rem 2rem 4rem;
@@ -43,7 +41,7 @@
 
 .SetIc {
   position: relative;
-  color: rgb(218, 255, 224);  
+  color: rgba(218, 255, 224, 0.541);    
   font-size: 1.5rem;
   &:hover {
     color: #e0fffe;

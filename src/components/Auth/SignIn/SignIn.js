@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import axios from 'axios';
 
-import logo from '../google.png';
-// import './SignIn.css';
 import { loginUser, loginGoogle } from '../../../store/actions';
+import logo from '../google.png';
+import backgroundImage from '../background.jpg';
 
-axios.defaults.withCredentials = true;
+const styles = {
+  backgroundImage: `url(${backgroundImage})`,
+};
 
 class SignIn extends Component {
   state = {
@@ -24,7 +25,6 @@ class SignIn extends Component {
   loginGoogle = e => {
     e.preventDefault();
     // this.props.loginGoogle();
-    
   };
 
   handleInputChange = e => {
@@ -33,7 +33,8 @@ class SignIn extends Component {
   };
   render() {
     return (
-      <div className="signin">
+      <div className="signin" style={styles}>
+        {/* <img src={background} /> */}
         <div className="signin--box">
           <h1 className="signin--header">Sign In</h1>
           <div className="signin--buttons">
@@ -45,11 +46,7 @@ class SignIn extends Component {
                 className="signin--buttons__google"
                 // onClick={e => this.loginGoogle(e)}
               >
-                <img
-                src={logo}
-                alt="google logo"
-                className="signin--buttons__google--logo"
-              />Google
+                <img src={logo} alt="google logo" className="signin--buttons__google--logo" />Google
               </button>
             </a>
           </div>
@@ -72,14 +69,12 @@ class SignIn extends Component {
               onChange={this.handleInputChange}
             />
             <br />
-            <Link to="/">
-              <input
-                className="signin--signin__button"
-                type="submit"
-                value="Sign In"
-                onClick={e => this.loginUser(e)}
-              />
-            </Link>
+            <input
+              className="signin--signin__button"
+              type="submit"
+              value="Sign In"
+              onClick={e => this.loginUser(e)}
+            />
           </form>
           <p className="signin--notmember">
             Not a member? <Link to="/signup"> Sign up </Link>

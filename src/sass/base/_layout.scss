@@ -2,23 +2,40 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Roboto',sans-serif;
-  background-color: #333333;
+  // font-family: 'Roboto',sans-serif;
+  font-family: 'Montserrat',sans-serif;
+  // background-color: #333333;
+  background: linear-gradient(45deg, rgb(235, 243, 255), #f0faff );
+  background-size: fill;
+  // background-color: #ffffff;
 }
 
 html {
   // box-sizing: border-box;
-  font-size: 62.5%;
+  font-size: 62.5%; // 1rem = 10px, 10px/16px = 32.5%; 16px is browser default
 }
 
 .App {
   display: flex;
   flex-flow: row nowrap;
   background-color: #ffffff;
-  width: 1200px;
+  /* offset-x | offset-y | blur-radius | spread-radius | color */
+  box-shadow: 0px 7px 10px 0px rgba(0, 0, 0, 0.459);
+  // color: rgba(218, 255, 224, 0.541);  
+  width: 120rem;
   margin: 8rem auto;
-  min-height: 1200px;
+  min-height: 120rem;
+  // position: relative;
 }
+
+// .App:after{
+//   content: '';
+//   display: block;
+//   width: 80%;
+//   height: 100px;
+//   box-shadow: 0 2px 100px;
+//   position: absolute;
+// }
 
 button {
   cursor: pointer;

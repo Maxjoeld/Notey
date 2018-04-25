@@ -21,18 +21,18 @@ class SideBar extends Component {
         <Link to="/">
           <div className="SetIc">
             <FontAwesome name="fas fa-sticky-note" />
-            <button className="SideBar__button">View Your Notes</button>
+            <button className="SideBar__link">View Your Notes</button>
           </div>
         </Link>
         <Link to="/create">
           <div className="SetIc">
             <FontAwesome name="fas fa-plus" />
-            <button className="SideBar__button">Create New Note</button>
+            <button className="SideBar__link">Create New Note</button>
           </div>
         </Link>
         <div className="SetIc" onClick={e => this.logoutUser(e)}>
           <FontAwesome name="fas fa-sign-out-alt" />
-          <button className="SideBar__button">Sign out</button>
+          <button className="SideBar__link">Sign out</button>
         </div>
       </div>
     );
