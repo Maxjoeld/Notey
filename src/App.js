@@ -2,13 +2,13 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 import SideBar from './components/SideBar/SideBar';
-import NoteList from './components/NoteList/NoteList';
-import CreateNote from './components/CreateNote/CreateNote';
-import ViewNote from './components/ViewNote/ViewNote';
-import EditNote from './components/EditNote/EditNote';
+import NoteList from './components/Notes/NoteList/NoteList';
+import CreateNote from './components/Notes/CreateNote/CreateNote';
+import ViewNote from './components/Notes/ViewNote/ViewNote';
+import EditNote from './components/Notes/EditNote/EditNote';
 import SignUp from './components/Auth/SignUp/SignUp';
 import Login from './components/Auth/SignIn/SignIn';
-import './App.css';
+// import './App.css';
 
 const App = props => {
   const PrivateRoute = ({ component: Comp, ...rest }) => (

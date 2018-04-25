@@ -1,23 +1,14 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
-import axios from 'axios';
 import { connect } from 'react-redux';
-import { deAuth } from '../../store/actions';
-import './SideBar.css';
+import { deAuth, logoutUser } from '../../store/actions';
+// import './SideBar.css';
 
 class SideBar extends Component {
-
   logoutUser = async e => {
     e.preventDefault();
-    try {
-      await axios.post('notes/logout');
-      await this.props.deAuth();
-      await sessionStorage.removeItem('id');
-      await this.props.history.push('/login');
-    } catch (err) {
-      console.log(err);
-    }
+    this.props.logoutUser(this.props.history);
   };
 
   render() {
@@ -48,4 +39,4 @@ class SideBar extends Component {
   }
 }
 
-export default withRouter(connect(null, { deAuth })(SideBar));
+export default withRouter(connect(null, { deAuth, logoutUser })(SideBar));

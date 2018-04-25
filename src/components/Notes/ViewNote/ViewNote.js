@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import { Link } from 'react-router-dom';
 
 import DeleteNote from '../DeleteNote/DeleteNote';
-import './ViewNote.css';
+// import './ViewNote.css';
 
 class NoteView extends Component {
   state = {

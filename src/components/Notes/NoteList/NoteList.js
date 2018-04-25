@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 import { SortableContainer, arrayMove } from 'react-sortable-hoc';
 import { CSVLink } from 'react-csv';
 import { connect } from 'react-redux';
-import { updateSortedNotes, handleIdx, onSortEnd, sortData, getNotes } from '../../store/actions';
+import { updateSortedNotes, handleIdx, onSortEnd, sortData, getNotes } from '../../../actions';
 import Note from './Note';
 
-import './Notes.css';
+// import './Notes.scss';
 
 class NoteList extends Component {
   state = {

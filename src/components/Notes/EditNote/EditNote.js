@@ -2,9 +2,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { editNote } from '../../store/actions';
+import { editNote } from '../../../actions';
 
-import '../CreateNote/CreateNote';
+// import '../CreateNote/CreateNote';
 
 class EditNote extends Component {
   state = {

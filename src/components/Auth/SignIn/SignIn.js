@@ -4,7 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 
 import logo from '../google.png';
-import './SignIn.css';
+// import './SignIn.css';
 import { loginUser, loginGoogle } from '../../../store/actions';
 
 axios.defaults.withCredentials = true;
@@ -23,7 +23,8 @@ class SignIn extends Component {
 
   loginGoogle = e => {
     e.preventDefault();
-    this.props.loginGoogle();
+    // this.props.loginGoogle();
+    
   };
 
   handleInputChange = e => {
@@ -39,7 +40,7 @@ class SignIn extends Component {
             <button className="signin--buttons__facebook">
               <i className="fab fa-facebook-square" />facebook
             </button>
-            <a href="http://localhost:5000/auth/google">
+            <a href="http://localhost:5000/auth/google" onClick={() => this.loginGoogle}>
               <button
                 className="signin--buttons__google"
                 // onClick={e => this.loginGoogle(e)}

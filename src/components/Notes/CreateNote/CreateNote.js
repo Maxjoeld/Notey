@@ -1,10 +1,10 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createNote } from '../../store/actions';
+import { createNote } from '../../../actions';
 import { Link } from 'react-router-dom';
 
-import './CreateNote.css';
+// import './CreateNote.css';
 
 class CreateNote extends Component {
   state = {

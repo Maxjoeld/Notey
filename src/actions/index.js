@@ -28,10 +28,27 @@ export const setId = id => {
   };
 };
 
-/////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
 // AUTH
-/////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
+export const deAuth = () => {
+  return {
+    type: DEAUTH,
+  };
+};
 
+export const logoutUser = (history) => {
+  return async dispatch => {
+    try {
+      await axios.post('notes/logout');
+      dispatch(deAuth());
+      await sessionStorage.removeItem('id');
+      await history.push('/login');
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
 export const loginGoogle = (username, password, history) => {
   return async dispatch => {
     try {
@@ -73,9 +90,9 @@ export const saveUser = (username, password, history) => {
 };
 
 
-/////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
 // NOTES
-/////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
 
 export const getNotes = () => {
   return async dispatch => {
@@ -124,14 +141,9 @@ export const deleteNote = inputId => {
 };
 
 /////////////////////////////////////////////////////////////////////
-// REG ACTIONS
+// SORT/HANDLING NOTES
 /////////////////////////////////////////////////////////////////////
 
-export const deAuth = () => {
-  return {
-    type: DEAUTH,
-  };
-};
 
 export const updateSortedNotes = sortedNotes => {
   return {

@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import rootReducer from './store/reducers';
 
+require('./sass/main.css');
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

@@ -2,9 +2,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { deleteNote } from '../../store/actions';
+import { deleteNote } from '../../../actions';
 
-import './DeleteNote.css';
+// import './DeleteNote.css';
 
 const DeleteNote = (props) => {
   return (

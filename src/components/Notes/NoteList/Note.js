@@ -3,7 +3,7 @@ import React, { component } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Link } from 'react-router-dom';
 import { SortableElement } from 'react-sortable-hoc';
-import './Notes.css';
+// import './Notes.css';
 
 const Note = SortableElement(props => {
   return (

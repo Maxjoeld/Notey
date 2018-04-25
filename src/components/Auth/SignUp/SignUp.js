@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { saveUser } from '../../../store/actions';
 
-import './SignUp.css';
+// import './SignUp.css';
 import logo from '../google.png';
 
 class SignUp extends Component {
