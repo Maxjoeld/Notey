@@ -11,22 +11,24 @@
 }
 
 .DeleteModal-Box {
+  font-size: 1.3rem;
   text-align: center;
   background: white;
   border: 2px solid black;
-  height: 150px;
-  padding: 10px;
+  height: 13rem;
+  padding: 1rem;
 }
 
 .DeleteModal-Box-Delete {
+
   background: #d0021b;
   border: 1px solid rgba(0,0,0,0.5);
-  margin: 6px;
-  padding: 10px 20px 10px 20px;
-  font-size: 20px;
+  margin: .6rem;
+  padding: 1rem 2rem 1rem 2rem;
+  font-size: 2rem;
   text-align: center;
-  width: 250px;
-  height: 45px;
+  width: 25rem;
+  height: 4.5rem;
   cursor: pointer;
   font-family: 'Roboto', sans-serif;
 }
@@ -39,12 +41,12 @@
     color: white;
     background-color: #2bc1c4;
     border: 1px solid rgba(0,0,0,0.5);
-    margin: 6px;
-    padding: 10px 20px 10px 20px;
-    font-size: 20px;
+    margin: .6rem;
+    padding: 1rem 2rem 1rem 2rem;
+    font-size: 2rem;
     text-align: center;
-    width: 250px;
-    height: 45px;
+    width: 25rem;
+    height: 4.5rem;
     cursor: pointer;
     font-family: 'Roboto', sans-serif;
   

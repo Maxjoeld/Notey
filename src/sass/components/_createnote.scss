@@ -1,35 +1,35 @@
 .CreateNote{
-  margin: 30px 40px;
-  font-size: 14px;
+  margin: 3rem 4rem;
+  font-size: 1.4rem;
 
   &--title {
-    font-size: 30px;
+    font-size: 3rem;
     color: rgba(1, 1, 1, 0.7);
   }
 
   &__Submit {
     color: white;
-    height: 30px;
-    width: 150px;
+    height: 3rem;
+    width: 15rem;
     background-color: #2bc1c4;
   }
   &--TitleInput {
-    height: 30px;
-    width: 400px;
-    margin-bottom: 20px;
-    padding: 7px;
+    height: 3rem;
+    width: 40rem;
+    margin-bottom: 2rem;
+    padding: .7rem;
     // border-radius: 4px;
     
   }
 
   &--BodyInput {
 
-    width: 600px;
-    height: 400px;
-    padding: 12px;
+    width: 60rem;
+    height: 40rem;
+    padding: 1.2rem;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-bottom: 16px;
+    border-radius: .4rem;
+    margin-bottom: 1.6rem;
     resize: vertical;
   }
   

@@ -1,8 +1,9 @@
 .NoteView {
+  font-size: 1.6rem;
   display: flex;
   flex-flow: column nowrap;
   width: 100%;
-  margin: 20px;
+  margin: 4rem;
   white-space: wrap;
   overflow: hidden;
   text-overflow: clip;
@@ -22,7 +23,7 @@
   cursor: pointer;
   text-decoration: underline;
   color: rgba(0,0,0,0.8);
-  margin-right: 15px;
+  margin-right: 1.5rem;
 }
 
 .SectionBody {

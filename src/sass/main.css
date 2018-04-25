@@ -1,77 +1,80 @@
 .Notes--comp {
   display: flex;
   flex-flow: row wrap;
-  margin-top: 70px; }
+  margin-top: 7rem; }
 
 .NotesView {
   display: flex;
   flex-flow: column;
-  margin-top: 25px; }
+  margin-top: 2.5rem; }
   .NotesView--header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start; }
   .NotesView__empty {
-    margin-left: 30px;
+    margin-left: 3rem;
     white-space: nowrap; }
   .NotesView__search {
-    margin-top: 15px;
-    margin-left: 20px;
-    padding: 4px;
-    width: 300px;
+    margin-top: 1.5rem;
+    margin-left: 2rem;
+    padding: 0.4rem;
+    width: 30rem;
     height: 40px;
     border-radius: 5%;
     border: 0.7px solid #cccccc; }
     .NotesView__search:focus {
-      width: 400px;
+      width: 40rem;
       -webkit-transition: width 0.4s ease-in-out;
       transition: width 0.4s ease-in-out; }
   .NotesView__sort {
-    margin: 20px 50px 10px 30px;
-    font-size: 14px;
+    margin: 2rem 5rem 1rem 3rem;
+    font-size: 1.4rem;
     cursor: pointer; }
     .NotesView__sort:hover {
-      font-size: 20px;
-      margin-left: 20px; }
+      font-size: 2rem;
+      margin-left: 2rem; }
 
 .Note {
   border: 1px solid #dadada;
   list-style: none;
-  margin-right: 10px;
-  width: 210px;
-  height: 230px;
+  margin-right: 1rem;
+  width: 21rem;
+  height: 23rem;
   background-color: #fff;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
   overflow: hidden; }
   .Note:hover {
     background-color: #ffd6d6; }
   .Note--NoteTitle {
+    font-size: 1.6rem;
     font-weight: 700;
     color: black;
-    height: 40px;
+    height: 4rem;
     width: 85%;
-    padding-bottom: 15px;
-    border-bottom: 1px solid rgba(177, 177, 177, 0.5);
+    padding-bottom: 1.5rem;
+    border-bottom: 0.1rem solid rgba(177, 177, 177, 0.5);
     /* This creates the border. Replace black with whatever color you want. */
     margin: 0 auto; }
   .Note--NoteBody {
+    font-size: 1.3rem;
     padding: 0px 10px 5px 10px;
     color: #636363;
-    line-height: 28px; }
+    line-height: 2.8rem; }
 
 .CSV-Link {
-  margin-left: 35px;
-  margin-bottom: 100px;
+  margin-left: 4rem;
+  margin-bottom: 10rem;
   color: black; }
 
 .signin {
   font-family: 'Lato',sans-serif;
-  width: 1200px;
+  width: 120rem;
   display: flex;
   justify-content: center;
   align-items: center;
   border: solid white;
-  background-color: #ebebeb;
+  background-color: white;
+  background-color: #ffffff;
   border: 1px solid white;
   color: black; }
   .signin--box {
@@ -80,210 +83,135 @@
     flex-flow: column;
     justify-content: center;
     align-items: center;
-    width: 400px;
-    height: 500px;
-    border: 0.5px solid #d1d1d1; }
+    width: 40rem;
+    height: 50rem;
+    border: 0.2rem solid #ff7e7e; }
   .signin--header {
-    margin-bottom: 35px; }
+    margin-bottom: 3.5rem; }
   .signin--buttons {
-    margin-bottom: 15px;
-    margin-left: 10px; }
+    margin-bottom: 1.5rem;
+    margin-left: 1rem; }
     .signin--buttons__facebook {
-      font-size: 12px;
+      font-size: 1.2rem;
       background-color: #435c94;
       color: white;
-      height: 35px;
-      width: 100px;
-      margin-right: 15px;
-      border-radius: 5px; }
+      height: 3.5rem;
+      width: 10rem;
+      margin-right: 1.5rem;
+      border-radius: .5rem; }
     .signin--buttons__google {
-      height: 35px;
-      width: 100px;
+      height: 3.5rem;
+      width: 10rem;
       background-color: white;
       color: #8b8b8b;
-      height: 35px;
-      width: 100px;
-      margin-right: 15px;
-      border-radius: 5px; }
+      height: 3.5rem;
+      width: 10rem;
+      margin-right: 1.5rem;
+      border-radius: .5rem; }
       .signin--buttons__google--logo {
         padding: none;
-        height: 13px;
+        height: 1.3rem;
         align-self: auto;
-        margin-right: 5px; }
-  .signin--signin {
-    font-size: 12px; }
-    .signin--signin__username {
-      padding: 5px;
-      height: 20px;
-      width: 200px;
-      border-radius: 5px;
-      margin-bottom: 5px;
-      border: 0.5px solid #dfdfdf; }
-    .signin--signin__password {
-      padding: 5px;
-      height: 20px;
-      width: 200px;
-      border-radius: 5px;
-      margin-bottom: 5px;
-      border: 0.5px solid #dfdfdf; }
-    .signin--signin__button {
-      padding: 5px;
-      height: 30px;
-      width: 100%;
-      background-color: black;
-      color: white;
-      font-size: 10px;
-      border-radius: 5px; }
-  .signin--notmember {
-    font-size: 10px;
-    margin-top: 20px; }
-
-.fa-facebook-square {
-  font-size: 15px;
-  margin-right: 5px; }
-
-.signin {
-  font-family: 'Lato',sans-serif;
-  width: 1200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: solid white;
-  background-color: #ebebeb;
-  border: 1px solid white;
-  color: black; }
-  .signin--box {
-    background-color: #ffffff;
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
-    align-items: center;
-    width: 400px;
-    height: 500px;
-    border: 0.5px solid #d1d1d1; }
-  .signin--buttons {
-    margin-bottom: 15px;
-    margin-left: 10px; }
-    .signin--buttons__facebook {
-      font-size: 12px;
-      background-color: #435c94;
-      color: white;
-      height: 35px;
-      width: 100px;
-      margin-right: 15px;
-      border-radius: 5px; }
-    .signin--buttons__google {
-      height: 35px;
-      width: 100px;
-      background-color: white;
-      color: #8b8b8b;
-      height: 35px;
-      width: 100px;
-      margin-right: 15px;
-      border-radius: 5px; }
-      .signin--buttons__google--logo {
-        padding: none;
-        height: 13px;
-        align-self: auto;
-        margin-right: 5px; }
+        margin-right: .5rem; }
   .signin--orsign {
-    font-size: 12px;
-    margin-bottom: 20px; }
+    font-size: 1.2rem;
+    margin-bottom: 2rem; }
   .signin--signin {
-    font-size: 12px;
-    margin-bottom: 20px; }
+    font-size: 1.2rem; }
     .signin--signin__username {
-      padding: 5px;
-      height: 20px;
-      width: 200px;
-      border-radius: 5px;
-      margin-bottom: 5px;
-      border: 0.5px solid #dfdfdf; }
+      padding: .5rem;
+      height: 2rem;
+      width: 20rem;
+      border-radius: .5rem;
+      margin-bottom: .5rem;
+      border: 0.1rem solid #dfdfdf; }
     .signin--signin__password {
-      padding: 5px;
-      height: 20px;
-      width: 200px;
-      border-radius: 5px;
-      margin-bottom: 5px;
-      border: 0.5px solid #dfdfdf; }
+      padding: .5rem;
+      height: 2rem;
+      width: 20rem;
+      border-radius: .5rem;
+      margin-bottom: .5rem;
+      border: 0.1rem solid #dfdfdf; }
     .signin--signin__button {
-      padding: 5px;
-      height: 30px;
+      padding: .5rem;
+      height: 3rem;
       width: 100%;
       background-color: black;
       color: white;
-      font-size: 10px;
-      border-radius: 5px; }
+      font-size: 1rem;
+      border-radius: .5rem; }
   .signin--notmember {
-    font-size: 10px;
-    margin-top: 20px; }
+    font-size: 1rem;
+    margin-top: 2rem; }
 
 .fa-facebook-square {
-  font-size: 15px;
-  margin-right: 5px; }
+  font-size: 1.5rem;
+  margin-right: .5rem; }
 
 .CreateNote {
-  margin: 30px 40px;
-  font-size: 14px; }
+  margin: 3rem 4rem;
+  font-size: 1.4rem; }
   .CreateNote--title {
-    font-size: 30px;
+    font-size: 3rem;
     color: rgba(1, 1, 1, 0.7); }
   .CreateNote__Submit {
     color: white;
-    height: 30px;
-    width: 150px;
+    height: 3rem;
+    width: 15rem;
     background-color: #2bc1c4; }
   .CreateNote--TitleInput {
-    height: 30px;
-    width: 400px;
-    margin-bottom: 20px;
-    padding: 7px; }
+    height: 3rem;
+    width: 40rem;
+    margin-bottom: 2rem;
+    padding: .7rem; }
   .CreateNote--BodyInput {
-    width: 600px;
-    height: 400px;
-    padding: 12px;
+    width: 60rem;
+    height: 40rem;
+    padding: 1.2rem;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-bottom: 16px;
+    border-radius: .4rem;
+    margin-bottom: 1.6rem;
     resize: vertical; }
 
 .SideBar {
   background-color: #242424;
   white-space: nowrap;
-  position: relative; }
+  position: relative;
+  padding-right: 1.5rem; }
   .SideBar__title {
     color: #11754f;
     color: white;
-    margin-left: 10px;
-    margin-bottom: 50px;
-    font-size: 50px;
-    padding-right: 30px; }
+    margin-left: 1rem;
+    margin-bottom: 5rem;
+    font-size: 5rem;
+    padding-right: 3rem; }
   .SideBar__button {
     font-weight: 300;
-    font: normal 10px;
+    font: normal 1rem;
     font-family: 'Times New Roman', Times, serif, sans-serif 50px;
     width: 100%;
-    margin: 10px 0;
-    font-size: 20px;
-    line-height: 3px;
+    margin: 1rem 0;
+    font-size: 2rem;
+    line-height: .3rem;
     cursor: pointer;
     color: #daffe0;
     background-color: #242424;
-    height: 30px;
-    padding: 20px 10px 20px 40px;
+    height: 3rem;
+    padding: 2rem 1rem 2rem 4rem;
     box-shadow: none;
     outline: none;
     border: none; }
     .SideBar__button:hover {
       color: #e0fffe;
-      font-size: 22px; }
+      font-size: 2.2rem; }
 
 .SetIc {
   position: relative;
-  color: #daffe0; }
+  color: #daffe0;
+  font-size: 1.5rem; }
   .SetIc:hover {
     color: #e0fffe;
-    font-size: 20px; }
+    font-size: 2rem; }
 
 .fa-sticky-note {
   position: absolute;
@@ -312,10 +240,11 @@
   color: inherit; }
 
 .NoteView {
+  font-size: 1.6rem;
   display: flex;
   flex-flow: column nowrap;
   width: 100%;
-  margin: 20px;
+  margin: 4rem;
   white-space: wrap;
   overflow: hidden;
   text-overflow: clip;
@@ -333,7 +262,7 @@
   cursor: pointer;
   text-decoration: underline;
   color: rgba(0, 0, 0, 0.8);
-  margin-right: 15px; }
+  margin-right: 1.5rem; }
 
 .SectionBody {
   margin-right: 20%; }
@@ -350,21 +279,22 @@
   height: 100%; }
 
 .DeleteModal-Box {
+  font-size: 1.3rem;
   text-align: center;
   background: white;
   border: 2px solid black;
-  height: 150px;
-  padding: 10px; }
+  height: 13rem;
+  padding: 1rem; }
 
 .DeleteModal-Box-Delete {
   background: #d0021b;
   border: 1px solid rgba(0, 0, 0, 0.5);
-  margin: 6px;
-  padding: 10px 20px 10px 20px;
-  font-size: 20px;
+  margin: .6rem;
+  padding: 1rem 2rem 1rem 2rem;
+  font-size: 2rem;
   text-align: center;
-  width: 250px;
-  height: 45px;
+  width: 25rem;
+  height: 4.5rem;
   cursor: pointer;
   font-family: 'Roboto', sans-serif; }
 
@@ -375,12 +305,12 @@
   color: white;
   background-color: #2bc1c4;
   border: 1px solid rgba(0, 0, 0, 0.5);
-  margin: 6px;
-  padding: 10px 20px 10px 20px;
-  font-size: 20px;
+  margin: .6rem;
+  padding: 1rem 2rem 1rem 2rem;
+  font-size: 2rem;
   text-align: center;
-  width: 250px;
-  height: 45px;
+  width: 25rem;
+  height: 4.5rem;
   cursor: pointer;
   font-family: 'Roboto', sans-serif; }
 
@@ -390,14 +320,15 @@ body {
   font-family: 'Roboto',sans-serif;
   background-color: #333333; }
 
+html {
+  font-size: 62.5%; }
+
 .App {
   display: flex;
   flex-flow: row nowrap;
   background-color: #ffffff;
   width: 1200px;
   margin: 8rem auto;
-  border: 1px solid rgba(0, 0, 0, 0.5);
-  /* height: 100%; */
   min-height: 1200px; }
 
 button {
