@@ -42,10 +42,10 @@ const userLogin = (req, res) => {
       .then((response) => {
         if (!response) throw new Error();
         req.session.username = username;
-        req.user = user;
+        req.session.user = user._id;
       })
       .then(() => {
-        res.json({ success: true, user, userId: user._id });
+        res.json({ success: true, session: req.session, userId: user._id });
       })
       .catch((error) => {
         return sendUserError('User does not exist at that id ', res);

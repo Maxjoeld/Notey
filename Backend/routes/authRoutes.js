@@ -4,7 +4,6 @@ const oAuth = require('../models/oAuth');
 // authenticate is a reserved word
 module.exports = (app) => {
   
-  
   app.get('/auth/google',
     passport.authenticate('google', {
       scope: ['profile', 'email'],
@@ -29,7 +28,7 @@ module.exports = (app) => {
         oAuth.create(newUser)
         .then(user => {
           req.session.username = oauthUser;
-          req.session.user = user;
+          req.session.user = user._id;
           // res.status(201).json({success: "User saved successfully", session: req.session, userId: user._id })
           res.redirect('http://localhost:3000/')
         })

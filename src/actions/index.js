@@ -3,6 +3,7 @@ import axios from 'axios';
 export const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
 export const GET_NOTES = 'GET_NOTES';
 export const DEAUTH = 'DEAUTH';
+export const ISAUTH = 'ISAUTH';
 export const SORT_NOTES = 'SORT_NOTES';
 export const SORT_DATA = 'SORT_DATA';
 export const NOTE_IDX = 'NOTE_IDX';
@@ -42,6 +43,7 @@ export const logoutUser = (history) => {
     try {
       await axios.post('notes/logout');
       dispatch(deAuth());
+      dispatch({ type: 'ISAUTH' });
       await sessionStorage.removeItem('id');
       await history.push('/login');
     } catch (err) {
@@ -49,11 +51,13 @@ export const logoutUser = (history) => {
     }
   };
 };
+
+
 export const loginGoogle = (username, password, history) => {
   return async dispatch => {
     try {
       const res = await axios.get('/auth/google');
-      sessionStorage.setItem('id', res.data.userId);
+      sessionStorage.setItem('id', res.session.userId);
       await history.push('/');
       await dispatch(getNotes());
     } catch (error) {
@@ -67,6 +71,7 @@ export const loginUser = (username, password, history) => {
     try {
       const res = await axios.post('/notes/login', { username, password });
       sessionStorage.setItem('id', res.data.userId);
+      dispatch({ type: 'ISAUTH' });
       await history.push('/');
       await dispatch(getNotes());
     } catch (error) {

@@ -1,6 +1,10 @@
 .signin {
-  background-size: cover;
+  // background-size: cover;
+  box-shadow: none;
   width: 120rem;
+  &--image {
+    width: 65%;
+  }
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,8 +20,8 @@
     justify-content: center;
     align-items: center;
     width: 40rem;
-    height: 50rem;
-    box-shadow: 16px 17px 10px -10px rgba(0, 0, 0, 0.157);
+    height: 52rem;
+    // box-shadow: 20px 20px 20px -10px rgba(0, 0, 0, 0.4);
     position: relative;
 
   }
@@ -28,7 +32,9 @@
   &--buttons {
     margin-bottom: 1.5rem;
     margin-left: 1rem;
+
     &__facebook {
+      border: none;
       // padding: 10px;
       font-size: 1.2rem;
       background-color: #435c94;
@@ -39,14 +45,14 @@
       border-radius: .5rem;
     }
     &__google {
-      height: 3.5rem;
-      width: 10rem;
+      border: 1px solid rgb(219, 219, 219);
       background-color: white;
       color: rgb(139, 139, 139);
-      height: 3.5rem;
+      height: 3.8rem;
       width: 10rem;
       margin-right: 1.5rem;
       border-radius: .5rem;
+
       &--logo {
         padding: none;
         height: 1.3rem;
@@ -94,7 +100,7 @@
       color: white;
       font-size: 1rem;
       border-radius: .5rem;
-      
+      border: 0.5px black;
     }
   }
   &--notmember {

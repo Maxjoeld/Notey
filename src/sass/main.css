@@ -67,7 +67,7 @@
   color: black; }
 
 .signin {
-  background-size: cover;
+  box-shadow: none;
   width: 120rem;
   display: flex;
   justify-content: center;
@@ -77,6 +77,8 @@
   background-color: #ffffff;
   border: 1px solid white;
   color: black; }
+  .signin--image {
+    width: 65%; }
   .signin--box {
     background-color: white;
     display: flex;
@@ -84,8 +86,7 @@
     justify-content: center;
     align-items: center;
     width: 40rem;
-    height: 50rem;
-    box-shadow: 16px 17px 10px -10px rgba(0, 0, 0, 0.157);
+    height: 52rem;
     position: relative; }
   .signin--header {
     margin-bottom: 3.5rem; }
@@ -93,6 +94,7 @@
     margin-bottom: 1.5rem;
     margin-left: 1rem; }
     .signin--buttons__facebook {
+      border: none;
       font-size: 1.2rem;
       background-color: #435c94;
       color: white;
@@ -101,11 +103,10 @@
       margin-right: 1.5rem;
       border-radius: .5rem; }
     .signin--buttons__google {
-      height: 3.5rem;
-      width: 10rem;
+      border: 1px solid #dbdbdb;
       background-color: white;
       color: #8b8b8b;
-      height: 3.5rem;
+      height: 3.8rem;
       width: 10rem;
       margin-right: 1.5rem;
       border-radius: .5rem; }
@@ -140,7 +141,8 @@
       background-color: black;
       color: white;
       font-size: 1rem;
-      border-radius: .5rem; }
+      border-radius: .5rem;
+      border: 0.5px black; }
   .signin--notmember {
     font-size: 1rem;
     margin-top: 2rem; }
@@ -344,11 +346,20 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Montserrat',sans-serif;
-  background: -webkit-linear-gradient(45deg, white 0%, #e5e5e5 100%);
-  background-size: fill; }
+  background-color: linear-gradient(to bottom, white 0%, rgba(255, 255, 255, 0) 100%);
+  background-size: cover; }
+
+.newApp {
+  box-shadow: none;
+  color: pink; }
 
 html {
+  box-sizing: border-box;
   font-size: 62.5%; }
+
+*.signin-page {
+  background: linear-gradient(45deg, #fff1ef, white);
+  box-shadow: none; }
 
 .App {
   display: flex;

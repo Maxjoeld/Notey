@@ -19,7 +19,7 @@ app.use(cors(corsOptions));
 app.use(session({
   secret: keys.seshSecret,
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   username: '',
 }));
 

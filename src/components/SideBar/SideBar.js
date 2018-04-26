@@ -23,30 +23,30 @@ class SideBar extends Component {
           <br />
         </h1>
         <div className="list">
-        <div className="sidebar--users">
-          <p>Maximo Delarosa</p>
-          <p>Welcome md809@gmail.com</p>
-        </div>
-        <div className="sidebar--chat">
-          <p>MailBox</p>
-          <p>Conversations</p>
-        </div>
-        <Link exact to="/">
-          <div className="sidebar--links">
-            <FontAwesome name="fas fa-sticky-note" />
-            <button className="sidebar--links__link">View Your Notes</button>
+          <div className="sidebar--users">
+            <p>Maximo Delarosa</p>
+            <p>Welcome md809@gmail.com</p>
           </div>
-        </Link>
-        <NavLink to="/create">
-          <div className="sidebar--links">
-            <FontAwesome name="fas fa-plus" />
-            <button className="sidebar--links__link">Create New Note</button>
+          <div className="sidebar--chat">
+            <p>MailBox</p>
+            <p>Conversations</p>
           </div>
-        </NavLink>
-        <div className="sidebar--links" onClick={e => this.logoutUser(e)}>
-          <FontAwesome name="fas fa-sign-out-alt" />
-          <button className="sidebar--links__link">Sign out</button>
-        </div>
+          <Link exact to="/">
+            <div className="sidebar--links">
+              <FontAwesome name="fas fa-sticky-note" />
+              <button className="sidebar--links__link">View Your Notes</button>
+            </div>
+          </Link>
+          <NavLink to="/create">
+            <div className="sidebar--links">
+              <FontAwesome name="fas fa-plus" />
+              <button className="sidebar--links__link">Create New Note</button>
+            </div>
+          </NavLink>
+          <div className="sidebar--links" onClick={e => this.logoutUser(e)}>
+            <FontAwesome name="fas fa-sign-out-alt" />
+            <button className="sidebar--links__link">Sign out</button>
+          </div>
         </div>
       </div>
     );

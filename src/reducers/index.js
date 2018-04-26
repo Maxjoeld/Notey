@@ -9,6 +9,7 @@ import {
   SORT_FALSE,
   ARRAY_MOVE,
   SET_ID,
+  ISAUTH,
 } from '../actions';
 
 const initialState = {
@@ -20,6 +21,8 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ISAUTH:
+      return { ...state, isAuthenticated: !state.isAuthenticated };
     case GET_NOTES:
       return { ...state, notes: action.payload };
     case DEAUTH:
