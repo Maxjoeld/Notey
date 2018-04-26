@@ -6,8 +6,6 @@ import { connect } from 'react-redux';
 import { updateSortedNotes, handleIdx, onSortEnd, sortData, getNotes } from '../../../actions';
 import Note from './Note';
 
-// import './Notes.scss';
-
 class NoteList extends Component {
   state = {
     search: '',

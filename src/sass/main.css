@@ -69,24 +69,27 @@
 .signin {
   box-shadow: none;
   width: 120rem;
+  height: 80rem;
   display: flex;
   justify-content: center;
   align-items: center;
   border: solid white;
-  background-color: white;
   background-color: #ffffff;
-  border: 1px solid white;
-  color: black; }
+  border: 1px solid white; }
   .signin--image {
-    width: 65%; }
+    max-width: 80rem;
+    max-height: 80rem;
+    clip: rect(0px, 60px, 500px, 0px); }
   .signin--box {
-    background-color: white;
+    margin-left: 5rem;
+    background-color: #ffffff;
     display: flex;
     flex-flow: column;
     justify-content: center;
     align-items: center;
     width: 40rem;
     height: 52rem;
+    box-shadow: 5px 10px 15px 0px rgba(0, 0, 0, 0.294);
     position: relative; }
   .signin--header {
     margin-bottom: 3.5rem; }
@@ -346,20 +349,24 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Montserrat',sans-serif;
-  background-color: linear-gradient(to bottom, white 0%, rgba(255, 255, 255, 0) 100%);
-  background-size: cover; }
+  background-color: white;
+  background-size: cover;
+  height: 50rem; }
 
 .newApp {
-  box-shadow: none;
-  color: pink; }
+  box-shadow: none; }
 
 html {
   box-sizing: border-box;
   font-size: 62.5%; }
 
-*.signin-page {
-  background: linear-gradient(45deg, #fff1ef, white);
-  box-shadow: none; }
+.signin-page {
+  display: flex;
+  margin: 50% auto;
+  justify-content: center;
+  align-items: center;
+  width: 120rem;
+  box-shadow: 0px 7px 10px 0px rgba(0, 0, 0, 0.459); }
 
 .App {
   display: flex;
@@ -369,7 +376,8 @@ html {
   box-shadow: 0px 7px 10px 0px rgba(0, 0, 0, 0.459);
   width: 120rem;
   margin: 8rem auto;
-  min-height: 120rem; }
+  min-height: 120rem;
+  position: relative; }
 
 button {
   cursor: pointer; }

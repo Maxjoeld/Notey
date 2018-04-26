@@ -15,14 +15,7 @@ class SignIn extends Component {
     username: '',
     password: '',
   };
-  componentWillMount() {
-    // document.body.style.backgroundColor = 'red'; // Set the style
-    document.body.className = 'signin-page'; // Or set the class
-    
-  }
-  componentWillUnmount() {
-    document.body.className = '';
-  }
+
 
   loginUser = e => {
     e.preventDefault();

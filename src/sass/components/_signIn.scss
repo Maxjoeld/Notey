@@ -2,26 +2,29 @@
   // background-size: cover;
   box-shadow: none;
   width: 120rem;
-  &--image {
-    width: 65%;
-  }
+  height: 80rem;
   display: flex;
   justify-content: center;
   align-items: center;
   border: solid white;
-  background-color: rgb(255, 255, 255);
   background-color: #ffffff;
   border: 1px solid white;
-  color: black;
+  
+  &--image {
+    max-width: 80rem;
+    max-height: 80rem;
+    clip: rect(0px,60px,500px,0px);
+  }
   &--box {
-    background-color: rgb(255, 255, 255);
+    margin-left: 5rem;
+    background-color: #ffffff;
     display: flex;
     flex-flow: column;
     justify-content: center;
     align-items: center;
     width: 40rem;
     height: 52rem;
-    // box-shadow: 20px 20px 20px -10px rgba(0, 0, 0, 0.4);
+    box-shadow: 5px 10px 15px 0px rgba(0, 0, 0, 0.294);
     position: relative;
 
   }
