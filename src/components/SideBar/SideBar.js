@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { NavLink, Link, withRouter } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
 import { connect } from 'react-redux';
-import { deAuth, logoutUser } from '../../store/actions';
+import { deAuth, logoutUser } from '../../actions';
 // import './SideBar.css';
+
+const styles = {
+  color: 'rgb(224, 255, 254)',
+};
 
 class SideBar extends Component {
   logoutUser = async e => {
@@ -13,26 +17,36 @@ class SideBar extends Component {
 
   render() {
     return (
-      <div className="SideBar">
-        <h1 className="SideBar__title">
+      <div className="sidebar">
+        <h1 className="sidebar__title">
           Notey <FontAwesome name="fas fa-book" />
           <br />
         </h1>
-        <Link to="/">
-          <div className="SetIc">
+        <div className="list">
+        <div className="sidebar--users">
+          <p>Maximo Delarosa</p>
+          <p>Welcome md809@gmail.com</p>
+        </div>
+        <div className="sidebar--chat">
+          <p>MailBox</p>
+          <p>Conversations</p>
+        </div>
+        <Link exact to="/">
+          <div className="sidebar--links">
             <FontAwesome name="fas fa-sticky-note" />
-            <button className="SideBar__link">View Your Notes</button>
+            <button className="sidebar--links__link">View Your Notes</button>
           </div>
         </Link>
-        <Link to="/create">
-          <div className="SetIc">
+        <NavLink to="/create">
+          <div className="sidebar--links">
             <FontAwesome name="fas fa-plus" />
-            <button className="SideBar__link">Create New Note</button>
+            <button className="sidebar--links__link">Create New Note</button>
           </div>
-        </Link>
-        <div className="SetIc" onClick={e => this.logoutUser(e)}>
+        </NavLink>
+        <div className="sidebar--links" onClick={e => this.logoutUser(e)}>
           <FontAwesome name="fas fa-sign-out-alt" />
-          <button className="SideBar__link">Sign out</button>
+          <button className="sidebar--links__link">Sign out</button>
+        </div>
         </div>
       </div>
     );

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 
-import { loginUser, loginGoogle } from '../../../store/actions';
+import { loginUser, loginGoogle } from '../../../actions';
 import logo from '../google.png';
 import backgroundImage from '../background.jpg';
 

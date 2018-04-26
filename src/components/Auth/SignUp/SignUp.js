@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { saveUser } from '../../../store/actions';
+import { saveUser } from '../../../actions';
 
 import logo from '../google.png';
 import backgroundImage from '../background.jpg';
