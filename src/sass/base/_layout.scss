@@ -19,7 +19,13 @@ button {
 
 a {
   text-decoration: none;
+  color: rgb(129, 129, 129);
 }
+
+.active {
+  color: rgb(96, 165, 255);
+}
+
 
 .App {
   display: flex;

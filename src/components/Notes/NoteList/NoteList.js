@@ -26,7 +26,6 @@ class NoteList extends Component {
   };
 
   render() {
-    // console.log({"notes":this.state.notes});
     const filteredNotes = this.props.notes.filter(note => {
       return note.title.toLowerCase().includes(this.state.search.toLowerCase());
     });
@@ -52,22 +51,21 @@ class NoteList extends Component {
 
     return (
       <div className="NotesView">
-        <div className="NotesView--header">
-          <h2 className="NotesView__empty">Your Notes: </h2>
+        <div className="Nav">
           <input
             type="text"
             placeholder="SearchEngine"
-            className="NotesView__search"
+            className="Nav--search"
             value={this.state.search}
             onChange={this.updateSearch}
           />
           {/* eslint-disable */}
           {this.props.sortedNotes ? (
-            <h1 className="NotesView__sort" onClick={() => this.props.sortData(this.props.notes)}>
+            <h1 className="Nav--sort" onClick={() => this.props.sortData(this.props.notes)}>
               Sort: Regular
             </h1>
           ) : (
-            <h1 className="NotesView__sort" onClick={() => this.props.sortData(this.props.notes)}>
+            <h1 className="Nav--sort" onClick={() => this.props.sortData(this.props.notes)}>
               Sort: Sorted Alphabetically
             </h1>
           )}

@@ -30,9 +30,9 @@ const App = (props) => {
   return (
     <Router>
         <div className='App' >
-          <Route className="App-sign"exact path="/login" component={Login} />
+          <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
-          <PrivateRoute exact component={SideBar} />
+          <PrivateRoute component={SideBar} />
           <PrivateRoute exact path="/" component={NoteList} />
           <PrivateRoute exact path="/create" component={CreateNote} />
           <PrivateRoute exact path="/view" component={ViewNote} />

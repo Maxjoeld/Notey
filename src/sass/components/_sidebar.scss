@@ -1,62 +1,46 @@
 .sidebar {
-  background-color: #242424;
   white-space: nowrap;
   position: relative;
-  padding-right: 1.5rem;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &--title {
+    color: rgb(80, 80, 80);
+    margin-left: 4rem;
+    margin-bottom: 5.5rem;
+    font-size: 4rem;
+    padding-right: 3rem;
+  }
   &--users {
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: white;
+    color: rgb(129, 129, 129);
     margin-bottom: 10rem;
   }
-  &--chat{
+  &--chat {
     display: flex;
     flex-direction: column;
     color: white;
     font-size: 1.6rem;
     align-items: center;
-  }
-  &__title {
-    // color: rgb(17, 117, 79);
-    color: white;
-    margin-left: 1rem;
-    margin-bottom: 5rem;
-    font-size: 5rem;
-    padding-right: 3rem;
+    & p {
+      :hover {
+        color: rgb(247, 164, 86);
+      }
+    }
   }
 }
 
-/////////////////////////////////////////////
-// ICONS
-/////////////////////////////////////////////
-
-.fa {
-  &-sticky-note {
-    position: absolute;
-    top: 38%;
-    left: 9%;
-    color: inherit;
-  }
-  &-plus {
-    position: absolute;
-    top: 38%;
-    left: 9%;
-    color: inherit;
-  }
-  &-bookmark {
-    position: absolute;
-    top: 4%;
-    left: 65%;
-    font-size: 50px;
-    color: inherit;
-  }
-  &-sign-out-alt {
-    position: absolute;
-    top: 25%;
-    left: 10%;
-    font-size: 25px;
-    color: inherit;
-  }
+.fa-fw {
+  padding-right: 0.5rem;
 }
+
+.NicoPic {
+  padding: 1rem;
+  max-width: 7rem;
+  max-height: 7rem;
+  border-radius: 20%;
+  border: .05rem solid rgb(190, 190, 190);
+}
+
