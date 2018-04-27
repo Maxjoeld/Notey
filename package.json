@@ -5,7 +5,8 @@
   "proxy": {
     "/notes": {
       "target": "http://localhost:5000"
-    },"/auth": {
+    },
+    "/auth": {
       "target": "http://localhost:5000"
     }
   },
@@ -31,6 +32,7 @@
     "redux": "^4.0.0",
     "redux-thunk": "^2.2.0",
     "run-all": "^1.0.1",
+    "styled-components": "^3.2.6",
     "yarn-recursive": "^1.0.5"
   },
   "scripts": {

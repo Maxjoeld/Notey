@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
+import { injectGlobal } from 'styled-components';
 
 import { loginUser, loginGoogle } from '../../../actions';
 import logo from '../google.png';
@@ -34,6 +35,7 @@ class SignIn extends Component {
   };
   render() {
     return (
+      <div className=".App-sign">
       <div className="signin">
         <img src={backgroundImage} alt="bg" className="signin--image" />
         <div className="signin--box">
@@ -81,6 +83,7 @@ class SignIn extends Component {
             Not a member? <Link to="/signup"> Sign up </Link>
           </p>
         </div>
+      </div>
       </div>
     );
   }
