@@ -3,9 +3,10 @@ const cors = require('cors');
 const passport = require('passport');
 const keys = require('./config');
 const routes = require('./routes/index');
-// const cookieSession = require('cookie-session');
+const passportRoutes = require('./routes/authRoutes');
 const session = require('express-session');
 require('./services/passport');
+
 
 const corsOptions = {
   origin: 'http://localhost:3000',
@@ -15,42 +16,30 @@ const app = express();
 
 app.use(express.json());
 app.use(cors(corsOptions));
-
 app.use(session({
   secret: keys.seshSecret,
   resave: false,
   saveUninitialized: false,
   username: '',
 }));
-
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.use(function(req, res, next) {
-//   res.header('Access-Control-Allow-Origin', "http://localhost:3000");
-//   res.header('Access-Control-Allow-Methods','GET');
-//   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-//   next();
-// })
-
-app.use(function(req, res, next) {
+app.use(function(req,res,next){
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
-});
+})
 
-app.get('/me', (req, res) => {
-  // Do NOT modify this route handler in any way
-  res.send({ user: req.user, session: req.session });
-});
-
-// Two ways of running the routes through the server
-// below you can just pass the required route and append the server to it
-// which will call it immediately--line 26 and 28 are the same
-require('./routes/authRoutes')(app); // This is for the Oauth sign ins
-
-routes(app); // this is for the basic auth && notes routes
+passportRoutes(app);
+routes(app); 
 
 module.exports = {
   app,
 };
+
+
+// app.get('/me', (req, res) => {
+//   // Do NOT modify this route handler in any way
+//   res.send({ user: req.user, session: req.session });
+// });

@@ -3,7 +3,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
 import { connect } from 'react-redux';
 import { deAuth, logoutUser } from '../../actions';
-import Nico from './Nico.png';
+import Nico from './Nico.jpg';
 
 class SideBar extends Component {
   logoutUser = async e => {
@@ -21,7 +21,9 @@ class SideBar extends Component {
         <div className="sidebar--chat">
           <div className="sidebar--users">
             <p>Welcome</p>
-            <img src={Nico} alt="NicoImage" className="NicoPic" />
+            <div className="Nico--cropper">
+              <img src={Nico} alt="NicoImage" className="NicoPic" />
+            </div>
             <p>md809@gmail.com</p>
           </div>
           {/* We can also add activeClassName to make our own classes instead of default .active */}

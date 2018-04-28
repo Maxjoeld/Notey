@@ -38,10 +38,19 @@
 }
 
 .NicoPic {
-  padding: 1rem;
-  max-width: 7rem;
-  max-height: 7rem;
-  border-radius: 20%;
-  border: .05rem solid rgb(190, 190, 190);
+  display: inline;
+  height: 100%;
+  position: relative;
 }
 
+.Nico--cropper {
+  display: flex;
+  border: 5px solid rgb(255, 255, 255);
+  box-shadow: 0px 0px 0px 5px rgb(211, 211, 211);
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 50%;
+  position: relative;
+}
