@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -7,8 +7,11 @@ import NoteList from './components/Notes/NoteList/NoteList';
 import CreateNote from './components/Notes/CreateNote/CreateNote';
 import ViewNote from './components/Notes/ViewNote/ViewNote';
 import EditNote from './components/Notes/EditNote/EditNote';
-import SignUp from './components/Auth/SignUp/SignUp';
+
 import Login from './components/Auth/SignIn/SignIn';
+import SignUp from './components/Auth/SignUp/SignUp';
+
+import Convo from './components/Chat/Convo';
 
 const App = (props) => {
   const PrivateRoute = ({ component: Comp, ...rest }) => (
@@ -29,15 +32,16 @@ const App = (props) => {
   );
   return (
     <Router>
-        <div className='App' >
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={SignUp} />
-          <PrivateRoute component={SideBar} />
-          <PrivateRoute exact path="/" component={NoteList} />
-          <PrivateRoute exact path="/create" component={CreateNote} />
-          <PrivateRoute exact path="/view" component={ViewNote} />
-          <PrivateRoute exact path="/edit" component={EditNote} />
-        </div>
+      <div className='App' >
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={SignUp} />
+        {/* <PrivateRoute component={SideBar} /> */}
+        <PrivateRoute exact path="/" component={NoteList} />
+        <PrivateRoute exact path="/create" component={CreateNote} />
+        <PrivateRoute exact path="/view" component={ViewNote} />
+        <PrivateRoute exact path="/edit" component={EditNote} />
+        <PrivateRoute exact path="/convo" component={Convo} />
+      </div>
     </Router>
   );
 };

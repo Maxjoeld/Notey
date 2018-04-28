@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { editNote } from '../../../actions';
-
-// import '../CreateNote/CreateNote';
+import SideBar from '../../SideBar/SideBar';
 
 class EditNote extends Component {
   state = {
@@ -25,14 +24,14 @@ class EditNote extends Component {
     this.setState({ [name]: value });
   };
 
-  handleSubmit = async (e) => {
-      e.preventDefault();
-      const { _id, title, content } = this.state;
+  handleSubmit = async e => {
+    e.preventDefault();
+    const { _id, title, content } = this.state;
     try {
-      await this.props.editNote({ _id ,title, content }, _id);
+      await this.props.editNote({ _id, title, content }, _id);
       await this.setState({ _id: '', title: '', content: '' });
       await this.props.history.push('/view');
-    } catch(err) {
+    } catch (err) {
       console.log('error');
     }
   };
@@ -40,40 +39,43 @@ class EditNote extends Component {
   render() {
     const { title, content } = this.state;
     return (
-      <div className='CreateNote'>
-        <form className='CreateNote__Form'>
-          <h1 className='CreateNote--title'>Update Note:</h1>
-          <input
-            className='CreateNote--TitleInput'
-            value={title}
-            placeholder="Note Title"
-            name="title"
-            type='text'
-            onChange={this.handleInputChange}
-            maxLength='32'
-            required
-          />
-          <br />
-          <textarea
-            className='CreateNote--BodyInput'
-            placeholder="Note Content"
-            name="content"
-            type='text'
-            value={content}
-            cols="100"
-            rows="40"
-            onChange={this.handleInputChange}
-            required
-          />
-          <br />
+      <div className="Master">
+        <SideBar />
+        <div className="CreateNote">
+          <form className="CreateNote__Form">
+            <h1 className="CreateNote--title">Update Note:</h1>
+            <input
+              className="CreateNote--TitleInput"
+              value={title}
+              placeholder="Note Title"
+              name="title"
+              type="text"
+              onChange={this.handleInputChange}
+              maxLength="32"
+              required
+            />
+            <br />
+            <textarea
+              className="CreateNote--BodyInput"
+              placeholder="Note Content"
+              name="content"
+              type="text"
+              value={content}
+              cols="100"
+              rows="40"
+              onChange={this.handleInputChange}
+              required
+            />
+            <br />
             <button
-              onClick={(e) => this.handleSubmit(e)}
+              onClick={e => this.handleSubmit(e)}
               className="CreateNote__Submit"
               type="submit"
             >
               Update
             </button>
-        </form>
+          </form>
+        </div>
       </div>
     );
   }

@@ -5,6 +5,7 @@ import { CSVLink } from 'react-csv';
 import { connect } from 'react-redux';
 import { updateSortedNotes, handleIdx, onSortEnd, sortData, getNotes } from '../../../actions';
 import Note from './Note';
+import SideBar from '../../SideBar/SideBar';
 
 class NoteList extends Component {
   state = {
@@ -50,45 +51,48 @@ class NoteList extends Component {
     });
 
     return (
-      <div className="NotesView">
-        <div className="Nav">
-          <input
-            type="text"
-            placeholder="SearchEngine"
-            className="Nav--search"
-            value={this.state.search}
-            onChange={this.updateSearch}
+      <div className="Master">
+        <SideBar />
+        <div className="NotesView">
+          <div className="Nav">
+            <input
+              type="text"
+              placeholder="SearchEngine"
+              className="Nav--search"
+              value={this.state.search}
+              onChange={this.updateSearch}
+            />
+            {/* eslint-disable */}
+            {this.props.sortedNotes ? (
+              <h1 className="Nav--sort" onClick={() => this.props.sortData(this.props.notes)}>
+                Sort: Regular
+              </h1>
+            ) : (
+              <h1 className="Nav--sort" onClick={() => this.props.sortData(this.props.notes)}>
+                Sort: Sorted Alphabetically
+              </h1>
+            )}
+            {/* eslint-enable */}
+          </div>
+          {this.state.emptyNotes ? (
+            <h3>
+              It looks like you don’t have any notes yet, click ’Create New Note’ to get started!
+            </h3>
+          ) : null}
+          <SortableList
+            pressDelay={150}
+            lockToContainerEdges
+            axis="xy"
+            notes={this.props.notes}
+            onSortEnd={this.onSortEnd}
+            handleNoteIndex={this.props.handleIdx}
           />
-          {/* eslint-disable */}
-          {this.props.sortedNotes ? (
-            <h1 className="Nav--sort" onClick={() => this.props.sortData(this.props.notes)}>
-              Sort: Regular
-            </h1>
-          ) : (
-            <h1 className="Nav--sort" onClick={() => this.props.sortData(this.props.notes)}>
-              Sort: Sorted Alphabetically
-            </h1>
-          )}
-          {/* eslint-enable */}
+          {!this.boolEmptyNotes ? (
+            <CSVLink className="CSV-Link" data={this.props.notes} filename="lambda-notes.csv">
+              Download CSV
+            </CSVLink>
+          ) : null}
         </div>
-        {this.state.emptyNotes ? (
-          <h3>
-            It looks like you don’t have any notes yet, click ’Create New Note’ to get started!
-          </h3>
-        ) : null}
-        <SortableList
-          pressDelay={150}
-          lockToContainerEdges
-          axis="xy"
-          notes={this.props.notes}
-          onSortEnd={this.onSortEnd}
-          handleNoteIndex={this.props.handleIdx}
-        />
-        {!this.boolEmptyNotes ? (
-          <CSVLink className="CSV-Link" data={this.props.notes} filename="lambda-notes.csv">
-            Download CSV
-          </CSVLink>
-        ) : null}
       </div>
     );
   }
@@ -102,5 +106,9 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
-  updateSortedNotes, handleIdx, sortData, onSortEnd, getNotes
+  updateSortedNotes,
+  handleIdx,
+  sortData,
+  onSortEnd,
+  getNotes,
 })(NoteList);

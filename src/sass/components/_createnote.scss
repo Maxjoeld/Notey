@@ -9,17 +9,19 @@
 
   &__Submit {
     color: white;
-    height: 3rem;
-    width: 15rem;
-    background-color: #2bc1c4;
+    height: 4rem;
+    width: 16rem;
+    // background-color: #2bc1c4;
+    background-color: rgb(247, 164, 86);
     margin-bottom: 40rem;
+    border: 0.5px solid rgba(128, 128, 128, 0.301);
+    border-radius: 4px;
   }
   &--TitleInput {
     height: 3rem;
     width: 40rem;
     margin-bottom: 2rem;
     padding: .7rem;
-    // border-radius: 4px;
     
   }
 

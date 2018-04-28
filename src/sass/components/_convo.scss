@@ -1,0 +1,56 @@
+.friendcomp {
+  display: flex;
+  margin:2rem 4%;
+
+  // align-items: flex-end;
+}
+
+.friendslist {
+  // border: 5px solid black;
+  font-size: 1.6rem;
+  // width: 30rem;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: flex-start;
+}
+
+.friendlist--search {
+  margin-top: 7rem;
+  height: 2.5rem;
+  width: 17rem;
+}
+
+.friendlist--contacts {
+
+
+  margin-right: 7rem;
+  margin-bottom: 2rem;
+  width: 20rem;
+  height: 4rem;
+  border: 1px solid black;
+  
+}
+
+.friendChat{
+  margin-left:3rem;
+  display: flex;
+  flex-direction: column;
+  align-content: flex-end;
+}
+
+.friendchat--header {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.friendchat--textbox {
+  width: 56rem;
+  height: 75rem;
+  border: 3px solid rgb(201, 201, 201);
+}
+
+.friendChat--search {
+  height: 7rem;
+  width: 55rem;
+}
