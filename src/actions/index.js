@@ -1,9 +1,10 @@
 import axios from 'axios';
 
 export const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
-export const GET_NOTES = 'GET_NOTES';
 export const DEAUTH = 'DEAUTH';
 export const ISAUTH = 'ISAUTH';
+
+export const GET_NOTES = 'GET_NOTES';
 export const SORT_NOTES = 'SORT_NOTES';
 export const SORT_DATA = 'SORT_DATA';
 export const NOTE_IDX = 'NOTE_IDX';
@@ -11,6 +12,11 @@ export const SORT_FALSE = 'SORT_FALSE';
 export const SORT_TRUE = 'SORT_TRUE';
 export const ARRAY_MOVE = 'ARRAY_MOVE';
 export const SET_ID = 'SET_ID';
+
+export const GET_CONTACTS = 'GET_CONTACTS';
+export const CONTACT_IDX = 'CONTACT_IDX';
+export const CONTACT_USER = 'CONTACT_USER';
+
 
 axios.defaults.withCredentials = true;
 
@@ -142,6 +148,35 @@ export const deleteNote = inputId => {
     } catch (error) {
       console.log({ err: 'There was an error loading your notes :(', error });
     }
+  };
+};
+
+
+/////////////////////////////////////////////////////////////////////
+// CHAT
+/////////////////////////////////////////////////////////////////////
+
+export const getContact = () => {
+  return async dispatch => {
+    try {
+      const res = await axios.get('/notes/chat');
+      await dispatch({ type: GET_CONTACTS, payload: res.data });
+    } catch (error) {
+      console.log({ err: 'There was an error loading your notes :(', error });
+    }
+  };
+};
+
+export const handleContactIdx = inputID => {
+  return (dispatch, getState) => {
+    const state = getState().contacts;
+    state.forEach((contact, i) => {
+      if (contact._id === inputID) {
+        console.log(contact);
+        dispatch({ type: 'CONTACT_IDX', payload: i });
+        dispatch({ type: 'CONTACT_USER', payload: contact });
+      }
+    });
   };
 };
 

@@ -5,6 +5,7 @@ const keys = require('./config');
 const routes = require('./routes/index');
 const passportRoutes = require('./routes/authRoutes');
 const session = require('express-session');
+const User = require('./models/users');
 require('./services/passport');
 
 
@@ -30,6 +31,16 @@ app.use(function(req,res,next){
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 })
+app.get('/notes/chat', (req, res) => {
+  User.find({})
+    .select( 'username')
+    .then(contacts => {
+      res.status(201).json(contacts);
+    })
+    .catch(err => {
+      res.status(400).send({ error: err });
+    });
+});
 
 passportRoutes(app);
 routes(app); 

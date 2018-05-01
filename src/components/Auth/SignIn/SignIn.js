@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import { injectGlobal } from 'styled-components';
 
 import { loginUser, loginGoogle } from '../../../actions';
 import logo from '../google.png';
 import backgroundImage from '../background.jpg';
-
-const styles = {
-  backgroundImage: `url(${backgroundImage})`,
-};
 
 class SignIn extends Component {
   state = {

@@ -29,6 +29,7 @@ class NoteView extends Component {
     this.forceUpdate();
   };
   render() {
+    // console.log(this.props.note[2].title);
     const { _id, title, content } = this.state;
     return (
       <div className="Master">

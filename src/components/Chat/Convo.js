@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import SideBar from '../SideBar/SideBar';
+import { getContact } from '../../actions';
+import Contact from './Contact';
 
 class Convo extends Component {
-  state = {};
+
+  async componentWillMount() {
+    await this.props.getContact();
+  }
 
   render() {
     return (
@@ -12,30 +18,25 @@ class Convo extends Component {
           <div className="friendslist">
             <p> Friends </p>
             <p> 20 Conversations </p>
-            <input
-              type="text"
-              placeholder="Search contacts"
-              className="friendlist--search"
-              value={this.state.search}
-              onChange={this.updateSearch}
-            />
-            <p className="friendlist--contacts" />
-            <p className="friendlist--contacts" />
-            <p className="friendlist--contacts" />
-            <p className="friendlist--contacts" />
-            <p className="friendlist--contacts" />
-            <p className="friendlist--contacts" />
-            <p className="friendlist--contacts" />
-            <p className="friendlist--contacts" />
-            <p className="friendlist--contacts" />
-            <p className="friendlist--contacts" />
-            <p className="friendlist--contacts" />
-            <p className="friendlist--contacts" />
+            <form>
+              <input
+                type="text"
+                placeholder="Search contacts"
+                className="friendlist--search"
+                // value={this.state.search}
+                // onClick={this.props.getContact}
+              />
+            </form>
+            {this.props.contacts.length > 0 ?
+              this.props.contacts.map(contact => {
+              return <Contact key={contact._id} index={contact._id} username={contact.username} />;
+              })
+            : null }
           </div>
           <hr />
           <div className="friendChat">
             <div className="friendchat--header">
-              <p> Namegoes Here </p>
+              <p>{this.props.contact.username}</p>
               <ul style={{ display: 'flex' }}>
                 <li> icon </li>
                 <li> icon </li>
@@ -55,4 +56,14 @@ class Convo extends Component {
   }
 }
 
-export default Convo;
+const mapStateToProps = state => {
+  return {
+    contacts: state.contacts,
+    contact: state.contact,
+  };
+};
+
+export default connect(mapStateToProps, { getContact })(Convo);
+
+// we simply just want to search for the user then onClick display the user
+// in the contactList that is displayed there

@@ -10,13 +10,19 @@ import {
   ARRAY_MOVE,
   SET_ID,
   ISAUTH,
+  GET_CONTACTS,
+  CONTACT_IDX,
+  CONTACT_USER,
 } from '../actions';
 
 const initialState = {
   notes: [],
   isAuthenticated: false,
   noteIndex: 0,
+  contactIndex: 0,
   sortedNotes: true,
+  contacts: [],
+  contact: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -33,6 +39,8 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, notes: action.payload };
     case NOTE_IDX:
       return { ...state, noteIndex: action.payload };
+    case CONTACT_IDX:
+      return { ...state, contactIdx: action.payload };
     case SORT_FALSE:
       return { ...state, notes: action.payload, sortedNotes: false };
     case SORT_TRUE:
@@ -41,6 +49,10 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, notes: action.payload };
     case SET_ID:
       return { ...state, authenticated: true, user: action.payload };
+    case GET_CONTACTS:
+      return { ...state, contacts: action.payload };
+    case CONTACT_USER:
+      return { ...state, contact: action.payload };
     default:
       return state;
   }
