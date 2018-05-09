@@ -25,6 +25,9 @@ const UserSchema = new Schema({
     type: String,
     ref: 'gooUser'
   },
+  img: {
+    type: String,
+  },
   notes: [
     {
       type: ObjectId,

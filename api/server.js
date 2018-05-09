@@ -21,16 +21,21 @@ app.use(session({
   secret: keys.seshSecret,
   resave: false,
   saveUninitialized: false,
-  username: '',
 }));
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 app.use(function(req,res,next){
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 })
+
+app.get('/me', (req, res) => {
+  // Do NOT modify this route handler in any way
+  res.send({ user: req.user, session: req.session });
+});
+
 app.get('/notes/chat', (req, res) => {
   User.find({})
     .select( 'username')

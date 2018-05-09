@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { removeCookie } from 'redux-cookie';
 
 export const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
 export const DEAUTH = 'DEAUTH';
@@ -50,6 +51,8 @@ export const logoutUser = (history) => {
       await axios.post('notes/logout');
       dispatch(deAuth());
       dispatch({ type: 'ISAUTH' });
+      document.cookie = 'connect.sid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/'
+      // await removeCookie('connect.sid', { path: '' });
       await sessionStorage.removeItem('id');
       await history.push('/login');
     } catch (err) {
@@ -180,6 +183,10 @@ export const handleContactIdx = inputID => {
   };
 };
 
+export const sendSms = () => {
+  return {
+  };
+};
 /////////////////////////////////////////////////////////////////////
 // SORT/HANDLING NOTES
 /////////////////////////////////////////////////////////////////////

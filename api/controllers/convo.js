@@ -21,6 +21,17 @@ const allContacts = (req, res) => {
     });
 };
 
+// const sendSms = (req, res) => {
+//   const { id } = req.params;
+//   User.findById(id)
+//     .then(foundUser => {
+//       res.status(201).send(foundUser);
+//     })
+//     .catch(err => {
+//       res.status(400).send({ err });
+//     });
+// };
+
 module.exports = {
   getContact,
   allContacts,

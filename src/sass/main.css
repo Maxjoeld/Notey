@@ -334,7 +334,7 @@
   font-size: 1.6rem; }
 
 .friendlist--search {
-  margin-top: 2rem;
+  margin-top: 3.5rem;
   height: 4rem;
   width: 24rem;
   margin-bottom: 3rem;
@@ -352,10 +352,13 @@
   justify-content: space-between;
   margin-bottom: 5rem; }
 
+.friendchat--user {
+  font-size: 2rem; }
+
 .friendchat--textbox {
   width: 56rem;
   height: 75rem;
-  border: 3px solid #c9c9c9; }
+  border: 0.3px solid #c9c9c9; }
 
 .friendChat--search {
   height: 7rem;

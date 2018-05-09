@@ -13,7 +13,7 @@ module.exports = (app) => {
   // this route will be different than the other and will not kick in
   // to Oauth flow, instead it has the code that we need and will try and
   // handle the case a little different
-  app.get('/auth/google/callback', passport.authenticate('google'), (req, res) => {
+  app.get('/auth/google/callback', passport.authenticate('google'), (req, res, next) => {
     // this is checking is already an existing user that wanted to use 0auth
     const { googleId, email , img } = req.user;
     const oauthUser = req.user.email;
@@ -24,12 +24,13 @@ module.exports = (app) => {
       // if its a brand new user in the database and have 
       // not used our original auth(user, password) method
       if (user === null) {
-        const newUser = new oAuth({ googleId, email, img })
-        oAuth.create(newUser)
+        const newUser = new oAuth({ googleId, username: email, img })
+        User.create(newUser)
         .then(user => {
-          req.session.username = oauthUser;
-          req.session.user = user._id;
-          res.status(201).json({success: "User saved successfully", session: req.session, userId: user._id })
+          // req.session.username = oauthUser;
+          req.session.username = user._id;
+          next();
+          // res.status(201).json({success: "User saved successfully", session: req.session, userId: user._id })
           // res.redirect('http://localhost:3000/')
         })
         .catch(error => res.status(500).json({ msg: 'Could not save user', error }))
