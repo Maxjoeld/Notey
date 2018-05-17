@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import SideBar from '../SideBar/SideBar';
 import { getContact, sendSms } from '../../actions';
 import Contact from './Contact';
+import openSocket from 'socket.io-client';
+
+const socket = openSocket('http://localhost:8000');
 
 class Convo extends Component {
 
