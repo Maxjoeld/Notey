@@ -3,21 +3,22 @@ const cors = require('cors');
 const passport = require('passport');
 const keys = require('./config');
 const routes = require('./routes/index');
-const passportRoutes = require('./routes/authRoutes');
+const passportRoutes = require('./controllers/authRoutes');
 const session = require('express-session');
 const User = require('./models/users');
 require('./services/passport');
 
+const app = express();
+
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-const Chat = require('./models/Chat');
+// const Chat = require('./models/chat');
 
 
 const corsOptions = {
   origin: 'http://localhost:3000',
   credentials: true,
 };
-const app = express();
 
 app.use(express.json());
 app.use(cors(corsOptions));
@@ -46,60 +47,45 @@ io.on('connection', function(socket){
     console.log('User Disconnected');
   });
 
+  // Chat.find().limit(100).sort({_id: 1})
+  //   .select('message')
+  //   .then((res) => socket.emit('loadData', res))
+  //   .catch((err) => console.log({err}));
 
-  // socket.on('example_message', function(msg){
-  //   console.log('message: ' + msg);
-  // });
+  // sendStatus = (s) => {
+  //   socket.emit('status',s);
+  // }
 
-  //   socket.emit('news', { hello: 'world' });
-  //   socket.on('my other event', function (data) {
-  //     console.log(data);
- 
-  //   });
- 
-    //  Emit the messages if theres no error 
-  // socket.on('loadData', () => {
-    Chat.find().limit(100).sort({_id: 1})
-      .select('message')
-      .then((res) => socket.emit('loadData', res))
-      .catch((err) => console.log({err}));
-  // });
+  // socket.on('input', (message) => {
+  //   let oldmsg = message;
 
+  //   // let's make sure they included a name and message when they send it 
+  //   if ( oldmsg === '') {
+  //     // send error status
+  //     return sendStatus('Please enter a name and message');
+  //   }
+  //     // insert message to database 
+  //     const newMessage = new Chat({ message })
+  //     newMessage.save(newMessage, () => {
+  //       // emit output back to client 
+  //       io.emit('output', [message]);
 
-  sendStatus = (s) => {
-    socket.emit('status',s);
-  }
-
-  socket.on('input', (message) => {
-    let oldmsg = message;
-
-    // let's make sure they included a name and message when they send it 
-    if ( oldmsg === '') {
-      // send error status
-      return sendStatus('Please enter a name and message');
-    }
-      // insert message to database 
-      const newMessage = new Chat({ message })
-      newMessage.save(newMessage, () => {
-        // emit output back to client 
-        io.emit('output', [message]);
-
-        // send status object 
-        sendStatus({
-          message: 'Message sent',
-          clear: true
-        })
-      });
+  //       // send status object 
+  //       sendStatus({
+  //         message: 'Message sent',
+  //         clear: true
+  //       })
+  //     });
     
-  });
+  // });
 
-  socket.on('Clear', (data) => {
-    // remove all chats from collection
-    chat.remove({}, () => {
-      // let client know that messages have been cleared 
-      socket.emit('cleared')
-    });
-  });
+  // socket.on('Clear', (data) => {
+  //   // remove all chats from collection
+  //   chat.remove({}, () => {
+  //     // let client know that messages have been cleared 
+  //     socket.emit('cleared')
+  //   });
+  // });
 });
 io.listen(8000);
 

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import openSocket from 'socket.io-client';
+
 import { connect } from 'react-redux';
 import SideBar from '../SideBar/SideBar';
 import { getContact, sendSms } from '../../actions';
 import Contact from './Contact';
-import openSocket from 'socket.io-client';
 
 const socket = openSocket('http://localhost:8000');
 
@@ -16,8 +17,13 @@ class Convo extends Component {
   sendSms = (e) => {
     e.preventDefault();
     console.log(this.props.contact._id);
-    this.props.sendSms(this.props.contact._id);
+    // axios call with the private messenger's id
+    // We now do user.findById
+    // once we find the user, we populate the chat 
+    // we return the chat data and load it on the screen 
+    // this.props.sendSms(this.props.contact._id);
   };
+
 
   render() {
     return (
@@ -67,7 +73,7 @@ class Convo extends Component {
             <button
               className="CreateNote__Submit"
               type="submit"
-              onClick={(e)=> this.sendSms(e)}
+              onClick={(e) => this.sendSms(e)}
             >
               Send
             </button>

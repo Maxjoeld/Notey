@@ -1,7 +1,6 @@
 import axios from 'axios';
-import { removeCookie } from 'redux-cookie';
 
-export const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
+// export const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
 export const DEAUTH = 'DEAUTH';
 export const ISAUTH = 'ISAUTH';
 
