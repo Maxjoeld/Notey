@@ -1,5 +1,5 @@
 const mongoose = require('mongoose'),
-  Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 // Schema defines how chat messages will be stored in MongoDB
 const ConversationSchema = new Schema({

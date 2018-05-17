@@ -1,5 +1,5 @@
 const mongoose = require('mongoose'),
-  Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const MessageSchema = new Schema({
   conversationId: {
