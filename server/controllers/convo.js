@@ -120,8 +120,29 @@ const sendReply = (req, res, next) => {
   });
 };
 
+const deleteConversation = (req, res, next) {
+  Conversation.findOneAndRemove({
+    $and : [
+            { '_id': req.params.conversationId }, { 'participants': req.user._id }
+           ]}, function(err) {
+        if (err) {
+          res.send({ error: err });
+          return next(err);
+        }
+
+        res.status(200).json({ message: 'Conversation removed!' });
+        return next();
+  });
+}
+
+
 
 module.exports = {
   getContact,
   allContacts,
+  getConversations,
+  getConversation,
+  newConversation,
+  sendReply,
+  deleteConversation
 };

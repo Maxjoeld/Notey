@@ -2,7 +2,16 @@
 const { addNote, deleteNote, editNote, getNotes } = require('./notes');
 // Auth Routes //
 const { userLogin, userLogout, userCreate } = require('./auth');
-const { getContact, allContacts } = require('./convo');
+// Chat Routes
+const {
+getContact,
+allContacts,
+getConversations,
+getConversation,
+newConversation,
+sendReply,
+deleteConversation } = require('./convo');
+
 
 module.exports = {
   addNote,
@@ -13,5 +22,10 @@ module.exports = {
   userLogout,
   userCreate,
   getContact,
-  allContacts
+  allContacts,
+  getConversations,
+  getConversation,
+  newConversation,
+  sendReply,
+  deleteConversation
 };
