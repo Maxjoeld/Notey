@@ -14,8 +14,8 @@ const sendUserError = (err, res) => {
 };
 
 const userCreate = (req, res) => {
-  const { username, password } = req.body;
-  const user = new User({ username, password });
+  const { username, password, profile } = req.body;
+  const user = new User({ username, password, profile });
   user
     .save()
     .then(newUser => {
@@ -41,10 +41,7 @@ const userLogin = (req, res) => {
       .checkPassword(password)
       .then((response) => {
         if (!response) throw new Error();
-        req.session.username = username;
         req.session.user = user._id;
-      })
-      .then(() => {
         res.json({ success: true, session: req.session, userId: user._id });
       })
       .catch((error) => {
