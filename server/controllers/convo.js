@@ -1,7 +1,6 @@
-const User = require('../models/users');
-const Conversation = require('../chat/models/conversation'),  
-      Message = require('../chat/models/message'),
-      User = require('../chat/models/user');
+const Conversation = require('../models/chat/conversation'),  
+      Message = require('../models/chat/message'),
+      User = require('../models/users');
 
 const getContact = (req, res) => {
   const { username } = req.body;
@@ -92,7 +91,6 @@ const newConversation = (req, res, next) => {
     participants: [_id, recipient]
   });
 
-
   conversation.save((err, newConversation) => {
     if (err) {
       res.json({ error: err });
@@ -120,7 +118,7 @@ const sendReply = (req, res, next) => {
   });
 };
 
-const deleteConversation = (req, res, next) {
+const deleteConversation = (req, res, next) => {
   Conversation.findOneAndRemove({
     $and : [
             { '_id': req.params.conversationId }, { 'participants': req.user._id }

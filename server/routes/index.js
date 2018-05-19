@@ -9,6 +9,7 @@ const {
   getContact,
   allContacts,
   getConversations,
+  getConversation,
   newConversation,
   sendReply,
   deleteConversation
@@ -30,10 +31,7 @@ module.exports = (app) => {
   app.route('/notes/getchat').get(allContacts);
   app.route('/notes/chat').post(getContact);
   app.get('/', getConversations);
-  // Retrieve single conversation
   app.get('/:conversationId', getConversation);
-  // Send reply in conversation
   app.post('/:conversationId', sendReply);
-  // Start new conversation
   app.post('/new/:recipient', newConversation);
 };
