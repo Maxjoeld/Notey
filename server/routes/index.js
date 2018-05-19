@@ -15,6 +15,8 @@ const {
   deleteConversation
 } = require('../controllers/index');
 // const { authenticate } = require('./authenticate');
+const { sessionAuth } = require('../middleware/authenticate');
+
 
 module.exports = (app) => {
   // Note Routes //
@@ -30,8 +32,8 @@ module.exports = (app) => {
   // Chat Routes //
   app.route('/notes/getchat').get(allContacts);
   app.route('/notes/chat').post(getContact);
-  app.get('/notes/getconvos', getConversations);
-  app.get('/notes/convo/:conversationId', getConversation);
-  app.post('/notes/reply:conversationId', sendReply);
-  app.post('/notes/new/:recipient', newConversation);
+  app.get('/notes/convoss',sessionAuth, getConversations);
+  app.get('/notes/convo/:conversationId',sessionAuth, getConversation);
+  app.post('/notes/reply/:conversationId', sessionAuth, sendReply);
+  app.post('/notes/new/:recipient',sessionAuth, newConversation);
 };

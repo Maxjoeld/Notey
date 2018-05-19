@@ -1,17 +1,7 @@
 const jwt = require('jsonwebtoken');
 const keys = require('../config');
 const User = require('../models/users');
-
-const STATUS_USER_ERROR = 422;
-
-const sendUserError = (err, res) => {
-  res.status(STATUS_USER_ERROR);
-  if (err && err.message) {
-    res.json({ message: err.message, stack: err.stack });
-  } else {
-    res.json({ error: err });
-  }
-};
+const { sendUserError } = require('../middleware/authenticate');
 
 const userCreate = (req, res) => {
   const { username, password, profile } = req.body;
@@ -34,7 +24,7 @@ const userLogin = (req, res) => {
   }
   User.findOne({ username }, (err, user) => {
     if (err || user === null) {
-      sendUserError('No user found at that id', res);
+      sendUserError({'No user found at that id': err}, res);
       return;
     }
     user
@@ -85,7 +75,7 @@ const userLogin = (req, res) => {
 // };
 
 const userLogout = (req, res) => {
-  if (!req.session.username) res.send('User is not logged in.');
+  if (!req.session.user) return sendUserError('User is not logged in.', res);
   req.session.destroy();
   res.status(200).json({ msg: 'Logged out.' });
 };
