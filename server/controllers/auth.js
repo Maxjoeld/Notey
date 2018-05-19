@@ -6,14 +6,9 @@ const { sendUserError } = require('../utils/authenticate');
 const userCreate = (req, res) => {
   const { username, password, profile } = req.body;
   const user = new User({ username, password, profile });
-  user
-    .save()
-    .then(newUser => {
-      res.status(201).send(newUser);
-    })
-    .catch(err => {
-      res.status(400).send({ err });
-    });
+  user.save()
+    .then(newUser => res.status(201).send(newUser))
+    .catch(err => res.status(400).send({ err }));
 };
 
 const userLogin = (req, res) => {

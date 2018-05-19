@@ -12,9 +12,7 @@ const addNote = (req, res) => {
     .then((note) => {
       const id = note._id;
       User.findOneAndUpdate({ _id: userId }, { $push: { notes: id } })
-        .then(() => {
-          res.status(201).json(note);
-        })
+        .then(() => res.status(201).json(note))
         .catch(err => res.json(err));
     })
     .catch(err => res.json(err));
