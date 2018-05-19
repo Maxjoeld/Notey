@@ -30,8 +30,8 @@ module.exports = (app) => {
   // Chat Routes //
   app.route('/notes/getchat').get(allContacts);
   app.route('/notes/chat').post(getContact);
-  app.get('/', getConversations);
-  app.get('/:conversationId', getConversation);
-  app.post('/:conversationId', sendReply);
-  app.post('/new/:recipient', newConversation);
+  app.get('/notes/getconvos', getConversations);
+  app.get('/notes/convo/:conversationId', getConversation);
+  app.post('/notes/reply:conversationId', sendReply);
+  app.post('/notes/new/:recipient', newConversation);
 };

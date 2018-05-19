@@ -74,12 +74,12 @@ const getConversation = (req, res, next) => {
     res.status.json({ conversation: messages })
   });
 }
-
+// notes/new/5aff94c72373c7408079ceed
 const newConversation = (req, res, next) => {
   const { recipient } = req.params;
   const { composedMessage } = req.body;
-  const { _id } = req.user;
-  
+  console.log(req.session);
+  const { user } = req.session;
   if (!recipient) {
     res.status(422({ error: 'Please choose a valid recipient for your message.'}));
   }
@@ -88,7 +88,7 @@ const newConversation = (req, res, next) => {
     return next();
   }
   const conversation = new Conversation({
-    participants: [_id, recipient]
+    participants: [user, recipient]
   });
 
   conversation.save((err, newConversation) => {

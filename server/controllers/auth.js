@@ -88,9 +88,8 @@ const userLogin = (req, res) => {
 // };
 
 const userLogout = (req, res) => {
-  // delete req.session
-  // res.json(req.session.username);
-  // console.log({req.session.username});
+  if (!req.session.username) res.send('User is not logged in.');
+  req.session.destroy();
   res.status(200).json({ msg: 'Logged out.' });
 };
 

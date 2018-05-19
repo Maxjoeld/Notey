@@ -37,7 +37,10 @@ const UserSchema = new Schema({
       type: ObjectId,
       ref: 'Note',
     },
-  ],
+  ]
+  },
+{
+  timestamps: true
 });
 
 UserSchema.pre('save', function (next) {
