@@ -2,18 +2,15 @@ const express = require('express');
 const cors = require('cors');
 const passport = require('passport');
 const keys = require('./config');
-const routes = require('./routes/index');
+const routes = require('./controllers/index');
 const passportRoutes = require('./controllers/authRoutes');
 const session = require('express-session');
 const User = require('./models/users');
 require('./services/passport');
 
 const app = express();
-
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-// const Chat = require('./models/chat');
-
 
 const corsOptions = {
   origin: 'http://localhost:3000',
@@ -89,70 +86,9 @@ io.on('connection', function(socket){
 });
 io.listen(8000);
 
-
-app.get('/notes/me', (req, res) => {
-  // Do NOT modify this route handler in any way
-  res.send({ user: req.user, session: req.session });
-});
-const Conversation = require('./models/chat/conversation'),  
-      Message = require('./models/chat/message');
-
-app.get('/notes/convos',(req,res, next) => {
-  // Only return one message from each conversation to display as snippet
-  Conversation.find({ participants: req.session.user })
-    .select('_id')
-    .exec((err, conversations) => {
-      console.log( conversations)
-      if (err) {
-        res.send({ error: err })
-        return next(err);
-      }
-
-      // Set up empty array to hold conversations + most recent message
-      let fullConversations = [];
-      conversations.forEach(conversation => {
-        Message.find({ 'conversationId': conversation._id })
-          .sort('-createdAt')
-          // This is loading just one message from the conversation to load, like whatsapp and fb does 
-          .limit(1)
-          .populate({
-            path: "author",
-            select: "profile.firstName profile.lastName"
-          })
-          .exec((err, message) => {
-            if (err) {
-              res.send({ error: err});
-              return next(err);
-            }
-            fullConversations.push(message);
-            if (fullConversations.length === conversations.length) {
-              return res.status(200).json({ conversations: fullConversations });
-            }
-          });
-      });
-    });
-});
-
-app.get('/notes/chat', (req, res) => {
-  User.find({})
-    .select( 'username')
-    .then(contacts => {
-      res.status(201).json(contacts);
-    })
-    .catch(err => {
-      res.status(400).send({ error: err });
-    });
-});
-
 passportRoutes(app);
 routes(app); 
 
 module.exports = {
   app,
 };
-
-
-// app.get('/me', (req, res) => {
-//   // Do NOT modify this route handler in any way
-//   res.send({ user: req.user, session: req.session });
-// });

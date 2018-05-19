@@ -59,21 +59,26 @@ const getConversations = (req,res, next) => {
     });
 };
 
+const less= (req,res) => {
+  res.json('heyee');
+};
+
 const getConversation = (req, res, next) => {
-  Message.find({ conversationId: req.params.conversationId })
-  .select('createdAt body author')
-  .sort('createdAt')
-  .populate({
-    path: 'author',
-    select: 'profile.firstName profile.lastName'
-  })
-  .exec((err, messages) => {
-    if (err) {
-      res.send({ error: err});
-      return next(err);
-    }
-    res.status(200).json({ conversation: messages })
-  });
+  res.json('hey')
+  // Message.find({ conversationId: req.params.conversationId })
+  // .select('createdAt body author')
+  // .sort('createdAt')
+  // .populate({
+  //   path: 'author',
+  //   select: 'profile.firstName profile.lastName'
+  // })
+  // .exec((err, messages) => {
+  //   if (err) {
+  //     res.send({ error: err});
+  //     return next(err);
+  //   }
+  //   res.status(200).json({ conversation: messages })
+  // });
 }
 // new/5b00448aa93df70de03e95f4
 // notes/new/5aff94c72373c7408079ceed
@@ -156,5 +161,6 @@ module.exports = {
   getConversation,
   newConversation,
   sendReply,
-  deleteConversation
+  deleteConversation,
+  less
 };

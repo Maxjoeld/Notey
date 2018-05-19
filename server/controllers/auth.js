@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const keys = require('../config');
 const User = require('../models/users');
-const { sendUserError } = require('../middleware/authenticate');
+const { sendUserError } = require('../utils/authenticate');
 
 const userCreate = (req, res) => {
   const { username, password, profile } = req.body;
