@@ -13,8 +13,8 @@ const userCreate = (req, res) => {
 
 const userLogin = (req, res) => {
   const { username, password } = req.body;
-  if (!username) {
-    sendUserError('username undefined', res);
+  if (!username || !password) {
+    sendUserError('You need to provide a username and password', res);
     return;
   }
   User.findOne({ username }, (err, user) => {
@@ -70,7 +70,6 @@ const userLogin = (req, res) => {
 // };
 
 const userLogout = (req, res) => {
-  console.log(req.session)
   if (!req.session.user) return sendUserError('User is not logged in.', res);
   req.session.destroy();
   res.status(200).json({ msg: 'Logged out.' });

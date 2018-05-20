@@ -3,13 +3,20 @@ import { connect } from 'react-redux';
 import { handleContactIdx } from '../../actions';
 
 const Contact = props => {
+  console.log(props);
   return (
     <div
       className="contact-box"
       onClick={() => props.handleContactIdx(props.index)}
     >
+
       <p className="contact-image" />
-      <p className="contact-username">{props.username}</p>
+      <div className="contact-info">
+        <p className="contact-firstName">{props.firstName}</p>
+        <p className="contact-lastName">{props.lastName}</p>
+        <p className="contact-time">{props.time}</p>
+      </div>
+      <p className="contact-body">{props.body}</p>
     </div>
   );
 };

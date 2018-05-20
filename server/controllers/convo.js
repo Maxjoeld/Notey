@@ -19,8 +19,8 @@ const allContacts = (req, res) => {
 
 const getConversations = (req,res) => {
   // Only return one message from each conversation to display as snippet
-  Conversation.find({ participants: req.session.user })
-  .select('_id')
+  Conversation.find({ participants: "5b00448aa93df70de03e95f4" })
+  .select('_id recipient initiator')
   .then((conversations) => {
     // Set up empty array to hold conversations + most recent message
     let fullConversations = [];
@@ -28,13 +28,14 @@ const getConversations = (req,res) => {
       Message.find({ 'conversationId': conversation._id })
         .sort('-createdAt')
         // This is loading just one message from the conversation to load, like whatsapp and fb does 
+        // if the id is not the current user, don't limit it keep searching for the r
         .limit(1)
         .populate({
           path: "author",
           select: "profile.firstName profile.lastName"
         })
         .then(message => {
-          fullConversations.push(message);
+          fullConversations.push([...message, {initiator:conversation.initiator}, {recipient:conversation.recipient}]);
           if (fullConversations.length === conversations.length) {
             return res.status(200).json({ conversations: fullConversations });
           }
@@ -66,24 +67,37 @@ const newConversation = (req, res, next) => {
   if (!composedMessage) {
     return sendUserError('Please enter a message.', res);
   }
-  const conversation = new Conversation({
-    participants: [user, recipient]
-  });
+  User.findOne({ _id: recipient})
+  .then(reci => {
+    let recipientName = reci.profile.firstName + " " + reci.profile.lastName;
+    User.findOne({ _id: user})
+    .then((newuse) => {
+      let initiator = newuse.profile.firstName + " " + newuse.profile.lastName;
 
-  conversation.save()
-    .then(newConversation => { 
-      const message = new Message({
-        conversationId: newConversation._id,
-        body: composedMessage,
-        author: user
+      const conversation = new Conversation({
+        participants: [user, recipient],
+        initiator: initiator,
+        recipient: recipientName
       });
-
-      message.save() 
-        .then(() => {
-          res.status(200).json({ message: 'Conversation started', conversationId: conversation._id });
-        }).catch(err => sendUserError(err,res));
-    })
-    .catch(err => sendUserError(err, res));
+  
+      conversation.save()
+        .then(newConversation => { 
+          const message = new Message({
+            conversationId: newConversation._id,
+            body: composedMessage,
+            author: user,
+          });
+        
+          message.save() 
+            .then(() => {
+              res.status(200).json({ message: 'Conversation started', conversationId: conversation._id });
+            }).catch(err => sendUserError(err,res));
+        })
+        .catch(err => sendUserError(err, res));
+    }).catch(err => console.log(err))
+  })
+.catch(err => console.log(err));
+  
 };
 
 const sendReply = (req, res, next) => {

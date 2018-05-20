@@ -9,7 +9,6 @@ import Contact from './Contact';
 const socket = openSocket('http://localhost:8000');
 
 class Convo extends Component {
-
   async componentWillMount() {
     await this.props.getContact();
   }
@@ -19,8 +18,8 @@ class Convo extends Component {
     console.log(this.props.contact._id);
     // axios call with the private messenger's id
     // We now do user.findById
-    // once we find the user, we populate the chat 
-    // we return the chat data and load it on the screen 
+    // once we find the user, we populate the chat
+    // we return the chat data and load it on the screen
     // this.props.sendSms(this.props.contact._id);
   };
 
@@ -44,17 +43,22 @@ class Convo extends Component {
             </form>
             {this.props.contacts.length > 0
               ? this.props.contacts.map(contact => {
+                return contact.map((person) => {
                   return (
                     <Contact
-                      key={contact._id}
-                      index={contact._id}
-                      username={contact.username}
+                      key={person._id}
+                      index={person._id}
+                      body={person.body.slice(0, 40)}
+                      firstName={person.author.profile.firstName}
+                      lastName={person.author.profile.lastName}
+                      time={person.createdAt.split('').splice(11, 5).join('')}
                     />
-                  );
+                    );
+                  });
                 })
               : null}
           </div>
-          <hr />
+          <hr className="convo-hr" />
           <form className="friendChat">
             <div className="friendchat--header">
               <p className="friendchat--user">{this.props.contact.username}</p>
