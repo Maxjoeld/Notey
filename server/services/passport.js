@@ -41,16 +41,3 @@ passport.use(new GoogleStrategy(
     done(null, user);
   },
 ));
-
-// refactor
-//  (accessToken, refreshtoken, profile, done) => {
-//      GooUser.findOne({ googleId: profile.id })
-//       .then(existingUser => {
-//         if (existingUser) {
-//           done(null, existingUser);
-//         } else {
-//            new GooUser({ googleId: profile.id })
-//             .save()
-//             .then(user => done(null, user));
-//         }
-//       });

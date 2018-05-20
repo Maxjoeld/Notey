@@ -28,7 +28,7 @@ module.exports = (app) => {
         User.create(newUser)
         .then(user => {
           // req.session.username = oauthUser;
-          req.session.username = user._id;
+          req.session.user = user._id;
           next();
           // res.status(201).json({success: "User saved successfully", session: req.session, userId: user._id })
           // res.redirect('http://localhost:3000/')

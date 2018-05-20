@@ -1,8 +1,7 @@
 const { app } = require('./server');
 const mongoose = require('mongoose');
-const socketIO = require('socket.io');
 const mongo = require('mongodb').MongoClient;
-const client = require('socket.io').listen(5001).sockets;
+
 
 const PORT = process.env.PORT || 5000;
 

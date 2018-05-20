@@ -161,8 +161,10 @@ export const deleteNote = inputId => {
 export const getContact = () => {
   return async dispatch => {
     try {
-      const res = await axios.get('/notes/chat');
-      await dispatch({ type: GET_CONTACTS, payload: res.data });
+      // const res = await axios.get('/notes/chat');
+      const res = await axios.get('/notes/chat/convo');
+      console.log(res);
+      // await dispatch({ type: GET_CONTACTS, payload: res.data });
     } catch (error) {
       console.log({ err: 'There was an error loading your notes :(', error });
     }

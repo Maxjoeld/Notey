@@ -70,6 +70,7 @@ const userLogin = (req, res) => {
 // };
 
 const userLogout = (req, res) => {
+  console.log(req.session)
   if (!req.session.user) return sendUserError('User is not logged in.', res);
   req.session.destroy();
   res.status(200).json({ msg: 'Logged out.' });
