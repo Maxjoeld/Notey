@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import ReactMarkdown from 'react-markdown';
 import { Link } from 'react-router-dom';
 
-import DeleteNote from '../DeleteNote/DeleteNote';
-import SideBar from '../../SideBar/SideBar';
+import DeleteNote from './DeleteNote';
+import SideBar from '../SideBar/SideBar';
 
 class NoteView extends Component {
   state = {

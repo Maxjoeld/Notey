@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import { SortableContainer, arrayMove } from 'react-sortable-hoc';
 import { CSVLink } from 'react-csv';
 import { connect } from 'react-redux';
-import { updateSortedNotes, handleIdx, onSortEnd, sortData, getNotes } from '../../../actions';
+import { updateSortedNotes, handleIdx, onSortEnd, sortData, getNotes } from '../../actions';
 import Note from './Note';
-import SideBar from '../../SideBar/SideBar';
+import SideBar from '../SideBar/SideBar';
 
 class NoteList extends Component {
   state = {

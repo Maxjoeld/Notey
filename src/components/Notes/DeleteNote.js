@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { deleteNote } from '../../../actions';
+import { deleteNote } from '../../actions';
 
 // import './DeleteNote.css';
 

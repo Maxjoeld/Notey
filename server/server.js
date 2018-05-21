@@ -2,15 +2,15 @@ const express = require('express');
 const cors = require('cors');
 const passport = require('passport');
 const keys = require('./config');
-const routes = require('./controllers/index');
+const routes = require('./routes/index');
 const passportRoutes = require('./controllers/authRoutes');
 const session = require('express-session');
 const User = require('./models/users');
 require('./services/passport');
 
 const app = express();
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
+// const http = require('http').Server(app);
+// const io = require('socket.io')(http);
 
 const corsOptions = {
   origin: 'http://localhost:3000',
@@ -37,12 +37,12 @@ app.use(function(req,res,next){
 
 // Socket.io
 
-io.on('connection', function(socket){
-  console.log('Sockets fully loaded ');
+// io.on('connection', function(socket){
+//   console.log('Sockets fully loaded ');
 
-  socket.on('disconnect', function(){
-    console.log('User Disconnected');
-  });
+//   socket.on('disconnect', function(){
+//     console.log('User Disconnected');
+//   });
 
   // Chat.find().limit(100).sort({_id: 1})
   //   .select('message')
@@ -83,8 +83,8 @@ io.on('connection', function(socket){
   //     socket.emit('cleared')
   //   });
   // });
-});
-io.listen(8000);
+// });
+// io.listen(8000);
 
 passportRoutes(app);
 routes(app); 

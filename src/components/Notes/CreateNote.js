@@ -1,9 +1,9 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createNote } from '../../../actions';
+import { createNote } from '../../actions';
 import { Link } from 'react-router-dom';
-import SideBar from '../../SideBar/SideBar';
+import SideBar from '../SideBar/SideBar';
 
 class CreateNote extends Component {
   state = {

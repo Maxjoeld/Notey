@@ -3,7 +3,7 @@ import React, { component } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Link } from 'react-router-dom';
 import { SortableElement } from 'react-sortable-hoc';
-import SideBar from '../../SideBar/SideBar';
+import SideBar from '../SideBar/SideBar';
 
 
 const Note = SortableElement(props => {

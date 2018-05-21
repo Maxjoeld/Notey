@@ -41,16 +41,6 @@ module.exports = (app) => {
     });
   });
 
-  app.get('/auth/:id', (req, res) => {
-    const { id } = req.params;
-    User.findById(id)
-      .populate('googleId')
-      .then(finalData => {
-        res.json(finalData);
-      })
-      .catch(err => res.json(err));
-  });
-
   // req represents the incoming response - res represent the outgoing response
   app.get('/auth/logout', (req, res) => {
     // logout is built in and klls the id and logs out the user

@@ -1,31 +1,36 @@
 import React, { Component } from 'react';
-import openSocket from 'socket.io-client';
+// import openSocket from 'socket.io-client';
 
 import { connect } from 'react-redux';
-import { getContact, getConversation } from '../../actions';
+import { getContact, getConversation, replyMessage } from '../../actions';
 import SideBar from '../SideBar/SideBar';
 import Contact from './Contact';
 import Messages from './Messages';
 
-const socket = openSocket('http://localhost:8000');
+// const socket = openSocket('http://localhost:8000');
 
 class Convo extends Component {
+  state = {
+    message: '',
+  };
   async componentWillMount() {
     await this.props.getContact();
   }
 
-  sendSms = (e) => {
+  reply = (e) => {
     e.preventDefault();
-    console.log(this.props.contact._id);
-    // axios call with the private messenger's id
-    // We now do user.findById
-    // once we find the user, we populate the chat
-    // we return the chat data and load it on the screen
-    // this.props.sendSms(this.props.contact._id);
+    const { message } = this.state;
+    this.props.replyMessage({ message });
+    this.setState({ message: '' });
   };
 
+  handleInputChange = e => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  };
 
   render() {
+    const { message } = this.state;
     return (
       <div className="Master">
         <SideBar />
@@ -83,15 +88,19 @@ class Convo extends Component {
                 })
               : null}
             </div>
-            <textarea
+            <input
               type="text"
               placeholder="Type your message here"
               className="friendChat--search"
+              value={message}
+              name="message"
+              onChange={this.handleInputChange}
+              required
             />
             <button
               className="CreateNote__Submit"
               type="submit"
-              onClick={(e) => this.sendSms(e)}
+              onClick={(e) => this.reply(e)}
             >
               Send
             </button>
@@ -110,7 +119,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { getContact, getConversation })(Convo);
+export default connect(mapStateToProps, { getContact, getConversation, replyMessage })(Convo);
 
 // we simply just want to search for the user then onClick display the user
 // in the contactList that is displayed there

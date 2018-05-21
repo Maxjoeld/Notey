@@ -51,8 +51,6 @@ export const logoutUser = (history) => {
       await axios.post('notes/logout');
       dispatch(deAuth());
       dispatch({ type: 'ISAUTH' });
-      document.cookie = 'connect.sid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/'
-      // await removeCookie('connect.sid', { path: '' });
       await sessionStorage.removeItem('id');
       await history.push('/login');
     } catch (err) {
@@ -177,6 +175,21 @@ export const getConversation = () => {
       const res = await axios.get(`notes/chat/convo/${conversationId}`);
       console.log(res.data);
       dispatch({ type: 'GET_CONVERSATION', payload: res.data.conversation });
+    } catch (error) {
+      console.log({ err: 'Err receiving conversationId', error });
+    }
+  };
+};
+
+export const replyMessage = (message) => {
+  return async (dispatch, getState) => {
+    try {
+      const { conversationId } = await getState().contact;
+      console.log(conversationId);
+      const res = await axios.post(`notes/chat/reply/${conversationId}`, message);
+      console.log(res.data);
+      dispatch(getConversation());
+      // dispatch({ type: 'GET_CONVERSATION', payload: res.data.conversation });
     } catch (error) {
       console.log({ err: 'Err receiving conversationId', error });
     }

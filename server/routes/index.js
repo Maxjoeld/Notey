@@ -1,10 +1,10 @@
 // Note Routes //
-const { addNote, deleteNote, editNote, getNotes } = require('./notes');
+const { addNote, deleteNote, editNote, getNotes } = require('../controllers/notes');
 // Auth Routes //
-const { userLogin, userLogout, userCreate } = require('./auth');
+const { userLogin, userLogout, userCreate } = require('../controllers/auth');
 // Chat Routes
 const { getContact,allContacts,getConversations, getConversation,
-newConversation,sendReply, deleteConversation} = require('./convo');
+newConversation,sendReply, deleteConversation} = require('../controllers/convo');
 const { sessionAuth } = require('../utils/authenticate');
 
 module.exports = (app) => {
@@ -31,6 +31,6 @@ module.exports = (app) => {
   app.get('/notes/me/1', (req, res) => {
   // Do NOT modify this route handler in any way
   res.send({ user: req.user, session: req.session });
-});
+  });
 };
 

@@ -2,10 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import NoteList from './components/Notes/NoteList/NoteList';
-import CreateNote from './components/Notes/CreateNote/CreateNote';
-import ViewNote from './components/Notes/ViewNote/ViewNote';
-import EditNote from './components/Notes/EditNote/EditNote';
+import NoteList from './components/Notes/NoteList';
+import CreateNote from './components/Notes/CreateNote';
+import ViewNote from './components/Notes/ViewNote';
+import EditNote from './components/Notes/EditNote';
 
 import Login from './components/Auth/SignIn/SignIn';
 import SignUp from './components/Auth/SignUp/SignUp';
