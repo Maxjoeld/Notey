@@ -19,8 +19,8 @@ const allContacts = (req, res) => {
 
 const getConversations = (req,res) => {
   // Only return one message from each conversation to display as snippet
-  Conversation.find({ participants: "5b00448aa93df70de03e95f4" })
-  .select('_id recipient initiator')
+  Conversation.find({ participants: req.session.user })
+  .select('_id')
   .then((conversations) => {
     // Set up empty array to hold conversations + most recent message
     let fullConversations = [];
@@ -35,7 +35,7 @@ const getConversations = (req,res) => {
           select: "profile.firstName profile.lastName"
         })
         .then(message => {
-          fullConversations.push([...message, {initiator:conversation.initiator}, {recipient:conversation.recipient}]);
+          fullConversations.push(...message);
           if (fullConversations.length === conversations.length) {
             return res.status(200).json({ conversations: fullConversations });
           }

@@ -42,8 +42,8 @@ class Convo extends Component {
               />
             </form>
             {this.props.contacts.length > 0
-              ? this.props.contacts.map(contact => {
-                return contact.map((person) => {
+              ? this.props.contacts.map(person => {
+                  console.log(person);
                   return (
                     <Contact
                       key={person._id}
@@ -54,14 +54,13 @@ class Convo extends Component {
                       time={person.createdAt.split('').splice(11, 5).join('')}
                     />
                     );
-                  });
                 })
               : null}
           </div>
           <hr className="convo-hr" />
           <form className="friendChat">
             <div className="friendchat--header">
-              <p className="friendchat--user">{this.props.contact.username}</p>
+                <p className="friendchat--user">{this.props.contact._id}</p>
               <ul style={{ display: 'flex' }}>
                 <li> icon </li>
                 <li> icon </li>
