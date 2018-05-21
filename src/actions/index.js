@@ -16,6 +16,7 @@ export const SET_ID = 'SET_ID';
 export const GET_CONTACTS = 'GET_CONTACTS';
 export const CONTACT_IDX = 'CONTACT_IDX';
 export const CONTACT_USER = 'CONTACT_USER';
+export const GET_CONVERSATION = 'GET_CONVERSATION';
 
 
 axios.defaults.withCredentials = true;
@@ -161,12 +162,23 @@ export const deleteNote = inputId => {
 export const getContact = () => {
   return async dispatch => {
     try {
-      // const res = await axios.get('/notes/chat/getchat');
       const res = await axios.get('/notes/chat/convo');
-      console.log(res.data.conversations);
       await dispatch({ type: GET_CONTACTS, payload: res.data.conversations });
     } catch (error) {
       console.log({ err: 'There was an error loading your notes :(', error });
+    }
+  };
+};
+
+export const getConversation = () => {
+  return async (dispatch, getState) => {
+    try {
+      const { conversationId } = await getState().contact;
+      const res = await axios.get(`notes/chat/convo/${conversationId}`);
+      console.log(res.data);
+      dispatch({ type: 'GET_CONVERSATION', payload: res.data.conversation });
+    } catch (error) {
+      console.log({ err: 'Err receiving conversationId', error });
     }
   };
 };
@@ -176,16 +188,11 @@ export const handleContactIdx = inputID => {
     const state = getState().contacts;
     state.forEach((contact, i) => {
       if (contact._id === inputID) {
-        console.log(contact);
         dispatch({ type: 'CONTACT_IDX', payload: i });
         dispatch({ type: 'CONTACT_USER', payload: contact });
+        dispatch(getConversation());
       }
     });
-  };
-};
-
-export const sendSms = () => {
-  return {
   };
 };
 /////////////////////////////////////////////////////////////////////

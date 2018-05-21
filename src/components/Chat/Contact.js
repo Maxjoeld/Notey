@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { handleContactIdx } from '../../actions';
 
 const Contact = props => {
-  console.log(props);
   return (
     <div
       className="contact-box"
