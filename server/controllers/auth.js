@@ -24,7 +24,7 @@ const userLogin = (req, res) => {
     }
     user
       .checkPassword(password)
-      .then((response) => {
+      .then(response => {
         if (!response) throw new Error();
         req.session.user = user._id;
         res.json({ success: true, session: req.session, userId: user._id });

@@ -1,6 +1,10 @@
 import axios from 'axios';
 
 // export const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
+import openSocket from 'socket.io-client';
+
+const socket = openSocket('http://localhost:8000');
+
 export const DEAUTH = 'DEAUTH';
 export const ISAUTH = 'ISAUTH';
 
@@ -185,10 +189,12 @@ export const replyMessage = (message) => {
   return async (dispatch, getState) => {
     try {
       const { conversationId } = await getState().contact;
-      console.log(conversationId);
-      const res = await axios.post(`notes/chat/reply/${conversationId}`, message);
-      console.log(res.data);
-      dispatch(getConversation());
+      await axios.post(`notes/chat/reply/${conversationId}`, message);
+      socket.emit('new message');
+      socket.on('refresh messages', () => {
+        getConversation();
+      });
+      // dispatch(getConversation());
       // dispatch({ type: 'GET_CONVERSATION', payload: res.data.conversation });
     } catch (error) {
       console.log({ err: 'Err receiving conversationId', error });
@@ -197,13 +203,19 @@ export const replyMessage = (message) => {
 };
 
 export const handleContactIdx = inputID => {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     const state = getState().contacts;
-    state.forEach((contact, i) => {
+    state.forEach(async (contact, i) => {
       if (contact._id === inputID) {
-        dispatch({ type: 'CONTACT_IDX', payload: i });
-        dispatch({ type: 'CONTACT_USER', payload: contact });
-        dispatch(getConversation());
+        try {
+          // socket.emit('leave conversation', contact.conversationId);
+          await dispatch({ type: 'CONTACT_IDX', payload: i });
+          await dispatch({ type: 'CONTACT_USER', payload: contact });
+          await dispatch(getConversation());
+          // socket.emit('enter conversation', contact.conversationId);
+        } catch (error) {
+          console.log({ err: 'Err receiving conversationId', error });
+        }
       }
     });
   };

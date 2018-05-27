@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import openSocket from 'socket.io-client';
+import openSocket from 'socket.io-client';
 
 import { connect } from 'react-redux';
 import { getContact, getConversation, replyMessage } from '../../actions';
@@ -7,7 +7,7 @@ import SideBar from '../SideBar/SideBar';
 import Contact from './Contact';
 import Messages from './Messages';
 
-// const socket = openSocket('http://localhost:8000');
+const socket = openSocket('http://localhost:8000');
 
 class Convo extends Component {
   state = {
@@ -15,6 +15,10 @@ class Convo extends Component {
   };
   async componentWillMount() {
     await this.props.getContact();
+  }
+
+  componentWillUnmount() {
+    socket.emit('leave conversation', this.props.contact.conversationId);
   }
 
   reply = (e) => {
@@ -57,6 +61,7 @@ class Convo extends Component {
                       firstName={person.author.profile.firstName}
                       lastName={person.author.profile.lastName}
                       time={person.createdAt.split('').splice(11, 5).join('')}
+                      convoId={person.conversationId}
                     />
                     );
                 })
