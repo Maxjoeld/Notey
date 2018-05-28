@@ -14,6 +14,7 @@ import {
   CONTACT_IDX,
   CONTACT_USER,
   GET_CONVERSATION,
+  GET_USERS,
 } from '../actions';
 
 const initialState = {
@@ -56,6 +57,8 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, contact: action.payload };
     case GET_CONVERSATION:
       return { ...state, conversation: action.payload };
+    case GET_USERS:
+      return { ...state, users: action.payload };
     default:
       return state;
   }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import openSocket from 'socket.io-client';
 
 import { connect } from 'react-redux';
-import { getContact, getConversation, replyMessage } from '../../actions';
+import { getContact, getConversation, replyMessage, getUsers } from '../../actions';
 import SideBar from '../SideBar/SideBar';
 import Contact from './Contact';
 import Messages from './Messages';
@@ -12,13 +12,18 @@ const socket = openSocket('http://localhost:8000');
 class Convo extends Component {
   state = {
     message: '',
+    search: '',
   };
   async componentWillMount() {
     await this.props.getContact();
+    await this.props.getUsers();
   }
 
   componentWillUnmount() {
     socket.emit('leave conversation', this.props.contact.conversationId);
+  }
+  getContact = (e) => {
+    e.preventDefault();
   }
 
   reply = (e) => {
@@ -33,8 +38,13 @@ class Convo extends Component {
     this.setState({ [name]: value });
   };
 
+
   render() {
-    const { message } = this.state;
+    // const filteredContacts = this.props.notes.filter(note => {
+    //   return note.title.toLowerCase().includes(this.state.search.toLowerCase());
+    // });
+
+    const { message, search } = this.state;
     return (
       <div className="Master">
         <SideBar />
@@ -47,8 +57,9 @@ class Convo extends Component {
                 type="text"
                 placeholder="Search contacts"
                 className="friendlist--search"
-                // value={this.state.search}
-                // onClick={this.props.getContact}
+                value={search}
+                name='search'
+                onChange={this.props.handleInputChange}
               />
             </form>
             {this.props.contacts.length > 0
@@ -63,7 +74,7 @@ class Convo extends Component {
                       time={person.createdAt.split('').splice(11, 5).join('')}
                       convoId={person.conversationId}
                     />
-                    );
+                  );
                 })
               : null}
           </div>
@@ -121,10 +132,16 @@ const mapStateToProps = state => {
     contacts: state.contacts,
     contact: state.contact,
     conversation: state.conversation,
+    users: state.users,
   };
 };
 
-export default connect(mapStateToProps, { getContact, getConversation, replyMessage })(Convo);
+export default connect(mapStateToProps, {
+  getContact,
+  getUsers,
+  getConversation,
+  replyMessage,
+})(Convo);
 
 // we simply just want to search for the user then onClick display the user
 // in the contactList that is displayed there

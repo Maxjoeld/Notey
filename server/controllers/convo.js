@@ -13,7 +13,7 @@ const getContact = (req, res) => {
 
 const allContacts = (req, res) => {
   User.find({})
-    .then(foundUser => res.status(201).send(foundUser))
+    .then(allUsers => res.status(201).send(allUsers))
     .catch(err => res.status(400).send({ error: err }));
 };
 

@@ -35,7 +35,7 @@ module.exports = (app) => {
   res.send({ user: req.user, session: req.session });
   });
 
-  app.get('/notes/islogged', (req, res) => {
+  app.get('/auth/islogged', (req, res, next) => {
     // Do NOT modify this route handler in any way
     if (!req.sessions.user) {
       sendUserError('User is not logged in', res);

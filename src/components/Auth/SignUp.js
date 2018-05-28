@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { saveUser } from '../../../actions';
+import { saveUser } from '../../actions';
 
-import logo from '../google.png';
-import backgroundImage from '../background.jpg';
+import logo from './google.png';
+import backgroundImage from './background.jpg';
 
 const styles = {
   backgroundImage: `url(${backgroundImage})`,

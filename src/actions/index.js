@@ -21,6 +21,7 @@ export const GET_CONTACTS = 'GET_CONTACTS';
 export const CONTACT_IDX = 'CONTACT_IDX';
 export const CONTACT_USER = 'CONTACT_USER';
 export const GET_CONVERSATION = 'GET_CONVERSATION';
+export const GET_USERS = 'GET_USERS';
 
 
 axios.defaults.withCredentials = true;
@@ -53,11 +54,14 @@ export const isAuthenticated = () => {
   return async dispatch => {
     try {
       // this will check if the route we're talking about is authenticated
-      const res = await axios.get('notes/loggedIn');
+      const res = await axios.get('/notes/isLogged');
       await sessionStorage.setItem('id', res.data.user);
-      dispatch({ type: 'ISAUTH' });
+      console.log(res.data.user);
+      await dispatch({ type: 'ISAUTH' });
+      // return true;
     } catch (error) {
       console.log(error);
+      // return false;
     }
   };
 };
@@ -96,6 +100,7 @@ export const loginUser = (username, password, history) => {
       const res = await axios.post('/notes/login', { username, password });
       sessionStorage.setItem('id', res.data.userId);
       dispatch({ type: 'ISAUTH' });
+      // await dispatch(isAuthenticated());
       await history.push('/');
       await dispatch(getNotes());
     } catch (error) {
@@ -173,6 +178,19 @@ export const deleteNote = inputId => {
 /////////////////////////////////////////////////////////////////////
 // CHAT
 /////////////////////////////////////////////////////////////////////
+
+
+export const getUsers = () => {
+  return async dispatch => {
+    try {
+      const res = await axios.get('/notes/chat/getchat');
+      console.log(res.data[0].username);
+      await dispatch({ type: GET_USERS, payload: res.data });
+    } catch (error) {
+      console.log({ err: 'There was an error loading your notes :(', error });
+    }
+  };
+};
 
 export const getContact = () => {
   return async dispatch => {

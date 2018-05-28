@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 
-import { loginUser, loginGoogle } from '../../../actions';
-import logo from '../google.png';
-import backgroundImage from '../background.jpg';
+import { loginUser, loginGoogle } from '../../actions';
+import logo from './google.png';
+import backgroundImage from './background.jpg';
 
 class SignIn extends Component {
   state = {
