@@ -49,6 +49,19 @@ export const deAuth = () => {
   };
 };
 
+export const isAuthenticated = () => {
+  return async dispatch => {
+    try {
+      // this will check if the route we're talking about is authenticated
+      const res = await axios.get('notes/loggedIn');
+      await sessionStorage.setItem('id', res.data.user);
+      dispatch({ type: 'ISAUTH' });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export const logoutUser = (history) => {
   return async dispatch => {
     try {

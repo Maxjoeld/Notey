@@ -61,6 +61,8 @@ io.on('connection', function(socket){
 });
 io.listen(8000);
 
+app
+
 passportRoutes(app);
 routes(app); 
 

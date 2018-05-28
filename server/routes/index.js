@@ -5,7 +5,9 @@ const { userLogin, userLogout, userCreate } = require('../controllers/auth');
 // Chat Routes
 const { getContact,allContacts,getConversations, getConversation,
 newConversation,sendReply, deleteConversation} = require('../controllers/convo');
-const { sessionAuth } = require('../utils/authenticate');
+
+const { sendUserError, sessionAuth } = require('../utils/authenticate');
+
 
 module.exports = (app) => {
   // Note Routes //
@@ -31,6 +33,16 @@ module.exports = (app) => {
   app.get('/notes/me/1', (req, res) => {
   // Do NOT modify this route handler in any way
   res.send({ user: req.user, session: req.session });
+  });
+
+  app.get('/notes/islogged', (req, res) => {
+    // Do NOT modify this route handler in any way
+    if (!req.sessions.user) {
+      sendUserError('User is not logged in', res);
+      return;
+    }
+    res.json({ session: req.session.user })
+    next();
   });
 };
 

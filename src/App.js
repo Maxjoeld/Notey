@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -12,39 +12,49 @@ import SignUp from './components/Auth/SignUp/SignUp';
 
 import Convo from './components/Chat/Convo';
 
-const App = () => {
-  const PrivateRoute = ({ component: Comp, ...rest }) => (
-    <Route
-      {...rest}
-      render={compProps =>
-        sessionStorage.getItem('id') ? (
-          <Comp {...compProps} {...rest} />
-        ) : (
-          <Redirect
-            to={{
-              pathname: '/login',
-            }}
-          />
-        )
-      }
-    />
-  );
-  return (
-    <Router>
-      <div className="App">
-        <Switch>
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={SignUp} />
-          <PrivateRoute exact path="/" component={NoteList} />
-          <PrivateRoute path="/create" component={CreateNote} />
-          <PrivateRoute path="/view" component={ViewNote} />
-          <PrivateRoute path="/edit" component={EditNote} />
-          <PrivateRoute path="/convo" component={Convo} />
-        </Switch>
-      </div>
-    </Router>
-  );
-};
+// import RequireAuth from './hoc/RequireAuth';
+import { isAuthenticated } from './actions';
+
+const PrivateRoute = ({ component: Comp, ...rest }, props) => (
+  <Route
+    {...rest}
+    render={compProps =>
+      props.isAuth ? (
+        <Comp {...compProps} {...rest} />
+      ) : (
+        <Redirect
+          to={{
+            pathname: '/login',
+          }}
+        />
+      )
+    }
+  />
+);
+
+class App extends Component {
+  componentWillMount() {
+    this.props.isAuthenticated();
+  }
+
+  render() {
+    return (
+      <Router>
+        <div className="App">
+          <Switch>
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={(SignUp)} />
+            <PrivateRoute exact path="/" component={(NoteList)} />
+            <PrivateRoute path="/create" component={(CreateNote)} />
+            <PrivateRoute path="/view" component={(ViewNote)} />
+            <PrivateRoute path="/edit" component={(EditNote)} />
+            <PrivateRoute path="/convo" component={(Convo)} />
+          </Switch>
+        </div>
+      </Router>
+    );
+  }
+}
 
 const mapStateToProps = state => {
   return {
@@ -52,4 +62,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, { isAuthenticated })(App);

@@ -1,6 +1,7 @@
 const passport = require('passport');
 const User = require('../models/users');
 const oAuth = require('../models/oAuth');
+const { sessionAuth } = require('../utils/authenticate');
 // authenticate is a reserved word
 module.exports = (app) => {
   
@@ -13,7 +14,7 @@ module.exports = (app) => {
   // this route will be different than the other and will not kick in
   // to Oauth flow, instead it has the code that we need and will try and
   // handle the case a little different
-  app.get('/auth/google/callback', passport.authenticate('google'), (req, res, next) => {
+  app.get('/auth/google/callback',sessionAuth, passport.authenticate('google'), (req, res, next) => {
     // this is checking is already an existing user that wanted to use 0auth
     const { googleId, email , img } = req.user;
     const oauthUser = req.user.email;
