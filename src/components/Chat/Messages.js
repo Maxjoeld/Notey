@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
 
-import openSocket from 'socket.io-client';
-
-const socket = openSocket('http://localhost:8000');
-
-
 class Messages extends Component {
   state = {}
 

@@ -2,16 +2,15 @@ import React, { Component } from 'react';
 import openSocket from 'socket.io-client';
 
 import { connect } from 'react-redux';
-import { getContact, getConversation, replyMessage, getUsers } from '../../actions';
+import { getContact, getConversation, getUsers } from '../../actions';
 import SideBar from '../SideBar/SideBar';
 import Contact from './Contact';
-import Messages from './Messages';
+import Chatbox from './Chatbox';
 
 const socket = openSocket('http://localhost:8000');
 
 class Convo extends Component {
   state = {
-    message: '',
     search: '',
   };
   async componentWillMount() {
@@ -26,13 +25,6 @@ class Convo extends Component {
     e.preventDefault();
   }
 
-  reply = (e) => {
-    e.preventDefault();
-    const { message } = this.state;
-    this.props.replyMessage({ message });
-    this.setState({ message: '' });
-  };
-
   handleInputChange = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
@@ -44,14 +36,14 @@ class Convo extends Component {
     //   return note.title.toLowerCase().includes(this.state.search.toLowerCase());
     // });
 
-    const { message, search } = this.state;
+    const { search } = this.state;
     return (
       <div className="Master">
         <SideBar />
         <div className="friendcomp">
           <div className="friendslist">
             <p> Friends </p>
-            <p> 20 Conversations </p>
+            <p> {this.props.contacts.length} Conversations </p>
             <form>
               <input
                 type="text"
@@ -79,48 +71,7 @@ class Convo extends Component {
               : null}
           </div>
           <hr className="convo-hr" />
-          <form className="friendChat">
-            <div className="friendchat--header">
-              <p className="friendchat--user">{this.props.contact._id}</p>
-              <ul style={{ display: 'flex' }}>
-                <li> icon </li>
-                <li> icon </li>
-                <li> icon </li>
-              </ul>
-            </div>
-            <div className="friendchat--textbox">
-              {this.props.conversation ?
-                this.props.conversation.map(convo => {
-                  return (
-                    <Messages
-                      key={convo._id}
-                      index={convo._id}
-                      message={convo.body}
-                      firstName={convo.author.profile.firstName}
-                      lastName={convo.author.profile.lastName}
-                      time={convo.createdAt.split('').splice(11, 5).join('')}
-                    />
-                  );
-                })
-              : null}
-            </div>
-            <input
-              type="text"
-              placeholder="Type your message here"
-              className="friendChat--search"
-              value={message}
-              name="message"
-              onChange={this.handleInputChange}
-              required
-            />
-            <button
-              className="CreateNote__Submit"
-              type="submit"
-              onClick={(e) => this.reply(e)}
-            >
-              Send
-            </button>
-          </form>
+          <Chatbox />
         </div>
       </div>
     );
@@ -140,7 +91,6 @@ export default connect(mapStateToProps, {
   getContact,
   getUsers,
   getConversation,
-  replyMessage,
 })(Convo);
 
 // we simply just want to search for the user then onClick display the user
