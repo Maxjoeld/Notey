@@ -6,6 +6,7 @@ import { getContact, getConversation, getUsers } from '../../actions';
 import SideBar from '../SideBar/SideBar';
 import Contact from './Contact';
 import Chatbox from './Chatbox';
+import Dropdown from './Dropdown';
 
 const socket = openSocket('http://localhost:8000');
 
@@ -53,6 +54,7 @@ class Convo extends Component {
                 name='search'
                 onChange={this.props.handleInputChange}
               />
+              <Dropdown />
             </form>
             {this.props.contacts.length > 0
               ? this.props.contacts.map(person => {
@@ -92,6 +94,3 @@ export default connect(mapStateToProps, {
   getUsers,
   getConversation,
 })(Convo);
-
-// we simply just want to search for the user then onClick display the user
-// in the contactList that is displayed there

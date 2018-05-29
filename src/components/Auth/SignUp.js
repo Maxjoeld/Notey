@@ -14,12 +14,15 @@ class SignUp extends Component {
   state = {
     username: '',
     password: '',
+    firstName: '',
+    lastName: '',
   };
 
   saveUser = e => {
     e.preventDefault();
-    const { username, password } = this.state;
-    this.props.saveUser(username, password, this.props.history);
+    const { username, password, firstName, lastName } = this.state;
+    const profile = { firstName, lastName };
+    this.props.saveUser(username, password, profile, this.props.history);
   };
 
   handleInputChange = e => {
@@ -32,7 +35,6 @@ class SignUp extends Component {
         <div className="signin--box">
           <h1 className="signin--header">Sign Up With</h1>
           <form className="signin--signin">
-            Username:<br />
             <input
               name="username"
               onChange={this.handleInputChange}
@@ -40,13 +42,25 @@ class SignUp extends Component {
               placeholder="Username"
             />
             <br />
-            Password
-            <br />
             <input
               name="password"
               onChange={this.handleInputChange}
               className="signin--signin__password"
               placeholder="Password"
+            />
+            <br />
+            <input
+              name="firstName"
+              onChange={this.handleInputChange}
+              className="signin--signin__username"
+              placeholder="firstname"
+            />
+            <br />
+            <input
+              name="lastName"
+              onChange={this.handleInputChange}
+              className="signin--signin__username"
+              placeholder="lastName"
             />
             <br />
             <input

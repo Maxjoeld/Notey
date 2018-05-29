@@ -385,6 +385,9 @@
   height: 7rem;
   width: 55rem; }
 
+.dropdown-user {
+  cursor: pointer; }
+
 body {
   margin: 0;
   padding: 0;

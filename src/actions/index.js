@@ -109,12 +109,13 @@ export const loginUser = (username, password, history) => {
   };
 };
 
-export const saveUser = (username, password, history) => {
+export const saveUser = (username, password, profile, history) => {
   return async dispatch => {
     try {
-      await axios.post('/notes/register', { username, password });
+      await axios.post('/notes/register', { username, password, profile });
       const res = await axios.post('/notes/login', { username, password });
       await sessionStorage.setItem('id', res.data.userId);
+      dispatch({ type: 'ISAUTH' });
       // await dispatch({ type: LOGIN });
       await history.push('/');
     } catch (error) {
@@ -184,7 +185,7 @@ export const getUsers = () => {
   return async dispatch => {
     try {
       const res = await axios.get('/notes/chat/getchat');
-      console.log(res.data[0].username);
+      console.log(res.data[0]._id);
       await dispatch({ type: GET_USERS, payload: res.data });
     } catch (error) {
       console.log({ err: 'There was an error loading your notes :(', error });
