@@ -23,6 +23,7 @@ const getConversations = (req,res) => {
   .select('_id')
   .then((conversations) => {
     // Set up empty array to hold conversations + most recent message
+
     let fullConversations = [];
     conversations.forEach(conversation => {
       Message.find({ 'conversationId': conversation._id })
@@ -64,9 +65,21 @@ const newConversation = (req, res, next) => {
   if (!recipient) {
     sendUserError('Please choose a valid recipient for your message.', res);
   }
-  if (!composedMessage) {
-    return sendUserError('Please enter a message.', res);
-  }
+  // check if conversation already exist
+  // Conversation.find({ i: req.session.user })
+  // .select('participants')
+  // .then((conversations) => {
+  //   convos.forEach((id => {
+  //     console.log({ loop: id });
+  //     if (id._id === req.params.recipient) {
+  //       console.log('userError')
+  //     } 
+  //   }))
+  // }).catch(err => sendUserError(err,res));
+  // if (!composedMessage) {
+  //   return sendUserError('Please enter a message.', res);
+  // }
+
   User.findOne({ _id: recipient})
   .then(reci => {
     let recipientName = reci.profile.firstName + " " + reci.profile.lastName;
@@ -81,22 +94,27 @@ const newConversation = (req, res, next) => {
       });
   
       conversation.save()
-        .then(newConversation => { 
-          const message = new Message({
-            conversationId: newConversation._id,
-            body: composedMessage,
-            author: user,
-          });
+        .then(newConversation => {
+          res.status(200).json({ message: 'Conversation started', conversationId: conversation._id }); 
+          // const message = new Message({
+          //   conversationId: newConversation._id,
+          //   body: composedMessage,
+          //   author: user,
+          // });
         
-          message.save() 
-            .then(() => {
-              res.status(200).json({ message: 'Conversation started', conversationId: conversation._id });
-            }).catch(err => sendUserError(err,res));
+          // message.save() 
+          //   .then(() => {
+          //    
+          //   }).catch(err => sendUserError(err,res));
         })
         .catch(err => sendUserError(err, res));
     }).catch(err => console.log(err))
   })
 .catch(err => console.log(err));
+  
+};
+
+const loadDataTemporarily = (req,res) => {
   
 };
 

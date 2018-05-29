@@ -180,6 +180,18 @@ export const deleteNote = inputId => {
 // CHAT
 /////////////////////////////////////////////////////////////////////
 
+export const loadNewUser = (userId) => {
+  return async dispatch => {
+    try {
+      // console.log(userId);
+      const res = await axios.post(`/notes/chat/new/${userId}`);
+      console.log(res.data);
+      // await dispatch({ type: GET_USERS, payload: res.data });
+    } catch (error) {
+      console.log({ err: 'There was an error loading your notes :(', error });
+    }
+  };
+};
 
 export const getUsers = () => {
   return async dispatch => {
