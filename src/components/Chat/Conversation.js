@@ -53,7 +53,7 @@ class Convo extends Component {
               />
               <Dropdown />
             </form>
-            {this.props.contacts.length > 0
+            {this.props.contacts
               ? this.props.contacts.map(person => {
                   return (
                     <Contact

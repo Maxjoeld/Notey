@@ -4,11 +4,7 @@ import { handleContactIdx } from '../../actions';
 
 const Contact = props => {
   return (
-    <div
-      className="contact-box"
-      onClick={() => props.handleContactIdx(props.index)}
-    >
-
+    <div className="contact-box" onClick={() => props.handleContactIdx(props.index)}>
       <p className="contact-image" />
       <div className="contact-info">
         <p className="contact-firstName">{props.firstName}</p>

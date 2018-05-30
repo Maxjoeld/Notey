@@ -23,6 +23,7 @@ const getConversations = (req,res) => {
   Conversation.find({ participants: req.session.user })
   .select('_id')
   .then((conversations) => {
+    console.log({conversations});
     
     // Set up empty array to hold conversations + most recent message
 
@@ -38,8 +39,10 @@ const getConversations = (req,res) => {
           select: "profile.firstName profile.lastName"
         })
         .then(message => {
+          console.log({message});
           fullConversations.push(...message);
           if (fullConversations.length === conversations.length) {
+            console.log({fullConversations});
             return res.status(200).json({ conversations: fullConversations });
           }
         }).catch(err => sendUserError(err, res));
@@ -62,8 +65,9 @@ const getConversation = (req, res) => {
 
 const newConversation = (req, res, next) => {
   const { recipient } = req.params;
-  const { composedMessage } = req.body;
+  const { message } = req.body;
   const { user } = req.session;
+  console.log(recipient, "this is the recipient");
   if (!recipient) {
     sendUserError('Please choose a valid recipient for your message.', res);
   }
@@ -78,9 +82,9 @@ const newConversation = (req, res, next) => {
   //     } 
   //   }))
   // }).catch(err => sendUserError(err,res));
-  // if (!composedMessage) {
-  //   return sendUserError('Please enter a message.', res);
-  // }
+  if (!message) {
+    return sendUserError('Please enter a message.', res);
+  }
 
   User.findOne({ _id: recipient})
   .then(reci => {
@@ -96,18 +100,17 @@ const newConversation = (req, res, next) => {
       });
   
       conversation.save()
-        .then(newConversation => {
-          res.status(200).json({ message: 'Conversation started', conversationId: conversation._id }); 
-          // const message = new Message({
-          //   conversationId: newConversation._id,
-          //   body: composedMessage,
-          //   author: user,
-          // });
+        .then(newConversation => { 
+          const newMessage = new Message({
+            conversationId: newConversation._id,
+            body: message,
+            author: user,
+          });
         
-          // message.save() 
-          //   .then(() => {
-          //    
-          //   }).catch(err => sendUserError(err,res));
+          newMessage.save() 
+            .then(() => {
+              res.status(200).json({ message: 'Conversation started', conversationId: conversation._id });
+            }).catch(err => sendUserError(err,res));
         })
         .catch(err => sendUserError(err, res));
     }).catch(err => console.log(err))
@@ -121,7 +124,6 @@ const loadDataTemporarily = (req,res) => {
 };
 
 const sendReply = (req, res, next) => {
-  console.log(req.body.message);
   const reply = new Message({
     conversationId: req.params.conversationId,
     body: req.body.message,

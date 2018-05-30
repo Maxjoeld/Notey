@@ -1,19 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadNewUser } from '../../actions';
+import { loadNewUser, handleNewUserIdx } from '../../actions';
 
 
 class Dropdown extends Component {
   state = {}
 
+  newUser = (userId) => {
+    // we don't want to create a new converstaion yet. We want to just show the user the new user.
+    console.log(userId);
+    this.props.handleNewUserIdx(userId);
+    // this.props.loadNewUser(userId);
+  }
+
   render() {
     return (
       <div>
         {this.props.users.map(user => {
-      /* eslint-disable */ 
+      /* eslint-disable */
           return (
-            <div user={user} key={user._id}>
-              <p className="dropdown-user" onClick={() => this.props.loadNewUser(user._id)}>{user.username}</p>
+            <div user={user} key={user._id} onClick={() => this.newUser(user._id)}>
+              <p className="dropdown-user">{user.username}</p>
             </div>
           );
         })}
@@ -27,4 +34,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { loadNewUser })(Dropdown);
+export default connect(mapStateToProps, { loadNewUser, handleNewUserIdx })(Dropdown);

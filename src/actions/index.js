@@ -22,6 +22,8 @@ export const CONTACT_IDX = 'CONTACT_IDX';
 export const CONTACT_USER = 'CONTACT_USER';
 export const GET_CONVERSATION = 'GET_CONVERSATION';
 export const GET_USERS = 'GET_USERS';
+export const USER = 'USER';
+export const USER_IDX = 'USER_IDX';
 
 
 axios.defaults.withCredentials = true;
@@ -182,13 +184,24 @@ export const deleteNote = inputId => {
 // CHAT
 /////////////////////////////////////////////////////////////////////
 
-export const loadNewUser = (userId) => {
+export const loadConvos = () => {
   return async dispatch => {
     try {
-      // console.log(userId);
-      const res = await axios.post(`/notes/chat/new/${userId}`);
+      const res = await axios.get('/notes/chat/convo');
+      await dispatch({ type: GET_CONTACTS, payload: res.data.conversations });
+    } catch (error) {
+      console.log({ err: 'There was an error loading your notes :(', error });
+    }
+  };
+};
+
+export const loadNewUser = (recipient, message) => {
+  return async dispatch => {
+    try {
+      console.log(message);
+      const res = await axios.post(`/notes/chat/new/${recipient}`, message);
       console.log(res.data);
-      // await dispatch({ type: GET_USERS, payload: res.data });
+      await dispatch(loadConvos());
     } catch (error) {
       console.log({ err: 'There was an error loading your notes :(', error });
     }
@@ -207,16 +220,6 @@ export const getUsers = () => {
   };
 };
 
-export const loadConvos = () => {
-  return async dispatch => {
-    try {
-      const res = await axios.get('/notes/chat/convo');
-      await dispatch({ type: GET_CONTACTS, payload: res.data.conversations });
-    } catch (error) {
-      console.log({ err: 'There was an error loading your notes :(', error });
-    }
-  };
-};
 
 export const getConversation = () => {
   return async (dispatch, getState) => {
@@ -240,8 +243,6 @@ export const replyMessage = (message) => {
       // socket.on('refresh messages', () => {
       await dispatch(getConversation());
       // });
-      // dispatch(getConversation());
-      // dispatch({ type: 'GET_CONVERSATION', payload: res.data.conversation });
     } catch (error) {
       console.log({ err: 'Err receiving conversationId', error });
     }
@@ -261,6 +262,24 @@ export const handleContactIdx = inputID => {
           // socket.emit('enter conversation', contact.conversationId);
         } catch (error) {
           console.log({ err: 'Err receiving conversationId', error });
+        }
+      }
+    });
+  };
+};
+
+export const handleNewUserIdx = inputID => {
+  return async (dispatch, getState) => {
+    const { users } = getState();
+    users.forEach(async (user, i) => {
+      if (user._id === inputID) {
+        try {
+          // socket.emit('leave conversation', user.conversationId);
+          await dispatch({ type: 'USER_IDX', payload: i });
+          await dispatch({ type: 'USER', payload: user });
+          // socket.emit('enter conversation', contact.conversationId);
+        } catch (error) {
+          console.log({ err: 'Err receiving user Information', error });
         }
       }
     });

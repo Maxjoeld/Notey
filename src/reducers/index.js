@@ -15,6 +15,8 @@ import {
   CONTACT_USER,
   GET_CONVERSATION,
   GET_USERS,
+  USER,
+  USER_IDX,
 } from '../actions';
 
 const initialState = {
@@ -23,9 +25,9 @@ const initialState = {
   noteIndex: 0,
   contactIndex: 0,
   sortedNotes: true,
-  contacts: [],
   contact: [],
-  // newContact: false,
+  newContact: true,
+  user: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -36,30 +38,32 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, notes: action.payload };
     case DEAUTH:
       return {
-        ...state, notes: [], noteIndex: 0, contacts: [], contact: [], conversation: [],
+        ...state, notes: [], noteIndex: 0, contacts: [], contact: [], conversation: [], user: [],
       };
     case SORT_NOTES:
       return { ...state, notes: action.payload };
     case NOTE_IDX:
       return { ...state, noteIndex: action.payload };
-    case CONTACT_IDX:
-      return { ...state, contactIdx: action.payload };
     case SORT_FALSE:
       return { ...state, notes: action.payload, sortedNotes: false };
     case SORT_TRUE:
       return { ...state, notes: action.payload, sortedNotes: true };
     case ARRAY_MOVE:
       return { ...state, notes: action.payload };
-    case SET_ID:
-      return { ...state, authenticated: true, user: action.payload };
     case GET_CONTACTS:
       return { ...state, contacts: action.payload };
+    case CONTACT_IDX:
+      return { ...state, contactIdx: action.payload };
     case CONTACT_USER:
       return { ...state, contact: action.payload };
     case GET_CONVERSATION:
       return { ...state, conversation: action.payload };
     case GET_USERS:
       return { ...state, users: action.payload };
+    case USER:
+      return { ...state, user: action.payload };
+    case USER_IDX:
+      return { ...state, userIdx: action.payload };
     default:
       return state;
   }
