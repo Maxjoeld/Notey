@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import openSocket from 'socket.io-client';
+// import openSocket from 'socket.io-client';
 
 import { connect } from 'react-redux';
 import { getContact, getConversation, getUsers } from '../../actions';
@@ -8,7 +8,7 @@ import Contact from './Contact';
 import Chatbox from './Chatbox';
 import Dropdown from './Dropdown';
 
-const socket = openSocket('http://localhost:8000');
+// const socket = openSocket('http://localhost:8000');
 
 class Convo extends Component {
   state = {
@@ -19,9 +19,9 @@ class Convo extends Component {
     await this.props.getUsers();
   }
 
-  componentWillUnmount() {
-    socket.emit('leave conversation', this.props.contact.conversationId);
-  }
+  // componentWillUnmount() {
+  //   socket.emit('leave conversation', this.props.contact.conversationId);
+  // }
   getContact = (e) => {
     e.preventDefault();
   }

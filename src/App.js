@@ -10,7 +10,7 @@ import EditNote from './components/Notes/EditNote';
 import Login from './components/Auth/SignIn';
 import SignUp from './components/Auth/SignUp';
 
-import Convo from './components/Chat/Convo';
+import Convo from './components/Chat/Conversation';
 
 // import RequireAuth from './hoc/RequireAuth';
 import { isAuthenticated } from './actions';

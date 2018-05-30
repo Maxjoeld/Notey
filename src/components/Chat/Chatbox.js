@@ -6,6 +6,7 @@ import Messages from './Messages';
 class ChatBox extends Component {
   state = {
     message: '',
+    isAuth: true,
   };
   reply = (e) => {
     e.preventDefault();
@@ -25,13 +26,18 @@ class ChatBox extends Component {
       <div>
         <form className="friendChat">
           <div className="friendchat--header">
-            <p className="friendchat--user">{this.props.contact._id}</p>
+            {/* <p className="friendchat--user"> */}
+            {/* {this.props.newContact ?
+              <p className="friendchat--user">Hey</p> : <p className="friendchat--user">{this.props.contact._id}</p>
+            } */}
+            {/* </p> */}
             <ul style={{ display: 'flex' }}>
               <li> icon </li>
               <li> icon </li>
               <li> icon </li>
             </ul>
           </div>
+          {/* {this.props.newContact ? <p>Hey</p> : */}
           <div className="friendchat--textbox">
             {this.props.conversation ?
               this.props.conversation.map(convo => {
@@ -46,8 +52,9 @@ class ChatBox extends Component {
                   />
                 );
               })
-            : null}
+              : null}
           </div>
+          {/* } */}
           <input
             type="text"
             placeholder="Type your message here"
@@ -74,6 +81,7 @@ const mapStateToProps = state => {
   return {
     contact: state.contact,
     conversation: state.conversation,
+    // newContact: state.newContact,
   };
 };
 

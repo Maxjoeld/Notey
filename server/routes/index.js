@@ -25,15 +25,15 @@ module.exports = (app) => {
   app.route('/notes/chat/getchat').get(allContacts);
 
   app.get('/notes/chat/convo/:conversationId',sessionAuth, getConversation);
-  app.get('/notes/chat/convo', getConversations);
+  app.get('/newyear/me/1', getConversations);
   app.post('/notes/chat/reply/:conversationId', sessionAuth, sendReply);
   app.post('/notes/chat/new/:recipient',sessionAuth, newConversation);
 
   
-  app.get('/notes/me/1', (req, res) => {
-  // Do NOT modify this route handler in any way
-  res.send({ user: req.user, session: req.session });
-  });
+  // app.get('/notes/me/1', (req, res) => {
+  // // Do NOT modify this route handler in any way
+  // res.send({ user: req.user, session: req.session });
+  // });
 
   app.get('/auth/islogged', (req, res, next) => {
     // Do NOT modify this route handler in any way

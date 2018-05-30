@@ -25,6 +25,7 @@ const initialState = {
   sortedNotes: true,
   contacts: [],
   contact: [],
+  // newContact: false,
 };
 
 const rootReducer = (state = initialState, action) => {

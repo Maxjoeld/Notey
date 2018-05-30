@@ -19,7 +19,8 @@ const allContacts = (req, res) => {
 
 const getConversations = (req,res) => {
   // Only return one message from each conversation to display as snippet
-  Conversation.find({ participants: req.session.user })
+  // res.json('helllo');
+  Conversation.find({ participants: "5b00448aa93df70de03e95f4" })
   .select('_id')
   .then((conversations) => {
     // Set up empty array to hold conversations + most recent message

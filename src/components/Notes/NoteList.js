@@ -15,8 +15,6 @@ class NoteList extends Component {
 
   async componentDidMount() {
     await this.props.getNotes();
-    await this.props.getUsers();
-    await this.props.getContact();
   }
 
   onSortEnd = ({ oldIndex, newIndex }) => {

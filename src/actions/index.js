@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 // export const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
-import openSocket from 'socket.io-client';
+// import openSocket from 'socket.io-client';
 
-const socket = openSocket('http://localhost:8000');
+// const socket = openSocket('http://localhost:8000');
 
 export const DEAUTH = 'DEAUTH';
 export const ISAUTH = 'ISAUTH';
@@ -103,6 +103,8 @@ export const loginUser = (username, password, history) => {
       // await dispatch(isAuthenticated());
       await history.push('/');
       await dispatch(getNotes());
+      await dispatch(getUsers());
+      await dispatch(getContact());
     } catch (error) {
       console.log({ err: 'There was an error signing in ', error });
     }
@@ -208,7 +210,7 @@ export const getUsers = () => {
 export const getContact = () => {
   return async dispatch => {
     try {
-      const res = await axios.get('/notes/chat/convo');
+      const res = await axios.get('http://localhost:5000/newyear/me/1');
       await dispatch({ type: GET_CONTACTS, payload: res.data.conversations });
     } catch (error) {
       console.log({ err: 'There was an error loading your notes :(', error });
@@ -220,7 +222,7 @@ export const getConversation = () => {
   return async (dispatch, getState) => {
     try {
       const { conversationId } = await getState().contact;
-      const res = await axios.get(`notes/chat/convo/${conversationId}`);
+      const res = await axios.get(`/notes/chat/convo/${conversationId}`);
       console.log(res.data);
       dispatch({ type: 'GET_CONVERSATION', payload: res.data.conversation });
     } catch (error) {
@@ -233,11 +235,11 @@ export const replyMessage = (message) => {
   return async (dispatch, getState) => {
     try {
       const { conversationId } = await getState().contact;
-      await axios.post(`notes/chat/reply/${conversationId}`, message);
-      socket.emit('new message');
-      socket.on('refresh messages', () => {
-        getConversation();
-      });
+      await axios.post(`/notes/chat/reply/${conversationId}`, message);
+      // socket.emit('new message');
+      // socket.on('refresh messages', () => {
+      await dispatch(getConversation());
+      // });
       // dispatch(getConversation());
       // dispatch({ type: 'GET_CONVERSATION', payload: res.data.conversation });
     } catch (error) {
