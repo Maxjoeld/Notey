@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import openSocket from 'socket.io-client';
 
 import { connect } from 'react-redux';
-import { getContact, getConversation, getUsers } from '../../actions';
+import { loadConvos, getConversation, getUsers } from '../../actions';
 import SideBar from '../SideBar/SideBar';
 import Contact from './Contact';
 import Chatbox from './Chatbox';
@@ -15,16 +15,13 @@ class Convo extends Component {
     search: '',
   };
   async componentWillMount() {
-    await this.props.getContact();
+    await this.props.loadConvos();
     await this.props.getUsers();
   }
 
   // componentWillUnmount() {
   //   socket.emit('leave conversation', this.props.contact.conversationId);
   // }
-  getContact = (e) => {
-    e.preventDefault();
-  }
 
   handleInputChange = e => {
     const { name, value } = e.target;
@@ -90,7 +87,7 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
-  getContact,
+  loadConvos,
   getUsers,
   getConversation,
 })(Convo);

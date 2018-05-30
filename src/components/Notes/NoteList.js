@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { SortableContainer, arrayMove } from 'react-sortable-hoc';
 import { CSVLink } from 'react-csv';
 import { connect } from 'react-redux';
-import { updateSortedNotes, handleIdx, onSortEnd, sortData, getNotes, getUsers, getContact } from '../../actions';
+import { updateSortedNotes, handleIdx, onSortEnd, sortData, getNotes, getUsers, loadConvos } from '../../actions';
 import Note from './Note';
 import SideBar from '../SideBar/SideBar';
 
@@ -112,5 +112,5 @@ export default connect(mapStateToProps, {
   onSortEnd,
   getNotes,
   getUsers,
-  getContact,
+  loadConvos,
 })(NoteList);

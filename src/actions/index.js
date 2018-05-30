@@ -104,7 +104,7 @@ export const loginUser = (username, password, history) => {
       await history.push('/');
       await dispatch(getNotes());
       await dispatch(getUsers());
-      await dispatch(getContact());
+      await dispatch(loadConvos());
     } catch (error) {
       console.log({ err: 'There was an error signing in ', error });
     }
@@ -207,10 +207,10 @@ export const getUsers = () => {
   };
 };
 
-export const getContact = () => {
+export const loadConvos = () => {
   return async dispatch => {
     try {
-      const res = await axios.get('http://localhost:5000/newyear/me/1');
+      const res = await axios.get('/notes/chat/convo');
       await dispatch({ type: GET_CONTACTS, payload: res.data.conversations });
     } catch (error) {
       console.log({ err: 'There was an error loading your notes :(', error });

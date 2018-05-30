@@ -25,7 +25,7 @@ module.exports = (app) => {
   app.route('/notes/chat/getchat').get(allContacts);
 
   app.get('/notes/chat/convo/:conversationId',sessionAuth, getConversation);
-  app.get('/newyear/me/1', getConversations);
+  app.get('/notes/chat/convo', getConversations);
   app.post('/notes/chat/reply/:conversationId', sessionAuth, sendReply);
   app.post('/notes/chat/new/:recipient',sessionAuth, newConversation);
 
