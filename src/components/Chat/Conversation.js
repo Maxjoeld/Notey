@@ -13,7 +13,7 @@ import Dropdown from './Dropdown';
 class Convo extends Component {
   state = {
     search: '',
-    // showDropDown: false,
+    showDropDown: false,
   };
   async componentWillMount() {
     await this.props.loadConvos();
@@ -29,9 +29,9 @@ class Convo extends Component {
     this.setState({ [name]: value });
   };
 
-  // showDropDown = () => {
-  //   this.setState({ showDropDown: !this.state.showDropDown });
-  // }
+  showDropDown = () => {
+    this.setState({ showDropDown: !this.state.showDropDown });
+  }
 
 
   render() {
@@ -54,11 +54,13 @@ class Convo extends Component {
                 className="friendlist--search"
                 value={search}
                 name='search'
-                autoomplete="off"
-                onChange={this.props.handleInputChange}
-                // onClick={this.showDropDown}
+                autoComplete="off"
+                onChange={this.handleInputChange}
+                onClick={() => this.showDropDown()}
               />
-              <Dropdown />
+              {this.state.showDropDown ?
+                <Dropdown showDrop={this.showDropDown} /> : null
+              }
             </form>
             {this.props.contacts
               ? this.props.contacts.map(person => {
@@ -76,7 +78,7 @@ class Convo extends Component {
                 })
               : null}
           </div>
-          <hr className="convo-hr" />
+          {/* <hr className="convo-hr" /> */}
           <Chatbox />
         </div>
       </div>

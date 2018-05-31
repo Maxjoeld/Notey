@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import onClickOutside from 'react-onclickoutside';
 import { connect } from 'react-redux';
-import { loadNewUser, handleNewUserIdx } from '../../actions';
+import { loadNewUser, handleNewUserIdx, newContact } from '../../actions';
 
 class Dropdown extends Component {
   state = {
@@ -9,13 +9,11 @@ class Dropdown extends Component {
   }
 
   newUser = (userId) => {
-    // we don't want to create a new converstaion yet. We want to just show the user the new user.
-    console.log(userId);
     this.props.handleNewUserIdx(userId);
-    // this.props.loadNewUser(userId);
+    this.props.newContact();
   }
-  handleClickOutside = evt => {
-    console.log(evt);
+  handleClickOutside = () => {
+    this.props.showDrop();
     this.setState({ showDropDown: !this.state.showDropDown });
   }
 
@@ -44,4 +42,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default onClickOutside(connect(mapStateToProps, { loadNewUser, handleNewUserIdx })(Dropdown));
+let MyComponent = onClickOutside(Dropdown);
+MyComponent = connect(mapStateToProps, { loadNewUser, handleNewUserIdx, newContact })(MyComponent)
+
+export default MyComponent;

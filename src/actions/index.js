@@ -24,6 +24,8 @@ export const GET_CONVERSATION = 'GET_CONVERSATION';
 export const GET_USERS = 'GET_USERS';
 export const USER = 'USER';
 export const USER_IDX = 'USER_IDX';
+export const NEW_CONTACT = 'NEW_CONTACT';
+export const EXISTING_CONTACT = 'EXISTING_CONTACT';
 
 
 axios.defaults.withCredentials = true;
@@ -183,6 +185,17 @@ export const deleteNote = inputId => {
 /////////////////////////////////////////////////////////////////////
 // CHAT
 /////////////////////////////////////////////////////////////////////
+export const newContact = () => {
+  return {
+    type: NEW_CONTACT,
+  };
+};
+
+export const existingContact = () => {
+  return {
+    type: EXISTING_CONTACT,
+  };
+};
 
 export const loadConvos = () => {
   return async dispatch => {
@@ -198,10 +211,9 @@ export const loadConvos = () => {
 export const loadNewUser = (recipient, message) => {
   return async dispatch => {
     try {
-      console.log(message);
       const res = await axios.post(`/notes/chat/new/${recipient}`, message);
-      console.log(res.data);
       await dispatch(loadConvos());
+      await dispatch(existingContact());
     } catch (error) {
       console.log({ err: 'There was an error loading your notes :(', error });
     }
@@ -251,6 +263,7 @@ export const replyMessage = (message) => {
 
 export const handleContactIdx = inputID => {
   return async (dispatch, getState) => {
+    await dispatch(existingContact());
     const state = getState().contacts;
     state.forEach(async (contact, i) => {
       if (contact._id === inputID) {

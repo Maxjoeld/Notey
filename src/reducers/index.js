@@ -17,6 +17,8 @@ import {
   GET_USERS,
   USER,
   USER_IDX,
+  NEW_CONTACT,
+  EXISTING_CONTACT,
 } from '../actions';
 
 const initialState = {
@@ -26,7 +28,7 @@ const initialState = {
   contactIndex: 0,
   sortedNotes: true,
   contact: [],
-  newContact: true,
+  newContact: false,
   user: [],
 };
 
@@ -64,6 +66,10 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, user: action.payload };
     case USER_IDX:
       return { ...state, userIdx: action.payload };
+    case NEW_CONTACT:
+      return { ...state, newContact: true };
+    case EXISTING_CONTACT:
+      return { ...state, newContact: false };
     default:
       return state;
   }
