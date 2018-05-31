@@ -31,7 +31,7 @@ class ChatBox extends Component {
     const { message } = this.state;
     let user;
     if (this.props.newContact) {
-      user = this.props.user._id;
+      user = this.props.recipient[0] + " "+ this.props.recipient[1];
     } else {
       user = this.props.contact._id;
     }
@@ -92,6 +92,7 @@ const mapStateToProps = state => {
     conversation: state.conversation,
     newContact: state.newContact,
     user: state.user,
+    recipient: state.recipient,
   };
 };
 

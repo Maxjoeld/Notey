@@ -18,6 +18,9 @@ class Dropdown extends Component {
   }
 
   render() {
+    // const filteredContacts = this.props.notes.filter(note => {
+    //   return note.title.toLowerCase().includes(this.state.search.toLowerCase());
+    // });
     return (
       <div>
         {this.state.showDropDown ?
@@ -26,7 +29,7 @@ class Dropdown extends Component {
           /* eslint-disable */
               return (
                 <div user={user} key={user._id} onClick={() => this.newUser(user._id)}>
-                  <p className="dropdown-user">{user.username}</p>
+                  <p className="dropdown-user">{user._id}</p>
                 </div>
               );
             })}

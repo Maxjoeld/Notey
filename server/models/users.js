@@ -17,9 +17,13 @@ const UserSchema = new Schema({
     unique: true,
     lowercase: true,
   },
-  profile: {
-    firstName: { type: String },
-    lastName: { type: String }
+  firstName: { 
+    type: String,
+    // required: true,
+  },
+  lastName: {
+    type: String,
+    // required: true, 
   },
   password: {
     type: String,

@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadConvos, getConversation, getUsers } from '../../actions';
 import SideBar from '../SideBar/SideBar';
-import Contact from './Contact';
+import Contact from './ContactList';
 import Chatbox from './Chatbox';
 import Dropdown from './Dropdown';
 
@@ -35,10 +35,6 @@ class Convo extends Component {
 
 
   render() {
-    // const filteredContacts = this.props.notes.filter(note => {
-    //   return note.title.toLowerCase().includes(this.state.search.toLowerCase());
-    // });
-
     const { search } = this.state;
     return (
       <div className="Master">

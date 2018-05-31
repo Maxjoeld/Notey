@@ -26,7 +26,7 @@ export const USER = 'USER';
 export const USER_IDX = 'USER_IDX';
 export const NEW_CONTACT = 'NEW_CONTACT';
 export const EXISTING_CONTACT = 'EXISTING_CONTACT';
-
+export const NEW_USER_NAME = 'NEW_USER_NAME';
 
 axios.defaults.withCredentials = true;
 
@@ -287,6 +287,7 @@ export const handleNewUserIdx = inputID => {
     users.forEach(async (user, i) => {
       if (user._id === inputID) {
         try {
+          await dispatch({type: 'NEW_USER_NAME', payload: [user.profile.firstName, user.profile.lastName] });
           // socket.emit('leave conversation', user.conversationId);
           await dispatch({ type: 'USER_IDX', payload: i });
           await dispatch({ type: 'USER', payload: user });
