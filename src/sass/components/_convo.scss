@@ -5,7 +5,6 @@
   // border: .02rem solid rgb(228, 228, 228);
   width: 30rem;
   height: 10rem;
-  position: relative;
   cursor: pointer;
   border-bottom: none;
   border-right: none;
@@ -18,6 +17,7 @@
   display: flex;
   // justify-content: space-evenly;
   margin-left: 8rem;
+  margin-top: -8rem;
 }
 
 .contact-firstName {
@@ -44,7 +44,7 @@
 
 .contact-image {
   // display: flex;
-  position: absolute;
+  // position: absolute;
   border: 5px solid rgb(255, 255, 255);
   box-shadow: 0px 0px 0px 2px rgb(211, 211, 211);
   justify-content: center;
@@ -69,6 +69,7 @@
 .friendcomp {
   display: flex;
   margin:2rem 4%;
+  position: relative;
   // color: blue;
 }
 
@@ -128,6 +129,15 @@
 // DropDown
 //////////////////////////////////////////
 
+.dropdown {
+  position: absolute;
+  background-color: rgb(255, 255, 255);
+  border: 0.5px solid rgb(211, 182, 127);
+  width: 20rem;
+  margin-top: -3rem;
+}
+
 .dropdown-user {
   cursor: pointer;
+  margin-left: 1rem;
 }

@@ -13,6 +13,7 @@ import Dropdown from './Dropdown';
 class Convo extends Component {
   state = {
     search: '',
+    // showDropDown: false,
   };
   async componentWillMount() {
     await this.props.loadConvos();
@@ -28,6 +29,10 @@ class Convo extends Component {
     this.setState({ [name]: value });
   };
 
+  // showDropDown = () => {
+  //   this.setState({ showDropDown: !this.state.showDropDown });
+  // }
+
 
   render() {
     // const filteredContacts = this.props.notes.filter(note => {
@@ -41,15 +46,17 @@ class Convo extends Component {
         <div className="friendcomp">
           <div className="friendslist">
             <p> Friends </p>
-            <p> {this.props.contacts.length} Conversations </p>
-            <form>
+            {/* <p> {this.props.contacts.length} Conversations </p> */}
+            <form className="form">
               <input
                 type="text"
                 placeholder="Search contacts"
                 className="friendlist--search"
                 value={search}
                 name='search'
+                autoomplete="off"
                 onChange={this.props.handleInputChange}
+                // onClick={this.showDropDown}
               />
               <Dropdown />
             </form>
