@@ -5,10 +5,11 @@ class Messages extends Component {
 
   render() {
     return (
-      <div>
-        <p className="contact-firstName">{this.props.firstName}</p>
-        <p className="contact-firstName">{this.props.lastName}</p>
-        <p>{this.props.message}</p>
+      <div className= "message-convo">
+        <p className="message-image-message" />
+        <p className="message-firstName">{this.props.firstName} {this.props.lastName}</p>
+        {/* <p className="contact-firstName">{this.props.lastName}</p> */}
+        <p className="message-message">{this.props.message}</p>
         <p>{this.props.time}</p>
       </div>
     );

@@ -35,7 +35,7 @@ class ChatBox extends Component {
     if (this.props.newContact) {
       user = this.props.recipient[0] + " " + this.props.recipient[1];
     } else if (this.props.contact) {
-      user = this.props.contact.author.firstName.toString();
+      user = this.props.contact._id;
     }
     return (
       <div>
@@ -66,22 +66,25 @@ class ChatBox extends Component {
               : null
             }
           </div>
-          <input
-            type="text"
-            placeholder="Type your message here"
-            className="friendChat--search"
-            value={message}
-            name="message"
-            onChange={this.handleInputChange}
-            required
-          />
-          <button
-            className="CreateNote__Submit"
-            type="submit"
-            onClick={(e) => this.props.newContact ? this.newContact(e) : this.reply(e)}
-          >
-            Send
-          </button>
+          <div className="friend-search-bar">
+            <FontAwesome name="far fa-comment-alt" />
+            <input
+              type="text"
+              placeholder="Type your message here..."
+              className="friendChat--search"
+              value={message}
+              name="message"
+              onChange={this.handleInputChange}
+              required
+            />
+            <button
+              className="friendChat--submit"
+              type="submit"
+              onClick={(e) => this.props.newContact ? this.newContact(e) : this.reply(e)}
+            >
+              Send
+            </button>
+          </div>
         </form>
       </div>
     );
