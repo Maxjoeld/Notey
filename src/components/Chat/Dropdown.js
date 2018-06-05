@@ -29,7 +29,7 @@ class Dropdown extends Component {
           /* eslint-disable */
               return (
                 <div user={user} key={user._id} onClick={() => this.newUser(user._id)}>
-                  <p className="dropdown-user">{user._id}</p>
+                  <p className="dropdown-user">{user.firstName}</p>
                 </div>
               );
             })}

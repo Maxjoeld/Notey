@@ -287,7 +287,7 @@ export const handleNewUserIdx = inputID => {
     users.forEach(async (user, i) => {
       if (user._id === inputID) {
         try {
-          await dispatch({type: 'NEW_USER_NAME', payload: [user.profile.firstName, user.profile.lastName] });
+          await dispatch({ type: 'NEW_USER_NAME', payload: [user.firstName, user.lastName] });
           // socket.emit('leave conversation', user.conversationId);
           await dispatch({ type: 'USER_IDX', payload: i });
           await dispatch({ type: 'USER', payload: user });

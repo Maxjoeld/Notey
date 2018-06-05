@@ -27,6 +27,11 @@ ul {
   list-style:none;
 }
 
+button:focus {
+  outline: 0;
+  border-radius:15px;
+}
+
 .active {
   color: rgb(96, 165, 255);
 }

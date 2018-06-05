@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Messages extends Component {
   state = {}
 
-  render() { 
+  render() {
     return (
       <div>
         <p className="contact-firstName">{this.props.firstName}</p>

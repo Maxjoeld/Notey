@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 // import openSocket from 'socket.io-client';
 
+import FontAwesome from 'react-fontawesome';
 import { connect } from 'react-redux';
 import { loadConvos, getConversation, getUsers } from '../../actions';
 import SideBar from '../SideBar/SideBar';
-import Contact from './ContactList';
+import ContactList from './ContactList';
 import Chatbox from './Chatbox';
 import Dropdown from './Dropdown';
 
@@ -41,12 +42,13 @@ class Convo extends Component {
         <SideBar />
         <div className="friendcomp">
           <div className="friendslist">
-            <p> Friends </p>
+            <p> <i className="fas fa-users fa-lg fa-fw" />Friends </p>
             {/* <p> {this.props.contacts.length} Conversations </p> */}
             <form className="form">
+              <FontAwesome name="fas fa-search" />
               <input
                 type="text"
-                placeholder="Search contacts"
+                placeholder="Search..."
                 className="friendlist--search"
                 value={search}
                 name='search'
@@ -60,13 +62,14 @@ class Convo extends Component {
             </form>
             {this.props.contacts
               ? this.props.contacts.map(person => {
+                  console.log(person.firstName);
                   return (
-                    <Contact
+                    <ContactList
                       key={person._id}
                       index={person._id}
                       body={person.body.slice(0, 40)}
-                      firstName={person.author.profile.firstName}
-                      lastName={person.author.profile.lastName}
+                      firstName={person.author.firstName}
+                      lastName={person.author.lastName}
                       time={person.createdAt.split('').splice(11, 5).join('')}
                       convoId={person.conversationId}
                     />

@@ -36,13 +36,11 @@ const getConversations = (req,res) => {
         .limit(1)
         .populate({
           path: "author",
-          select: "profile.firstName profile.lastName"
+          select: "firstName lastName"
         })
         .then(message => {
-          console.log({message});
           fullConversations.push(...message);
           if (fullConversations.length === conversations.length) {
-            console.log({fullConversations});
             return res.status(200).json({ conversations: fullConversations });
           }
         }).catch(err => sendUserError(err, res));
@@ -57,7 +55,7 @@ const getConversation = (req, res) => {
   .sort('createdAt')
   .populate({
     path: 'author',
-    select: 'profile.firstName profile.lastName'
+    select: 'firstName lastName'
   })
   .then(messages => res.status(200).json({ conversation: messages }))
   .catch(err => sendUserError(err, res));

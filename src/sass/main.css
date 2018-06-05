@@ -346,20 +346,46 @@
   background-color: blue;
   border: 0.5px solid #e4e4e4; }
 
+.iconparent {
+  margin-top: 2rem; }
+
+.fa-phone {
+  margin-right: 15px;
+  padding: 10px;
+  border-radius: 15px;
+  border: 0.5px solid #c4c4c4;
+  cursor: pointer; }
+
+.fa-video {
+  margin-right: 15px;
+  padding: 10px;
+  border-radius: 15px;
+  border: 0.5px solid #c4c4c4;
+  cursor: pointer; }
+
+.fa-ellipsis-v {
+  margin-right: 15px;
+  padding: 10px 17px;
+  border-radius: 15px;
+  border: 0.5px solid #c4c4c4;
+  cursor: pointer; }
+
 .friendcomp {
   display: flex;
   margin: 2rem 4%;
   position: relative; }
 
 .friendslist {
+  margin-top: 2.8rem;
   font-size: 1.6rem; }
 
 .friendlist--search {
   margin-top: 3.5rem;
-  height: 4rem;
+  padding: 6px 15px 6px 30px;
+  height: 3rem;
   width: 24rem;
   margin-bottom: 3rem;
-  border-radius: 10%;
+  border-radius: 15px;
   border: 0.7px solid #d7d7d7; }
 
 .friendChat {
@@ -371,10 +397,13 @@
 .friendchat--header {
   display: flex;
   justify-content: space-between;
+  text-align: center;
+  margin-top: 2rem;
   margin-bottom: 5rem; }
 
 .friendchat--user {
-  font-size: 2rem; }
+  font-size: 2rem;
+  margin-top: 2.5rem; }
 
 .friendchat--textbox {
   width: 56rem;
@@ -385,16 +414,28 @@
   height: 7rem;
   width: 55rem; }
 
+.form {
+  position: relative; }
+
 .dropdown {
   position: absolute;
+  border-radius: 10px;
+  margin-left: 1rem;
   background-color: white;
-  border: 0.5px solid #d3b67f;
+  border: 1px solid #cacaca;
+  border-top: 0px;
   width: 20rem;
   margin-top: -3rem; }
 
 .dropdown-user {
   cursor: pointer;
   margin-left: 1rem; }
+
+.fa-search {
+  color: #dadada;
+  position: absolute;
+  top: 48px;
+  left: 10px; }
 
 body {
   margin: 0;
@@ -416,6 +457,10 @@ a {
 
 ul {
   list-style: none; }
+
+button:focus {
+  outline: 0;
+  border-radius: 15px; }
 
 .active {
   color: #60a5ff; }

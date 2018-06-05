@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { replyMessage, loadNewUser } from '../../actions';
 import Messages from './Messages';
 
+import FontAwesome from 'react-fontawesome';
+
 class ChatBox extends Component {
   state = {
     message: '',
@@ -31,20 +33,20 @@ class ChatBox extends Component {
     const { message } = this.state;
     let user;
     if (this.props.newContact) {
-      user = this.props.recipient[0] + " "+ this.props.recipient[1];
-    } else {
-      user = this.props.contact._id;
+      user = this.props.recipient[0] + " " + this.props.recipient[1];
+    } else if (this.props.contact) {
+      user = this.props.contact.author.firstName.toString();
     }
     return (
       <div>
         <form className="friendChat">
           <div className="friendchat--header">
             <p className="friendchat--user">{user}</p>
-            <ul style={{ display: 'flex' }}>
-              <li> icon </li>
-              <li> icon </li>
-              <li> icon </li>
-            </ul>
+            <div className="iconparent">
+            <FontAwesome name="fas fa-phone fa-2x" />
+            <FontAwesome name="fas fa-video fa-2x" />
+            <FontAwesome name="fas fa-ellipsis-v fa-2x" />
+            </div>
           </div>
           <div className="friendchat--textbox">
             {this.props.newContact ? '' :
@@ -55,8 +57,8 @@ class ChatBox extends Component {
                       key={convo._id}
                       index={convo._id}
                       message={convo.body}
-                      firstName={convo.author.profile.firstName}
-                      lastName={convo.author.profile.lastName}
+                      firstName={convo.author.firstName}
+                      lastName={convo.author.lastName}
                       time={convo.createdAt.split('').splice(11, 5).join('')}
                     />
                   );
