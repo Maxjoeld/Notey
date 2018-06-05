@@ -43,7 +43,10 @@ class Convo extends Component {
         <div className="friendcomp">
           <div className="friendslist">
             <p> <i className="fas fa-users fa-lg fa-fw" />Friends </p>
-            {/* <p> {this.props.contacts.length} Conversations </p> */}
+            {this.props.contacts ?
+              <p> {this.props.contacts.length} Conversations </p>
+            : null
+            }
             <form className="form">
               <FontAwesome name="fas fa-search" />
               <input
