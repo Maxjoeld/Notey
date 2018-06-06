@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const cors = require('cors');
 const passport = require('passport');
 const keys = require('./config');
@@ -13,8 +14,7 @@ const Grid = require('gridfs-stream');
 const fs = require('fs');
 const path = require('path');
 const conn = mongoose.connection;
-const imgPath = PATH.JOIN(__DIRNAME, './images/icon.img');
-
+const imgPath = path.join(__dirname, './images/Nico2.png');
 Grid.mongo = mongoose.mongo;
 
 conn.once('open', () => {
@@ -23,14 +23,14 @@ conn.once('open', () => {
 
   // when connection is open, create write stream with the name to store
   // file as in the DB
-  const writestream = gfs.createWriteStream({
-    filename: 'icon.img'
+  const writeStream = gfs.createWriteStream({
+    filename: 'Nico2.png'
   });
   // create a read-strea, from where rhe video currently is (imgPath)
   // and pipe it into the database (through write-stream)
-  fs.createReadStream(videoPath).pipe(writeStream);
+  fs.createReadStream(imgPath).pipe(writeStream);
 
-  writestream.on('close', (file) => {
+  writeStream.on('close', (file) => {
     // do something with 'file'
     // console logging that it was written successfully
     console.log(file.filename + 'Written to DB');
