@@ -60,6 +60,7 @@ const getConversation = (req, res) => {
 }
 
 const newConversation = (req, res, next) => {
+  // console.log(recipient);
   const { recipient } = req.params;
   const { message } = req.body;
   const { user } = req.session;
@@ -83,10 +84,10 @@ const newConversation = (req, res, next) => {
 
   User.findOne({ _id: recipient})
   .then(reci => {
-    let recipientName = reci.profile.firstName + " " + reci.profile.lastName;
+    let recipientName = reci.firstName + " " + reci.lastName;
     User.findOne({ _id: user})
     .then((newuse) => {
-      let initiator = newuse.profile.firstName + " " + newuse.profile.lastName;
+      let initiator = newuse.firstName + " " + newuse.lastName;
 
       const conversation = new Conversation({
         participants: [user, recipient],

@@ -4,8 +4,8 @@ const User = require('../models/users');
 const { sendUserError } = require('../utils/authenticate');
 
 const userCreate = (req, res) => {
-  const { username, password, profile } = req.body;
-  const user = new User({ username, password, profile });
+  const { username, password, firstName, lastName } = req.body;
+  const user = new User({ username, password, firstName, lastName });
   user.save()
     .then(newUser => res.status(201).send(newUser))
     .catch(err => res.status(400).send({ err }));

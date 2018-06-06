@@ -5,12 +5,14 @@
 
 .contact-box {
   width: 30rem;
-  height: 10rem;
+  height: 6rem;
   cursor: pointer;
   border-bottom: none;
   border-right: none;
     &:last-child {
       // border-bottom: .02rem solid rgb(228, 228, 228);
+      color: rgb(172, 172, 172);
+      background-color: linear-gradient(blue, pink);
     }
 }
 
@@ -30,6 +32,7 @@
 .contact-body {
   margin-top: -1rem;
   margin-left: 8rem;
+  color: rgb(160, 160, 160);
   // margin-bottom: 10rem;
 }
 
@@ -78,7 +81,7 @@
 }
 
 .friendlist--search {
-  margin-top: 3.5rem;
+  margin-top: 2.5rem;
   padding:6px 15px 6px 30px;
   height: 3rem;
   width: 24rem;
@@ -156,8 +159,12 @@
 .friendchat--textbox {
   width: 56rem;
   height: 70rem;
-  border: 0.3px solid rgb(201, 201, 201);
+  // border: 0.3px solid rgb(201, 201, 201);
   margin-bottom: 1rem;
+  overflow: hidden;
+  &:hover {   
+    overflow-y: scroll;
+  }
 }
 
 //////////////////////////////////////////
@@ -171,7 +178,7 @@
   margin-top: 1rem;
   padding:6px 15px 6px 30px;
   height: 3rem;
-  width: 50rem;
+  width: 52rem;
   margin-bottom: 3rem;
   border-radius:15px; 
   border: 0.7px solid rgb(215, 215, 215);
@@ -187,7 +194,7 @@
   border:none;
   position: absolute;
   top: -1rem;
-  left: 44.5rem;
+  left: 46.6rem;
 }
 
 .fa-comment-alt {
@@ -228,7 +235,7 @@
 .fa-search {
   color:rgb(218, 218, 218);
   position: absolute;
-  top: 48px;
+  top: 40px;
   left: 10px; 
 }
 

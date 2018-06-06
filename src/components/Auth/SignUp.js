@@ -21,8 +21,7 @@ class SignUp extends Component {
   saveUser = e => {
     e.preventDefault();
     const { username, password, firstName, lastName } = this.state;
-    const profile = { firstName, lastName };
-    this.props.saveUser(username, password, profile, this.props.history);
+    this.props.saveUser(username, password, firstName, lastName, this.props.history);
   };
 
   handleInputChange = e => {

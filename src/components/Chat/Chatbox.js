@@ -43,9 +43,9 @@ class ChatBox extends Component {
           <div className="friendchat--header">
             <p className="friendchat--user">{user}</p>
             <div className="iconparent">
-            <FontAwesome name="fas fa-phone fa-2x" />
-            <FontAwesome name="fas fa-video fa-2x" />
-            <FontAwesome name="fas fa-ellipsis-v fa-2x" />
+              <FontAwesome name="fas fa-phone fa-2x" />
+              <FontAwesome name="fas fa-video fa-2x" />
+              <FontAwesome name="fas fa-ellipsis-v fa-2x" />
             </div>
           </div>
           <div className="friendchat--textbox">

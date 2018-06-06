@@ -116,10 +116,10 @@ export const loginUser = (username, password, history) => {
   };
 };
 
-export const saveUser = (username, password, profile, history) => {
+export const saveUser = (username, password, firstName, lastName, history) => {
   return async dispatch => {
     try {
-      await axios.post('/notes/register', { username, password, profile });
+      await axios.post('/notes/register', { username, password, firstName, lastName });
       const res = await axios.post('/notes/login', { username, password });
       await sessionStorage.setItem('id', res.data.userId);
       dispatch({ type: 'ISAUTH' });
@@ -212,6 +212,7 @@ export const loadConvos = () => {
 export const loadNewUser = (recipient, message) => {
   return async dispatch => {
     try {
+      console.log(recipient);
       const res = await axios.post(`/notes/chat/new/${recipient}`, message);
       await dispatch(loadConvos());
       await dispatch(existingContact());
