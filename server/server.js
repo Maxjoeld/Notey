@@ -8,6 +8,38 @@ const session = require('express-session');
 const User = require('./models/users');
 require('./services/passport');
 
+// where to find the picture/video in the filesystem that we'll be storing in the DB
+const Grid = require('gridfs-stream');
+const fs = require('fs');
+const path = require('path');
+const conn = mongoose.connection;
+const imgPath = PATH.JOIN(__DIRNAME, './images/icon.img');
+
+Grid.mongo = mongoose.mongo;
+
+conn.once('open', () => {
+  console.log('Connection open');
+  var gfs = Grid(conn.db);
+
+  // when connection is open, create write stream with the name to store
+  // file as in the DB
+  const writestream = gfs.createWriteStream({
+    filename: 'icon.img'
+  });
+  // create a read-strea, from where rhe video currently is (imgPath)
+  // and pipe it into the database (through write-stream)
+  fs.createReadStream(videoPath).pipe(writeStream);
+
+  writestream.on('close', (file) => {
+    // do something with 'file'
+    // console logging that it was written successfully
+    console.log(file.filename + 'Written to DB');
+  })
+});
+
+
+
+
 const app = express();
 // const http = require('http').Server(app);
 // const io = require('socket.io')(http);
