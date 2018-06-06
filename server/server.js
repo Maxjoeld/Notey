@@ -17,25 +17,25 @@ const conn = mongoose.connection;
 const imgPath = path.join(__dirname, './images/Nico2.png');
 Grid.mongo = mongoose.mongo;
 
-conn.once('open', () => {
-  console.log('Connection open');
-  var gfs = Grid(conn.db);
+// conn.once('open', () => {
+//   console.log('Connection open');
+//   var gfs = Grid(conn.db);
 
-  // when connection is open, create write stream with the name to store
-  // file as in the DB
-  const writeStream = gfs.createWriteStream({
-    filename: 'Nico2.png'
-  });
-  // create a read-strea, from where rhe video currently is (imgPath)
-  // and pipe it into the database (through write-stream)
-  fs.createReadStream(imgPath).pipe(writeStream);
+//   // when connection is open, create write stream with the name to store
+//   // file as in the DB
+//   const writeStream = gfs.createWriteStream({
+//     filename: 'Nico2.png'
+//   });
+//   // create a read-strea, from where rhe video currently is (imgPath)
+//   // and pipe it into the database (through write-stream)
+//   fs.createReadStream(imgPath).pipe(writeStream);
 
-  writeStream.on('close', (file) => {
-    // do something with 'file'
-    // console logging that it was written successfully
-    console.log(file.filename + 'Written to DB');
-  })
-});
+//   writeStream.on('close', (file) => {
+//     // do something with 'file'
+//     // console logging that it was written successfully
+//     console.log(file.filename + 'Written to DB');
+//   })
+// });
 
 
 

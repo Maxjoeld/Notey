@@ -37,8 +37,6 @@
 }
 
 .contact-image {
-  // display: flex;
-  // position: absolute;
   border: 5px solid rgb(255, 255, 255);
   box-shadow: 0px 0px 0px 2px rgb(211, 211, 211);
   justify-content: center;
@@ -47,7 +45,6 @@
   overflow: hidden;
   border-radius: 50%;
   margin-left: 1rem;
-  // background-color: rgb(255, 167, 15);
 }
 
 .contact-firstName {
@@ -153,7 +150,7 @@
 .friendchat--user {
   font-size: 2rem;
   margin-top: 2.5rem;
-  
+  margin-left: 1rem;
 }
 
 .friendchat--textbox {

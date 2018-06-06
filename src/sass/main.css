@@ -407,7 +407,8 @@
 
 .friendchat--user {
   font-size: 2rem;
-  margin-top: 2.5rem; }
+  margin-top: 2.5rem;
+  margin-left: 1rem; }
 
 .friendchat--textbox {
   width: 56rem;
