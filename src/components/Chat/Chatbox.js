@@ -35,7 +35,7 @@ class ChatBox extends Component {
     if (this.props.newContact) {
       user = this.props.recipient[0] + " " + this.props.recipient[1];
     } else if (this.props.contact) {
-      user = this.props.contact._id;
+      user = this.props.contact;
     }
     return (
       <div>
@@ -93,7 +93,7 @@ class ChatBox extends Component {
 
 const mapStateToProps = state => {
   return {
-    contact: state.contact,
+    contact: state.contactName,
     conversation: state.conversation,
     newContact: state.newContact,
     user: state.user,

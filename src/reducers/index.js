@@ -20,6 +20,7 @@ import {
   NEW_CONTACT,
   EXISTING_CONTACT,
   NEW_USER_NAME,
+  CONTACT_NAME,
 } from '../actions';
 
 const initialState = {
@@ -73,6 +74,8 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, newContact: false };
     case NEW_USER_NAME:
       return { ...state, recipient: action.payload };
+    case CONTACT_NAME:
+      return { ...state, contactName: action.payload };
     default:
       return state;
   }

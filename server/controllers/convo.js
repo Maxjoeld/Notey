@@ -18,8 +18,6 @@ const allContacts = (req, res) => {
 };
 
 const getConversations = (req,res) => {
-  // Only return one message from each conversation to display as snippet
-  // res.json('helllo');
   Conversation.find({ participants: req.session.user })
   .select('_id')
   .then((conversations) => {
@@ -65,7 +63,6 @@ const newConversation = (req, res, next) => {
   const { recipient } = req.params;
   const { message } = req.body;
   const { user } = req.session;
-  console.log(recipient, "this is the recipient");
   if (!recipient) {
     sendUserError('Please choose a valid recipient for your message.', res);
   }
@@ -117,8 +114,8 @@ const newConversation = (req, res, next) => {
   
 };
 
-const loadDataTemporarily = (req,res) => {
-  
+const searchByUsername = (req,res) => {
+  Conversation.find
 };
 
 const sendReply = (req, res, next) => {

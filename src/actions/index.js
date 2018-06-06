@@ -27,6 +27,7 @@ export const USER_IDX = 'USER_IDX';
 export const NEW_CONTACT = 'NEW_CONTACT';
 export const EXISTING_CONTACT = 'EXISTING_CONTACT';
 export const NEW_USER_NAME = 'NEW_USER_NAME';
+export const CONTACT_NAME = 'CONTACT_NAME';
 
 axios.defaults.withCredentials = true;
 
@@ -271,6 +272,7 @@ export const handleContactIdx = inputID => {
           // socket.emit('leave conversation', contact.conversationId);
           await dispatch({ type: 'CONTACT_IDX', payload: i });
           await dispatch({ type: 'CONTACT_USER', payload: contact });
+          await dispatch({ type: 'CONTACT_NAME', payload: contact.author.firstName + "  " + contact.author.lastName });
           await dispatch(getConversation());
           // socket.emit('enter conversation', contact.conversationId);
         } catch (error) {
