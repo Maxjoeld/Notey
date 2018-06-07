@@ -5,6 +5,7 @@ const { Schema } = mongoose;
 const MessageSchema = new Schema({
   conversationId: {
     type: Schema.Types.ObjectId,
+    ref: 'Conversation',
     required: true
   },
   body: {

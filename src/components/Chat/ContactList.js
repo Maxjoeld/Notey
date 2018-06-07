@@ -16,8 +16,8 @@ const Contact = props => {
     <div className="contact-box" onClick={() => props.handleContactIdx(props.index)}>
       <p className="contact-image" />
       <div className="contact-info">
-        <p className="contact-firstName">{props.firstName}</p>
-        <p className="contact-lastName">{props.lastName}</p>
+        <p className="contact-firstName">{props.admin === props.initiator ? props.recipient : null }</p>
+        {/* <p className="contact-lastName">{props.lastName}</p> */}
         <p className="contact-time">{props.time}</p>
       </div>
       <p className="contact-body">{props.body}</p>
@@ -25,4 +25,11 @@ const Contact = props => {
   );
 };
 
-export default connect(null, { handleContactIdx })(Contact);
+const mapStateToProps = state => {
+  return {
+    admin: state.admin,
+  };
+};
+
+
+export default connect(mapStateToProps, { handleContactIdx })(Contact);

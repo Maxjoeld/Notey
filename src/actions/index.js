@@ -7,6 +7,7 @@ import axios from 'axios';
 
 export const DEAUTH = 'DEAUTH';
 export const ISAUTH = 'ISAUTH';
+export const ADMIN = 'ADMIN';
 
 export const GET_NOTES = 'GET_NOTES';
 export const SORT_NOTES = 'SORT_NOTES';
@@ -71,7 +72,7 @@ export const isAuthenticated = () => {
   };
 };
 
-export const logoutUser = (history) => {
+export const logoutUser = history => {
   return async dispatch => {
     try {
       await axios.post('notes/logout');
@@ -84,7 +85,6 @@ export const logoutUser = (history) => {
     }
   };
 };
-
 
 export const loginGoogle = (username, password, history) => {
   return async dispatch => {
@@ -103,8 +103,10 @@ export const loginUser = (username, password, history) => {
   return async dispatch => {
     try {
       const res = await axios.post('/notes/login', { username, password });
+      console.log(res.data.user);
       sessionStorage.setItem('id', res.data.userId);
       dispatch({ type: 'ISAUTH' });
+      dispatch({ type: 'ADMIN', payload: res.data.user });
       // await dispatch(isAuthenticated());
       await history.push('/');
       await dispatch(getNotes());
@@ -119,7 +121,9 @@ export const loginUser = (username, password, history) => {
 export const saveUser = (username, password, firstName, lastName, history) => {
   return async dispatch => {
     try {
-      await axios.post('/notes/register', { username, password, firstName, lastName });
+      await axios.post('/notes/register', {
+        username, password, firstName, lastName,
+      });
       const res = await axios.post('/notes/login', { username, password });
       await sessionStorage.setItem('id', res.data.userId);
       dispatch({ type: 'ISAUTH' });
@@ -130,7 +134,6 @@ export const saveUser = (username, password, firstName, lastName, history) => {
     }
   };
 };
-
 
 //////////////////////////////////////////////////////////////////
 // NOTES
@@ -182,7 +185,6 @@ export const deleteNote = inputId => {
   };
 };
 
-
 /////////////////////////////////////////////////////////////////////
 // CHAT
 /////////////////////////////////////////////////////////////////////
@@ -198,10 +200,21 @@ export const existingContact = () => {
   };
 };
 
+export const getUserNames = () => {
+  return async dispatch => {
+    try {
+      const res = await axios.get('/notes/chat/searchByUsername');
+      await dispatch({ type: GET_CONTACTS, payload: res.data.conversations });
+    } catch (error) {
+      console.log({ err: 'There was an error loading your notes :(', error });
+    }
+  };
+};
+
 export const loadConvos = () => {
   return async dispatch => {
     try {
-      const res = await axios.get('/notes/chat/convo');
+      const res = await axios.get('/notes/chat/getConversations');
       await dispatch({ type: GET_CONTACTS, payload: res.data.conversations });
     } catch (error) {
       console.log({ err: 'There was an error loading your notes :(', error });
@@ -225,7 +238,7 @@ export const loadNewUser = (recipient, message) => {
 export const getUsers = () => {
   return async dispatch => {
     try {
-      const res = await axios.get('/notes/chat/getchat');
+      const res = await axios.get('/notes/chat/allContacts');
       console.log(res.data[0]._id);
       await dispatch({ type: GET_USERS, payload: res.data });
     } catch (error) {
@@ -234,12 +247,11 @@ export const getUsers = () => {
   };
 };
 
-
 export const getConversation = () => {
   return async (dispatch, getState) => {
     try {
       const { conversationId } = await getState().contact;
-      const res = await axios.get(`/notes/chat/convo/${conversationId}`);
+      const res = await axios.get(`/notes/chat/convo/${conversationId._id}`);
       console.log(res.data);
       dispatch({ type: 'GET_CONVERSATION', payload: res.data.conversation });
     } catch (error) {
@@ -248,11 +260,11 @@ export const getConversation = () => {
   };
 };
 
-export const replyMessage = (message) => {
+export const replyMessage = message => {
   return async (dispatch, getState) => {
     try {
       const { conversationId } = await getState().contact;
-      await axios.post(`/notes/chat/reply/${conversationId}`, message);
+      await axios.post(`/notes/chat/reply/${conversationId._id}`, message);
       // socket.emit('new message');
       // socket.on('refresh messages', () => {
       await dispatch(getConversation());
@@ -266,14 +278,18 @@ export const replyMessage = (message) => {
 export const handleContactIdx = inputID => {
   return async (dispatch, getState) => {
     await dispatch(existingContact());
-    const state = getState().contacts;
-    state.forEach(async (contact, i) => {
+    const { contacts } = getState();
+    const { admin } = getState();
+    contacts.forEach(async (contact, i) => {
       if (contact._id === inputID) {
         try {
           // socket.emit('leave conversation', contact.conversationId);
           await dispatch({ type: 'CONTACT_IDX', payload: i });
           await dispatch({ type: 'CONTACT_USER', payload: contact });
-          await dispatch({ type: 'CONTACT_NAME', payload: contact.author.firstName + "  " + contact.author.lastName });
+          await dispatch({
+            type: 'CONTACT_NAME',
+            payload: `${contact.author.firstName}  ${contact.author.lastName}`,
+          });
           await dispatch(getConversation());
           // socket.emit('enter conversation', contact.conversationId);
         } catch (error) {
@@ -306,14 +322,12 @@ export const handleNewUserIdx = inputID => {
 // SORT/HANDLING NOTES
 /////////////////////////////////////////////////////////////////////
 
-
 export const updateSortedNotes = sortedNotes => {
   return {
     type: SORT_NOTES,
     payload: sortedNotes,
   };
 };
-
 
 export const handleIdx = inputID => {
   return (dispatch, getState) => {
@@ -340,10 +354,9 @@ export const sortData = state => {
   };
 };
 
-export const onSortEnd = (orderList) => {
+export const onSortEnd = orderList => {
   return {
     type: 'ARRAY_MOVE',
     payload: orderList,
   };
 };
-

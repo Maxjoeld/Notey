@@ -3,8 +3,8 @@ const { addNote, deleteNote, editNote, getNotes } = require('../controllers/note
 // Auth Routes //
 const { userLogin, userLogout, userCreate } = require('../controllers/auth');
 // Chat Routes
-const { getContact,allContacts,getConversations, getConversation,
-newConversation,sendReply, deleteConversation} = require('../controllers/convo');
+const { allContacts,getConversations, getConversation,
+newConversation,sendReply, deleteConversation } = require('../controllers/convo');
 
 const { sendUserError, sessionAuth } = require('../utils/authenticate');
 
@@ -21,11 +21,10 @@ module.exports = (app) => {
   app.route('/notes/logout').post(userLogout);
   
   // Chat Routes //
-  app.route('/notes/chat').post(getContact);
-  app.route('/notes/chat/getchat').get(allContacts);
+  app.route('/notes/chat/allContacts').get(allContacts);
 
   app.get('/notes/chat/convo/:conversationId',sessionAuth, getConversation);
-  app.get('/notes/chat/convo', getConversations);
+  app.get('/notes/chat/getConversations', getConversations);
   app.post('/notes/chat/reply/:conversationId', sessionAuth, sendReply);
   app.post('/notes/chat/new/:recipient',sessionAuth, newConversation);
 

@@ -3,6 +3,7 @@ import {
   GET_NOTES,
   // AUTHENTICATION_ERROR,
   DEAUTH,
+  ADMIN,
   SORT_NOTES,
   NOTE_IDX,
   SORT_TRUE,
@@ -36,6 +37,8 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ADMIN:
+      return { ...state, admin: action.payload };
     case ISAUTH:
       return { ...state, isAuthenticated: !state.isAuthenticated };
     case GET_NOTES:

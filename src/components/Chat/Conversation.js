@@ -75,6 +75,8 @@ class Convo extends Component {
                       lastName={person.author.lastName}
                       time={person.createdAt.split('').splice(11, 5).join('')}
                       convoId={person.conversationId}
+                      initiator={person.conversationId.initiator}
+                      recipient={person.conversationId.recipient}
                     />
                   );
                 })

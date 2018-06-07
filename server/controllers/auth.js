@@ -6,7 +6,8 @@ const { sendUserError } = require('../utils/authenticate');
 const userCreate = (req, res) => {
   const { username, password, firstName, lastName } = req.body;
   const user = new User({ username, password, firstName, lastName });
-  user.save()
+  user
+    .save()
     .then(newUser => res.status(201).send(newUser))
     .catch(err => res.status(400).send({ err }));
 };
@@ -19,7 +20,7 @@ const userLogin = (req, res) => {
   }
   User.findOne({ username }, (err, user) => {
     if (err || user === null) {
-      sendUserError({'No user found at that id': err}, res);
+      sendUserError({ 'No user found at that id': err }, res);
       return;
     }
     user
@@ -27,9 +28,14 @@ const userLogin = (req, res) => {
       .then(response => {
         if (!response) throw new Error();
         req.session.user = user._id;
-        res.json({ success: true, session: req.session, userId: user._id });
+        res.json({
+          success: true,
+          session: req.session,
+          user: user.firstName + ' ' + user.lastName,
+          userId: user._id
+        });
       })
-      .catch((error) => {
+      .catch(error => {
         return sendUserError('User does not exist at that id ', res);
       });
   });
@@ -75,9 +81,8 @@ const userLogout = (req, res) => {
   res.status(200).json({ msg: 'Logged out.' });
 };
 
-
 module.exports = {
   userCreate,
   userLogin,
-  userLogout,
+  userLogout
 };

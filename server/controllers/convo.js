@@ -17,34 +17,31 @@ const allContacts = (req, res) => {
     .catch(err => res.status(400).send({ error: err }));
 };
 
-const getConversations = (req,res) => {
+const getConversations = (req,res) => { 
   Conversation.find({ participants: req.session.user })
-  .select('_id')
-  .then((conversations) => {
-    console.log({conversations});
-    
-    // Set up empty array to hold conversations + most recent message
-
-    let fullConversations = [];
-    conversations.forEach(conversation => {
-      Message.find({ 'conversationId': conversation._id })
-        .sort('-createdAt')
-        // This is loading just one message from the conversation to load, like whatsapp and fb does 
-        // if the id is not the current user, don't limit it keep searching for the r
-        .limit(1)
-        .populate({
-          path: "author",
-          select: "firstName lastName"
+      .select('_id')
+      .then(conversations => {
+        let fullConversations = [];
+        conversations.forEach(conversation => {
+        Message.find({ 'conversationId': conversation._id })
+          .sort('-createdAt')
+          .limit(1)
+          .populate({
+            path: "conversationId",
+            select: "initiator recipient"
+          })
+          .populate({
+            path: "author",
+            select: "firstName lastName"
+          })
+          .then(message => {
+            fullConversations.push(...message);
+            if (fullConversations.length === conversations.length) {
+              return res.status(200).json({ conversations: fullConversations });
+            }
+          }).catch(err => sendUserError(err, res));
         })
-        .then(message => {
-          fullConversations.push(...message);
-          if (fullConversations.length === conversations.length) {
-            return res.status(200).json({ conversations: fullConversations });
-          }
-        }).catch(err => sendUserError(err, res));
-    });
-  })
-  .catch(err => sendUserError(err,res));
+      }).catch(err => sendUserError(err, res));
 };
 
 const getConversation = (req, res) => {
@@ -115,9 +112,6 @@ const newConversation = (req, res, next) => {
   
 };
 
-const searchByUsername = (req,res) => {
-  Conversation.find
-};
 
 const sendReply = (req, res, next) => {
   const reply = new Message({
