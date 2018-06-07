@@ -4,6 +4,7 @@ import FontAwesome from 'react-fontawesome';
 import { connect } from 'react-redux';
 import { deAuth, logoutUser } from '../../actions';
 import Nico from './Nico.jpg';
+import logo from './logo.png';
 
 class SideBar extends Component {
   logoutUser = async e => {
@@ -14,8 +15,10 @@ class SideBar extends Component {
   render() {
     return (
       <div className="sidebar">
+        {/* <FontAwesome name="fas fa-book" /> */}
+        <img src={logo} alt="SideLogo" className="Side-logo" />
         <h1 className="sidebar--title">
-          Notey <FontAwesome name="fas fa-book" />
+          Notey
           <br />
         </h1>
         <div className="sidebar--chat">
@@ -31,9 +34,11 @@ class SideBar extends Component {
           <p><NavLink exact to='/convo'><i className="fas fa-comments fa-fw" />Conversations</NavLink></p>
           <p><NavLink exact to="/"><i className="fas fa-sticky-note fa-fw" />View Your Notes</NavLink></p>
           <p><NavLink exact to='/create'><i className="fas fa-plus fa-fw" />Create New Note</NavLink></p>
-          <p style={{ cursor: 'pointer', color: 'rgb(129, 129, 129)' }}
+          <p
+style={{ cursor: 'pointer', color: 'rgb(129, 129, 129)' }}
             onClick={e => this.logoutUser(e)}
-          ><i className="fas fa-sign-out-alt fa-fw" />Sign Out</p>
+          ><i className="fas fa-sign-out-alt fa-fw" />Sign Out
+          </p>
         </div>
       </div>
     );
