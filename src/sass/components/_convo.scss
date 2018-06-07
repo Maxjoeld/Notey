@@ -159,9 +159,7 @@
   // border: 0.3px solid rgb(201, 201, 201);
   margin-bottom: 1rem;
   overflow: hidden;
-  &:hover {   
-    overflow-y: scroll;
-  }
+  overflow-y: scroll;
 }
 
 //////////////////////////////////////////
@@ -264,8 +262,7 @@
 }
 
 .message-convo{
-  display: flex;
-  // justify-content: space-between;
+  display: flex;;
   align-items: center;
 }
 
@@ -276,4 +273,19 @@
   line-height: 3;
   background-color: rgba(191, 224, 255, 0.479);
   // align-self: flex-end;
+}
+
+
+.message-message.admin {
+  background-color: rgba(238, 205, 98, 0.411);
+}
+
+
+.message-convo.admin,.message-message.admin, .message-message.admin, .message-firstName.admin, .message-time{
+  -moz-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  transform: scaleX(-1);
+  -ms-filter: fliph; /*IE*/
+    filter: fliph; /*IE*/
 }

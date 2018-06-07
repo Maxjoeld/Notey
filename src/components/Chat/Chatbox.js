@@ -30,6 +30,9 @@ class ChatBox extends Component {
   };
 
   render() {
+    if (this.props.conversation) {
+      console.log(this.props.conversation[0]);
+    }
     const { message } = this.state;
     let user;
     if (this.props.newContact) {
@@ -37,6 +40,7 @@ class ChatBox extends Component {
     } else if (this.props.contact) {
       user = this.props.contact;
     }
+    
     return (
       <div>
         <form className="friendChat">

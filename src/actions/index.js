@@ -275,7 +275,7 @@ export const replyMessage = message => {
   };
 };
 
-export const handleContactIdx = inputID => {
+export const handleContactIdx = (inputID, user) => {
   return async (dispatch, getState) => {
     await dispatch(existingContact());
     const { contacts } = getState();
@@ -288,7 +288,7 @@ export const handleContactIdx = inputID => {
           await dispatch({ type: 'CONTACT_USER', payload: contact });
           await dispatch({
             type: 'CONTACT_NAME',
-            payload: `${contact.author.firstName}  ${contact.author.lastName}`,
+            payload: user,
           });
           await dispatch(getConversation());
           // socket.emit('enter conversation', contact.conversationId);

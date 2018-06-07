@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleContactIdx } from '../../actions';
 
@@ -10,20 +10,27 @@ const getRandomColor = () => {
   }
   return color;
 };
-
-const Contact = props => {
-  return (
-    <div className="contact-box" onClick={() => props.handleContactIdx(props.index)}>
-      <p className="contact-image" />
-      <div className="contact-info">
-        <p className="contact-firstName">{props.admin === props.initiator ? props.recipient : null }</p>
-        {/* <p className="contact-lastName">{props.lastName}</p> */}
-        <p className="contact-time">{props.time}</p>
+class Contact extends Component {
+  state = {}
+  render() {
+    let user;
+    if (this.props.admin === this.props.initiator) {
+      user = this.props.recipient;
+    } else {
+      user = this.props.initiator;
+    }
+    return (
+      <div className="contact-box" onClick={() => this.props.handleContactIdx(this.props.index, user)}>
+        <p className="contact-image" />
+        <div className="contact-info">
+          <p className="contact-firstName">{user}</p>
+          <p className="contact-time">{this.props.time}</p>
+        </div>
+        <p className="contact-body">{this.props.body}</p>
       </div>
-      <p className="contact-body">{props.body}</p>
-    </div>
-  );
-};
+    );
+  }
+}
 
 const mapStateToProps = state => {
   return {
