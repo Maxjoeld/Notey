@@ -30,17 +30,14 @@ class ChatBox extends Component {
   };
 
   render() {
-    if (this.props.conversation) {
-      console.log(this.props.conversation[0]);
-    }
     const { message } = this.state;
     let user;
     if (this.props.newContact) {
-      user = this.props.recipient[0] + " " + this.props.recipient[1];
+      user = `${this.props.recipient[0]} ${this.props.recipient[1]}`;
     } else if (this.props.contact) {
       user = this.props.contact;
     }
-    
+
     return (
       <div>
         <form className="friendChat">
@@ -61,8 +58,8 @@ class ChatBox extends Component {
                       key={convo._id}
                       index={convo._id}
                       message={convo.body}
-                      firstName={convo.author.firstName}
-                      lastName={convo.author.lastName}
+                      firstName={convo.author.firstName ? '' : null}
+                      lastName={convo.author.lastName ? '' : null}
                       time={convo.createdAt.split('').splice(11, 5).join('')}
                     />
                   );
@@ -102,6 +99,7 @@ const mapStateToProps = state => {
     newContact: state.newContact,
     user: state.user,
     recipient: state.recipient,
+    admin: state.admin,
   };
 };
 

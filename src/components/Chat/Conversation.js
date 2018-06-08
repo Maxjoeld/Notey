@@ -65,7 +65,6 @@ class Convo extends Component {
             </form>
             {this.props.contacts
               ? this.props.contacts.map(person => {
-                  console.log(person.firstName);
                   return (
                     <ContactList
                       key={person._id}
@@ -82,7 +81,7 @@ class Convo extends Component {
                 })
               : null}
           </div>
-          {/* <hr className="convo-hr" /> */}
+          <hr className="convo-hr" />
           <Chatbox />
         </div>
       </div>

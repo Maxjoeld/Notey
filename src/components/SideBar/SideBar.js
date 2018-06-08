@@ -35,7 +35,7 @@ class SideBar extends Component {
           <p><NavLink exact to="/"><i className="fas fa-sticky-note fa-fw" />View Your Notes</NavLink></p>
           <p><NavLink exact to='/create'><i className="fas fa-plus fa-fw" />Create New Note</NavLink></p>
           <p
-style={{ cursor: 'pointer', color: 'rgb(129, 129, 129)' }}
+            style={{ cursor: 'pointer', color: 'rgb(129, 129, 129)' }}
             onClick={e => this.logoutUser(e)}
           ><i className="fas fa-sign-out-alt fa-fw" />Sign Out
           </p>
