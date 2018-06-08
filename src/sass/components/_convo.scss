@@ -274,23 +274,24 @@
   padding: 0.5rem;
   margin-right: 1rem;
   line-height: 3;
-  background-color: rgba(191, 224, 255, 0.479);
+  background-color: rgba(238, 205, 98, 0.411);
   // align-self: flex-end;
 }
 
 
 .message-message.admin {
-  background-color: rgba(238, 205, 98, 0.411);
+  background-color: rgba(191, 224, 255, 0.479);
 
 }
 
 .message-message.continuous-message {
   margin-left: 9.5rem;
-  background-color: rgba(238, 205, 98, 0.411);
+  background-color: rgba(191, 224, 255, 0.479);
+  
 }
 .message-message.user-message {
   margin-left: 10rem;
-  background-color: rgba(191, 224, 255, 0.479);
+  background-color: rgba(238, 205, 98, 0.411);
 }
 
 

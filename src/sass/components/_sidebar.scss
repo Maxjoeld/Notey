@@ -1,4 +1,5 @@
 .sidebar {
+  // background-color: rgba(41, 41, 41, 0.493);
   background-color: rgb(37, 37, 37);
   white-space: nowrap;
   position: relative;
@@ -7,8 +8,8 @@
   align-items: center;
   padding-bottom: 30rem;
   position: relative;
-  padding-right: 3rem;
-  padding-left: 4rem;
+  // padding-right: 3rem;
+  // padding-left: 4rem;
   &--title {
     position: absolute;
     color: rgb(180, 180, 180);
@@ -63,4 +64,14 @@
   overflow: hidden;
   border-radius: 50%;
   position: relative;
+}
+
+.sidebar-links {
+  background-color: rgba(63, 63, 63, 0.336);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 25rem;
+  width: 25rem;
+  // padding: 2rem;
 }
