@@ -4,7 +4,9 @@ import { Link, withRouter } from 'react-router-dom';
 
 import { loginUser, loginGoogle } from '../../actions';
 import logo from './google.png';
+import noteyLogo from './logo.png';
 import backgroundImage from './background.jpg';
+
 
 class SignIn extends Component {
   state = {
@@ -33,6 +35,8 @@ class SignIn extends Component {
         <div className="signin">
           <img src={backgroundImage} alt="bg" className="signin--image" />
           <div className="signin--box">
+            <img src={noteyLogo} alt="SideLogo" className="Side-logo" />
+            <h1 className="signin-notey">Notey</h1>
             <h1 className="signin--header">Sign In</h1>
             <div className="signin--buttons">
               <button className="signin--buttons__facebook">

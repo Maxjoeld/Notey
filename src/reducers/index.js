@@ -45,7 +45,14 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, notes: action.payload };
     case DEAUTH:
       return {
-        ...state, notes: [], noteIndex: 0, contacts: [], contact: [], conversation: [], user: [],
+        ...state,
+        isAuthenticated: false,
+        notes: [],
+        noteIndex: 0,
+        contacts: [],
+        contact: [],
+        user: [],
+        conversation: [],
       };
     case SORT_NOTES:
       return { ...state, notes: action.payload };

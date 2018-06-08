@@ -6,35 +6,35 @@ class Messages extends Component {
     admin: false,
   };
 
-  componentWillMount() {
-    const name = `${this.props.firstName} ${this.props.lastName}`;
-    if (this.props.admin === name) {
-      this.adminOrUser();
-    }
-  }
-  adminOrUser = () => {
-    this.setState({ admin: !this.state.admin });
-  }
-
   render() {
+    const adminName = this.props.firstName === null ? "message-message continuous-message" : "message-message admin";
+    const userName = this.props.firstName === null ? "message-message user-message" : "message-message";
     return (
       <React.Fragment>
-        {this.state.admin ?
-            <div className="message-convo admin">
-              <p className="message-image-message admin" />
-              <p className="message-firstName admin">
-                {this.props.firstName} {this.props.lastName}
-              </p>
-              <p className="message-message admin">{this.props.message}</p>
-              <p className="message-time">{this.props.time}</p>
-            </div>
+        {this.props.isAdmin ?
+          <div className="message-convo admin">
+            {this.props.firstName !== null ?
+              <div>
+                <p className="message-image-message admin" />
+                <p className="message-firstName admin">
+                  {this.props.firstName} {this.props.lastName}
+                </p>
+              </div>
+            : null}
+            <p className={adminName}>{this.props.message}</p>
+            <p className="message-time">{this.props.time}</p>
+          </div>
         :
           <div className="message-convo">
-            <p className="message-image-message" />
-            <p className="message-firstName">
-              {this.props.firstName} {this.props.lastName}
-            </p>
-            <p className="message-message">{this.props.message}</p>
+            {this.props.firstName !== null ?
+              <div>
+                <p className="message-image-message" />
+                <p className="message-firstName">
+                  {this.props.firstName} {this.props.lastName}
+                </p>
+              </div>
+            : null}
+            <p className={userName}>{this.props.message}</p>
             <p>{this.props.time}</p>
           </div>
         }
@@ -45,8 +45,22 @@ class Messages extends Component {
 const mapStateToProps = state => {
   return {
     admin: state.admin,
+    contact: state.contactName,
   };
 };
 
 
 export default connect(mapStateToProps)(Messages);
+
+// firstName={i > 0 &&
+//   this.props.conversation[i - 1].author.firstName ===
+//   convo.author.firstName
+//     ? ''
+//     : convo.author.firstName
+// }
+// lastName={i > 0 &&
+//   this.props.conversation[i - 1].author.lastName ===
+//   convo.author.lastName
+//     ? ''
+//     : convo.author.lastName
+// }

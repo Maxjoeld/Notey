@@ -281,10 +281,20 @@
 
 .message-message.admin {
   background-color: rgba(238, 205, 98, 0.411);
+
+}
+
+.message-message.continuous-message {
+  margin-left: 9.5rem;
+  background-color: rgba(238, 205, 98, 0.411);
+}
+.message-message.user-message {
+  margin-left: 10rem;
+  background-color: rgba(191, 224, 255, 0.479);
 }
 
 
-.message-convo.admin,.message-message.admin, .message-message.admin, .message-firstName.admin, .message-time{
+.message-convo.admin,.message-message.admin, .message-message.admin,.message-message.continuous-message, .message-firstName.admin, .message-time{
   -moz-transform: scaleX(-1);
   -webkit-transform: scaleX(-1);
   -o-transform: scaleX(-1);

@@ -249,26 +249,9 @@ export const getConversation = () => {
   return async (dispatch, getState) => {
     try {
       const { conversationId } = await getState().contact;
-      const { admin } = await getState();
-      const { contactName } = await getState();
       const res = await axios.get(`/notes/chat/convo/${conversationId._id}`);
       console.log(res.data);
-      let streak = 0;
-      const convo = [res.data];
-      console.log(convo);
-      
-      const conversation = convo.map((x, i) => {
-        if (i > 0 && (`${convo[streak].author.firstName} ${convo[streak].author.lastName}` === (`${x.author.firstName} ${x.author.lastName}`))) {
-          delete x.author;
-          return x;
-        } else if (i > 0 && (`${x.author.firstName} ${x.author.lastName}` === contactName || admin)) {
-          streak = i;
-          return x;
-        }
-        return x;
-      });
-      // console.log({ ...conversation });
-      dispatch({ type: 'GET_CONVERSATION', payload: { ...conversation } });
+      dispatch({ type: 'GET_CONVERSATION', payload: res.data.conversation });
     } catch (error) {
       console.log({ err: 'Err receiving conversationId', error });
     }
@@ -301,10 +284,7 @@ export const handleContactIdx = (inputID, user) => {
           // socket.emit('leave conversation', contact.conversationId);
           await dispatch({ type: 'CONTACT_IDX', payload: i });
           await dispatch({ type: 'CONTACT_USER', payload: contact });
-          await dispatch({
-            type: 'CONTACT_NAME',
-            payload: user,
-          });
+          await dispatch({ type: 'CONTACT_NAME', payload: user });
           await dispatch(getConversation());
           // socket.emit('enter conversation', contact.conversationId);
         } catch (error) {

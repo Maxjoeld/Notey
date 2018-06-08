@@ -9,20 +9,20 @@ class ChatBox extends Component {
   state = {
     message: '',
   };
-  reply = (e) => {
+  reply = e => {
     e.preventDefault();
     const { message } = this.state;
     this.props.replyMessage({ message });
     this.setState({ message: '' });
   };
 
-  newContact = (e) => {
+  newContact = e => {
     e.preventDefault();
     const { message } = this.state;
     const recipient = this.props.user._id;
     this.props.loadNewUser(recipient, { message });
     this.setState({ message: '' });
-  }
+  };
 
   handleInputChange = e => {
     const { name, value } = e.target;
@@ -37,7 +37,6 @@ class ChatBox extends Component {
     } else if (this.props.contact) {
       user = this.props.contact;
     }
-
     return (
       <div>
         <form className="friendChat">
@@ -50,22 +49,35 @@ class ChatBox extends Component {
             </div>
           </div>
           <div className="friendchat--textbox">
-            {this.props.newContact ? '' :
-              this.props.conversation ?
-                this.props.conversation.map(convo => {
-                  return (
-                    <Messages
-                      key={convo._id}
-                      index={convo._id}
-                      message={convo.body}
-                      firstName={convo.author.firstName ? '' : null}
-                      lastName={convo.author.lastName ? '' : null}
-                      time={convo.createdAt.split('').splice(11, 5).join('')}
-                    />
-                  );
-                })
-              : null
-            }
+            {this.props.newContact ? ''
+              : this.props.conversation ?
+                  this.props.conversation.map((convo, i) => {
+                    return (
+                      <Messages
+                        key={convo._id}
+                        index={convo._id}
+                        message={convo.body}
+                        firstName={i > 0 &&
+                          this.props.conversation[i - 1].author.firstName ===
+                          convo.author.firstName
+                            ? null
+                            : convo.author.firstName
+                        }
+                        lastName={i > 0 &&
+                          this.props.conversation[i - 1].author.lastName ===
+                          convo.author.lastName
+                            ? null
+                            : convo.author.lastName
+                        }
+                        isAdmin={this.props.admin === `${convo.author.firstName} ${convo.author.lastName}`}
+                        time={convo.createdAt
+                          .split('')
+                          .splice(11, 5)
+                          .join('')}
+                      />
+                    );
+                  })
+                : null}
           </div>
           <div className="friend-search-bar">
             <FontAwesome name="far fa-comment-alt" />
@@ -81,7 +93,7 @@ class ChatBox extends Component {
             <button
               className="friendChat--submit"
               type="submit"
-              onClick={(e) => this.props.newContact ? this.newContact(e) : this.reply(e)}
+              onClick={e => (this.props.newContact ? this.newContact(e) : this.reply(e))}
             >
               Send
             </button>

@@ -65,31 +65,31 @@
 
 .signin {
   box-shadow: none;
-  width: 120rem;
-  height: 80rem;
+  width: 110rem;
+  height: 85rem;
   display: flex;
-  justify-content: center;
+  align-content: space-evenly;
   align-items: center;
   border: solid white;
   background-color: #ffffff;
   border: 1px solid white; }
   .signin--image {
     max-width: 80rem;
-    max-height: 80rem;
+    max-height: 100%;
     clip: rect(0px, 60px, 500px, 0px); }
   .signin--box {
-    margin-left: 5rem;
+    margin-left: 10rem;
     background-color: #ffffff;
     display: flex;
     flex-flow: column;
     justify-content: center;
     align-items: center;
     width: 40rem;
-    height: 52rem;
+    height: 60rem;
     box-shadow: 5px 10px 15px 0px rgba(0, 0, 0, 0.294);
     position: relative; }
   .signin--header {
-    margin-bottom: 3.5rem; }
+    margin-bottom: 2rem; }
   .signin--buttons {
     margin-bottom: 1.5rem;
     margin-left: 1rem; }
@@ -145,11 +145,17 @@
       border: 0.5px black; }
   .signin--notmember {
     font-size: 1rem;
-    margin-top: 2rem; }
+    margin-top: 5rem; }
 
 .fa-facebook-square {
   font-size: 1.5rem;
   margin-right: .5rem; }
+
+.signin-notey {
+  margin-left: 0.9rem;
+  margin-top: -3.3rem;
+  margin-bottom: 4rem;
+  color: grey; }
 
 .CreateNote {
   margin: 3rem 4rem;
@@ -519,7 +525,15 @@
 .message-message.admin {
   background-color: rgba(238, 205, 98, 0.411); }
 
-.message-convo.admin, .message-message.admin, .message-message.admin, .message-firstName.admin, .message-time {
+.message-message.continuous-message {
+  margin-left: 9.5rem;
+  background-color: rgba(238, 205, 98, 0.411); }
+
+.message-message.user-message {
+  margin-left: 10rem;
+  background-color: rgba(191, 224, 255, 0.479); }
+
+.message-convo.admin, .message-message.admin, .message-message.admin, .message-message.continuous-message, .message-firstName.admin, .message-time {
   -moz-transform: scaleX(-1);
   -webkit-transform: scaleX(-1);
   -o-transform: scaleX(-1);
