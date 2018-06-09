@@ -89,7 +89,7 @@ export const logoutUser = history => {
 export const loginGoogle = (username, password, history) => {
   return async dispatch => {
     try {
-      const res = await axios.get('/auth/google');
+      const res = await axios.get('http://localhost:5000/auth/google');
       sessionStorage.setItem('id', res.session.userId);
       await history.push('/');
       await dispatch(getNotes());
