@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { saveUser } from '../../actions';
 
 import logo from './google.png';
-import backgroundImage from './background.jpg';
+import backgroundImage from './background2.jpg';
 
 const styles = {
   backgroundImage: `url(${backgroundImage})`,
@@ -30,8 +30,10 @@ class SignUp extends Component {
   };
   render() {
     return (
-      <div className="signin" style={styles}>
-        <div className="signin--box">
+      <div className="signup" style={styles}>
+        <p className="signup-headline">Lorem ipsum <br/> <span className="signup-headline2">dolor sit amet</span></p>
+        {/* <img src={backgroundImage} alt="bg" className="signup--image" /> */}
+        <div className="signup--box">
           <h1 className="signin--header">Sign Up With</h1>
           <form className="signin--signin">
             <input

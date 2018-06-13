@@ -27,7 +27,7 @@ class SideBar extends Component {
             <div className="Nico--cropper">
               <img src={Nico} alt="NicoImage" className="NicoPic" />
             </div>
-            <p>md809@gmail.com</p>
+            <p>{this.props.admin}</p>
           </div>
           {/* We can also add activeClassName to make our own classes instead of default .active */}
           <div className="sidebar-links">
@@ -47,4 +47,10 @@ class SideBar extends Component {
   }
 }
 
-export default withRouter(connect(null, { deAuth, logoutUser })(SideBar));
+const mapStateToProps = state => {
+  return {
+    admin: state.admin,
+  };
+};
+
+export default withRouter(connect(mapStateToProps, { deAuth, logoutUser })(SideBar));
