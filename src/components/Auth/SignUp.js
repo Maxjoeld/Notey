@@ -5,7 +5,7 @@ import { saveUser } from '../../actions';
 
 import logo from './google.png';
 import backgroundImage from './background2.jpg';
-
+import noteyLogo from './logo.png';
 const styles = {
   backgroundImage: `url(${backgroundImage})`,
 };
@@ -32,8 +32,9 @@ class SignUp extends Component {
     return (
       <div className="signup" style={styles}>
         <p className="signup-headline">Lorem ipsum <br/> <span className="signup-headline2">dolor sit amet</span></p>
-        {/* <img src={backgroundImage} alt="bg" className="signup--image" /> */}
         <div className="signup--box">
+        <img src={noteyLogo} alt="SideLogo" className="Side-logo" />
+        <h1 className="signin-notey">Notey</h1>
           <h1 className="signin--header">Sign Up With</h1>
           <form className="signin--signin">
             <input
