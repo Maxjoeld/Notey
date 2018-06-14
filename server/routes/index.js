@@ -36,11 +36,13 @@ module.exports = (app) => {
 
   app.get('/auth/islogged', (req, res, next) => {
     // Do NOT modify this route handler in any way
-    if (!req.sessions.user) {
+    console.log('sessssssion line 39 ',req.session);
+    if (!req.session.user) {
       sendUserError('User is not logged in', res);
       return;
     }
-    res.json({ session: req.session.user })
+    console.log('sessssssion LINE 44',req.session);
+    res.json({ user: req.session.user })
     next();
   });
 };

@@ -17,10 +17,14 @@ const allContacts = (req, res) => {
     .catch(err => res.status(400).send({ error: err }));
 };
 
-const getConversations = (req,res) => { 
+const getConversations = (req,res) => {
+  console.log(req.session.user); 
   Conversation.find({ participants: req.session.user })
       .select('_id')
       .then(conversations => {
+        if (conversations.length === 0) {
+          return res.status(200).json({ conversations: [] });
+        }
         let fullConversations = [];
         conversations.forEach(conversation => {
         Message.find({ 'conversationId': conversation._id })

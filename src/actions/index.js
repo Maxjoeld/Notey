@@ -55,19 +55,52 @@ export const deAuth = () => {
     type: DEAUTH,
   };
 };
+export const getUsers = () => {
+  return async dispatch => {
+    try {
+      const res = await axios.get('/notes/chat/allContacts');
+      await dispatch({ type: GET_USERS, payload: res.data });
+    } catch (error) {
+      console.log({ err: 'There was an error loading your notes :(', error });
+    }
+  };
+};
 
+export const loadConvos = () => {
+  return async dispatch => {
+    try {
+      const res = await axios.get('/notes/chat/getConversations');
+      await dispatch({ type: GET_CONTACTS, payload: res.data.conversations });
+    } catch (error) {
+      console.log({ err: 'There was an error loading your notes :(', error });
+    }
+  };
+};
+
+export const getNotes = () => {
+  return async dispatch => {
+    const id = sessionStorage.getItem('id');
+    try {
+      const res = await axios.get(`/notes/${id}`);
+      await dispatch({ type: GET_NOTES, payload: res.data.notes });
+    } catch (error) {
+      console.log({ err: 'There was an error loading your notes :(', error });
+    }
+  };
+};
 export const isAuthenticated = () => {
   return async dispatch => {
     try {
       // this will check if the route we're talking about is authenticated
-      const res = await axios.get('/notes/isLogged');
+      console.log('hey');
+      const res = await axios.get('/auth/isLogged');
       await sessionStorage.setItem('id', res.data.user);
       console.log(res.data.user);
       await dispatch({ type: 'ISAUTH' });
-      dispatch({ type: 'ADMIN', payload: res.data.user });
+      await dispatch({ type: 'ADMIN', payload: res.data.user });
       await dispatch(getNotes());
       await dispatch(getUsers());
-      await dispatch(loadConvos());
+      // await dispatch(loadConvos());
     } catch (error) {
       console.log(error);
       // return false;
@@ -141,17 +174,6 @@ export const saveUser = (username, password, firstName, lastName, history) => {
 // NOTES
 /////////////////////////////////////////////////////////////////
 
-export const getNotes = () => {
-  return async dispatch => {
-    const id = sessionStorage.getItem('id');
-    try {
-      const res = await axios.get(`/notes/${id}`);
-      await dispatch({ type: GET_NOTES, payload: res.data.notes });
-    } catch (error) {
-      console.log({ err: 'There was an error loading your notes :(', error });
-    }
-  };
-};
 
 export const createNote = inputNote => {
   return async dispatch => {
@@ -213,17 +235,6 @@ export const getUserNames = () => {
   };
 };
 
-export const loadConvos = () => {
-  return async dispatch => {
-    try {
-      const res = await axios.get('/notes/chat/getConversations');
-      await dispatch({ type: GET_CONTACTS, payload: res.data.conversations });
-    } catch (error) {
-      console.log({ err: 'There was an error loading your notes :(', error });
-    }
-  };
-};
-
 export const loadNewUser = (recipient, message) => {
   return async dispatch => {
     try {
@@ -231,17 +242,6 @@ export const loadNewUser = (recipient, message) => {
       const res = await axios.post(`/notes/chat/new/${recipient}`, message);
       await dispatch(loadConvos());
       await dispatch(existingContact());
-    } catch (error) {
-      console.log({ err: 'There was an error loading your notes :(', error });
-    }
-  };
-};
-
-export const getUsers = () => {
-  return async dispatch => {
-    try {
-      const res = await axios.get('/notes/chat/allContacts');
-      await dispatch({ type: GET_USERS, payload: res.data });
     } catch (error) {
       console.log({ err: 'There was an error loading your notes :(', error });
     }

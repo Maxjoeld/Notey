@@ -15,6 +15,7 @@ class NoteList extends Component {
 
   async componentDidMount() {
     await this.props.getNotes();
+    await this.props.loadConvos();
   }
 
   onSortEnd = ({ oldIndex, newIndex }) => {
@@ -27,7 +28,7 @@ class NoteList extends Component {
   };
 
   render() {
-    let filteredNotes = []; 
+    let filteredNotes = [];
     if (this.props.notes) {
       filteredNotes = this.props.notes.filter(note => {
         return note.title.toLowerCase().includes(this.state.search.toLowerCase());
@@ -90,11 +91,11 @@ class NoteList extends Component {
             onSortEnd={this.onSortEnd}
             handleNoteIndex={this.props.handleIdx}
           />
-          {!this.boolEmptyNotes ? (
+          {/* {!this.boolEmptyNotes ? (
             <CSVLink className="CSV-Link" data={this.props.notes} filename="lambda-notes.csv">
               Download CSV
             </CSVLink>
-          ) : null}
+          ) : null} */}
         </div>
       </div>
     );

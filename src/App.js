@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -10,44 +10,51 @@ import EditNote from './components/Notes/EditNote';
 import Login from './components/Auth/SignIn';
 import SignUp from './components/Auth/SignUp';
 
-import RequireAuth from './hoc/RequireAuth';
+// import RequireAuth from './hoc/RequireAuth';
 import Convo from './components/Chat/Conversation';
 
 
 import { isAuthenticated } from './actions';
 
-const App = (props) => {
-  // const PrivateRoute = ({ component: Comp, ...rest }) => (
-  //   <Route
-  //     {...rest}
-  //     render={compProps =>
-  //       sessionStorage.getItem('id') ? (
-  //         <Comp {...compProps} {...rest} />
-  //       ) : (
-  //         <Redirect
-  //           to={{
-  //             pathname: '/login',
-  //           }}
-  //         />
-  //       )
-  //     }
-  //   />
-  // );
-  return (
-    <Router>
-      <div className="App">
-        <Switch>
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={(SignUp)} />
-          <Route exact path="/" component={RequireAuth(NoteList)} />
-          <Route path="/create" component={RequireAuth(CreateNote)} />
-          <Route path="/view" component={RequireAuth(ViewNote)} />
-          <Route path="/edit" component={RequireAuth(EditNote)} />
-          <Route path="/convo" component={RequireAuth(Convo)} />
-        </Switch>
-      </div>
-    </Router>
-  );
+const PrivateRoute = ({ component: Comp, ...rest }) => (
+  <Route
+    {...rest}
+    render={compProps =>
+      sessionStorage.getItem('id') ? (
+        <Comp {...compProps} {...rest} />
+      ) : (
+        <Redirect
+          to={{
+            pathname: '/login',
+          }}
+        />
+      )
+    }
+  />
+);
+
+class App extends Component {
+  state = {}
+  componentWillMount() {
+    this.props.isAuthenticated();
+  }
+  render() {
+    return (
+      <Router>
+        <div className="App">
+          <Switch>
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={(SignUp)} />
+            <PrivateRoute exact path="/" component={(NoteList)} />
+            <PrivateRoute path="/create" component={(CreateNote)} />
+            <PrivateRoute path="/view" component={(ViewNote)} />
+            <PrivateRoute path="/edit" component={(EditNote)} />
+            <PrivateRoute path="/convo" component={(Convo)} />
+          </Switch>
+        </div>
+      </Router>
+    );
+  }
 }
 
 
