@@ -1,5 +1,5 @@
-const Conversation = require('../models/chat/conversation'),  
-      Message = require('../models/chat/message'),
+const Conversation = require('../models/conversation'),  
+      Message = require('../models/message'),
       User = require('../models/users'),
       { sendUserError } = require('../utils/authenticate');
 

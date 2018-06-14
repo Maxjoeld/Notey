@@ -1,7 +1,5 @@
 const { app } = require('./server');
 const mongoose = require('mongoose');
-const mongo = require('mongodb').MongoClient;
-
 
 const PORT = process.env.PORT || 5000;
 

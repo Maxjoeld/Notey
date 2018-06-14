@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { mySecret } = require('../config');
+const { mySecret } = require('../config/config');
 const STATUS_USER_ERROR = 422;
 
 const sendUserError = (err, res) => {

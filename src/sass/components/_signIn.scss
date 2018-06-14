@@ -43,19 +43,22 @@
       background-color: #435c94;
       color: white;
       height: 3.5rem;
-      width: 10rem;
+      width: 9rem;
       margin-right: 1.5rem;
       border-radius: .5rem;
     }
     &__google {
-      border: 1px solid rgb(219, 219, 219);
-      background-color: white;
+      // background-color: black;
+      font-size: 1.2rem;
+
       color: rgb(139, 139, 139);
       height: 3.8rem;
       width: 10rem;
       margin-right: 1.5rem;
       border-radius: .5rem;
-
+      border: 0.7px solid rgba(105, 105, 105, 0.384);
+      padding: 1rem;
+      
       &--logo {
         padding: none;
         height: 1.3rem;

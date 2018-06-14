@@ -42,7 +42,7 @@ class SignIn extends Component {
               <button className="signin--buttons__facebook">
                 <i className="fab fa-facebook-square" />facebook
               </button>
-              <a href="/auth/google">
+              <a href="/auth/google" className="signin--buttons__google">
                 {/* <button className="signin--buttons__google" onClick={e => this.loginGoogle(e)}> */}
                 <img src={logo} alt="google logo" className="signin--buttons__google--logo" />Google
                 {/* </button> */}

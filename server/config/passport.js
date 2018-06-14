@@ -3,17 +3,12 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const keys = require('../config');
 const User = require('../models/users');
 
-const mongoose = require('mongoose');
-// const cookieSession = require('cookie-session');
-
-const GooUser = require('../models/gooUser');
-
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
-  GooUser.findById(id).then(user => {
+  User.findById(id).then(user => {
     console.log({ user });
     done(null, user);
   });

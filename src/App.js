@@ -35,8 +35,8 @@ const PrivateRoute = ({ component: Comp, ...rest }) => (
 
 class App extends Component {
   state = {}
-  componentWillMount() {
-    this.props.isAuthenticated();
+  async componentWillMount() {
+    await this.props.isAuthenticated();
   }
   render() {
     return (

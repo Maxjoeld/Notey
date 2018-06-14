@@ -28,20 +28,15 @@ module.exports = (app) => {
   app.post('/notes/chat/reply/:conversationId', sessionAuth, sendReply);
   app.post('/notes/chat/new/:recipient',sessionAuth, newConversation);
 
-  
   app.get('/notes/me/1', (req, res) => {
-  // Do NOT modify this route handler in any way
   res.send({ user: req.user, session: req.session });
   });
 
   app.get('/auth/islogged', (req, res, next) => {
-    // Do NOT modify this route handler in any way
-    console.log('sessssssion line 39 ',req.session);
     if (!req.session.user) {
       sendUserError('User is not logged in', res);
       return;
     }
-    console.log('sessssssion LINE 44',req.session);
     res.json({ user: req.session.user })
     next();
   });
