@@ -51,16 +51,3 @@ const mapStateToProps = state => {
 
 
 export default connect(mapStateToProps)(Messages);
-
-// firstName={i > 0 &&
-//   this.props.conversation[i - 1].author.firstName ===
-//   convo.author.firstName
-//     ? ''
-//     : convo.author.firstName
-// }
-// lastName={i > 0 &&
-//   this.props.conversation[i - 1].author.lastName ===
-//   convo.author.lastName
-//     ? ''
-//     : convo.author.lastName
-// }

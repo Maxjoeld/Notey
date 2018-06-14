@@ -10,12 +10,13 @@ import EditNote from './components/Notes/EditNote';
 import Login from './components/Auth/SignIn';
 import SignUp from './components/Auth/SignUp';
 
+import RequireAuth from './hoc/RequireAuth';
 import Convo from './components/Chat/Conversation';
 
-// import RequireAuth from './hoc/RequireAuth';
+
 import { isAuthenticated } from './actions';
 
-const App = () => {
+const App = (props) => {
   const PrivateRoute = ({ component: Comp, ...rest }) => (
     <Route
       {...rest}
@@ -38,11 +39,11 @@ const App = () => {
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/signup" component={(SignUp)} />
-          <PrivateRoute exact path="/" component={(NoteList)} />
-          <PrivateRoute path="/create" component={(CreateNote)} />
-          <PrivateRoute path="/view" component={(ViewNote)} />
-          <PrivateRoute path="/edit" component={(EditNote)} />
-          <PrivateRoute path="/convo" component={(Convo)} />
+          <PrivateRoute exact path="/" component={RequireAuth(NoteList)} />
+          <PrivateRoute path="/create" component={RequireAuth(CreateNote)} />
+          <PrivateRoute path="/view" component={RequireAuth(ViewNote)} />
+          <PrivateRoute path="/edit" component={RequireAuth(EditNote)} />
+          <PrivateRoute path="/convo" component={RequireAuth(Convo)} />
         </Switch>
       </div>
     </Router>
@@ -56,4 +57,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, { isAuthenticated })(App);

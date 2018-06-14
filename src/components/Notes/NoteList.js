@@ -27,9 +27,12 @@ class NoteList extends Component {
   };
 
   render() {
-    const filteredNotes = this.props.notes.filter(note => {
-      return note.title.toLowerCase().includes(this.state.search.toLowerCase());
-    });
+    let filteredNotes = []; 
+    if (this.props.notes) {
+      filteredNotes = this.props.notes.filter(note => {
+        return note.title.toLowerCase().includes(this.state.search.toLowerCase());
+      });
+    }
 
     const SortableList = SortableContainer(props => {
       return (

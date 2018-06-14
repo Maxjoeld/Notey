@@ -47,16 +47,25 @@ const UserSchema = new Schema({
   timestamps: true
 });
 
+UserSchema.set('validateBeforeSave', false);
+UserSchema.path('password').validate(function (value) {
+  return v != null;
+});
+
 UserSchema.pre('save', function (next) {
-  bcrypt.hash(this.password, SALT_ROUNDS, (err, hashed) => {
-    if (err) return next(err);
-    this.password = hashed;
-    next();
-  });
+ if (this.password !== null) {
+   bcrypt.hash(this.password, SALT_ROUNDS, (err, hashed) => {
+     if (err) return next(err);
+     this.password = hashed;
+     next();
+   });
+ }
 });
 
 UserSchema.methods.checkPassword = function (plainTextPW) {
+  if (this.password !== null) {
   return bcrypt.compare(plainTextPW, this.password);
+  }
 };
 
 module.exports = mongoose.model('User', UserSchema);

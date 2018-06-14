@@ -1,6 +1,8 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const keys = require('../config');
+const User = require('../models/users');
+
 const mongoose = require('mongoose');
 // const cookieSession = require('cookie-session');
 
@@ -25,20 +27,24 @@ passport.use(new GoogleStrategy(
     callbackURL: '/auth/google/callback',
   },
   async (accessToken, refreshtoken, profile, done) => {
-    // console.log({ accessToken });
-    // console.log({ refreshtoken });
-    // console.log({ profile: profile });
+    console.log({ accessToken });
+    console.log({ refreshtoken });
+    console.log({ profile: profile.name.givenName });
     console.log('success');
-    const existingUser = await GooUser.findOne({ googleId: profile.id });
+    const existingUser = await User.findOne({ username: profile.emails[0].value });
+    
     if (existingUser) {
       return done(null, existingUser);
     }
-    const newUser = new GooUser({
-      googleId: profile.id,
-      email: profile.emails[0].value,
+    let newUser = new User({
+      username: profile.emails[0].value,
+      firstName: profile.name.givenName,
+      lastName: profile.name.familyName,
       img: profile.photos[0].value,
+      password: null
     });
-    const user = await newUser.save();
+
+    const user = await newUser.save()
     done(null, user);
   },
 ));

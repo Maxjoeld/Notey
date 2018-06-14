@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setId, isAuthenticated } from '../actions';
 
@@ -6,7 +7,7 @@ export default ComposedComponent => {
   class RequireAuth extends Component {
     async componentWillMount() {
       await this.props.isAuthenticated();
-      if (!this.props.isAuthenticated) {
+      if (!this.props.isAuth) {
         this.props.history.push('/login');
       }
     }
@@ -25,5 +26,5 @@ export default ComposedComponent => {
     };
   };
 
-  return connect(null, { setId, isAuthenticated })(RequireAuth);
+  return  withRouter(connect(null, { setId, isAuthenticated })(RequireAuth));
 };

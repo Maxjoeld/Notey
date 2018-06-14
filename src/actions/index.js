@@ -64,7 +64,10 @@ export const isAuthenticated = () => {
       await sessionStorage.setItem('id', res.data.user);
       console.log(res.data.user);
       await dispatch({ type: 'ISAUTH' });
-      // return true;
+      dispatch({ type: 'ADMIN', payload: res.data.user });
+      await dispatch(getNotes());
+      await dispatch(getUsers());
+      await dispatch(loadConvos());
     } catch (error) {
       console.log(error);
       // return false;

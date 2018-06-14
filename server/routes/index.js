@@ -29,10 +29,10 @@ module.exports = (app) => {
   app.post('/notes/chat/new/:recipient',sessionAuth, newConversation);
 
   
-  // app.get('/notes/me/1', (req, res) => {
-  // // Do NOT modify this route handler in any way
-  // res.send({ user: req.user, session: req.session });
-  // });
+  app.get('/notes/me/1', (req, res) => {
+  // Do NOT modify this route handler in any way
+  res.send({ user: req.user, session: req.session });
+  });
 
   app.get('/auth/islogged', (req, res, next) => {
     // Do NOT modify this route handler in any way
