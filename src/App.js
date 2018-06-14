@@ -17,33 +17,33 @@ import Convo from './components/Chat/Conversation';
 import { isAuthenticated } from './actions';
 
 const App = (props) => {
-  const PrivateRoute = ({ component: Comp, ...rest }) => (
-    <Route
-      {...rest}
-      render={compProps =>
-        sessionStorage.getItem('id') ? (
-          <Comp {...compProps} {...rest} />
-        ) : (
-          <Redirect
-            to={{
-              pathname: '/login',
-            }}
-          />
-        )
-      }
-    />
-  );
+  // const PrivateRoute = ({ component: Comp, ...rest }) => (
+  //   <Route
+  //     {...rest}
+  //     render={compProps =>
+  //       sessionStorage.getItem('id') ? (
+  //         <Comp {...compProps} {...rest} />
+  //       ) : (
+  //         <Redirect
+  //           to={{
+  //             pathname: '/login',
+  //           }}
+  //         />
+  //       )
+  //     }
+  //   />
+  // );
   return (
     <Router>
       <div className="App">
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/signup" component={(SignUp)} />
-          <PrivateRoute exact path="/" component={RequireAuth(NoteList)} />
-          <PrivateRoute path="/create" component={RequireAuth(CreateNote)} />
-          <PrivateRoute path="/view" component={RequireAuth(ViewNote)} />
-          <PrivateRoute path="/edit" component={RequireAuth(EditNote)} />
-          <PrivateRoute path="/convo" component={RequireAuth(Convo)} />
+          <Route exact path="/" component={RequireAuth(NoteList)} />
+          <Route path="/create" component={RequireAuth(CreateNote)} />
+          <Route path="/view" component={RequireAuth(ViewNote)} />
+          <Route path="/edit" component={RequireAuth(EditNote)} />
+          <Route path="/convo" component={RequireAuth(Convo)} />
         </Switch>
       </div>
     </Router>

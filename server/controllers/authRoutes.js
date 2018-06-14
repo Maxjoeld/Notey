@@ -16,7 +16,7 @@ module.exports = (app) => {
   // handle the case a little different
   app.get('/auth/google/callback', passport.authenticate('google'), (req, res, next) => {
     req.session.user = req.user._id
-    res.redirect('http://localhost:3000/')
+    res.redirect('http://localhost:3000/create')
     // res.json({ session: req.session.user })
     next();
   });

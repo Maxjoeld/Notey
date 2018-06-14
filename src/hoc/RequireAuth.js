@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setId, isAuthenticated } from '../actions';
 
 export default ComposedComponent => {
   class RequireAuth extends Component {
-    async componentWillMount() {
-      await this.props.isAuthenticated();
+    componentWillMount() {
+      this.props.isAuthenticated();
+      console.log(this.props.isAuth);
       if (!this.props.isAuth) {
         this.props.history.push('/login');
       }
     }
+
+    // componentWillUpdate(nextProps) {
+    //   if (!this.props.isAuth) {
+    //     this.props.history.push('/login');
+    //   }
+    // }
 
     render() {
       return (
@@ -26,5 +32,5 @@ export default ComposedComponent => {
     };
   };
 
-  return  withRouter(connect(null, { setId, isAuthenticated })(RequireAuth));
+  return connect(mapStateToProps, { setId, isAuthenticated })(RequireAuth);
 };
