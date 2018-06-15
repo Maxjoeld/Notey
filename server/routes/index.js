@@ -37,7 +37,7 @@ module.exports = (app) => {
       sendUserError('User is not logged in', res);
       return;
     }
-    res.json({ user: req.session.user })
+    res.json({ user: req.session.user, profile: req.session.profile })
     next();
   });
 };

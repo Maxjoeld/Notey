@@ -226,6 +226,7 @@
 
 .NicoPic {
   display: inline;
+  width: 100%;
   height: 100%;
   position: relative; }
 
@@ -540,7 +541,7 @@
   margin-left: 10rem;
   background-color: rgba(238, 205, 98, 0.411); }
 
-.message-convo.admin, .message-message.admin, .message-message.admin, .message-message.continuous-message, .message-firstName.admin, .message-time {
+.message-convo.admin, .message-message.admin, .message-contact-image, .message-message.continuous-message, .message-firstName.admin, .message-time {
   -moz-transform: scaleX(-1);
   -webkit-transform: scaleX(-1);
   -o-transform: scaleX(-1);

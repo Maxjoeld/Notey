@@ -29,6 +29,7 @@ export const NEW_CONTACT = 'NEW_CONTACT';
 export const EXISTING_CONTACT = 'EXISTING_CONTACT';
 export const NEW_USER_NAME = 'NEW_USER_NAME';
 export const CONTACT_NAME = 'CONTACT_NAME';
+export const PROFILE = 'PROFILE';
 
 axios.defaults.withCredentials = true;
 
@@ -97,7 +98,8 @@ export const isAuthenticated = () => {
       await sessionStorage.setItem('id', res.data.user);
       console.log(res.data.user);
       await dispatch({ type: 'ISAUTH' });
-      await dispatch({ type: 'ADMIN', payload: res.data.user });
+      await dispatch({ type: 'PROFILE', payload: res.data.profile });
+      await dispatch({ type: 'ADMIN', payload: res.data.profile.firstName + ' ' + res.data.profile.lastName });
       await dispatch(getNotes());
       await dispatch(getUsers());
       // await dispatch(loadConvos());

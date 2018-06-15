@@ -22,6 +22,7 @@ import {
   EXISTING_CONTACT,
   NEW_USER_NAME,
   CONTACT_NAME,
+  PROFILE,
 } from '../actions';
 
 const initialState = {
@@ -39,6 +40,8 @@ const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADMIN:
       return { ...state, admin: action.payload };
+    case PROFILE:
+      return { ...state, profile: action.payload };
     case ISAUTH:
       return { ...state, isAuthenticated: !state.isAuthenticated };
     case GET_NOTES:

@@ -25,7 +25,7 @@ class SideBar extends Component {
           <div className="sidebar--users">
             <p>Welcome</p>
             <div className="Nico--cropper">
-              <img src={Nico} alt="NicoImage" className="NicoPic" />
+              <img src={this.props.profilePic ? this.props.profilePic.img : Nico} alt="NicoImage" className="NicoPic" />
             </div>
             <p>{this.props.admin}</p>
           </div>
@@ -50,6 +50,7 @@ class SideBar extends Component {
 const mapStateToProps = state => {
   return {
     admin: state.admin,
+    profilePic: state.profile,
   };
 };
 

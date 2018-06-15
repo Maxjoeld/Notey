@@ -7,7 +7,7 @@ class Messages extends Component {
   };
 
   render() {
-    const adminName = this.props.firstName === null ? "message-message continuous-message" : "message-message admin";
+    const adminName = this.props.firstName === null ? "message-message continuous-message" : "message-contact-image";
     const userName = this.props.firstName === null ? "message-message user-message" : "message-message";
     return (
       <React.Fragment>
@@ -15,7 +15,10 @@ class Messages extends Component {
           <div className="message-convo admin">
             {this.props.firstName !== null ?
               <div>
-                <p className="message-image-message admin" />
+                {/* <p className="message-image-message admin" /> */}
+                {/* <div className="contact-image"> */}
+                  <img className="contact-image" src={this.props.profilePic ? this.props.profilePic.img : null} alt="NicoImage" />
+                {/* </div> */}
                 <p className="message-firstName admin">
                   {this.props.firstName} {this.props.lastName}
                 </p>
@@ -46,6 +49,7 @@ const mapStateToProps = state => {
   return {
     admin: state.admin,
     contact: state.contactName,
+    profilePic: state.profile,
   };
 };
 
