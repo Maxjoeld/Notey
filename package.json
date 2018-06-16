@@ -47,6 +47,10 @@
     "styled-components": "^3.2.6",
     "yarn-recursive": "^1.0.5"
   },
+  "engines": {
+    "node": "10.4.1",
+    "npm": "6.1.0"
+  },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
