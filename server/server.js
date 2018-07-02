@@ -2,20 +2,20 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const passport = require('passport');
-const keys = require('./config/config');
+const keys = require('./config/dev');
 const routes = require('./routes/index');
 require('./config/passport');
 const passportRoutes = require('./controllers/authRoutes');
 const session = require('express-session');
-const User = require('./models/users');
+// const User = require('./models/users');
 
 // where to find the picture/video in the filesystem that we'll be storing in the DB
-const Grid = require('gridfs-stream');
-const fs = require('fs');
-const path = require('path');
-const conn = mongoose.connection;
-const imgPath = path.join(__dirname, './images/Nico2.png');
-Grid.mongo = mongoose.mongo;
+// const Grid = require('gridfs-stream');
+// const fs = require('fs');
+// const path = require('path');
+// const conn = mongoose.connection;
+// const imgPath = path.join(__dirname, './images/Nico2.png');
+// Grid.mongo = mongoose.mongo;
 
 // conn.once('open', () => {
 //   console.log('Connection open');
@@ -38,8 +38,6 @@ Grid.mongo = mongoose.mongo;
 // });
 
 
-
-
 const app = express();
 // const http = require('http').Server(app);
 // const io = require('socket.io')(http);
@@ -56,6 +54,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
 }));
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(passport.initialize());
@@ -94,10 +93,8 @@ app.use(function(req,res,next){
 // });
 // io.listen(8000);
 
-app
-
 passportRoutes(app);
-routes(app); 
+routes(app);
 
 module.exports = {
   app,

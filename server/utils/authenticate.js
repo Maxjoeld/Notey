@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { mySecret } = require('../config/config');
+const { seshSecret } = require('../config/dev');
 const STATUS_USER_ERROR = 422;
 
 const sendUserError = (err, res) => {
@@ -13,7 +13,7 @@ const sendUserError = (err, res) => {
 const jwtauth = (req, res, next) => {
   const token = req.get('Authorization');
   if (token) {
-    jwt.verify(token, mySecret, (err, jwtObj) => {
+    jwt.verify(token, seshSecret, (err, jwtObj) => {
       if (err) return res.status(422).json(err);
       req.jwtObj = jwtObj;
       next();

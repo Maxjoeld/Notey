@@ -60,6 +60,7 @@ export const getUsers = () => {
   return async dispatch => {
     try {
       const res = await axios.get('/notes/chat/allContacts');
+      console.log({ contacts: res.data });
       await dispatch({ type: GET_USERS, payload: res.data });
     } catch (error) {
       console.log({ err: 'There was an error loading your notes :(', error });
@@ -71,6 +72,7 @@ export const loadConvos = () => {
   return async dispatch => {
     try {
       const res = await axios.get('/notes/chat/getConversations');
+      console.log({ convossss: res.data });
       await dispatch({ type: GET_CONTACTS, payload: res.data.conversations });
     } catch (error) {
       console.log({ err: 'There was an error loading your notes :(', error });
