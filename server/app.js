@@ -1,12 +1,13 @@
 const { app } = require('./server');
 const mongoose = require('mongoose');
-const keys = require('./config/dev');
+// const keys = require('./config/dev');
 const PORT = process.env.PORT || 5000;
 
 mongoose.Promise = global.Promise;
 // 'mongodb://localhost/fs-notes'
+// http://localhost:5000
 mongoose
-  .connect(keys.mongoURI)
+  .connect('mongodb://localhost/fs-notes')
   .then(() => {
     console.log('Successfully connected to MongoDB');
   })

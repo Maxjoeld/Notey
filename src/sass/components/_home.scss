@@ -1,0 +1,37 @@
+.Home-header {
+  width: inherit;
+  height: 150rem;
+  border: 1px solid black;
+}
+
+.Home--Pic {
+  text-align: center;
+  height: 50rem;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+}
+
+.Home--three--boxes{
+  display:flex;
+  justify-content: space-evenly;
+  margin-bottom: 50rem;
+}
+
+.Boxes {
+  text-align: center;
+  height: 30rem;
+  width: 30rem;
+  border: 1px solid black;
+}
+
+.Home-bottom {
+  width: inherit;
+  height: 15rem;
+  border: 1px solid black;
+}
+
+.Home--nav {
+  display: flex;
+  justify-content: space-between;
+}

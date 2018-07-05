@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import Home from './components/Home';
 import NoteList from './components/Notes/NoteList';
 import CreateNote from './components/Notes/CreateNote';
 import ViewNote from './components/Notes/ViewNote';
@@ -43,6 +44,7 @@ class App extends Component {
       <Router>
         <div className="App">
           <Switch>
+            <Route path="/home" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={(SignUp)} />
             <PrivateRoute exact path="/" component={(NoteList)} />
