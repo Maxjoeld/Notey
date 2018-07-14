@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const passport = require('passport');
-const keys = require('./config/dev');
+const keys = require('./config/keys');
 const routes = require('./routes/index');
 require('./config/passport');
 const passportRoutes = require('./controllers/authRoutes');
@@ -43,14 +43,14 @@ const app = express();
 // const io = require('socket.io')(http);
 
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: keys.client,
   credentials: true,
 };
 
 app.use(express.json());
 app.use(cors(corsOptions));
 app.use(session({
-  secret: keys.seshSecret,
+  secret: keys.client,
   resave: false,
   saveUninitialized: false,
 }));
