@@ -76,6 +76,7 @@ class SignIn extends Component {
             </form>
             <p className="signin--notmember">
               Not a member? <Link to="/signup"> Sign up </Link>
+              <Link to="/Home">Home</Link>
             </p>
           </div>
         </div>

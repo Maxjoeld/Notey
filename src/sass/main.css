@@ -585,15 +585,14 @@
 
 .Home-header {
   width: inherit;
-  height: 150rem;
-  border: 1px solid black; }
+  height: 150rem; }
 
 .Home--Pic {
+  margin: 0 auto;
   text-align: center;
-  height: 50rem;
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  border: 1px solid black; }
+  flex-direction: column; }
 
 .Home--three--boxes {
   display: flex;
@@ -608,18 +607,33 @@
 
 .Home-bottom {
   width: inherit;
-  height: 15rem;
+  height: 2rem;
   border: 1px solid black; }
 
 .Home--nav {
   display: flex;
-  justify-content: space-between; }
+  justify-content: center;
+  align-items: center; }
+
+.Home--nav--links {
+  display: flex;
+  font-size: 1.5rem;
+  margin-right: 10rem; }
+
+.Home--nav--title {
+  margin-left: 1rem; }
+
+.home-logo {
+  margin: 2rem 1px 2rem 2rem;
+  max-height: 5rem; }
+
+.home--title {
+  display: inline-block; }
 
 body {
   margin: 0;
   padding: 0;
   font-family: 'Montserrat',sans-serif;
-  background: linear-gradient(45deg, #c0e4ff 0%, #ddbe7c 100%);
   background-size: fill; }
 
 html {
@@ -648,5 +662,5 @@ button:focus {
   /* offset-x | offset-y | blur-radius | spread-radius | color */
   box-shadow: 0px 7px 10px 0px rgba(0, 0, 0, 0.459);
   width: 120rem;
-  margin: 25rem auto;
+  margin: 0 auto;
   position: relative; }

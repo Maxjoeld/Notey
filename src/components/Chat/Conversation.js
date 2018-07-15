@@ -98,8 +98,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {
-  loadConvos,
-  getUsers,
-  getConversation,
-})(Convo);
+export default connect(mapStateToProps, { loadConvos, getUsers, getConversation })(Convo);
