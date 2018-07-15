@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './SideBar/logo.png';
 import home from './home.jpg';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 class Home extends Component {
   state = {}
@@ -14,9 +14,10 @@ class Home extends Component {
             Notey
           </h1> */}
             <div className="Home--nav--links">
-              <p className="Home--nav--title">Home</p>
-              <p className="Home--nav--title"><Link to="/login">Sign In</Link></p>
-              <p className="Home--nav--title"><Link to="/signup">Sign up</Link></p>
+              <p className="Home--nav--title"><NavLink to="/home">Home</NavLink></p>
+              <p className="Home--nav--title"><NavLink to="/about">About Us</NavLink></p>
+              <p className="Home--nav--title"><NavLink to="/login">Sign In</NavLink></p>
+              <p className="Home--nav--title"><NavLink to="/signup">Sign up</NavLink></p>
             </div>
         </div>
         <img src={home} alt="SideLogo" className="Home--Pic"/>
