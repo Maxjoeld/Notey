@@ -97,6 +97,16 @@ app.use(function(req,res,next){
 // io.listen(8000);
 console.log(keys.client);
 
+app.get('/islogged', (req, res, next) => {
+  // if (!req.session.user) {
+  //   sendUserError('User is not logged in', res);
+  //   return;
+  // }
+  // console.log({ session: req.session });
+  res.json({ profile: 'hey' });
+  // next();
+});
+
 passportRoutes(app);
 routes(app);
 

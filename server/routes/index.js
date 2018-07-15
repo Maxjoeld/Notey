@@ -34,15 +34,5 @@ module.exports = (app) => {
   app.get('/me/1', (req, res) => {
     res.send({ user: req.user, session: req.session });
   });
-
-  app.get('/islogged', (req, res, next) => {
-    // if (!req.session.user) {
-    //   sendUserError('User is not logged in', res);
-    //   return;
-    // }
-    // console.log({ session: req.session });
-    res.json({ profile: 'hey' });
-    // next();
-  });
 };
 
