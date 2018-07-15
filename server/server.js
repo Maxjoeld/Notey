@@ -9,6 +9,8 @@ const passportRoutes = require('./controllers/authRoutes');
 const session = require('express-session');
 // const User = require('./models/users');
 
+
+
 // where to find the picture/video in the filesystem that we'll be storing in the DB
 // const Grid = require('gridfs-stream');
 // const fs = require('fs');
@@ -41,16 +43,16 @@ const session = require('express-session');
 const app = express();
 // const http = require('http').Server(app);
 // const io = require('socket.io')(http);
-
+const DOMAIN = process.env.PORT || 'http://localhost:3000';
 const corsOptions = {
-  origin: keys.client,
+  origin: DOMAIN,
   credentials: true,
 };
 
 app.use(express.json());
 app.use(cors(corsOptions));
 app.use(session({
-  secret: keys.client,
+  secret: keys.seshSecret,
   resave: false,
   saveUninitialized: false,
 }));
@@ -61,7 +63,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(function(req,res,next){
-  res.header("Access-Control-Allow-Origin", keys.client);
+  res.header("Access-Control-Allow-Origin", DOMAIN);
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 })
@@ -92,6 +94,7 @@ app.use(function(req,res,next){
 
 // });
 // io.listen(8000);
+console.log(keys.client);
 
 passportRoutes(app);
 routes(app);

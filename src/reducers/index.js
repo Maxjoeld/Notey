@@ -9,7 +9,7 @@ import {
   SORT_TRUE,
   SORT_FALSE,
   ARRAY_MOVE,
-  SET_ID,
+  // SET_ID,
   ISAUTH,
   GET_CONTACTS,
   CONTACT_IDX,

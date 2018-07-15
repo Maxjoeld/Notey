@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
-import FontAwesome from 'react-fontawesome';
 import { connect } from 'react-redux';
 import { deAuth, logoutUser } from '../../actions';
 import Nico from './Nico.jpg';

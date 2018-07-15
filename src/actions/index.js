@@ -40,7 +40,7 @@ axios.defaults.withCredentials = true;
 //       payload: error,
 //     };
 // };
-const URL = 'https://protected-cove-34559.herokuapp.com';
+const URL = 'http://protected-cove-34559.herokuapp.com';
 // const URL = 'http://localhost:5000';
 
 export const setId = id => {
@@ -106,10 +106,8 @@ export const isAuthenticated = () => {
   return async dispatch => {
     try {
       // this will check if the route we're talking about is authenticated
-      console.log('hey');
-      const res = await axios.get(`${URL}/auth/isLogged`);
+      const res = await axios.get(`${URL}/notes/isLogged`);
       await sessionStorage.setItem('id', res.data.user);
-      console.log(res.data.user);
       await dispatch({ type: 'ISAUTH' });
       await dispatch({ type: 'PROFILE', payload: res.data.profile });
       await dispatch({ type: 'ADMIN', payload: `${res.data.profile.firstName} ${res.data.profile.lastName}` });
@@ -180,7 +178,7 @@ export const saveUser = (username, password, firstName, lastName, history) => {
       await history.push('/');
     } catch (error) {
       if (error) console.log('error: ', error.response);
-      if (error.response.data.err.errors) {
+      else if (error.response.data.err.errors) {
         dispatch(authError('Your username must be a valid email address.'));
       } else if (error.response.data.err.errmsg) {
         dispatch(authError('This username already exists.'));
@@ -258,7 +256,7 @@ export const loadNewUser = (recipient, message) => {
   return async dispatch => {
     try {
       console.log(recipient);
-      const res = await axios.post(`${URL}/notes/chat/new/${recipient}`, message);
+      await axios.post(`${URL}/notes/chat/new/${recipient}`, message);
       await dispatch(loadConvos());
       await dispatch(existingContact());
     } catch (error) {
@@ -300,7 +298,6 @@ export const handleContactIdx = (inputID, user) => {
   return async (dispatch, getState) => {
     await dispatch(existingContact());
     const { contacts } = getState();
-    const { admin } = getState();
     contacts.forEach(async (contact, i) => {
       if (contact._id === inputID) {
         try {
