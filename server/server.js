@@ -44,6 +44,7 @@ const app = express();
 // const http = require('http').Server(app);
 // const io = require('socket.io')(http);
 const DOMAIN = process.env.PORT || 'http://localhost:3000';
+console.log(DOMAIN);
 const corsOptions = {
   origin: DOMAIN,
   credentials: true,

@@ -17,32 +17,32 @@ module.exports = (app) => {
   // Note Routes //
   app.route('/notes/:id').get(getNotes);
   app.route('/notes/:id').delete(deleteNote);
-  app.route('/notes').post(addNote);
-  app.route('/notes').put(editNote);
+  app.route('/add').post(addNote);
+  app.route('/edit').put(editNote);
   //  User Routes //
-  app.route('/notes/register').post(userCreate);
-  app.route('/notes/login').post(userLogin);
-  app.route('/notes/logout').post(userLogout);
+  app.route('/register').post(userCreate);
+  app.route('/login').post(userLogin);
+  app.route('/logout').post(userLogout);
 
   // Chat Routes //
-  app.route('/notes/chat/allContacts').get(allContacts);
+  app.route('/chat/allContacts').get(allContacts);
 
-  app.get('/notes/chat/convo/:conversationId', sessionAuth, getConversation);
-  app.get('/notes/chat/getConversations', getConversations);
-  app.post('/notes/chat/reply/:conversationId', sessionAuth, sendReply);
-  app.post('/notes/chat/new/:recipient', sessionAuth, newConversation);
-  app.get('/notes/me/1', (req, res) => {
+  app.get('/chat/convo/:conversationId', sessionAuth, getConversation);
+  app.get('/chat/getConversations', getConversations);
+  app.post('/chat/reply/:conversationId', sessionAuth, sendReply);
+  app.post('/chat/new/:recipient', sessionAuth, newConversation);
+  app.get('/me/1', (req, res) => {
     res.send({ user: req.user, session: req.session });
   });
 
-  app.get('/notes/islogged', (req, res, next) => {
-    if (!req.session.user) {
-      sendUserError('User is not logged in', res);
-      return;
-    }
-    console.log({ session: req.session });
-    res.json({ user: req.session.user, profile: req.session.profile });
-    next();
+  app.get('/islogged', (req, res, next) => {
+    // if (!req.session.user) {
+    //   sendUserError('User is not logged in', res);
+    //   return;
+    // }
+    // console.log({ session: req.session });
+    res.json({ profile: 'hey' });
+    // next();
   });
 };
 
