@@ -33,14 +33,7 @@ export const PROFILE = 'PROFILE';
 
 axios.defaults.withCredentials = true;
 
-// export const authError = error => {
-//   if (error)
-//     return {
-//       type: AUTHENTICATION_ERROR,
-//       payload: error,
-//     };
-// };
-// const URL = 'protected-cove-34559.herokuapp.com';
+const URL = 'protected-cove-34559.herokuapp.com';
 // const URL = 'http://localhost:5000';
 
 export const setId = id => {
