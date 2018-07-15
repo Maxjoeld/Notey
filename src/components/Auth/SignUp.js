@@ -28,6 +28,7 @@ class SignUp extends Component {
     const { name, value } = e.target;
     this.setState({ [name]: value });
   };
+
   render() {
     return (
       <div className="signup" style={styles}>
@@ -36,6 +37,7 @@ class SignUp extends Component {
         <img src={noteyLogo} alt="SideLogo" className="Side-logo" />
         <h1 className="signin-notey">Notey</h1>
           <h1 className="signin--header">Sign Up With</h1>
+          <h3>{this.props.message}</h3>
           <form className="signin--signin">
             <input
               name="username"
@@ -95,4 +97,10 @@ class SignUp extends Component {
   }
 }
 
-export default withRouter(connect(null, { saveUser })(SignUp));
+const mapStateToProps = state => {
+  return {
+    message: state.error,
+  };
+};
+
+export default withRouter(connect(mapStateToProps, { saveUser })(SignUp));

@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-// export const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
 // import openSocket from 'socket.io-client';
-
 // const socket = openSocket('http://localhost:8000');
 
 export const DEAUTH = 'DEAUTH';
 export const ISAUTH = 'ISAUTH';
 export const ADMIN = 'ADMIN';
+
+export const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
 
 export const GET_NOTES = 'GET_NOTES';
 export const SORT_NOTES = 'SORT_NOTES';
@@ -40,14 +40,23 @@ axios.defaults.withCredentials = true;
 //       payload: error,
 //     };
 // };
-const URL = 'https://protected-cove-34559.herokuapp.com';
-// const URL = 'http://localhost:5000';
+// const URL = 'https://protected-cove-34559.herokuapp.com';
+const URL = 'http://localhost:5000';
 
 export const setId = id => {
   return {
     type: SET_ID,
     payload: id,
   };
+};
+
+export const authError = error => {
+  if (error) {
+    return {
+      type: AUTHENTICATION_ERROR,
+      payload: error,
+    };
+  }
 };
 
 //////////////////////////////////////////////////////////////////
@@ -103,7 +112,7 @@ export const isAuthenticated = () => {
       console.log(res.data.user);
       await dispatch({ type: 'ISAUTH' });
       await dispatch({ type: 'PROFILE', payload: res.data.profile });
-      await dispatch({ type: 'ADMIN', payload: `${res.data.profile.firstName } ${ res.data.profile.lastName}` });
+      await dispatch({ type: 'ADMIN', payload: `${res.data.profile.firstName} ${res.data.profile.lastName}` });
       await dispatch(getNotes());
       await dispatch(getUsers());
       // await dispatch(loadConvos());
@@ -121,7 +130,7 @@ export const logoutUser = history => {
       dispatch(deAuth());
       dispatch({ type: 'ISAUTH' });
       await sessionStorage.removeItem('id');
-      await history.push('/login');
+      // await history.push('/login');
     } catch (err) {
       console.log(err);
     }
@@ -165,13 +174,17 @@ export const saveUser = (username, password, firstName, lastName, history) => {
       await axios.post(`${URL}/notes/register`, {
         username, password, firstName, lastName,
       });
-      const res = await axios.post('/notes/login', { username, password });
+      const res = await axios.post(`${URL}/notes/login`, { username, password });
       await sessionStorage.setItem('id', res.data.userId);
       dispatch({ type: 'ISAUTH' });
-      // await dispatch({ type: LOGIN });
       await history.push('/');
     } catch (error) {
-      console.log({ err: 'There was an error signing up ', error });
+      if (error) console.log('error: ', error.response);
+      if (error.response.data.err.errors) {
+        dispatch(authError('Your username must be a valid email address.'));
+      } else if (error.response.data.err.errmsg) {
+        dispatch(authError('This username already exists.'));
+      }
     }
   };
 };

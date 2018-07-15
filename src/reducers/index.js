@@ -1,7 +1,7 @@
 // import { combineReducers } from 'redux';
 import {
   GET_NOTES,
-  // AUTHENTICATION_ERROR,
+  AUTHENTICATION_ERROR,
   DEAUTH,
   ADMIN,
   SORT_NOTES,
@@ -34,12 +34,15 @@ const initialState = {
   contact: [],
   newContact: false,
   user: [],
+  message: undefined,
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADMIN:
       return { ...state, admin: action.payload };
+    case AUTHENTICATION_ERROR:
+      return { ...state, error: action.payload };
     case PROFILE:
       return { ...state, profile: action.payload };
     case ISAUTH:

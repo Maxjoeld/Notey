@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 mongooseTypes.loadTypes(mongoose, 'email');
 
 const { Schema } = mongoose;
-const { Email } = mongoose.SchemaTypes;
+const { Email } = mongoose.Schema.Types;
 const { ObjectId } = mongoose.Schema.Types;
 
 const SALT_ROUNDS = 11;
@@ -15,7 +15,7 @@ const UserSchema = new Schema({
   username: {
     type: Email,
     unique: true,
-    lowercase: true,
+    required: true,
   },
   firstName: { 
     type: String,
@@ -47,10 +47,11 @@ const UserSchema = new Schema({
   timestamps: true
 });
 
-UserSchema.set('validateBeforeSave', false);
-UserSchema.path('password').validate(function (value) {
-  return v != null;
-});
+// Use this for passport.js
+// UserSchema.set('validateBeforeSave', false);
+// UserSchema.path('password').validate(function (value) {
+//   return v != null;
+// });
 
 UserSchema.pre('save', function (next) {
  if (this.password !== null) {

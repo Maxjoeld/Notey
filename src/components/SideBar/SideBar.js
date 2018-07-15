@@ -38,7 +38,7 @@ class SideBar extends Component {
             <p
               style={{ cursor: 'pointer', color: 'rgb(129, 129, 129)' }}
               onClick={e => this.logoutUser(e)}
-            ><i className="fas fa-sign-out-alt fa-fw" />Sign Out
+            ><NavLink to='/home'><i className="fas fa-sign-out-alt fa-fw" />Sign Out</NavLink>
             </p>
           </div>
         </div>
