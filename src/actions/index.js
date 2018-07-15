@@ -63,7 +63,7 @@ export const deAuth = () => {
 export const getUsers = () => {
   return async dispatch => {
     try {
-      const res = await axios.get(`${URL}/chat/allContacts`);
+      const res = await axios.get('/chat/allContacts');
       console.log({ contacts: res.data });
       await dispatch({ type: GET_USERS, payload: res.data });
     } catch (error) {
@@ -75,7 +75,7 @@ export const getUsers = () => {
 export const loadConvos = () => {
   return async dispatch => {
     try {
-      const res = await axios.get(`${URL}/chat/getConversations`);
+      const res = await axios.get('/chat/getConversations');
       console.log({ convossss: res.data });
       await dispatch({ type: GET_CONTACTS, payload: res.data.conversations });
     } catch (error) {
@@ -88,7 +88,7 @@ export const getNotes = () => {
   return async dispatch => {
     const id = sessionStorage.getItem('id');
     try {
-      const res = await axios.get(`${URL}/notes/${id}`);
+      const res = await axios.get(`/notes/${id}`);
       await dispatch({ type: GET_NOTES, payload: res.data.notes });
     } catch (error) {
       console.log({ err: 'There was an error retrieving your notes ', error });
@@ -99,7 +99,7 @@ export const isAuthenticated = () => {
   return async dispatch => {
     try {
       // this will check if the route we're talking about is authenticated
-      const res = await axios.get(`${URL}/isLogged`);
+      const res = await axios.get('/isLogged');
       await sessionStorage.setItem('id', res.data.user);
       console.log(res.data);
       await dispatch({ type: 'ISAUTH' });
@@ -109,7 +109,7 @@ export const isAuthenticated = () => {
       await dispatch(getUsers());
       await dispatch(loadConvos());
     } catch (error) {
-      console.log(error + "With isAuthenticated Route");
+      console.log(`${error  }With isAuthenticated Route`);
       // return false;
     }
   };
@@ -118,7 +118,7 @@ export const isAuthenticated = () => {
 export const logoutUser = history => {
   return async dispatch => {
     try {
-      await axios.post(`${URL}/logout`);
+      await axios.post('/logout');
       dispatch(deAuth());
       dispatch({ type: 'ISAUTH' });
       await sessionStorage.removeItem('id');
@@ -132,7 +132,7 @@ export const logoutUser = history => {
 export const loginGoogle = (username, password, history) => {
   return async dispatch => {
     try {
-      const res = await axios.get(`${URL}/auth/google`);
+      const res = await axios.get('/auth/google');
       sessionStorage.setItem('id', res.session.userId);
       await history.push('/');
       await dispatch(getNotes());
@@ -145,7 +145,7 @@ export const loginGoogle = (username, password, history) => {
 export const loginUser = (username, password, history) => {
   return async dispatch => {
     try {
-      const res = await axios.post(`${URL}/login`, { username, password });
+      const res = await axios.post('/login', { username, password });
       sessionStorage.setItem('id', res.data.userId);
       dispatch({ type: 'ISAUTH' });
       dispatch({ type: 'ADMIN', payload: res.data.user });
@@ -163,10 +163,10 @@ export const loginUser = (username, password, history) => {
 export const saveUser = (username, password, firstName, lastName, history) => {
   return async dispatch => {
     try {
-      await axios.post(`${URL}/register`, {
+      await axios.post('/register', {
         username, password, firstName, lastName,
       });
-      const res = await axios.post(`${URL}/login`, { username, password });
+      const res = await axios.post('/login', { username, password });
       await sessionStorage.setItem('id', res.data.userId);
       dispatch({ type: 'ISAUTH' });
       await history.push('/');
@@ -189,7 +189,7 @@ export const saveUser = (username, password, firstName, lastName, history) => {
 export const createNote = inputNote => {
   return async dispatch => {
     try {
-      await axios.post(`${URL}/add`, inputNote);
+      await axios.post('/add', inputNote);
       await dispatch(getNotes());
     } catch (error) {
       console.log({ err: 'There was an error loading your notes :(', error });
@@ -201,7 +201,7 @@ export const editNote = (editedNote, id) => {
   return async dispatch => {
     const notePackage = { editedNote, id };
     try {
-      await axios.put(`${URL}/edit`, notePackage);
+      await axios.put('/edit', notePackage);
       await dispatch(getNotes());
     } catch (error) {
       console.log({ err: 'There was an error loading your notes :(', error });
@@ -212,7 +212,7 @@ export const editNote = (editedNote, id) => {
 export const deleteNote = inputId => {
   return async dispatch => {
     try {
-      await axios.delete(`${URL}/${inputId}`);
+      await axios.delete(`/${inputId}`);
       dispatch(getNotes());
     } catch (error) {
       console.log({ err: 'There was an error loading your notes :(', error });
@@ -240,7 +240,7 @@ export const loadNewUser = (recipient, message) => {
   return async dispatch => {
     try {
       console.log(recipient);
-      await axios.post(`${URL}/chat/new/${recipient}`, message);
+      await axios.post(`/chat/new/${recipient}`, message);
       await dispatch(loadConvos());
       await dispatch(existingContact());
     } catch (error) {
@@ -254,7 +254,7 @@ export const getConversation = () => {
   return async (dispatch, getState) => {
     try {
       const { conversationId } = await getState().contact;
-      const res = await axios.get(`${URL}/chat/convo/${conversationId._id}`);
+      const res = await axios.get(`/chat/convo/${conversationId._id}`);
       console.log(res.data);
       dispatch({ type: 'GET_CONVERSATION', payload: res.data.conversation });
     } catch (error) {
@@ -267,7 +267,7 @@ export const replyMessage = message => {
   return async (dispatch, getState) => {
     try {
       const { conversationId } = await getState().contact;
-      await axios.post(`${URL}/chat/reply/${conversationId._id}`, message);
+      await axios.post(`/chat/reply/${conversationId._id}`, message);
       // socket.emit('new message');
       // socket.on('refresh messages', () => {
       await dispatch(getConversation());
