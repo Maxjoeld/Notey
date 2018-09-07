@@ -585,25 +585,25 @@
 
 .Home-header {
   width: inherit;
-  height: 150rem; }
+  height: 120rem; }
 
 .Home--Pic {
   margin: 0 auto;
   text-align: center;
-  width: 100%;
+  max-width: 90%;
   display: flex;
   flex-direction: column; }
 
-.Home--three--boxes {
+.Home-three-boxes {
   display: flex;
   justify-content: space-evenly;
-  margin-bottom: 50rem; }
+  margin-bottom: 5rem; }
 
 .Boxes {
+  margin-top: 4rem;
   text-align: center;
   height: 30rem;
-  width: 30rem;
-  border: 1px solid black; }
+  width: 30rem; }
 
 .Home-bottom {
   width: inherit;
@@ -629,6 +629,17 @@
 
 .home--title {
   display: inline-block; }
+
+.fa-paper-plane {
+  font-size: 17rem;
+  color: #bdfbff; }
+
+.plus {
+  font-size: 17rem;
+  color: #bdfbff; }
+
+.home-Box-title {
+  font-size: 2rem; }
 
 body {
   margin: 0;

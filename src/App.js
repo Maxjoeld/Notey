@@ -42,9 +42,9 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="App">
-          <Switch>
-            <Route path="/home" component={Home} />
+        <Switch>
+          <Route path="/home" component={Home} />
+          <div className="App">
             <Route path="/login" component={Login} />
             <Route path="/signup" component={(SignUp)} />
             <PrivateRoute exact path="/" component={(NoteList)} />
@@ -52,8 +52,8 @@ class App extends Component {
             <PrivateRoute path="/view" component={(ViewNote)} />
             <PrivateRoute path="/edit" component={(EditNote)} />
             <PrivateRoute path="/convo" component={(Convo)} />
-          </Switch>
-        </div>
+          </div>
+        </Switch>
       </Router>
     );
   }

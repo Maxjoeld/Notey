@@ -22,12 +22,23 @@ class Home extends Component {
         </div>
         <img src={home} alt="SideLogo" className="Home--Pic"/>
         {/* <p className="Home--Pic">Picture goes here</p> */}
-        <div className="Home--three--boxes">
-          <p className="Boxes">Box 1</p>
-          <p className="Boxes">Box 2</p>
-          <p className="Boxes">Box 3</p>
+        <div className="Home-three-boxes">
+          <div className="Boxes">
+            <p className="home-Box-title">Create</p>
+            <p>You can send messages to other users and also share notes that 
+              you created
+            </p>
+            <i className="fas fa-plus plus" />
+          </div>
+          <div className="Boxes">
+            <p className="home-Box-title">Send</p>
+            <p>You can send messages to other users and also share notes that 
+              you created
+            </p>
+            <i className="far fa-paper-plane" />
+          </div>
         </div>
-        <p className="Home-bottom" />
+        {/* <p className="Home-bottom" /> */}
       </div>
     );
   }
