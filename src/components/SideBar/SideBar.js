@@ -31,14 +31,14 @@ class SideBar extends Component {
           </div>
           {/* We can also add activeClassName to make our own classes instead of default .active */}
           <div className="sidebar-links">
-            <p><NavLink to='/mailbox'><i className="fas fa-envelope-open fa-fw" />MailBox</NavLink></p>
+            {/* <p><NavLink to='/mailbox'><i className="fas fa-envelope-open fa-fw" />MailBox</NavLink></p> */}
             <p><NavLink exact to='/convo'><i className="fas fa-comments fa-fw" />Conversations</NavLink></p>
             <p><NavLink exact to="/"><i className="fas fa-sticky-note fa-fw" />View Your Notes</NavLink></p>
             <p><NavLink exact to='/create'><i className="fas fa-plus fa-fw" />Create New Note</NavLink></p>
             <p
               style={{ cursor: 'pointer', color: 'rgb(129, 129, 129)' }}
               onClick={e => this.logoutUser(e)}
-            ><i className="fas fa-sign-out-alt fa-fw" />Sign Out
+            ><NavLink exact to='/create'><i className="fas fa-sign-out-alt fa-fw" />Sign Out</NavLink>
             </p>
           </div>
         </div>

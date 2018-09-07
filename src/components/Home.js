@@ -14,10 +14,10 @@ class Home extends Component {
             Notey
           </h1> */}
             <div className="Home--nav--links">
-              <p className="Home--nav--title"><NavLink to="/home">Home</NavLink></p>
-              <p className="Home--nav--title"><NavLink to="/about">About Us</NavLink></p>
-              <p className="Home--nav--title"><NavLink to="/login">Sign In</NavLink></p>
-              <p className="Home--nav--title"><NavLink to="/signup">Sign up</NavLink></p>
+              <p className="Home--nav--title"><NavLink className="link-hover" to="/home">Home</NavLink></p>
+              {/* <p className="Home--nav--title"><NavLink to="/about">About Us</NavLink></p> */}
+              <p className="Home--nav--title"><NavLink className="link-hover" to="/login">Sign In</NavLink></p>
+              <p className="Home--nav--title"><NavLink className="link-hover" to="/signup">Sign up</NavLink></p>
             </div>
         </div>
         <img src={home} alt="SideLogo" className="Home--Pic"/>

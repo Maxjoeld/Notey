@@ -488,7 +488,7 @@
     font-size: 1.6rem;
     align-items: center; }
     .sidebar--chat p :hover {
-      color: #f7a456; }
+      color: #60a5ff; }
 
 .Side-logo {
   margin: 2rem 1px 2rem 2rem;
@@ -623,6 +623,9 @@
 .Home--nav--title {
   margin-left: 1rem; }
 
+.link-hover:hover {
+  color: #60a5ff; }
+
 .home-logo {
   margin: 2rem 1px 2rem 2rem;
   max-height: 5rem; }
@@ -673,5 +676,5 @@ button:focus {
   /* offset-x | offset-y | blur-radius | spread-radius | color */
   box-shadow: 0px 7px 10px 0px rgba(0, 0, 0, 0.459);
   width: 120rem;
-  margin: 0 auto;
+  margin: 5rem auto;
   position: relative; }
