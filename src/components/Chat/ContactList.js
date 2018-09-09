@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleContactIdx } from '../../actions';
+import icon from './user.png';
 
 const getRandomColor = () => {
   const letters = '0123456789ABCDEF';
@@ -21,7 +22,7 @@ class Contact extends Component {
     }
     return (
       <div className="contact-box" onClick={() => this.props.handleContactIdx(this.props.index, user)}>
-        <p className="contact-image" />
+        <img src={icon} alt="user-icon"className="contact-image" />
         <div className="contact-info">
           <p className="contact-firstName">{user}</p>
           <p className="contact-time">{this.props.time}</p>

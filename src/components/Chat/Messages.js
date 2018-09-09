@@ -7,7 +7,7 @@ class Messages extends Component {
   };
 
   render() {
-    const adminName = this.props.firstName === null ? "message-message continuous-message" : "message-contact-image";
+    const adminName = this.props.firstName === null ? "message-message continuous-message" : "message-message-admin";
     const userName = this.props.firstName === null ? "message-message user-message" : "message-message";
     return (
       <React.Fragment>
@@ -17,7 +17,7 @@ class Messages extends Component {
               <div>
                 {/* <p className="message-image-message admin" /> */}
                 {/* <div className="contact-image"> */}
-                  <img className="contact-image" src={this.props.profilePic ? this.props.profilePic.img : null} alt="NicoImage" />
+                  {/* <img className="contact-image" src={this.props.profilePic ? this.props.profilePic.img : null} alt="NicoImage" /> */}
                 {/* </div> */}
                 <p className="message-firstName admin">
                   {this.props.firstName} {this.props.lastName}
@@ -31,7 +31,7 @@ class Messages extends Component {
           <div className="message-convo">
             {this.props.firstName !== null ?
               <div>
-                <p className="message-image-message" />
+                {/* <p className="message-image-message" /> */}
                 <p className="message-firstName">
                   {this.props.firstName} {this.props.lastName}
                 </p>
