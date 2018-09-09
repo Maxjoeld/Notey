@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { NavLink, Link, withRouter } from 'react-router-dom';
 
 import { loginUser, loginGoogle } from '../../actions';
 import logo from './google.png';
@@ -76,7 +76,8 @@ class SignIn extends Component {
             </form>
             <p className="signin--notmember">
               Not a member? <Link to="/signup"> Sign up </Link>
-              <Link to="/Home">Home</Link>
+              <br />
+              <NavLink className="home-link" to="/Home">Home</NavLink>
             </p>
           </div>
         </div>

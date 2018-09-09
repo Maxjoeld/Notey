@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { NavLink, Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { saveUser } from '../../actions';
 
@@ -87,7 +87,9 @@ class SignUp extends Component {
           </div>
           <p className="signin--notmember">
             {' '}
-            Already a member? <Link to="/"> Sign in </Link>
+            Already a member? <Link to="/login"> Sign in </Link>
+            <br />
+            <NavLink className="home-link" to="/Home">Home</NavLink>
           </p>
         </div>
       </div>
