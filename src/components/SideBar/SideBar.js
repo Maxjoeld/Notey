@@ -3,7 +3,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
 import { connect } from 'react-redux';
 import { deAuth, logoutUser } from '../../actions';
-import Nico from './Nico.jpg';
+import Nico from './user.png';
 import logo from './logo.png';
 
 class SideBar extends Component {
