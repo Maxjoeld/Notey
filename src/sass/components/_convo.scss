@@ -300,8 +300,6 @@
   line-height: 3;
   // background-color: rgba(238, 205, 98, 0.411);
   background-color: rgba(191, 224, 255, 0.479);
-
-  // align-self: flex-end;
 }
 
 
@@ -310,12 +308,11 @@
 }
 
 .message-message.continuous-message {
-  margin-left: 9.5rem;
+  margin-left: 8rem;
   background-color: rgba(191, 224, 255, 0.479);
-  
 }
 .message-message.user-message {
-  margin-left: 10rem;
+  margin-left: 11.5rem;
   background-color: rgba(238, 205, 98, 0.411);
 }
 
