@@ -1,0 +1,40 @@
+.signup {
+  box-shadow: none;
+  height: 85rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  // border: 1px solid white;
+  background-size: cover;
+  position: relative;
+  &--box {
+    margin-right: 8rem;
+    background-color: #ffffffc4;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    width: 40rem;
+    height: 60rem;
+    box-shadow: 5px 10px 15px 0px rgba(0, 0, 0, 0.294);
+    position: relative;
+
+  }
+
+  &-headline {
+    position: absolute;
+    font-size: 5rem;
+    font-weight: 700;
+    color: white;
+    top: 18rem;
+    left: 10rem;
+  }
+
+  &-headline2 {
+    font-weight: 400;
+    font-size: 3rem;
+    position: absolute;
+    top: 4.9rem;
+
+  }
+}
