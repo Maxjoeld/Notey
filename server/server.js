@@ -4,9 +4,10 @@ const cors = require('cors');
 const passport = require('passport');
 const keys = require('./config/keys');
 const routes = require('./routes/index');
-require('./config/passport');
 const passportRoutes = require('./controllers/authRoutes');
 const session = require('express-session');
+const path = require('path');
+require('./config/passport');
 // const User = require('./models/users');
 
 // where to find the picture/video in the filesystem that we'll be storing in the DB
@@ -95,6 +96,11 @@ app.use(function(req,res,next){
 
 passportRoutes(app);
 routes(app);
+
+app.use(express.static(path.join(__dirname, '../client/build')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../', 'client', 'build', 'index.html'));
+});
 
 module.exports = {
   app,

@@ -2,6 +2,11 @@
   "name": "experiment",
   "version": "0.1.0",
   "private": true,
+  "proxy": {
+    "/notes": {
+      "target": "http://localhost:5000"
+    }
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "bcrypt": "^3.0.0",
@@ -46,7 +51,7 @@
     "test": "react-scripts test --env=jsdom",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
-    "server": "nodemon server/app.js",
+    "server": "cd ../server && nodemon app.js",
     "dev": "concurrently \"npm run server\" \"npm-run-all -p watch-css start-js\"",
     "build-js": "react-scripts build",
     "build": "npm-run-all build-css build-js",
