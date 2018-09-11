@@ -248,10 +248,12 @@
 /////////////////////////////////////////
 
 .message-firstName {
+  width: 5rem;
+  // background-color: blue;
   font-style: 400;
   font-weight: 700;
   margin-left: 1rem;
-  margin-right: 3rem;
+  margin-right: 2rem;
 }
 .message-lastName {
   margin-left: 8px;
@@ -312,7 +314,7 @@
   background-color: rgba(191, 224, 255, 0.479);
 }
 .message-message.user-message {
-  margin-left: 11.5rem;
+  margin-left: 8rem;
   background-color: rgba(238, 205, 98, 0.411);
 }
 

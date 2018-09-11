@@ -45,6 +45,7 @@ class Messages extends Component {
     );
   }
 }
+
 const mapStateToProps = state => {
   return {
     admin: state.admin,
