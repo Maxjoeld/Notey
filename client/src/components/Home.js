@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './SideBar/logo.png';
 import home from './home.jpg';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 class Home extends Component {
   state = {}
@@ -20,7 +20,15 @@ class Home extends Component {
               <p className="Home--nav--title"><NavLink className="link-hover" to="/signup">Sign up</NavLink></p>
             </div>
         </div>
-        <img src={home} alt="SideLogo" className="Home--Pic"/>
+        <div className="Home-img">
+          <img src={home} alt="SideLogo" className="Home--Pic"/>
+            <div className="Home-type">
+              Create <br />Read <br/> Send <br />
+              <Link to="/signup">
+                <button className="Home-button">Sign up</button>
+              </Link>
+            </div>
+        </div>
         {/* <p className="Home--Pic">Picture goes here</p> */}
         <div className="Home-three-boxes">
           <div className="Boxes">

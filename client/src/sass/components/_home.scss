@@ -75,3 +75,28 @@
 .home-Box-title {
   font-size: 2rem;
 }
+
+.Home-img {
+  position: relative;
+
+}
+
+.Home-type {
+  position: absolute;
+  color: white;
+  font-size: 7rem;
+  font-weight: 700;
+  top: 20%;
+  left: 12%;
+}
+
+.Home-button {
+  color: rgb(113, 163, 255);
+  height: 3rem;
+  width: 15rem;
+  position: absolute;
+  top: 100%;
+  border: none;
+  background-color: rgb(255, 236, 219);
+  // left: 20%;
+}

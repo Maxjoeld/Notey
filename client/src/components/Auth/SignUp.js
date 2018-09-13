@@ -31,7 +31,7 @@ class SignUp extends Component {
   render() {
     return (
       <div className="signup" style={styles}>
-        <p className="signup-headline">Lorem ipsum <br/> <span className="signup-headline2">dolor sit amet</span></p>
+        <p className="signup-headline">Join us!<br/><span className="signup-headline2">and experience our awesome community </span></p>
         <div className="signup--box">
         <img src={noteyLogo} alt="SideLogo" className="Side-logo" />
         <h1 className="signin-notey">Notey</h1>

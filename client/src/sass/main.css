@@ -569,10 +569,11 @@
     top: 18rem;
     left: 10rem; }
   .signup-headline2 {
+    width: 50rem;
     font-weight: 400;
-    font-size: 3rem;
+    font-size: 2rem;
     position: absolute;
-    top: 4.9rem; }
+    top: 5.5rem; }
 
 .NoteView {
   font-size: 1.6rem;
@@ -663,6 +664,26 @@
 
 .home-Box-title {
   font-size: 2rem; }
+
+.Home-img {
+  position: relative; }
+
+.Home-type {
+  position: absolute;
+  color: white;
+  font-size: 7rem;
+  font-weight: 700;
+  top: 20%;
+  left: 12%; }
+
+.Home-button {
+  color: #71a3ff;
+  height: 3rem;
+  width: 15rem;
+  position: absolute;
+  top: 100%;
+  border: none;
+  background-color: #ffecdb; }
 
 body {
   margin: 0;
