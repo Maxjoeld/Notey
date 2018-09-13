@@ -33,14 +33,12 @@ class Home extends Component {
         <div className="Home-three-boxes">
           <div className="Boxes">
             <p className="home-Box-title">Create</p>
-            <p>You can send messages to other users and also share notes that 
-              you created
-            </p>
+            <p>Create notes to your liking </p>
             <i className="fas fa-plus plus" />
           </div>
           <div className="Boxes">
             <p className="home-Box-title">Send</p>
-            <p>You can send messages to other users and also share notes that 
+            <p>Send messages to other users and also share notes that 
               you created
             </p>
             <i className="far fa-paper-plane" />
