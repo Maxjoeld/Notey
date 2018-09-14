@@ -12,14 +12,14 @@ require('./config/passport');
 
 const app = express();
 const corsOptions = {
-  origin: keys.client,
+  origin: 'https://notey-app.herokuapp.com',
   credentials: true,
 };
 
 app.use(express.json());
 app.use(cors(corsOptions));
 app.use(session({
-  secret: keys.client,
+  secret: 'secret',
   resave: false,
   saveUninitialized: false,
 }));
