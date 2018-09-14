@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 5000;
 mongoose.Promise = global.Promise;
 // 'mongodb://localhost/fs-notes'
 mongoose
-  .connect(keys.mongoURI)
+  .connect('mongodb://Mjd809:R1d3%40%4015%40b@ds115931.mlab.com:15931/notey')
   .then(() => {
     console.log('Successfully connected to MongoDB');
   })
