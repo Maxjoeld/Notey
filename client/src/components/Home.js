@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import logo from './SideBar/logo.png';
 import home from './home.jpg';
 import { NavLink, Link } from 'react-router-dom';
-
+import {
+  LazyLoadImage
+} from 'react-lazy-load-image-component';
 class Home extends Component {
   state = {}
   render() {
     return (
       <div className="Home-header">
         <div className="Home--nav">
+        
           <img src={logo} alt="SideLogo" className="home-logo" />
           {/* <h1 className="home--title">
             Notey
@@ -21,7 +24,12 @@ class Home extends Component {
             </div>
         </div>
         <div className="Home-img">
-          <img src={home} alt="SideLogo" className="Home--Pic"/>
+          <LazyLoadImage
+            src={home}
+            alt="SideLogo"
+            className="Home--Pic"
+            effect="blur"
+          />
             <div className="Home-type">
               Create <br />Read <br/> Send <br />
               <Link to="/signup">

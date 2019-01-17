@@ -1,7 +1,5 @@
-// import { combineReducers } from 'redux';
 import {
   GET_NOTES,
-  // AUTHENTICATION_ERROR,
   DEAUTH,
   ADMIN,
   SORT_NOTES,
