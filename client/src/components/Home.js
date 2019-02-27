@@ -11,17 +11,16 @@ class Home extends Component {
     return (
       <div className="Home-header">
         <div className="Home--nav">
-        
           <img src={logo} alt="SideLogo" className="home-logo" />
           {/* <h1 className="home--title">
             Notey
           </h1> */}
-            <div className="Home--nav--links">
-              <p className="Home--nav--title"><NavLink className="link-hover" to="/home">Home</NavLink></p>
-              {/* <p className="Home--nav--title"><NavLink to="/about">About Us</NavLink></p> */}
-              <p className="Home--nav--title"><NavLink className="link-hover" to="/login">Sign In</NavLink></p>
-              <p className="Home--nav--title"><NavLink className="link-hover" to="/signup">Sign up</NavLink></p>
-            </div>
+          <div className="Home--nav--links">
+            <p className="Home--nav--title"><NavLink className="link-hover" to="/home">Home</NavLink></p>
+            {/* <p className="Home--nav--title"><NavLink to="/about">About Us</NavLink></p> */}
+            <p className="Home--nav--title"><NavLink className="link-hover" to="/login">Sign In</NavLink></p>
+            <p className="Home--nav--title"><NavLink className="link-hover" to="/signup">Sign up</NavLink></p>
+          </div>
         </div>
         <div className="Home-img">
           <LazyLoadImage

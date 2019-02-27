@@ -62,7 +62,6 @@ const getConversation = (req, res) => {
 };
 
 const newConversation = (req, res, next) => {
-  // console.log(recipient);
   const { recipient } = req.params;
   const { message } = req.body;
   const { user } = req.session;
